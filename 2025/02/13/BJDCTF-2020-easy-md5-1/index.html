@@ -1,0 +1,108 @@
+<!DOCTYPE html><html lang="en" theme-mode="dark"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>[BJDCTF 2020]easy_md5 | CTF学习笔记</title><link rel="icon" type="image/x-icon" href="/favicon.ico"><link rel="preload" as="font" crossorigin="anonymous" href="/font/Bender.ttf"><link rel="preload" as="font" crossorigin="anonymous" href="/font/BenderLight.ttf"><link rel="preload" as="font" crossorigin="anonymous" href="/font/JetBrainsMono-Regular.woff2"><link rel="stylesheet" href="/css/arknights.css"><style>@font-face {
+  font-family: Bender;
+  src: local('Bender'), url("/font/Bender.ttf"), url("/font/Bender.otf");
+}
+@font-face {
+  font-family: BenderLight;
+  src: local('BenderLight'), url("/font/BenderLight.ttf");
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}
+</style><script>var config = {"root":"/","code_fold":15,"search":{"preload":false,"activeHolder":"键入以继续","blurHolder":"数据检索","noResult":"无 $0 相关数据"},"code":{"codeInfo":"$0 - $1 行","copy":"复制"}}</script><link type="text/css" rel="stylesheet" href="/lib/encrypt/hbe.style.css"><script src="//unpkg.com/mermaid@10.5.0/dist/mermaid.min.js"></script><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lightgallery.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-zoom.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-thumbnail.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/css/all.min.css"><script>if (window.localStorage.getItem('theme-mode') === 'light')
+ document.documentElement.setAttribute('theme-mode', 'light')
+if (window.localStorage.getItem('theme-mode') === 'dark')
+ document.documentElement.setAttribute('theme-mode', 'dark')</script><style>@font-face {
+ font-family: BenderLight;
+ src: local('Bender'), url("/font/BenderLight.woff2") format('woff2');
+}
+@font-face {
+ font-family: 'JetBrains Mono';
+ src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}</style><style>:root {
+ --dark-background: url('https://ak.hypergryph.com/assets/index/images/ak/pc/bk.jpg');
+ --light-background: url('/img/bk.jpg');
+ --theme-encrypt-confirm: '确认'
+}</style><script defer src="/js/arknights.js"></script><script defer src="/js/search.js"></script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script defer type="module">import mermaid from '//unpkg.com/mermaid@10.5.0/dist/mermaid.esm.mjs';
+window.mermaid = mermaid;
+code.paintMermaid();
+</script><script async src="//unpkg.com/lightgallery@2.7.1/lightgallery.min.js"></script><script async src="//unpkg.com/lightgallery@2.7.1/plugins/zoom/lg-zoom.min.js"></script><script async src="//unpkg.com/lightgallery@2.7.1/plugins/thumbnail/lg-thumbnail.min.js"></script><script async src="/lib/encrypt/hbe.js"></script><script async src="/js/pjax.js"></script><script class="pjax-js">reset= () => {document.querySelector('.lg-container')?.remove()
+lightGallery(document.getElementById('post-bg'), {
+  plugins: [lgZoom,lgThumbnail],
+  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js','data-pjax','.busuanzi'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);document.addEventListener('pjax:success', _ => bszCaller.fetch(
+ "//busuanzi.ibruce.info/busuanzi?jsonpCallback=BusuanziCallback", a => {
+  bszTag.texts(a),
+  bszTag.shows()
+}));reset()})</script><script class="pjax-js">reset= () => {document.querySelector('.lg-container')?.remove()
+lightGallery(document.getElementById('post-bg'), {
+  plugins: [lgZoom,lgThumbnail],
+  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="loading" style="opacity: 0;"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><div class="navBtn"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><nav><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="数据检索" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup" tabindex="0"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">Home</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">Archives</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>[BJDCTF 2020]easy_md5</h1><div id="post-info"><span>文章发布时间: <div class="control"><time datetime="2025-02-13T06:25:17.000Z" id="date"> 2025-02-13</time></div></span><br><span>最后更新时间: <div class="control"><time datetime="2025-02-13T06:28:14.516Z" id="updated"> 2025-02-13</time></div></span><br><span>文章总字数: <div class="control">696</div></span><br><span>预计阅读时间: <div class="control">2 分钟</div></span><br><span id="busuanzi_container_page_pv">页面浏览: <span class="control" id="busuanzi_value_page_pv">加载中...</span></span></div></div><hr><div id="post-content"><h1 id="解题过程"><a href="#解题过程" class="headerlink" title="解题过程"></a>解题过程</h1><p>dir扫扫没头绪别管了看下wp</p class='item-img' data-src='/2025/02/13/BJDCTF-2020-easy-md5-1/QQ20250213-133501.png'><img src="/2025/02/13/BJDCTF-2020-easy-md5-1/QQ20250213-133501.png" class="" title="QQ20250213-133501">
+
+<p>原来我们的小提示在输入框的返回响应头里</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select * from &#x27;admin&#x27; where password=md5($pass,true)<br></code></pre></td></tr></table></figure>
+
+<p>从名为 <code>&#39;admin&#39;</code> 的表中，选择所有列（<code>*</code>），但条件是密码字段的值必须等于一个通过 <code>md5</code> 函数加密后生成的密码。</p>
+<p>然后呢？密码呢？注入看看，好像不会，看看wp</p>
+<p><a target="_blank" rel="noopener" href="https://www.nssctf.cn/note/set/3001">https://www.nssctf.cn/note/set/3001</a></p>
+<p>当‘ or ’ 后面的值为True是，就能构成万能密码，实现绕过</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">select * from `admin` where password=&#x27;&#x27;or&#x27;true&#x27;<br></code></pre></td></tr></table></figure>
+
+<h4 id="补充知识点："><a href="#补充知识点：" class="headerlink" title="补充知识点："></a>补充知识点：</h4><p><strong>MySQL的一个特性：</strong></p>
+<p>在mysql里面，在用作布尔型判断时，以1开头的字符串会被当做整型数。</p>
+<p>要注意的是这种情况是必须要有单引号括起来的，比如password&#x3D;‘xxx’ or ‘1xxxxxxxxx’，那么就相当于password&#x3D;‘xxx’ or 1 ，也就相当于password&#x3D;‘xxx’ or true，所以返回值就是true。</p>
+<p>当然在我后来测试中发现，不只是1开头，只要是数字开头都是可以的。<br>当然如果只有数字的话，就不需要单引号，比如password&#x3D;‘xxx’ or 1，那么返回值也是true。（xxx指代任意字符）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">select * from `admin` where password=&#x27;&#x27;or&#x27;1abcdefg&#x27;    ---&gt;  True<br>select * from `admin` where password=&#x27;&#x27;or&#x27;0abcdefg&#x27;    ---&gt;  False<br>select * from `admin` where password=&#x27;&#x27;or&#x27;1&#x27;           ---&gt;  True<br>select * from `admin` where password=&#x27;&#x27;or&#x27;2&#x27;           ---&gt;  True<br>select * from `admin` where password=&#x27;&#x27;or&#x27;0&#x27;           ---&gt;  False<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">&lt;?php <br>for ($i = 0;;) &#123; <br> for ($c = 0; $c &lt; 1000000; $c++, $i++)<br>  if (stripos(md5($i, true), &#x27;\&#x27;or\&#x27;&#x27;) !== false)<br>   echo &quot;\nmd5($i) = &quot; . md5($i, true) . &quot;\n&quot;;<br> echo &quot;.&quot;;<br>&#125;<br>?&gt;<br><br>//引用于 http://mslc.ctf.su/wp/leet-more-2010-oh-those-admins-writeup/<br></code></pre></td></tr></table></figure>
+
+<h1 id="其实我看不懂下面一段"><a href="#其实我看不懂下面一段" class="headerlink" title="*其实我看不懂下面一段"></a>*其实我看不懂下面一段</h1><p>这里提供一个最常用的：<strong>ffifdyop</strong>，该字符串md5加密后若md5()的参数为True时会返回 <strong>‘or’6<trash></strong> (<trash>其实就是一些乱码和不可见字符，这里只要第一位是非零数字即可被判定为True，后面的<trash>会在MySQL将其转换成整型比较时丢掉)</p>
+<p>所以如果这里我们输入ffifdyop，后端的SQL语句会变成：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">select * from `admin` where password=&#x27;&#x27;or&#x27;6&lt;trash&gt;&#x27;           ---&gt;  True<br></code></pre></td></tr></table></figure class='item-img' data-src='/2025/02/13/BJDCTF-2020-easy-md5-1/QQ20250213-135621.png'><img src="/2025/02/13/BJDCTF-2020-easy-md5-1/QQ20250213-135621.png" class="" title="QQ20250213-135621">
+
+<p>这个过滤我会过过过</p class='item-img' data-src='/2025/02/13/BJDCTF-2020-easy-md5-1/QQ20250213-135937.png'><img src="/2025/02/13/BJDCTF-2020-easy-md5-1/QQ20250213-135937.png" class="" title="QQ20250213-135937">
+
+<h3 id="方法-1：利用已知的-MD5-碰撞"><a href="#方法-1：利用已知的-MD5-碰撞" class="headerlink" title="方法 1：利用已知的 MD5 碰撞"></a>方法 1：利用已知的 MD5 碰撞</h3><h3 id="方法-2：利用-PHP-的类型特性（如果条件允许）"><a href="#方法-2：利用-PHP-的类型特性（如果条件允许）" class="headerlink" title="方法 2：利用 PHP 的类型特性（如果条件允许）"></a>方法 2：利用 PHP 的类型特性（如果条件允许）</h3><p>数组绕过</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">param1[]=1&amp;param2[]=2<br></code></pre></td></tr></table></figure>
+
+<p>在这种情况下：</p>
+<ul>
+<li><code>param1</code> 和 <code>param2</code> 都是数组，它们的值不同（<code>[1] !== [2]</code>）。</li>
+<li><code>md5(param1)</code> 和 <code>md5(param2)</code> 都返回 <code>null</code>，因此 <code>null === null</code> 为 <code>true</code>。</li>
+</ul>
+<p>BP一直抓的是上一次的包所以没成功太尴尬了</p>
+<h1 id="知识点总结：PHPmd5绕过"><a href="#知识点总结：PHPmd5绕过" class="headerlink" title="知识点总结：PHPmd5绕过"></a>知识点总结：PHPmd5绕过</h1><h2 id="两个等号-0e绕过（记录特殊值"><a href="#两个等号-0e绕过（记录特殊值" class="headerlink" title="两个等号 0e绕过（记录特殊值"></a>两个等号 0e绕过（记录特殊值</h2><h2 id="三个等号-数组绕过"><a href="#三个等号-数组绕过" class="headerlink" title="三个等号 数组绕过"></a>三个等号 数组绕过</h2><p>tags:</p>
+<ul>
+<li>md5</li>
+<li>弱比较</li>
+<li>强比较</li>
+<li>数组绕过</li>
+<li>PHP</li>
+</ul>
+<div id="paginator"></div></div><div id="post-footer"><div id="pages" style="justify-content: flex-end"><div class="footer-link" style="width: 50%;right:1px;border-left:1px #fe2 solid"><a href="/2025/02/12/%E7%BD%91%E9%BC%8E%E6%9D%AF2018Fakebook/">[网鼎杯 2018]Fakebook 上一篇 →</a></div></div></div></div><div class="bottom-btn"><div><a class="i-top" id="to-top" onClick="scrolls.scrolltop();" title="回到顶部" style="opacity: 0; display: none;">∧ </a><a class="i-index" id="to-index" href="#toc-div" title="文章目录">≡</a><a class="i-color" id="color-mode" onClick="colorMode.change()" title="切换主题"></a></div></div></article><aside><div id="about"><a href="/" id="logo"><img src="https://ak.hypergryph.com/assets/index/images/ak/pc/faction/1.png" alt="Logo" style="margin:0;border-radius:0;"></a><h1 id="Dr"><a href="/">温柔刀</a></h1><div id="description"><p>JNU_WEB</p></div><div id="social-links"><a class="social" target="_blank" rel="noopener" href="https://github.com/Gent1eknife"><i class="fab fa-github" alt="GitHub"></i></a></div></div><div id="aside-block"><div id="toc-div"><h1>目录</h1><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%A7%A3%E9%A2%98%E8%BF%87%E7%A8%8B"><span class="toc-number">1.</span> <span class="toc-text">解题过程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A1%A5%E5%85%85%E7%9F%A5%E8%AF%86%E7%82%B9%EF%BC%9A"><span class="toc-number">1.0.0.1.</span> <span class="toc-text">补充知识点：</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%B6%E5%AE%9E%E6%88%91%E7%9C%8B%E4%B8%8D%E6%87%82%E4%B8%8B%E9%9D%A2%E4%B8%80%E6%AE%B5"><span class="toc-number">2.</span> <span class="toc-text">*其实我看不懂下面一段</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E6%B3%95-1%EF%BC%9A%E5%88%A9%E7%94%A8%E5%B7%B2%E7%9F%A5%E7%9A%84-MD5-%E7%A2%B0%E6%92%9E"><span class="toc-number">2.0.1.</span> <span class="toc-text">方法 1：利用已知的 MD5 碰撞</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E6%B3%95-2%EF%BC%9A%E5%88%A9%E7%94%A8-PHP-%E7%9A%84%E7%B1%BB%E5%9E%8B%E7%89%B9%E6%80%A7%EF%BC%88%E5%A6%82%E6%9E%9C%E6%9D%A1%E4%BB%B6%E5%85%81%E8%AE%B8%EF%BC%89"><span class="toc-number">2.0.2.</span> <span class="toc-text">方法 2：利用 PHP 的类型特性（如果条件允许）</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93%EF%BC%9APHPmd5%E7%BB%95%E8%BF%87"><span class="toc-number">3.</span> <span class="toc-text">知识点总结：PHPmd5绕过</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%A4%E4%B8%AA%E7%AD%89%E5%8F%B7-0e%E7%BB%95%E8%BF%87%EF%BC%88%E8%AE%B0%E5%BD%95%E7%89%B9%E6%AE%8A%E5%80%BC"><span class="toc-number">3.1.</span> <span class="toc-text">两个等号 0e绕过（记录特殊值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E4%B8%AA%E7%AD%89%E5%8F%B7-%E6%95%B0%E7%BB%84%E7%BB%95%E8%BF%87"><span class="toc-number">3.2.</span> <span class="toc-text">三个等号 数组绕过</span></a></li></ol></li></ol></div></div><footer><nobr>构建自 <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a></nobr><wbr><nobr> 使用主题 <a target="_blank" rel="noopener" href="https://github.com/Yue-plus/hexo-theme-arknights">Arknights</a></nobr><wbr><nobr> 主题作者 <a target="_blank" rel="noopener" href="https://github.com/Yue-plus">Yue_plus</a></nobr></footer></aside></main><canvas id="canvas-dust"></canvas></body></html>
