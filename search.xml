@@ -1,6 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title></title>
+    <url>/2025/02/28/%E5%91%A8%E6%8A%A520250307/</url>
+    <content><![CDATA[<h1 id="周报20250307"><a href="#周报20250307" class="headerlink" title="周报20250307"></a>周报20250307</h1><blockquote>
+<p>我要从南走到北</p>
+<p>我还要从白走到黑</p>
+<p>我要人们都看到我</p>
+<p>但不知道我是谁</p>
+</blockquote>
+<p>学了CS之后感觉身上出了两个变化：</p>
+<p>一个是感觉不那么emotional了，具体的表现是变得冷漠了（？就好像是情绪被解离了一样，这个变化有点难描述，甚至本人与死人气息越来越接近了</p>
+<p>还有一个是，艺高人大胆了。写了一个把flag编码再加上中文字符再编码100次的题，把wp的脚本贴给AI，让他教我，忘记的语法继续让他教我，然后打开pycharm写一个差不多版本的。就这么下去，也能把CTF需要的语法差不多都熟了？</p>
+<p>我一直记得东哥那句“你不是黑客”吗，黑客一直以来就是不遵守规则的，手机要root游戏机要破解，遇到什么限制就想办法破除这个限制<del>而不是转身向山里走去</del>。从小到大我面对困难的态度就是，打不起我还躲不起吗。现在好像变了一点点，因为了解的技术多了，眼界开阔了，有些难题就像早八迟到了一样不是什么大事。没有本事的时候，上学丢了红领巾天就塌了。</p>
+<p>以前一直很害怕脚本，因为看不懂，下次知道是同类型的题也不会写，没想过现场让AI教，然后仿写。思路通了，就不知道以前为什么害怕，这态度太讨骂了。<del>为什么以前我会为了Ta伤心呢?</del></p>
+<p>抄脚本的时候改了点参数就要都改，忘了改就报错(ノ_；＼不过最后发现是最后解码的字符串的我让他decode</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>[FSCTF 2023]base套</title>
+    <url>/2025/02/28/%C2%96-FSCTF-2023-base%E5%A5%97/</url>
+    <content><![CDATA[<p>这个题目是给了一个很多次base64编码，每一次还会加上中文前缀的结果，要求解码</p>
+<p>主要任务是写一个脚本</p>
+<p>下面是我写的极简脚本~~~</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">from</span> base64 <span class="keyword">import</span> b64decode</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">base64_decode</span>(<span class="params">b64</span>):</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        b64 = re.sub(<span class="string">r&#x27;flag|[一-龥]&#x27;</span>, <span class="string">&#x27;&#x27;</span>, b64) <span class="comment"># 语法不熟</span></span><br><span class="line">        decoded_b64 = b64decode(b64)</span><br><span class="line">        <span class="keyword">return</span> decoded_b64.decode(),<span class="literal">True</span></span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        <span class="keyword">return</span> b64,<span class="literal">False</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;flag.txt&#x27;</span>, <span class="string">&#x27;r&#x27;</span>,encoding=<span class="string">&#x27;utf-8&#x27;</span>) <span class="keyword">as</span> file: <span class="comment"># 现在会啦</span></span><br><span class="line">     flag = file.read()</span><br><span class="line">     <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">         flag,can_decode = base64_decode(flag)</span><br><span class="line">         <span class="keyword">if</span> <span class="keyword">not</span> can_decode:</span><br><span class="line">             <span class="built_in">print</span>(flag)</span><br><span class="line">             <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>Misc</category>
+      </categories>
+      <tags>
+        <tag>字符编码</tag>
+        <tag>编码分析</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>SSTI学习总结</title>
     <url>/2025/02/27/SSTI%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/</url>
     <content><![CDATA[<h1 id="相关链接"><a href="#相关链接" class="headerlink" title="相关链接"></a>相关链接</h1><p><a href="https://www.k0rz3n.com/2018/11/12/%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0%E5%B8%A6%E4%BD%A0%E7%90%86%E8%A7%A3%E6%BC%8F%E6%B4%9E%E4%B9%8BSSTI%E6%BC%8F%E6%B4%9E/">https://www.k0rz3n.com/2018/11/12/%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0%E5%B8%A6%E4%BD%A0%E7%90%86%E8%A7%A3%E6%BC%8F%E6%B4%9E%E4%B9%8BSSTI%E6%BC%8F%E6%B4%9E/</a></p>
@@ -993,8 +1026,8 @@
         <category>Index</category>
       </categories>
       <tags>
-        <tag>First</tag>
         <tag>Test</tag>
+        <tag>First</tag>
       </tags>
   </entry>
   <entry>
