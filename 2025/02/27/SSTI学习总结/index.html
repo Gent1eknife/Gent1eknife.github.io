@@ -16,23 +16,28 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/silver/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.22.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.22.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":true,"show_result":true,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="注意，学习总结是摘自网上的各种博客总结的，并非本人原创。 注入是什么？注入就是格式化字符串漏洞的一种体现 SSTI注入是什么？服务器端模板注入 所以凡是使用模板的地方都可能会出现 SSTI 的问题 常见模版1.php 常用的Smarty Twig Twig是来自于Symfony的模板引擎，它非常易于安装和使用。它的操作有点像Mustache和liquid。 Blade Blade 是 Larave">
+
+    <meta name="description" content="注意，学习总结是摘自网上的各种博客总结的，并非本人原创。 摘抄的摘抄的自用的自用的 注入是什么？注入就是格式化字符串漏洞的一种体现">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SSTI学习总结">
 <meta property="og:url" content="http://example.com/2025/02/27/SSTI%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/index.html">
 <meta property="og:site_name" content="CTF学习笔记">
-<meta property="og:description" content="注意，学习总结是摘自网上的各种博客总结的，并非本人原创。 注入是什么？注入就是格式化字符串漏洞的一种体现 SSTI注入是什么？服务器端模板注入 所以凡是使用模板的地方都可能会出现 SSTI 的问题 常见模版1.php 常用的Smarty Twig Twig是来自于Symfony的模板引擎，它非常易于安装和使用。它的操作有点像Mustache和liquid。 Blade Blade 是 Larave">
+<meta property="og:description" content="注意，学习总结是摘自网上的各种博客总结的，并非本人原创。 摘抄的摘抄的自用的自用的 注入是什么？注入就是格式化字符串漏洞的一种体现">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2025/02/27/SSTI%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/SSTI%E6%B5%85%E6%9E%90-%E6%A3%80%E6%B5%8B%E5%8E%9F%E7%90%86.png">
 <meta property="article:published_time" content="2025-02-27T05:03:38.000Z">
-<meta property="article:modified_time" content="2025-03-01T03:24:18.494Z">
+<meta property="article:modified_time" content="2025-03-01T08:29:00.308Z">
 <meta property="article:author" content="温柔刀">
 <meta property="article:tag" content="PHP">
 <meta property="article:tag" content="SSTI">
 <meta property="article:tag" content="Smarty">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2025/02/27/SSTI%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/SSTI%E6%B5%85%E6%9E%90-%E6%A3%80%E6%B5%8B%E5%8E%9F%E7%90%86.png">
 
 
 <link rel="canonical" href="http://example.com/2025/02/27/SSTI%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/">
@@ -81,6 +86,7 @@
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
@@ -89,16 +95,44 @@
 
 <nav class="site-nav">
   <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
   </ul>
 </nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
 
 </header>
         
   
   <aside class="sidebar">
+
+
 
     <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
@@ -113,7 +147,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B3%A8%E5%85%A5%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">1.</span> <span class="nav-text">注入是什么？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SSTI%E6%B3%A8%E5%85%A5%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">2.</span> <span class="nav-text">SSTI注入是什么？</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E6%A8%A1%E7%89%88"><span class="nav-number">2.1.</span> <span class="nav-text">常见模版</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-php-%E5%B8%B8%E7%94%A8%E7%9A%84"><span class="nav-number">2.1.1.</span> <span class="nav-text">1.php 常用的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Java-%E5%B8%B8%E7%94%A8%E7%9A%84"><span class="nav-number">2.1.2.</span> <span class="nav-text">2.Java 常用的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Python-%E5%B8%B8%E7%94%A8%E7%9A%84"><span class="nav-number">2.1.3.</span> <span class="nav-text">3.Python 常用的</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SSTI%E6%80%8E%E4%B9%88%E4%BA%A7%E7%94%9F%E7%9A%84%EF%BC%9F%EF%BC%88%E5%A4%A7%E7%99%BD%E8%AF%9D%E6%96%B0%E6%89%8B%E7%90%86%E8%A7%A3%E7%89%88%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">SSTI怎么产生的？（大白话新手理解版）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-flask"><span class="nav-number">3.1.</span> <span class="nav-text">1.flask</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#render-template-string-%E5%92%8C-render-template-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">3.1.1.</span> <span class="nav-text">render_template_string() 和 render_template() 的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%881%EF%BC%89render-template-string"><span class="nav-number">3.1.1.1.</span> <span class="nav-text">（1）render_template_string()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%882%EF%BC%89render-template"><span class="nav-number">3.1.1.2.</span> <span class="nav-text">（2）render_template()</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-php"><span class="nav-number">3.2.</span> <span class="nav-text">2.php</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E9%93%BE%E6%8E%A5"><span class="nav-number">4.</span> <span class="nav-text">相关链接</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B3%A8%E5%85%A5%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">1.</span> <span class="nav-text">注入是什么？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SSTI%E6%B3%A8%E5%85%A5%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">2.</span> <span class="nav-text">SSTI注入是什么？</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E6%A8%A1%E7%89%88"><span class="nav-number">2.1.</span> <span class="nav-text">常见模版</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-php-%E5%B8%B8%E7%94%A8%E7%9A%84"><span class="nav-number">2.1.1.</span> <span class="nav-text">1.php 常用的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Java-%E5%B8%B8%E7%94%A8%E7%9A%84"><span class="nav-number">2.1.2.</span> <span class="nav-text">2.Java 常用的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Python-%E5%B8%B8%E7%94%A8%E7%9A%84"><span class="nav-number">2.1.3.</span> <span class="nav-text">3.Python 常用的</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SSTI%E6%80%8E%E4%B9%88%E4%BA%A7%E7%94%9F%E7%9A%84%EF%BC%9F%EF%BC%88%E5%A4%A7%E7%99%BD%E8%AF%9D%E6%96%B0%E6%89%8B%E7%90%86%E8%A7%A3%E7%89%88%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">SSTI怎么产生的？（大白话新手理解版）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-flask%E7%9A%84%E4%BE%8B%E5%AD%90"><span class="nav-number">3.1.</span> <span class="nav-text">1.flask的例子</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#render-template-string-%E5%92%8C-render-template-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">3.1.1.</span> <span class="nav-text">render_template_string() 和 render_template() 的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%881%EF%BC%89render-template-string"><span class="nav-number">3.1.1.1.</span> <span class="nav-text">（1）render_template_string()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%882%EF%BC%89render-template"><span class="nav-number">3.1.1.2.</span> <span class="nav-text">（2）render_template()</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-php%E7%9A%84%E4%BE%8B%E5%AD%90"><span class="nav-number">3.2.</span> <span class="nav-text">2.php的例子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-python%E7%9A%84%E4%BE%8B%E5%AD%90"><span class="nav-number">3.3.</span> <span class="nav-text">3.python的例子</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B%E4%B8%80%EF%BC%9A"><span class="nav-number">3.3.0.1.</span> <span class="nav-text">实例一：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B%E4%BA%8C%EF%BC%9A"><span class="nav-number">3.3.0.2.</span> <span class="nav-text">实例二：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-java%E7%9A%84%E4%BE%8B%E5%AD%90"><span class="nav-number">3.4.</span> <span class="nav-text">4.java的例子</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A3%80%E6%B5%8B%E6%96%B9%E6%B3%95"><span class="nav-number">4.</span> <span class="nav-text">检测方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%94%BB%E5%87%BB%E6%80%9D%E8%B7%AF"><span class="nav-number">5.</span> <span class="nav-text">攻击思路</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E6%94%BB%E5%87%BB%E6%96%B9%E5%90%91%EF%BC%9A"><span class="nav-number">5.1.</span> <span class="nav-text">1.攻击方向：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E6%94%BB%E5%87%BB%E6%96%B9%E6%B3%95%EF%BC%9A"><span class="nav-number">5.2.</span> <span class="nav-text">2.攻击方法：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#PHP%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C"><span class="nav-number">6.</span> <span class="nav-text">PHP命令执行</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#python%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86"><span class="nav-number">7.</span> <span class="nav-text">python前置知识</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E9%93%BE%E6%8E%A5"><span class="nav-number">8.</span> <span class="nav-text">相关链接</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -128,7 +162,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">40</span>
+          <span class="site-state-item-count">41</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -142,10 +176,16 @@
       </div>
   </nav>
 </div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Gent1eknife" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Gent1eknife" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
 
         </div>
       </div>
     </div>
+
 
     
   </aside>
@@ -200,7 +240,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-03-01 11:24:18" itemprop="dateModified" datetime="2025-03-01T11:24:18+08:00">2025-03-01</time>
+      <time title="修改时间：2025-03-01 16:29:00" itemprop="dateModified" datetime="2025-03-01T16:29:00+08:00">2025-03-01</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -233,14 +273,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>1.3k</span>
+      <span>2.2k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>5 分钟</span>
+      <span>8 分钟</span>
     </span>
 </div>
 
@@ -251,7 +291,10 @@
     
     
     <div class="post-body" itemprop="articleBody"><p>注意，学习总结是摘自网上的各种博客总结的，并非本人原创。</p>
+<p>摘抄的摘抄的自用的自用的</p>
 <h1 id="注入是什么？"><a href="#注入是什么？" class="headerlink" title="注入是什么？"></a>注入是什么？</h1><p><strong>注入就是格式化字符串漏洞的一种体现</strong></p>
+<span id="more"></span>
+
 <h1 id="SSTI注入是什么？"><a href="#SSTI注入是什么？" class="headerlink" title="SSTI注入是什么？"></a>SSTI注入是什么？</h1><p>服务器端模板注入</p>
 <p>所以<strong>凡是使用模板的地方都可能会出现 SSTI 的问题</strong></p>
 <h2 id="常见模版"><a href="#常见模版" class="headerlink" title="常见模版"></a>常见模版</h2><h3 id="1-php-常用的"><a href="#1-php-常用的" class="headerlink" title="1.php 常用的"></a><strong>1.php 常用的</strong></h3><p><strong>Smarty</strong></p>
@@ -272,7 +315,7 @@
 <p>django 应该使用的是专属于自己的一个模板引擎，我这里姑且就叫他 django，我们都知道 django 以快速开发著称，有自己好用的ORM，他的很多东西都是耦合性非常高的，你使用别的就不能发挥出 django 的特性了</p>
 <p><strong>tornado</strong></p>
 <p>tornado 也有属于自己的一套模板引擎，tornado 强调的是异步非阻塞高并发</p>
-<h1 id="SSTI怎么产生的？（大白话新手理解版）"><a href="#SSTI怎么产生的？（大白话新手理解版）" class="headerlink" title="SSTI怎么产生的？（大白话新手理解版）"></a>SSTI怎么产生的？（大白话新手理解版）</h1><h2 id="1-flask"><a href="#1-flask" class="headerlink" title="1.flask"></a>1.flask</h2><p>先来看几个函数</p>
+<h1 id="SSTI怎么产生的？（大白话新手理解版）"><a href="#SSTI怎么产生的？（大白话新手理解版）" class="headerlink" title="SSTI怎么产生的？（大白话新手理解版）"></a>SSTI怎么产生的？（大白话新手理解版）</h1><h2 id="1-flask的例子"><a href="#1-flask的例子" class="headerlink" title="1.flask的例子"></a>1.flask的例子</h2><p>先来看几个函数</p>
 <h3 id="render-template-string-和-render-template-的区别"><a href="#render-template-string-和-render-template-的区别" class="headerlink" title="render_template_string() 和 render_template() 的区别"></a><strong><code>render_template_string()</code> 和 <code>render_template()</code> 的区别</strong></h3><h4 id="（1）render-template-string"><a href="#（1）render-template-string" class="headerlink" title="（1）render_template_string()"></a><strong>（1）<code>render_template_string()</code></strong></h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> render_template_string</span><br><span class="line"></span><br><span class="line">html = render_template_string(<span class="string">&quot;Hello, &#123;&#123; name &#125;&#125;!&quot;</span>, name=<span class="string">&quot;Alice&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(html)  <span class="comment"># 输出: Hello, Alice!</span></span><br></pre></td></tr></table></figure>
 
 <ul>
@@ -296,7 +339,7 @@
 
 
 
-<h2 id="2-php"><a href="#2-php" class="headerlink" title="2.php"></a>2.php</h2><p><strong>示例PHP代码1：</strong></p>
+<h2 id="2-php的例子"><a href="#2-php的例子" class="headerlink" title="2.php的例子"></a>2.php的例子</h2><p><strong>示例PHP代码1：</strong></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">require_once dirname(__FILE__).‘/../lib/Twig/Autoloader.php‘;</span><br><span class="line">Twig_Autoloader::register(true);</span><br><span class="line">$twig = new Twig_Environment(new Twig_Loader_String());</span><br><span class="line">$output = $twig-&gt;render(&quot;Hello &#123;&#123;name&#125;&#125;&quot;, array(&quot;name&quot; =&gt; $_GET[&quot;name&quot;]));  // 将用户输入作为模版变量的值</span><br><span class="line">echo $output;</span><br><span class="line">TEXT</span><br></pre></td></tr></table></figure>
 
 <p>这段代码明显没有什么问题，用户的输入到时候渲染的时候就是 name 的值，由于name 外面已经有</p>
@@ -321,6 +364,35 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123;xxx&#125;&#125;</span><br><span class="line">TEXT</span><br></pre></td></tr></table></figure>
 
 <p>就非常的符合模板的规则，模板引擎一高兴就给解析了，然后服务器就凉了。</p>
+<h2 id="3-python的例子"><a href="#3-python的例子" class="headerlink" title="3.python的例子"></a>3.python的例子</h2><h4 id="实例一："><a href="#实例一：" class="headerlink" title="实例一："></a><strong>实例一：</strong></h4><p><strong>示例Python代码1：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@app.errorhandler(<span class="params"><span class="number">404</span></span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">page_not_found</span>(<span class="params">e</span>):</span><br><span class="line">    template = <span class="string">&#x27;&#x27;&#x27;&#123;%% extends &quot;layout.html&quot; %%&#125;</span></span><br><span class="line"><span class="string">&#123;%% block body %%&#125;</span></span><br><span class="line"><span class="string">    &lt;div class=&quot;center-content error&quot;&gt;</span></span><br><span class="line"><span class="string">        &lt;h1&gt;Oops! That page doesn&#x27;t exist.&lt;/h1&gt;</span></span><br><span class="line"><span class="string">        &lt;h3&gt;%s&lt;/h3&gt;</span></span><br><span class="line"><span class="string">    &lt;/div&gt;</span></span><br><span class="line"><span class="string">&#123;%% endblock %%&#125;</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span> % (request.url)</span><br><span class="line">    <span class="keyword">return</span> render_template_string(template), <span class="number">404</span></span><br><span class="line">TEXT</span><br></pre></td></tr></table></figure>
+
+<p>这是一段经典的 flask 源码，@app.errorhandler(404) 这一部分是装饰器，用于检测404用的，和最后的 ,404呼应的，这与我们这次的测试无关</p>
+<p>我们看到，这里本身开发者并没有打算用到什么模板语法，就是使用了一个字符串的格式化来传递一个 url ，但是你别忘了你还是用模板的方式去渲染的啊，也就是说还是支持模板引擎支持的语法，那我们为什么不能输入模板引擎的语法呢？<strong>（永远不要相信用户的输入）</strong></p>
+<p>于是我们就能在URL后面跟上</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123; 7+7 &#125;&#125;</span><br><span class="line">TEXT</span><br></pre></td></tr></table></figure>
+
+<p>自然而然就能计算出 49 了</p>
+<h4 id="实例二："><a href="#实例二：" class="headerlink" title="实例二："></a><strong>实例二：</strong></h4><p><strong>示例Python代码2：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># coding: utf-8</span></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">from</span> jinja2 importTemplate</span><br><span class="line"> </span><br><span class="line">template = Template(<span class="string">&quot;Your input: &#123;&#125;&quot;</span>.<span class="built_in">format</span>(sys.argv[<span class="number">1</span>] <span class="keyword">if</span> <span class="built_in">len</span>(sys.argv) &gt; <span class="number">1</span> <span class="keyword">else</span> <span class="string">&#x27;&lt;empty&gt;&#x27;</span>)) <span class="comment">#主要问题出现在这里</span></span><br><span class="line"><span class="built_in">print</span> template.render()</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-java的例子"><a href="#4-java的例子" class="headerlink" title="4.java的例子"></a>4.java的例子</h2><p>等我看懂了再写</p>
+<h1 id="检测方法"><a href="#检测方法" class="headerlink" title="检测方法"></a>检测方法</h1><p>同常规的 SQL 注入检测，XSS 检测一样，模板注入漏洞的检测也是向传递的参数中承载特定 Payload 并根据返回的内容来进行判断的。每一个模板引擎都有着自己的语法，Payload 的构造需要针对各类模板引擎制定其不同的扫描规则，就如同 SQL 注入中有着不同的数据库类型一样。</p>
+<p>简单来说，就是更改请求参数使之承载含有模板引擎语法的 Payload，通过页面渲染返回的内容检测承载的 Payload 是否有得到编译解析，有解析则可以判定含有 Payload 对应模板引擎注入，否则不存在 SSTI。</p>
+<img src="/2025/02/27/SSTI%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/SSTI%E6%B5%85%E6%9E%90-%E6%A3%80%E6%B5%8B%E5%8E%9F%E7%90%86.png" class="" title="SSTI浅析-检测原理">
+
+<blockquote>
+<p>**注意：**有的时候出现 XSS 的时候，也有可能是 SSTI 漏洞，虽说模板引擎在大多数情况下都是使用的xss 过滤的，但是也不排除有些意外情况的出现，比如<br>有的模板引擎(比如 jinja2)在渲染的时候默认只针对特定的文件后缀名的文件(html,xhtml等)进行XSS过滤</p>
+</blockquote>
+<h1 id="攻击思路"><a href="#攻击思路" class="headerlink" title="攻击思路"></a>攻击思路</h1><h2 id="1-攻击方向："><a href="#1-攻击方向：" class="headerlink" title="1.攻击方向："></a>1.攻击方向：</h2><p>找到模板注入主要从三个方向进行攻击</p>
+<p>(1)模板本身<br>(2)框架本身<br>(3)语言本身<br>(4)应用本身</p>
+<h2 id="2-攻击方法："><a href="#2-攻击方法：" class="headerlink" title="2.攻击方法："></a>2.攻击方法：</h2><p>我们知道 SSTI 能够造成很多种危害，包括 敏感信息泄露、RCE、GetShell 等，关键就在于如何才能利用这个注入点执行我们想执行的代码，那么我们寻找利用点的范围实际上就是在我们上面的四个地方，一个是模板本身支持的语法、内置变量、属性、函数，还有就是纯粹框架的全局变量、属性、函数，然后我们考虑语言本身的特性，比如 面向对象的内省机制，最最最后我们无能为力的时候才考虑怎么寻找应用定义的一些东西，因为这个是几乎没有文档的，是开发者的自行设计，一般需要拿到应用的源码才能考虑，于是我将其放在最后一个<del>(这样好难完全没干过)</del></p>
+<blockquote>
+<p><strong>注意：</strong></p>
+<p>在这种面向对象的语言中，获取父类这种思想要贯穿始终，理论基础就是 Python 的魔法方法 PHP 的自省 JAVA 的反射 机制</p>
+</blockquote>
+<h1 id="PHP命令执行"><a href="#PHP命令执行" class="headerlink" title="PHP命令执行"></a>PHP命令执行</h1><h1 id="python前置知识"><a href="#python前置知识" class="headerlink" title="python前置知识"></a>python前置知识</h1><p>关于类：</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_45779334/article/details/107858999">https://blog.csdn.net/qq_45779334/article/details/107858999</a></p>
 <h1 id="相关链接"><a href="#相关链接" class="headerlink" title="相关链接"></a>相关链接</h1><p><a target="_blank" rel="noopener" href="https://www.k0rz3n.com/2018/11/12/%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0%E5%B8%A6%E4%BD%A0%E7%90%86%E8%A7%A3%E6%BC%8F%E6%B4%9E%E4%B9%8BSSTI%E6%BC%8F%E6%B4%9E/%E6%9C%80%E5%A5%BD%E7%9A%84">https://www.k0rz3n.com/2018/11/12/%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0%E5%B8%A6%E4%BD%A0%E7%90%86%E8%A7%A3%E6%BC%8F%E6%B4%9E%E4%B9%8BSSTI%E6%BC%8F%E6%B4%9E/最好的</a></p>
 <p>俱乐部卢师傅写的例会文件</p>
 
@@ -332,12 +404,17 @@
 
     <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/PHP/" rel="tag"># PHP</a>
-              <a href="/tags/SSTI/" rel="tag"># SSTI</a>
-              <a href="/tags/Smarty/" rel="tag"># Smarty</a>
+              <a href="/tags/PHP/" rel="tag"><i class="fa fa-tag"></i> PHP</a>
+              <a href="/tags/SSTI/" rel="tag"><i class="fa fa-tag"></i> SSTI</a>
+              <a href="/tags/Smarty/" rel="tag"><i class="fa fa-tag"></i> Smarty</a>
           </div>
 
         
+  <div class="social-like a2a_kit a2a_kit_size_32 a2a_default_style">
+    <a class="a2a_dd" target="_blank" rel="noopener" href="https://www.addtoany.com/share"></a>
+      <a class="a2a_button_facebook"></a>
+      <a class="a2a_button_twitter"></a>
+  </div>
 
           <div class="post-nav">
             <div class="post-nav-item">
@@ -380,17 +457,17 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">11k</span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">12k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">40 分钟</span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">44 分钟</span>
   </span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
-  </div>
 
     </div>
   </footer>
@@ -416,12 +493,16 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
 <script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
 
-  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
 
 
 
 
 
+  <script src="/js/third-party/pace.js"></script>
+
+  <script src="/js/third-party/addtoany.js"></script>
 
   
 
@@ -442,3 +523,6 @@ document.addEventListener('page:loaded', () => {
 
 </body>
 </html>
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
