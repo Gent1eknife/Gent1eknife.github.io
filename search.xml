@@ -497,14 +497,10 @@
       </tags>
   </entry>
   <entry>
-    <title>[陇剑杯 2021]jwt（问2）</title>
-    <url>/2025/02/22/%C2%96-%E9%99%87%E5%89%91%E6%9D%AF-2021-jwt%EF%BC%88%E9%97%AE2%EF%BC%89/</url>
-    <content><![CDATA[<p>题目说攻击者是进行了绕过的，流量里登录了两遍，登陆之后执行whoami都是失败的，返回权限不足，下面第三遍执行whoami时突然成功了，结合查到的jwt绕过方法，攻击者是修改tocken值进行绕过的，将原本10086的id改为了10087，获取到了管理员权限</p>
-<img src="/2025/02/22/%C2%96-%E9%99%87%E5%89%91%E6%9D%AF-2021-jwt%EF%BC%88%E9%97%AE2%EF%BC%89/QQ20250222-140911.png" class="" title="QQ20250222-140911">
-
-
-
-<img src="/2025/02/22/%C2%96-%E9%99%87%E5%89%91%E6%9D%AF-2021-jwt%EF%BC%88%E9%97%AE2%EF%BC%89/QQ20250222-140947.png" class="" title="QQ20250222-140947">
+    <title>[陇剑杯 2021]日志分析（问1）+jwt（问2）</title>
+    <url>/2025/02/22/%C2%96%E9%99%87%E5%89%91%E6%9D%AF-2021-jwt%EF%BC%88%E9%97%AE2%EF%BC%89/</url>
+    <content><![CDATA[<h1 id="日志分析（问1）"><a href="#日志分析（问1）" class="headerlink" title="日志分析（问1）"></a>日志分析（问1）</h1><p>把日志用010打开，搜索200<br><img src="https://www.nssctf.cn/files/2023/9/25/3eecd8b87f.jpg" alt="NSSIMAGE"><br>看到一个下载www%2ezip的，%2e在十六进制表示.，所以源文件是<a href="http://www.zip/">www.zip</a></p>
+<h1 id="jwt（问2）"><a href="#jwt（问2）" class="headerlink" title="jwt（问2）"></a>jwt（问2）</h1><p>题目说攻击者是进行了绕过的，流量里登录了两遍，登陆之后执行whoami都是失败的，返回权限不足，下面第三遍执行whoami时突然成功了，结合查到<img src="/%C2%96%E9%99%87%E5%89%91%E6%9D%AF-2021-jwt%EF%BC%88%E9%97%AE2%EF%BC%89/QQ20250222-140947.png" alt="QQ20250222-140947">的jwt绕过方法，攻击者是修改tocken值进行<img src="/%C2%96%E9%99%87%E5%89%91%E6%9D%AF-2021-jwt%EF%BC%88%E9%97%AE2%EF%BC%89/QQ20250222-140911.png" alt="QQ20250222-140911">绕过的，将原本10086的id改为了10087，获取到了管理员权限</p>
 ]]></content>
       <categories>
         <category>Misc</category>
