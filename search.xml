@@ -393,18 +393,6 @@
 ]]></content>
   </entry>
   <entry>
-    <title>test for next</title>
-    <url>/2025/02/25/test-for-next/</url>
-    <content><![CDATA[<p>561695156</p>
-]]></content>
-      <categories>
-        <category>why no categories</category>
-      </categories>
-      <tags>
-        <tag>why no tag</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>ZipCracker命令及使用场景</title>
     <url>/2025/02/25/ZipCracker%E5%91%BD%E4%BB%A4%E5%8F%8A%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF/</url>
     <content><![CDATA[<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">python3 ZipCracker.py &lt;同目录下压缩包名字&gt; &lt;自定义字典&gt; (可选)</span><br></pre></td></tr></table></figure>
@@ -934,12 +922,6 @@
         <tag>无字母RCE</tag>
         <tag>RCE</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>我有巨物恐惧症</title>
-    <url>/2025/02/19/%E6%88%91%E6%9C%89%E5%B7%A8%E7%89%A9%E6%81%90%E6%83%A7%E7%97%87/</url>
-    <content><![CDATA[<p>我不明白怎么有这么多工具这么多命令这么多魔术方法</p>
-]]></content>
   </entry>
   <entry>
     <title>[NCTF 2018]滴!晨跑打卡</title>
