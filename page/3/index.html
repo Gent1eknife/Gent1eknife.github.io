@@ -129,13 +129,13 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">42</span>
+          <span class="site-state-item-count">43</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">8</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -163,6 +163,121 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/02/22/%C2%96%E9%99%87%E5%89%91%E6%9D%AF-2021-jwt%EF%BC%88%E9%97%AE2%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar_2.gif">
+      <meta itemprop="name" content="温柔刀">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CTF学习笔记">
+      <meta itemprop="description" content="JNU_WEB">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | CTF学习笔记">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/02/22/%C2%96%E9%99%87%E5%89%91%E6%9D%AF-2021-jwt%EF%BC%88%E9%97%AE2%EF%BC%89/" class="post-title-link" itemprop="url">[陇剑杯 2021]日志分析（问1）+jwt（问2）</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-02-22 14:06:39" itemprop="dateCreated datePublished" datetime="2025-02-22T14:06:39+08:00">2025-02-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-03-01 11:08:43" itemprop="dateModified" datetime="2025-03-01T11:08:43+08:00">2025-03-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Misc/" itemprop="url" rel="index"><span itemprop="name">Misc</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/2025/02/22/%C2%96%E9%99%87%E5%89%91%E6%9D%AF-2021-jwt%EF%BC%88%E9%97%AE2%EF%BC%89/#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/2025/02/22/%C2%96%E9%99%87%E5%89%91%E6%9D%AF-2021-jwt%EF%BC%88%E9%97%AE2%EF%BC%89/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>143</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="日志分析（问1）"><a href="#日志分析（问1）" class="headerlink" title="日志分析（问1）"></a>日志分析（问1）</h1><p>把日志用010打开，搜索200<br><img src="https://www.nssctf.cn/files/2023/9/25/3eecd8b87f.jpg" alt="NSSIMAGE"><br>看到一个下载www%2ezip的，%2e在十六进制表示.，所以源文件是<a target="_blank" rel="noopener" href="http://www.zip/">www.zip</a></p>
+<h1 id="jwt（问2）"><a href="#jwt（问2）" class="headerlink" title="jwt（问2）"></a>jwt（问2）</h1><p>题目说攻击者是进行了绕过的，流量里登录了两遍，登陆之后执行whoami都是失败的，返回权限不足，下面第三遍执行whoami时突然成功了，结合查到<img src="/%C2%96%E9%99%87%E5%89%91%E6%9D%AF-2021-jwt%EF%BC%88%E9%97%AE2%EF%BC%89/QQ20250222-140947.png" alt="QQ20250222-140947">的jwt绕过方法，攻击者是修改tocken值进行<img src="/%C2%96%E9%99%87%E5%89%91%E6%9D%AF-2021-jwt%EF%BC%88%E9%97%AE2%EF%BC%89/QQ20250222-140911.png" alt="QQ20250222-140911">绕过的，将原本10086的id改为了10087，获取到了管理员权限</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -450,7 +565,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-03-02 09:34:53" itemprop="dateModified" datetime="2025-03-02T09:34:53+08:00">2025-03-02</time>
+      <time title="修改时间：2025-03-04 21:02:53" itemprop="dateModified" datetime="2025-03-04T21:02:53+08:00">2025-03-04</time>
     </span>
 
   
@@ -474,7 +589,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>225</span>
+      <span>228</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -495,7 +610,7 @@
           <p>此为个人理解，争取往大白话，口语化方向看齐。</p>
 <h1 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h1><h1 id="CDN"><a href="#CDN" class="headerlink" title="CDN"></a>CDN</h1><h1 id="技术栈"><a href="#技术栈" class="headerlink" title="技术栈"></a>技术栈</h1><h1 id="CMS"><a href="#CMS" class="headerlink" title="CMS"></a>CMS</h1><h1 id="CMD指纹"><a href="#CMD指纹" class="headerlink" title="CMD指纹"></a>CMD指纹</h1><h1 id="CVE"><a href="#CVE" class="headerlink" title="CVE"></a>CVE</h1><h1 id="0day"><a href="#0day" class="headerlink" title="0day"></a>0day</h1><p>没有被公开发表的漏洞。也就是说你做这道题不可以查已经发表的CVE来复现得到flag。</p>
 <h1 id="SRC"><a href="#SRC" class="headerlink" title="SRC"></a>SRC</h1><h1 id="wp-exp-poc-payload"><a href="#wp-exp-poc-payload" class="headerlink" title="wp exp poc payload"></a>wp exp poc payload</h1><p>“答案”</p>
-<h1 id="webshell-shell-web"><a href="#webshell-shell-web" class="headerlink" title="webshell shell web"></a>webshell shell web</h1><h1 id="cookie-session-token"><a href="#cookie-session-token" class="headerlink" title="cookie session token"></a>cookie session token</h1><h1 id="jwt-js"><a href="#jwt-js" class="headerlink" title="jwt js"></a>jwt js</h1><p>JWT 由三部分组成： Header 头部、 Payload 负载 和 Signature 签名，它是一个很长的字符串，中间用点（.）隔开。客户端收到服务器返回的 JWT，可以储存在 Cookie 里面，也可以储存在 localStorage。</p>
+<h1 id="webshell-shell-web"><a href="#webshell-shell-web" class="headerlink" title="webshell shell web"></a>webshell shell web</h1><h1 id="cookie-session-token"><a href="#cookie-session-token" class="headerlink" title="cookie session token"></a>cookie session token</h1><h1 id="jwt-js-json-jdk-java"><a href="#jwt-js-json-jdk-java" class="headerlink" title="jwt js json jdk java"></a>jwt js json jdk java</h1><p>JWT 由三部分组成： Header 头部、 Payload 负载 和 Signature 签名，它是一个很长的字符串，中间用点（.）隔开。客户端收到服务器返回的 JWT，可以储存在 Cookie 里面，也可以储存在 localStorage。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Header</span>.<span class="property">Payload</span>.<span class="property">Signature</span></span><br></pre></td></tr></table></figure>
 
 <p>长这样：</p>
@@ -1215,118 +1330,6 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2025/02/16/VNCTF-%E9%9D%A2%E8%AF%95%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB%E7%AD%94%E6%A1%88/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar_2.gif">
-      <meta itemprop="name" content="温柔刀">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CTF学习笔记">
-      <meta itemprop="description" content="JNU_WEB">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | CTF学习笔记">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2025/02/16/VNCTF-%E9%9D%A2%E8%AF%95%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB%E7%AD%94%E6%A1%88/" class="post-title-link" itemprop="url">VNCTF 面试问题汇总答案</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2025-02-16 20:25:08" itemprop="dateCreated datePublished" datetime="2025-02-16T20:25:08+08:00">2025-02-16</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-03-02 09:44:41" itemprop="dateModified" datetime="2025-03-02T09:44:41+08:00">2025-03-02</time>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-    <span class="post-meta-item-icon">
-      <i class="far fa-comment"></i>
-    </span>
-    <span class="post-meta-item-text">Waline：</span>
-  
-    <a title="waline" href="/2025/02/16/VNCTF-%E9%9D%A2%E8%AF%95%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB%E7%AD%94%E6%A1%88/#waline" itemprop="discussionUrl">
-      <span class="post-comments-count waline-comment-count" data-path="/2025/02/16/VNCTF-%E9%9D%A2%E8%AF%95%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB%E7%AD%94%E6%A1%88/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>758</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>3 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          Here's something encrypted, password is required to continue reading.
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2025/02/16/VNCTF-%E9%9D%A2%E8%AF%95%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB%E7%AD%94%E6%A1%88/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
     <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/4/"><i class="fa fa-angle-right"></i></a>
   </nav>
@@ -1351,14 +1354,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">14k</span>
+    <span title="站点总字数">15k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">51 分钟</span>
+    <span title="站点阅读时长">55 分钟</span>
   </span>
 </div>
 
