@@ -264,6 +264,60 @@
 
 
 <p><a href="https://drinkflower.asia/wordpress/archives/441">严格过滤下的SSTI注入</a></p>
+<h1 id="GWCTF-2019-你的名字"><a href="#GWCTF-2019-你的名字" class="headerlink" title="[GWCTF 2019]你的名字"></a>[GWCTF 2019]你的名字</h1><h1 id="NISACTF-2022-midlevel"><a href="#NISACTF-2022-midlevel" class="headerlink" title="[NISACTF 2022]midlevel"></a>[NISACTF 2022]midlevel</h1><img src="/2025/03/01/SSTI%E9%9B%86%E4%B8%AD%E5%AD%A6%E4%B9%A0%E9%A2%98%E7%9B%AE%E6%B1%87%E6%80%BB/20230226102815-3922049c-b57d-1.png" class="" title="20230226102815-3922049c-b57d-1">
+
+<h2 id="Smarty漏洞成因："><a href="#Smarty漏洞成因：" class="headerlink" title="Smarty漏洞成因："></a>Smarty漏洞成因：</h2><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    <span class="keyword">require_once</span>(<span class="string">&#x27;./smarty/libs/&#x27;</span> . <span class="string">&#x27;Smarty.class.php&#x27;</span>);</span><br><span class="line">    <span class="variable">$smarty</span> = <span class="keyword">new</span> <span class="title class_">Smarty</span>();</span><br><span class="line">    <span class="variable">$ip</span> = <span class="variable">$_SERVER</span>[<span class="string">&#x27;HTTP_X_FORWARDED_FOR&#x27;</span>];</span><br><span class="line">    <span class="variable">$smarty</span>-&gt;<span class="title function_ invoke__">display</span>(<span class="string">&quot;string:&quot;</span>.<span class="variable">$ip</span>);     <span class="comment">// display函数把标签替换成对象的php变量；显示模板</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这段 PHP 代码的关键漏洞点在于 <strong>SSTI（服务器端模板注入）</strong>，主要问题出现在这一行：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">php</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">复制编辑</span><br><span class="line">$smarty-&gt;display(&quot;string:&quot;.$ip);</span><br></pre></td></tr></table></figure>
+
+<h3 id="SSTI-漏洞分析"><a href="#SSTI-漏洞分析" class="headerlink" title="SSTI 漏洞分析"></a><strong>SSTI 漏洞分析</strong></h3><hr>
+<h4 id="1-SERVER-HTTP-X-FORWARDED-FOR-可控"><a href="#1-SERVER-HTTP-X-FORWARDED-FOR-可控" class="headerlink" title="1. $_SERVER[&#39;HTTP_X_FORWARDED_FOR&#39;] 可控"></a><strong>1. <code>$_SERVER[&#39;HTTP_X_FORWARDED_FOR&#39;]</code> 可控</strong></h4><ul>
+<li><pre><code>$_SERVER[&#39;HTTP_X_FORWARDED_FOR&#39;]
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">是 HTTP 请求头字段，攻击者可以通过伪造请求头来控制其值，比如：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+css
+
+
+复制编辑
+X-Forwarded-For: &#123;payload&#125;
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">这样，</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+$ip
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">   变量的值就可以被攻击者控制。</span><br><span class="line"></span><br><span class="line">#### **2. `display(&quot;string:&quot;.$ip)` 直接解析输入**</span><br><span class="line"></span><br><span class="line">- `Smarty` 允许 `display(&quot;string:xxx&quot;)` 解析 **Smarty 模板语法**，意味着 `$ip` 变量的值如果包含 Smarty 语法，**Smarty 会执行模板中的代码**。</span><br><span class="line"></span><br><span class="line">#### **3. 攻击利用**</span><br><span class="line"></span><br><span class="line">- 假设攻击者发送如下请求：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+scss
+
+
+复制编辑
+X-Forwarded-For: &#123;*phpinfo()*&#125;
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">代码执行后，相当于：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+php
+
+
+复制编辑
+$smarty-&gt;display(&quot;string:&#123;*phpinfo()*&#125;&quot;);
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">`Smarty` 解析 `&#123;* phpinfo() *&#125;` 作为 **模板注释**，不会执行。但如果换成：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+bash
+
+
+复制编辑
+X-Forwarded-For: &#123;$smarty.version&#125;
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">代码执行后：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+php
+
+
+复制编辑
+$smarty-&gt;display(&quot;string:&#123;$smarty.version&#125;&quot;);
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">  这样，Smarty 会解析 `&#123;$smarty.version&#125;`，并显示 **Smarty 版本号**。</span><br><span class="line"></span><br><span class="line">- 进一步利用，比如：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+scss
+
+
+复制编辑
+X-Forwarded-For: &#123;phpinfo()&#125;
+</code></pre>
+<p>如果 <strong>PHP 允许 <code>Smarty</code> 解析 <code>php</code> 标签</strong>，就会执行 <code>phpinfo()</code>，泄露 PHP 配置信息。</p>
+</li>
+</ul>
+<p>这个地方对应的就是xff头处存在smarty模板，我们可以利用smarty形式来进行攻击。</p>
+<p>摘自：<a href="https://xz.aliyun.com/news/11666?time__1311=eqUxuQDtDQitWkxBkFDnQFeG=2KiIxG8mKeD&u_atoken=d1877f7d5e5153ab62305384a28e30a9&u_asig=1a0c399a17410769091401613e00c7">Smarty模板注入&amp;CVE-2017-1000480</a></p>
 ]]></content>
       <categories>
         <category>Web</category>
@@ -1303,8 +1357,8 @@
         <category>Web</category>
       </categories>
       <tags>
-        <tag>反序列化</tag>
         <tag>SQL注入</tag>
+        <tag>反序列化</tag>
         <tag>PHP伪协议</tag>
       </tags>
   </entry>
