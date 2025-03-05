@@ -1512,8 +1512,8 @@ X-Forwarded-For: &#123;phpinfo()&#125;
         <category>Index</category>
       </categories>
       <tags>
-        <tag>Test</tag>
         <tag>First</tag>
+        <tag>Test</tag>
       </tags>
   </entry>
   <entry>
