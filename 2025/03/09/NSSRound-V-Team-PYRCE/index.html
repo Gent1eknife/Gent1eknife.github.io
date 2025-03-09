@@ -24,16 +24,19 @@
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.22.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":true,"show_result":true,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
 
-    <meta name="description" content="源码： 12345678910111213141516171819202122232425262728293031323334353637383940414243444546# 导入必要的库from flask import Flask, request, make_responseimport uuid  # 此导入在代码中未使用，可以考虑移除import os# 初始化 Flask 应用app">
+    <meta name="description" content="源码：">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[NSSRound#V Team]PYRCE">
 <meta property="og:url" content="http://example.com/2025/03/09/NSSRound-V-Team-PYRCE/index.html">
 <meta property="og:site_name" content="CTF学习笔记">
-<meta property="og:description" content="源码： 12345678910111213141516171819202122232425262728293031323334353637383940414243444546# 导入必要的库from flask import Flask, request, make_responseimport uuid  # 此导入在代码中未使用，可以考虑移除import os# 初始化 Flask 应用app">
+<meta property="og:description" content="源码：">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-03-09T05:43:46.000Z">
-<meta property="article:modified_time" content="2025-03-09T06:35:18.644Z">
+<meta property="article:modified_time" content="2025-03-09T06:54:21.043Z">
 <meta property="article:author" content="温柔刀">
+<meta property="article:tag" content="RCE">
+<meta property="article:tag" content="WAF绕过">
+<meta property="article:tag" content="Python">
 <meta name="twitter:card" content="summary">
 
 
@@ -206,7 +209,16 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2025-03-09 13:43:46 / 修改时间：14:35:18" itemprop="dateCreated datePublished" datetime="2025-03-09T13:43:46+08:00">2025-03-09</time>
+      <time title="创建时间：2025-03-09 13:43:46 / 修改时间：14:54:21" itemprop="dateCreated datePublished" datetime="2025-03-09T13:43:46+08:00">2025-03-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
+        </span>
     </span>
 
   
@@ -230,7 +242,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>492</span>
+      <span>493</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -248,6 +260,8 @@
     
     
     <div class="post-body" itemprop="articleBody"><p>源码：</p>
+<span id="more"></span>
+
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 导入必要的库</span></span><br><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask, request, make_response</span><br><span class="line"><span class="keyword">import</span> uuid  <span class="comment"># 此导入在代码中未使用，可以考虑移除</span></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"><span class="comment"># 初始化 Flask 应用</span></span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义一个简单的 Web 应用防火墙（WAF）函数</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">waf</span>(<span class="params">rce</span>):</span><br><span class="line">    <span class="comment"># 定义黑名单字符</span></span><br><span class="line">    black_list = <span class="string">&#x27;01233456789un/|&#123;&#125;*!;@#\n~\&#x27;\&quot;&gt;&lt;=+-_ &#x27;</span></span><br><span class="line">    <span class="comment"># 遍历黑名单字符</span></span><br><span class="line">    <span class="keyword">for</span> black <span class="keyword">in</span> black_list:</span><br><span class="line">        <span class="keyword">if</span> black <span class="keyword">in</span> rce:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义根路由，处理 GET 请求</span></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/&#x27;</span>, methods=[<span class="string">&#x27;GET&#x27;</span>]</span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">index</span>():</span><br><span class="line">    <span class="comment"># 检查请求参数中是否包含 &quot;Ňśś&quot;</span></span><br><span class="line">    nss = request.args.get(<span class="string">&quot;Ňśś&quot;</span>)</span><br><span class="line">    <span class="keyword">if</span> nss:</span><br><span class="line">        <span class="comment"># 调用 WAF 函数检查输入是否合法</span></span><br><span class="line">        <span class="keyword">if</span> waf(nss):</span><br><span class="line">            <span class="comment"># 如果合法，执行系统命令</span></span><br><span class="line">            os.popen(nss)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="comment"># 如果不合法，返回 &quot;waf&quot;</span></span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;waf&quot;</span></span><br><span class="line">    <span class="comment"># 返回 &quot;/source&quot;</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;/source&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义 /source 路由，处理 GET 请求</span></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/source&#x27;</span>, methods=[<span class="string">&#x27;GET&#x27;</span>]</span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">source</span>():</span><br><span class="line">    <span class="comment"># 读取当前文件（app.py）的内容</span></span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&quot;app.py&quot;</span>, <span class="string">&#x27;rb&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">        src = f.read()</span><br><span class="line">    <span class="keyword">return</span> src</span><br><span class="line"></span><br><span class="line"><span class="comment"># 主程序入口</span></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    <span class="comment"># 运行 Flask 应用</span></span><br><span class="line">    app.run(host=<span class="string">&#x27;0.0.0.0&#x27;</span>, debug=<span class="literal">False</span>, port=<span class="number">8080</span>)</span><br></pre></td></tr></table></figure>
 
 
@@ -288,6 +302,11 @@
     
 
     <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/RCE/" rel="tag"><i class="fa fa-tag"></i> RCE</a>
+              <a href="/tags/WAF%E7%BB%95%E8%BF%87/" rel="tag"><i class="fa fa-tag"></i> WAF绕过</a>
+              <a href="/tags/Python/" rel="tag"><i class="fa fa-tag"></i> Python</a>
+          </div>
 
         
   <div class="social-like a2a_kit a2a_kit_size_32 a2a_default_style">
