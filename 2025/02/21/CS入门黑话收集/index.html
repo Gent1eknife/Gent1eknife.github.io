@@ -24,15 +24,15 @@
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.22.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":true,"show_result":true,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
 
-    <meta name="description" content="此为个人理解，争取往大白话，口语化方向看齐。 接口CDN技术栈CMSCMD指纹CVE0day没有被公开发表的漏洞。也就是说你做这道题不可以查已经发表的CVE来复现得到flag。 SRCwp exp poc payload“答案” webshell shell webcookie session tokenjwt js json jdk javaJWT 由三部分组成： Header 头部、 Payl">
+    <meta name="description" content="此为个人理解，争取往大白话，口语化方向看齐。 DNSDNS（Domain Name System，域名系统）是互联网的“电话簿”，它的作用是将你输入的网址（比如 www.google.com）转换成计算机能理解的IP地址（比如 172.217.160.132）。没有DNS，你上网需要记住一堆数字，而有了它，你只需要记住简单的域名。 接口interface CDN技术栈CMSCMD指纹CVE0day">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CS入门黑话收集">
 <meta property="og:url" content="http://example.com/2025/02/21/CS%E5%85%A5%E9%97%A8%E9%BB%91%E8%AF%9D%E6%94%B6%E9%9B%86/index.html">
 <meta property="og:site_name" content="CTF学习笔记">
-<meta property="og:description" content="此为个人理解，争取往大白话，口语化方向看齐。 接口CDN技术栈CMSCMD指纹CVE0day没有被公开发表的漏洞。也就是说你做这道题不可以查已经发表的CVE来复现得到flag。 SRCwp exp poc payload“答案” webshell shell webcookie session tokenjwt js json jdk javaJWT 由三部分组成： Header 头部、 Payl">
+<meta property="og:description" content="此为个人理解，争取往大白话，口语化方向看齐。 DNSDNS（Domain Name System，域名系统）是互联网的“电话簿”，它的作用是将你输入的网址（比如 www.google.com）转换成计算机能理解的IP地址（比如 172.217.160.132）。没有DNS，你上网需要记住一堆数字，而有了它，你只需要记住简单的域名。 接口interface CDN技术栈CMSCMD指纹CVE0day">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-02-21T02:54:51.000Z">
-<meta property="article:modified_time" content="2025-03-04T13:02:53.920Z">
+<meta property="article:modified_time" content="2025-03-20T12:36:30.977Z">
 <meta property="article:author" content="温柔刀">
 <meta property="article:tag" content="笔记">
 <meta name="twitter:card" content="summary">
@@ -118,7 +118,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8E%A5%E5%8F%A3"><span class="nav-number">1.</span> <span class="nav-text">接口</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CDN"><span class="nav-number">2.</span> <span class="nav-text">CDN</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8A%80%E6%9C%AF%E6%A0%88"><span class="nav-number">3.</span> <span class="nav-text">技术栈</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CMS"><span class="nav-number">4.</span> <span class="nav-text">CMS</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CMD%E6%8C%87%E7%BA%B9"><span class="nav-number">5.</span> <span class="nav-text">CMD指纹</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CVE"><span class="nav-number">6.</span> <span class="nav-text">CVE</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#0day"><span class="nav-number">7.</span> <span class="nav-text">0day</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SRC"><span class="nav-number">8.</span> <span class="nav-text">SRC</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#wp-exp-poc-payload"><span class="nav-number">9.</span> <span class="nav-text">wp exp poc payload</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#webshell-shell-web"><span class="nav-number">10.</span> <span class="nav-text">webshell shell web</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#cookie-session-token"><span class="nav-number">11.</span> <span class="nav-text">cookie session token</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#jwt-js-json-jdk-java"><span class="nav-number">12.</span> <span class="nav-text">jwt js json jdk java</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%93"><span class="nav-number">12.0.1.</span> <span class="nav-text">结</span></a></li></ol></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#DNS"><span class="nav-number">1.</span> <span class="nav-text">DNS</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8E%A5%E5%8F%A3"><span class="nav-number">2.</span> <span class="nav-text">接口</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CDN"><span class="nav-number">3.</span> <span class="nav-text">CDN</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8A%80%E6%9C%AF%E6%A0%88"><span class="nav-number">4.</span> <span class="nav-text">技术栈</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CMS"><span class="nav-number">5.</span> <span class="nav-text">CMS</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CMD%E6%8C%87%E7%BA%B9"><span class="nav-number">6.</span> <span class="nav-text">CMD指纹</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CVE"><span class="nav-number">7.</span> <span class="nav-text">CVE</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#0day"><span class="nav-number">8.</span> <span class="nav-text">0day</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SRC"><span class="nav-number">9.</span> <span class="nav-text">SRC</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#wp-exp-poc-payload"><span class="nav-number">10.</span> <span class="nav-text">wp exp poc payload</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#webshell-shell-web"><span class="nav-number">11.</span> <span class="nav-text">webshell shell web</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#cookie-session-token"><span class="nav-number">12.</span> <span class="nav-text">cookie session token</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#jwt-js-json-jdk-java"><span class="nav-number">13.</span> <span class="nav-text">jwt js json jdk java</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%93"><span class="nav-number">13.0.1.</span> <span class="nav-text">结</span></a></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -133,7 +133,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">57</span>
+          <span class="site-state-item-count">62</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -213,7 +213,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-03-04 21:02:53" itemprop="dateModified" datetime="2025-03-04T21:02:53+08:00">2025-03-04</time>
+      <time title="修改时间：2025-03-20 20:36:30" itemprop="dateModified" datetime="2025-03-20T20:36:30+08:00">2025-03-20</time>
     </span>
 
   
@@ -237,7 +237,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>228</span>
+      <span>306</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -255,7 +255,9 @@
     
     
     <div class="post-body" itemprop="articleBody"><p>此为个人理解，争取往大白话，口语化方向看齐。</p>
-<h1 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h1><h1 id="CDN"><a href="#CDN" class="headerlink" title="CDN"></a>CDN</h1><h1 id="技术栈"><a href="#技术栈" class="headerlink" title="技术栈"></a>技术栈</h1><h1 id="CMS"><a href="#CMS" class="headerlink" title="CMS"></a>CMS</h1><h1 id="CMD指纹"><a href="#CMD指纹" class="headerlink" title="CMD指纹"></a>CMD指纹</h1><h1 id="CVE"><a href="#CVE" class="headerlink" title="CVE"></a>CVE</h1><h1 id="0day"><a href="#0day" class="headerlink" title="0day"></a>0day</h1><p>没有被公开发表的漏洞。也就是说你做这道题不可以查已经发表的CVE来复现得到flag。</p>
+<h1 id="DNS"><a href="#DNS" class="headerlink" title="DNS"></a>DNS</h1><p>DNS（Domain Name System，域名系统）是互联网的“电话簿”，它的作用是将你输入的<strong>网址</strong>（比如 <code>www.google.com</code>）转换成计算机能理解的<strong>IP地址</strong>（比如 <code>172.217.160.132</code>）。没有DNS，你上网需要记住一堆数字，而有了它，你只需要记住简单的域名。</p>
+<h1 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h1><p>interface</p>
+<h1 id="CDN"><a href="#CDN" class="headerlink" title="CDN"></a>CDN</h1><h1 id="技术栈"><a href="#技术栈" class="headerlink" title="技术栈"></a>技术栈</h1><h1 id="CMS"><a href="#CMS" class="headerlink" title="CMS"></a>CMS</h1><h1 id="CMD指纹"><a href="#CMD指纹" class="headerlink" title="CMD指纹"></a>CMD指纹</h1><h1 id="CVE"><a href="#CVE" class="headerlink" title="CVE"></a>CVE</h1><h1 id="0day"><a href="#0day" class="headerlink" title="0day"></a>0day</h1><p>没有被公开发表的漏洞。也就是说你做这道题不可以查已经发表的CVE来复现得到flag。</p>
 <h1 id="SRC"><a href="#SRC" class="headerlink" title="SRC"></a>SRC</h1><h1 id="wp-exp-poc-payload"><a href="#wp-exp-poc-payload" class="headerlink" title="wp exp poc payload"></a>wp exp poc payload</h1><p>“答案”</p>
 <h1 id="webshell-shell-web"><a href="#webshell-shell-web" class="headerlink" title="webshell shell web"></a>webshell shell web</h1><h1 id="cookie-session-token"><a href="#cookie-session-token" class="headerlink" title="cookie session token"></a>cookie session token</h1><h1 id="jwt-js-json-jdk-java"><a href="#jwt-js-json-jdk-java" class="headerlink" title="jwt js json jdk java"></a>jwt js json jdk java</h1><p>JWT 由三部分组成： Header 头部、 Payload 负载 和 Signature 签名，它是一个很长的字符串，中间用点（.）隔开。客户端收到服务器返回的 JWT，可以储存在 Cookie 里面，也可以储存在 localStorage。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Header</span>.<span class="property">Payload</span>.<span class="property">Signature</span></span><br></pre></td></tr></table></figure>
@@ -349,14 +351,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">29k</span>
+    <span title="站点总字数">41k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">1:45</span>
+    <span title="站点阅读时长">2:30</span>
   </span>
 </div>
 
