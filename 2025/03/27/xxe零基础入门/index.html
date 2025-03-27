@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="google-site-verification=1l-Ncv0xIlzPx6dkZdorprb8MU59sYp-f3JtihJKCaM">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/silver/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.22.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":true,"show_result":true,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+
+    <meta name="description" content="前置知识：XML可扩展标记语言（eXtensible Markup Language）是什么？https:&#x2F;&#x2F;www.runoob.com&#x2F;web&#x2F;web-xml.html 一种用于存储和传输数据的标记语言，结构类似 HTML，但标签可自定义。 1234&lt;user&gt;  &lt;name&gt;张三&lt;&#x2F;name&gt;  &lt;age&gt;30&lt;&#x2F;age&gt;&lt;&#x2F;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="xxe零基础入门">
+<meta property="og:url" content="http://example.com/2025/03/27/xxe%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8/index.html">
+<meta property="og:site_name" content="CTF学习笔记">
+<meta property="og:description" content="前置知识：XML可扩展标记语言（eXtensible Markup Language）是什么？https:&#x2F;&#x2F;www.runoob.com&#x2F;web&#x2F;web-xml.html 一种用于存储和传输数据的标记语言，结构类似 HTML，但标签可自定义。 1234&lt;user&gt;  &lt;name&gt;张三&lt;&#x2F;name&gt;  &lt;age&gt;30&lt;&#x2F;age&gt;&lt;&#x2F;">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-03-27T13:40:22.000Z">
+<meta property="article:modified_time" content="2025-03-27T15:37:40.991Z">
+<meta property="article:author" content="温柔刀">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2025/03/27/xxe%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2025/03/27/xxe%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8/","path":"2025/03/27/xxe零基础入门/","title":"xxe零基础入门"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>xxe零基础入门 | CTF学习笔记</title>
+  
+
+
+
+
+
+
+
+<link rel="dns-prefetch" href="comment-three-tau.vercel.app">
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">CTF学习笔记</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86%EF%BC%9A"><span class="nav-number">1.</span> <span class="nav-text">前置知识：</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#XML%E5%8F%AF%E6%89%A9%E5%B1%95%E6%A0%87%E8%AE%B0%E8%AF%AD%E8%A8%80%EF%BC%88eXtensible-Markup-Language%EF%BC%89%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">1.1.</span> <span class="nav-text">XML可扩展标记语言（eXtensible Markup Language）是什么？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#XML%E8%AF%AD%E6%B3%95"><span class="nav-number">1.1.1.</span> <span class="nav-text">XML语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#XML-%E6%A0%87%E7%AD%BE%E5%AF%B9%E5%A4%A7%E5%B0%8F%E5%86%99%E6%95%8F%E6%84%9F"><span class="nav-number">1.1.2.</span> <span class="nav-text">XML 标签对大小写敏感</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E4%BD%93%E5%BC%95%E7%94%A8"><span class="nav-number">1.1.3.</span> <span class="nav-text">实体引用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DTD%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">1.2.</span> <span class="nav-text">DTD是什么？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DTD%E7%9A%84%E4%B8%89%E5%A4%A7%E6%A0%B8%E5%BF%83%E5%8A%9F%E8%83%BD"><span class="nav-number">1.2.1.</span> <span class="nav-text">DTD的三大核心功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BE%8B%E5%AD%90"><span class="nav-number">1.2.2.</span> <span class="nav-text">例子</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#DTD%E6%96%87%E4%BB%B6%EF%BC%88rules-dtd%EF%BC%89"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">DTD文件（rules.dtd）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#XML%E6%96%87%E4%BB%B6%EF%BC%88book-xml%EF%BC%89"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">XML文件（book.xml）</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#XXE"><span class="nav-number">2.</span> <span class="nav-text">XXE</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%96%E9%83%A8%E5%AE%9E%E4%BD%93"><span class="nav-number">2.1.</span> <span class="nav-text">外部实体</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%96%E9%83%A8%E5%AE%9E%E4%BD%93-vs-%E5%86%85%E9%83%A8%E5%AE%9E%E4%BD%93%EF%BC%88%E5%AF%B9%E6%AF%94%E7%90%86%E8%A7%A3%EF%BC%89"><span class="nav-number">2.2.</span> <span class="nav-text">外部实体 vs 内部实体（对比理解）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81URI%E5%8D%8F%E8%AE%AE"><span class="nav-number">2.2.0.1.</span> <span class="nav-text">常见URI协议</span></a></li></ol></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="温柔刀"
+      src="/images/avatar_2.gif">
+  <p class="site-author-name" itemprop="name">温柔刀</p>
+  <div class="site-description" itemprop="description">JNU_WEB</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">66</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">48</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Gent1eknife" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Gent1eknife" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/03/27/xxe%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar_2.gif">
+      <meta itemprop="name" content="温柔刀">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CTF学习笔记">
+      <meta itemprop="description" content="JNU_WEB">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="xxe零基础入门 | CTF学习笔记">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          xxe零基础入门
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2025-03-27 21:40:22 / 修改时间：23:37:40" itemprop="dateCreated datePublished" datetime="2025-03-27T21:40:22+08:00">2025-03-27</time>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/2025/03/27/xxe%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8/#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/2025/03/27/xxe%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.1k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>4 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="前置知识："><a href="#前置知识：" class="headerlink" title="前置知识："></a>前置知识：</h1><h2 id="XML可扩展标记语言（eXtensible-Markup-Language）是什么？"><a href="#XML可扩展标记语言（eXtensible-Markup-Language）是什么？" class="headerlink" title="XML可扩展标记语言（eXtensible Markup Language）是什么？"></a>XML可扩展标记语言（eXtensible Markup Language）是什么？</h2><p><a target="_blank" rel="noopener" href="https://www.runoob.com/web/web-xml.html">https://www.runoob.com/web/web-xml.html</a></p>
+<p>一种用于存储和传输数据的标记语言，结构类似 HTML，但标签可自定义。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">user</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">name</span>&gt;</span>张三<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">age</span>&gt;</span>30<span class="tag">&lt;/<span class="name">age</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">user</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="XML语法"><a href="#XML语法" class="headerlink" title="XML语法"></a>XML语法</h3><p>XML文档由元素构成，每个元素包括开始标签、结束标签和元素内容。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># XML 声明文件的可选部分，如果存在需要放在文档的第一行</span><br><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span>?&gt;</span> </span><br><span class="line"># XML 必须包含根元素，它是所有其他元素的父元素，比如以下实例中 root 就是根元素：</span><br><span class="line"><span class="tag">&lt;<span class="name">note</span>&gt;</span></span><br><span class="line">    # XML文档由元素构成，每个元素包括开始标签、结束标签和元素内容。</span><br><span class="line">  <span class="tag">&lt;<span class="name">to</span>&gt;</span>Tove<span class="tag">&lt;/<span class="name">to</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">from</span>&gt;</span>Jani<span class="tag">&lt;/<span class="name">from</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">heading</span>&gt;</span>Reminder<span class="tag">&lt;/<span class="name">heading</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span>Don&#x27;t forget me this weekend!<span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">note</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>最简单的元素例如：</p>
+<p><code>&lt;to&gt;1&lt;/to&gt;</code></p>
+<p>元素可以包含属性，属性提供有关元素的附加信息。</p>
+<p>属性位于开始标签中,例如：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">person</span> <span class="attr">age</span>=<span class="string">&quot;30&quot;</span> <span class="attr">gender</span>=<span class="string">&quot;male&quot;</span>&gt;</span>John Doe<span class="tag">&lt;/<span class="name">person</span>&gt;</span></span><br><span class="line"># XML 属性值必须加引号</span><br></pre></td></tr></table></figure>
+
+<h3 id="XML-标签对大小写敏感"><a href="#XML-标签对大小写敏感" class="headerlink" title="XML 标签对大小写敏感"></a>XML 标签对大小写敏感</h3><h3 id="实体引用"><a href="#实体引用" class="headerlink" title="实体引用"></a>实体引用</h3><p>如果您想把这些字符放在元素中，请用对应的实体引用字符来代替：</p>
+<table>
+<thead>
+<tr>
+<th>实体引用</th>
+<th>显示符号</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>&amp;lt;</code></td>
+<td>&lt;</td>
+<td>less than</td>
+</tr>
+<tr>
+<td><code>&amp;gt;</code></td>
+<td>&gt;</td>
+<td>greater than</td>
+</tr>
+<tr>
+<td><code>&amp;amp;</code></td>
+<td>&amp;</td>
+<td>ampersand</td>
+</tr>
+<tr>
+<td><code>&amp;apos;</code></td>
+<td>‘</td>
+<td>apostrophe</td>
+</tr>
+<tr>
+<td><code>&amp;quot;</code></td>
+<td>“</td>
+<td>quotation mark</td>
+</tr>
+</tbody></table>
+<h2 id="DTD是什么？"><a href="#DTD是什么？" class="headerlink" title="DTD是什么？"></a>DTD是什么？</h2><p><strong>DTD（Document Type Definition，文档类型定义）</strong> 是XML的“规则说明书”，用来定义XML文档中允许出现哪些标签、属性，以及它们的结构和关系。</p>
+<p>DTD有助于数据标准化、数据验证、简化维护、实体复用。</p>
+<p>DTD的核心作用**：**定义规则 + 验证数据 + 复用内容。</p>
+<h3 id="DTD的三大核心功能"><a href="#DTD的三大核心功能" class="headerlink" title="DTD的三大核心功能"></a><strong>DTD的三大核心功能</strong></h3><ol>
+<li><p><strong>定义元素（标签）</strong><br>规定XML中可以有哪些标签，以及标签的嵌套关系。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!ELEMENT 用户 (姓名, 年龄)&gt;  &lt;!-- 规定“用户”标签下必须包含“姓名”和“年龄”子标签 --&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>定义属性</strong><br>规定某个标签可以有哪些属性，属性类型是什么。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;!ATTLIST 用户  </span><br><span class="line">  id CDATA #REQUIRED     &lt;!-- id属性必须存在，值是文本 --&gt;</span><br><span class="line">  role (admin|user) &quot;user&quot;  &lt;!-- role属性只能是admin或user，默认是user --&gt;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>定义实体（重点！）</strong><br>定义可复用的“变量”，简化XML内容（但这也是XXE漏洞的来源！）。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;!ENTITY 公司名 &quot;ABC科技有限公司&quot;&gt;  &lt;!-- 内部实体 --&gt;</span><br><span class="line">&lt;!ENTITY logo SYSTEM &quot;http://example.com/logo.png&quot;&gt;  &lt;!-- 外部实体 --&gt;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><h4 id="DTD文件（rules-dtd）"><a href="#DTD文件（rules-dtd）" class="headerlink" title="DTD文件（rules.dtd）"></a><strong>DTD文件（rules.dtd）</strong></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;!ELEMENT 书籍 (书名, 作者, 价格)&gt;  </span><br><span class="line">&lt;!ELEMENT 书名 (#PCDATA)&gt;  </span><br><span class="line">&lt;!ELEMENT 作者 (#PCDATA)&gt;  </span><br><span class="line">&lt;!ELEMENT 价格 (#PCDATA)&gt;  </span><br><span class="line">&lt;!ATTLIST 书籍  </span><br><span class="line">  id CDATA #REQUIRED  </span><br><span class="line">  分类 (文学|科技|历史) &quot;文学&quot;  </span><br><span class="line">&gt;</span><br><span class="line">&lt;!ENTITY 出版社 &quot;XX图书出版社&quot;&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="XML文件（book-xml）"><a href="#XML文件（book-xml）" class="headerlink" title="XML文件（book.xml）"></a><strong>XML文件（book.xml）</strong></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;  </span><br><span class="line">&lt;!DOCTYPE 书籍 SYSTEM &quot;rules.dtd&quot;&gt;  </span><br><span class="line">&lt;书籍 id=&quot;B001&quot; 分类=&quot;科技&quot;&gt;  </span><br><span class="line">  &lt;书名&gt;XML从入门到放弃&lt;/书名&gt;  </span><br><span class="line">  &lt;作者&gt;&amp;出版社;编辑部&lt;/作者&gt;  </span><br><span class="line">  &lt;价格&gt;50.00&lt;/价格&gt;  </span><br><span class="line">&lt;/书籍&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>解析过程</strong></p>
+<ol>
+<li>解析器读取<code>rules.dtd</code>，知道<code>&lt;书籍&gt;</code>必须包含<code>书名</code>、<code>作者</code>、<code>价格</code>。</li>
+<li>检查<code>book.xml</code>是否符合规则（比如是否有<code>id</code>属性，<code>分类</code>值是否合法）。</li>
+<li>将<code>&amp;出版社;</code>替换为“XX图书出版社”。</li>
+</ol>
+<h1 id="XXE"><a href="#XXE" class="headerlink" title="XXE"></a>XXE</h1><h2 id="外部实体"><a href="#外部实体" class="headerlink" title="外部实体"></a>外部实体</h2><p><strong>外部实体</strong> 是XML中一种特殊的“变量”，它的值<strong>不是直接写在XML里</strong>，而是<strong>从外部文件或网络获取</strong>。攻击者利用它，可以<strong>让服务器读取敏感文件或访问内网资源</strong>。</p>
+<p>语法格式：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!ENTITY 实体名 SYSTEM &quot;URI&quot;&gt;  </span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong><code>SYSTEM</code></strong>：关键字，表示这是一个外部实体。</li>
+<li><strong><code>URI</code></strong>：指向外部资源的路径，可以是本地文件或网络地址。</li>
+</ul>
+<h2 id="外部实体-vs-内部实体（对比理解）"><a href="#外部实体-vs-内部实体（对比理解）" class="headerlink" title="外部实体 vs 内部实体（对比理解）"></a>外部实体 vs 内部实体（对比理解）</h2><ol>
+<li>内部实体</li>
+</ol>
+<p>  定义：实体值直接写在XML内部。</p>
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;!ENTITY name &quot;张三&quot;&gt;  &lt;!-- 值直接写死为“张三” --&gt;</span><br><span class="line">&lt;用户&gt;&amp;name;&lt;/用户&gt;    &lt;!-- 输出：张三 --&gt;</span><br></pre></td></tr></table></figure>
+
+
+<p>  用途：简化重复内容，类似编程中的常量。</p>
+<ol start="2">
+<li>外部实体<br>  定义：实体值从外部文件或网络获取。</li>
+</ol>
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;!ENTITY secret SYSTEM &quot;file:///etc/passwd&quot;&gt;  &lt;!-- 值从/etc/passwd文件读取 --&gt;</span><br><span class="line">&lt;数据&gt;&amp;secret;&lt;/数据&gt;  &lt;!-- 输出文件内容 --&gt;</span><br></pre></td></tr></table></figure>
+
+<p>合法场景：引用公共资源（如公司LOGO地址）。</p>
+<p>攻击场景：XXE漏洞的核心利用点！</p>
+<h4 id="常见URI协议"><a href="#常见URI协议" class="headerlink" title="常见URI协议"></a><strong>常见URI协议</strong></h4><table>
+<thead>
+<tr>
+<th align="left">协议</th>
+<th align="left">示例</th>
+<th align="left">用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong><code>file://</code></strong></td>
+<td align="left"><code>file:///etc/passwd</code></td>
+<td align="left">读取本地文件</td>
+</tr>
+<tr>
+<td align="left"><strong><code>http://</code></strong></td>
+<td align="left"><code>http://example.com/data.txt</code></td>
+<td align="left">访问网络资源</td>
+</tr>
+<tr>
+<td align="left"><strong><code>ftp://</code></strong></td>
+<td align="left"><code>ftp://example.com/file</code></td>
+<td align="left">通过FTP协议获取文件</td>
+</tr>
+<tr>
+<td align="left"><strong><code>php://</code></strong></td>
+<td align="left"><code>php://filter/read=convert.base64-encode/resource=index.php</code></td>
+<td align="left">读取PHP文件并Base64编码（PHP特有）</td>
+</tr>
+</tbody></table>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+  <div class="social-like a2a_kit a2a_kit_size_32 a2a_default_style">
+    <a class="a2a_dd" target="_blank" rel="noopener" href="https://www.addtoany.com/share"></a>
+      <a class="a2a_button_facebook"></a>
+      <a class="a2a_button_twitter"></a>
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/03/26/SWPUCTF-2022-%E6%96%B0%E7%94%9F%E8%B5%9B-ez-rce/" rel="prev" title="[SWPUCTF 2022 新生赛]ez_rce">
+                  <i class="fa fa-angle-left"></i> [SWPUCTF 2022 新生赛]ez_rce
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2025/03/27/%E6%8D%A2%E4%B8%AA%E4%BB%A3%E7%90%86/" rel="next" title="换个代理">
+                  换个代理 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="waline"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">温柔刀</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">44k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">2:41</span>
+  </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+  <script src="/js/third-party/addtoany.js"></script>
+
+  
+
+
+
+
+<script class="next-config" data-name="waline" type="application/json">{"lang":"zh-cn","enable":true,"serverURL":"comment-three-tau.vercel.app","cssUrl":"https://unpkg.com/@waline/client@v2/dist/waline.css","commentCount":true,"pageview":false,"placeholder":"说两句吧~","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"visitor":true,"comment_count":true,"requiredFields":["nick","mail"],"libUrl":"//unpkg.com/@waline/client@v2/dist/waline.js","el":"#waline","comment":true,"path":"/2025/03/27/xxe%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8/"}</script>
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v2/dist/waline.css">
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.waline.el).then(() =>
+    NexT.utils.getScript(CONFIG.waline.libUrl, { condition: window.Waline })
+  ).then(() => 
+    Waline.init(Object.assign({}, CONFIG.waline,{ el: document.querySelector(CONFIG.waline.el) }))
+  );
+});
+</script>
+
+</body>
+</html>
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>

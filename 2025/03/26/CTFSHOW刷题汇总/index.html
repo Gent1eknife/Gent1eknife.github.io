@@ -24,15 +24,15 @@
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.22.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":true,"show_result":true,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
 
-    <meta name="description" content="JNU_WEB">
+    <meta name="description" content="PWNPWN 入门WEBWEB 入门">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CTFSHOW刷题汇总">
 <meta property="og:url" content="http://example.com/2025/03/26/CTFSHOW%E5%88%B7%E9%A2%98%E6%B1%87%E6%80%BB/index.html">
 <meta property="og:site_name" content="CTF学习笔记">
-<meta property="og:description" content="JNU_WEB">
+<meta property="og:description" content="PWNPWN 入门WEBWEB 入门">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-03-26T11:01:01.000Z">
-<meta property="article:modified_time" content="2025-03-26T11:01:02.009Z">
+<meta property="article:modified_time" content="2025-03-27T12:10:07.919Z">
 <meta property="article:author" content="温柔刀">
 <meta name="twitter:card" content="summary">
 
@@ -104,7 +104,7 @@
 
 
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -117,6 +117,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#PWN"><span class="nav-number">1.</span> <span class="nav-text">PWN</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#PWN-%E5%85%A5%E9%97%A8"><span class="nav-number">2.</span> <span class="nav-text">PWN 入门</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#WEB"><span class="nav-number">3.</span> <span class="nav-text">WEB</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#WEB-%E5%85%A5%E9%97%A8"><span class="nav-number">4.</span> <span class="nav-text">WEB 入门</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86"><span class="nav-number">4.1.</span> <span class="nav-text">信息搜集</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#web1-23"><span class="nav-number">4.1.1.</span> <span class="nav-text">web1-23</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB"><span class="nav-number">4.2.</span> <span class="nav-text">文件包含</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#web78-83"><span class="nav-number">4.2.1.</span> <span class="nav-text">web78-83</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web87-88"><span class="nav-number">4.2.2.</span> <span class="nav-text">web87-88</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SSRF"><span class="nav-number">4.3.</span> <span class="nav-text">SSRF</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#web351"><span class="nav-number">4.3.1.</span> <span class="nav-text">web351</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web352"><span class="nav-number">4.3.2.</span> <span class="nav-text">web352</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web353"><span class="nav-number">4.3.3.</span> <span class="nav-text">web353</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web354"><span class="nav-number">4.3.4.</span> <span class="nav-text">web354</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web355"><span class="nav-number">4.3.5.</span> <span class="nav-text">web355</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web356"><span class="nav-number">4.3.6.</span> <span class="nav-text">web356</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%AA%E5%A4%8D%E7%8E%B0-web357"><span class="nav-number">4.3.7.</span> <span class="nav-text">(未复现)web357</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web358"><span class="nav-number">4.3.8.</span> <span class="nav-text">web358</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web359"><span class="nav-number">4.3.9.</span> <span class="nav-text">web359</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web360"><span class="nav-number">4.3.10.</span> <span class="nav-text">web360</span></a></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -131,18 +132,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">63</span>
+          <span class="site-state-item-count">66</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-count">12</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">47</span>
+        <span class="site-state-item-count">48</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -203,9 +204,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2025-03-26 19:01:01 / 修改时间：19:01:02" itemprop="dateCreated datePublished" datetime="2025-03-26T19:01:01+08:00">2025-03-26</time>
+      <time title="创建时间：2025-03-26 19:01:01" itemprop="dateCreated datePublished" datetime="2025-03-26T19:01:01+08:00">2025-03-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-03-27 20:10:07" itemprop="dateModified" datetime="2025-03-27T20:10:07+08:00">2025-03-27</time>
     </span>
 
   
@@ -229,14 +236,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>0</span>
+      <span>1.9k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
+      <span>7 分钟</span>
     </span>
 </div>
 
@@ -246,7 +253,155 @@
     
     
     
-    <div class="post-body" itemprop="articleBody">
+    <div class="post-body" itemprop="articleBody"><h1 id="PWN"><a href="#PWN" class="headerlink" title="PWN"></a>PWN</h1><h1 id="PWN-入门"><a href="#PWN-入门" class="headerlink" title="PWN 入门"></a>PWN 入门</h1><h1 id="WEB"><a href="#WEB" class="headerlink" title="WEB"></a>WEB</h1><h1 id="WEB-入门"><a href="#WEB-入门" class="headerlink" title="WEB 入门"></a>WEB 入门</h1><span id="more"></span>
+
+<h2 id="信息搜集"><a href="#信息搜集" class="headerlink" title="信息搜集"></a>信息搜集</h2><h3 id="web1-23"><a href="#web1-23" class="headerlink" title="web1-23"></a>web1-23</h3><h2 id="文件包含"><a href="#文件包含" class="headerlink" title="文件包含"></a>文件包含</h2><h3 id="web78-83"><a href="#web78-83" class="headerlink" title="web78-83"></a>web78-83</h3><h3 id="web87-88"><a href="#web87-88" class="headerlink" title="web87-88"></a>web87-88</h3><h2 id="SSRF"><a href="#SSRF" class="headerlink" title="SSRF"></a>SSRF</h2><h3 id="web351"><a href="#web351" class="headerlink" title="web351"></a>web351</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">error_reporting(0);</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">$url=$_POST [&#x27;url&#x27;];</span><br><span class="line">$ch=curl_init($ url);</span><br><span class="line">curl_setopt($ch, CURLOPT_HEADER, 0);</span><br><span class="line">curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);</span><br><span class="line">$result=curl_exec($ ch);</span><br><span class="line">curl_close($ch);</span><br><span class="line">echo ($result);</span><br><span class="line"></span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>url &#x3D; <a target="_blank" rel="noopener" href="http://127.0.0.1/flag.php">http://127.0.0.1/flag.php</a><br>url &#x3D; localhost&#x2F;flag.php<br>url &#x3D; 127.0.0.1&#x2F;flag.php</p>
+<p>url &#x3D; file:&#x2F;&#x2F;&#x2F;var&#x2F;www&#x2F;html&#x2F;flag.php(在源代码)</p>
+<p>尝试 post 传入 url，并使用 file 协议作为参数，file:&#x2F;&#x2F;&#x2F;etc&#x2F;passwd 有返回值。 然后猜测 flag 在当前目录，而当前目录一般都是&#x2F;var&#x2F;www&#x2F;html 故传入 file:&#x2F;&#x2F;&#x2F;var&#x2F;www&#x2F;html&#x2F;flag.php</p>
+<p>两个问题等你写</p>
+<p>curl_exec 的特性</p>
+<p>本题最后一个 payload 有什么不同，为什么可以绕过本地限制</p>
+<p><strong>答案：</strong></p>
+<ol>
+<li><strong><code>curl_exec</code> 函数的作用及使用场景</strong><br><code>curl_exec</code> 是 PHP cURL 库中用于执行预配置的 cURL 会话的函数。它会发起网络请求（如 HTTP、FTP 等）并获取响应数据。在正常开发中，<code>curl_exec</code> 常用于以下场景：<ul>
+<li>调用第三方 API（如支付接口、社交媒体平台）。</li>
+<li>爬取网页内容或聚合数据。</li>
+<li>下载远程文件（如图片、文档）。</li>
+<li>实现服务间通信（如微服务架构中的内部调用）。</li>
+</ul>
+</li>
+<li><strong>前三个 Payload 生效的原因</strong><br>前三个 Payload 利用的是 <strong>SSRF（服务端请求伪造）</strong>，使服务器向自身发起请求：<ul>
+<li><code>url=http://127.0.0.1/flag.php</code> 与 <code>url=http://localhost/flag.php</code>：<br><code>127.0.0.1</code> 和 <code>localhost</code> 均指向服务器本地。若 <code>flag.php</code> 部署在服务器的 Web 根目录（如 <code>/var/www/html/</code>）且仅允许本地访问，通过 cURL 请求这些地址可直接读取文件内容。</li>
+<li><strong>注意</strong>：若 Payload 中未显式包含协议（如 <code>http://</code>），cURL 可能默认补全或报错，实际测试时需确保 URL 格式正确（如 <code>http://127.0.0.1/flag.php</code>）。</li>
+</ul>
+</li>
+<li><strong><code>file://</code> 协议绕过本地限制的原因</strong><br>Payload <code>url=file:///var/www/html/flag.php</code> 生效的关键点：<ul>
+<li><strong>直接文件系统访问</strong>：<code>file://</code> 协议允许 cURL 直接读取服务器本地文件，无需经过 HTTP 服务。若代码未限制协议类型（默认允许所有协议），攻击者可绕过网络层限制（如防火墙、IP 黑名单）。</li>
+<li><strong>防御缺失</strong>：若服务器未禁用危险协议（如通过 <code>CURLOPT_PROTOCOLS</code> 限制仅允许 HTTP&#x2F;HTTPS），<code>file://</code> 可被利用读取敏感文件（如 <code>/etc/passwd</code>）。</li>
+</ul>
+</li>
+</ol>
+<h3 id="web352"><a href="#web352" class="headerlink" title="web352"></a>web352</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">error_reporting(0);</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">$url=$_POST [&#x27;url&#x27;];</span><br><span class="line">$x=parse_url($ url);</span><br><span class="line">if($x[&#x27;scheme&#x27;]===&#x27;http&#x27;||$ x [&#x27;scheme&#x27;]===&#x27;https&#x27;)&#123; </span><br><span class="line">    #仅允许 http:// 或 https:// 协议，阻止 file://、gopher:// 等危险协议</span><br><span class="line">if(! preg_match(&#x27;/localhost|127.0.0/&#x27;))&#123;</span><br><span class="line">    #检测 URL 中是否包含 localhost 或 127.0.0，若匹配则终止并返回 &quot;hacker&quot;。</span><br><span class="line">    #这里的 localhost 和 127.0.0 真的被过滤了吗？preg_match 函数的参数都没给完整，其限制字符就是个幌子</span><br><span class="line">$ch=curl_init($ url);</span><br><span class="line">curl_setopt($ch, CURLOPT_HEADER, 0);</span><br><span class="line">curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);</span><br><span class="line">$result=curl_exec($ ch);</span><br><span class="line">curl_close($ch);</span><br><span class="line">echo ($result);</span><br><span class="line">&#125;</span><br><span class="line">else&#123;</span><br><span class="line">    die(&#x27;hacker&#x27;);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">else&#123;</span><br><span class="line">    die(&#x27;hacker&#x27;);</span><br><span class="line">&#125;</span><br><span class="line">?&gt; hacker</span><br></pre></td></tr></table></figure>
+
+
+<p><strong>漏洞分析</strong></p>
+<ol>
+<li><strong>正则表达式缺陷</strong></li>
+</ol>
+<ul>
+<li><strong>范围不完整</strong>：正则仅检测 <code>127.0.0</code>，但未覆盖以下情况：<ul>
+<li>IPv4 短格式：<code>http://127.1/</code>（等价于 <code>127.0.0.1</code>）。</li>
+<li>十进制 IP：<code>http://2130706433/</code>（对应 <code>127.0.0.1</code>）。</li>
+<li><del>IPv6 地址：<code>http://[::1]/</code>（对应 <code>localhost</code>）。</del></li>
+</ul>
+</li>
+<li><del><strong>大小写绕过</strong>：未使用 <code>i</code> 修饰符，<code>LocalHost</code> 或 <code>LOCALHOST</code> 可绕过检测。</del></li>
+</ul>
+<ol start="2">
+<li><strong><code>parse_url</code> 解析绕过</strong></li>
+</ol>
+<ul>
+<li><strong>URL 混淆攻击</strong>：<br>构造 <code>http://evil.com@127.0.0.1/</code>，<code>parse_url</code> 解析的 <code>host</code> 为 <code>evil.com</code>，但实际请求发送到 <code>127.0.0.1</code>。</li>
+<li><strong>路径注入</strong>：<br><code>http://example.com/127.0.0.1/flag.php</code>，正则触发误杀合法 URL，但攻击者仍可能利用其他格式。</li>
+</ul>
+<p><strong>攻击示例</strong></p>
+<p>绕过黑名单的 Payload：</p>
+<ol>
+<li><p><strong>IPv4 短格式</strong></p>
+<p>复制</p>
+<p>url &#x3D; <a target="_blank" rel="noopener" href="http://127.0.0.1/flag.php">http://127.1/flag.php</a></p>
+<ul>
+<li>等价于 <code>127.0.0.1</code>，但绕过正则检测。</li>
+</ul>
+</li>
+<li><p><strong>十进制 IP</strong></p>
+<p>复制</p>
+<p>url &#x3D; <a target="_blank" rel="noopener" href="http://127.0.0.1/flag.php">http://2130706433/flag.php</a></p>
+<ul>
+<li>十进制 <code>2130706433</code> 对应 <code>127.0.0.1</code>。</li>
+</ul>
+</li>
+<li><p><del><strong>IPv6 地址</strong></del></p>
+<p><del>复制</del></p>
+<p>url &#x3D; http:&#x2F;&#x2F;[:: 1]&#x2F;flag.php</p>
+<ul>
+<li><del>IPv6 的本地回环地址，未被正则覆盖。</del></li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p>各种进制的 IP 地址</p>
+<p>#默认</p>
+<p><a target="_blank" rel="noopener" href="http://127.0.0.1/">http://127.0.0.1</a></p>
+<p>#16 进制</p>
+</blockquote>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="http://127.0.0.1/">http://0x7F000001</a></p>
+</blockquote>
+<blockquote>
+<p>#10 进制</p>
+</blockquote>
+<blockquote>
+<p>((127 <em>256+0)</em> 256+0)*256+1&#x2F;&#x2F;计算过程<br><a target="_blank" rel="noopener" href="http://127.0.0.1/">http://2130706433</a></p>
+</blockquote>
+<blockquote>
+<p>#8 进制</p>
+</blockquote>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="http://127.0.0.1/">http://0177.0000.0000.0001</a></p>
+</blockquote>
+<blockquote>
+<p>题目使用 parse_url 对 url 进行解析，需要我们传入协议为 http 或者是 https，同时不可以出现 localhost 或者是 127.0.0 绕过: 使用其余各种指向 127.0.0.1 的地址 &gt;&gt;&gt;&gt; <a target="_blank" rel="noopener" href="http://127.0.0.1/">http://127.00000.00000.001/</a> 0 的数量多一点少一点都没影响，最后还是会指向 127.0.0.1 &gt;&gt;&gt;&gt; <a target="_blank" rel="noopener" href="http://127.0.0.1/">http://127.1</a> &gt;&gt;&gt;&gt; 利用进制绕过……………… payload：url &#x3D; <a target="_blank" rel="noopener" href="http://127.0.0.1/flag.php">http://127.00000.00000.001/flag.php</a> 或者 <a target="_blank" rel="noopener" href="http://127.0.0.1/flag.php">http://127.1/flag.php</a></p>
+</blockquote>
+<blockquote>
+<p>前面的解析都没有认真思考</p>
+<p>这里的 localhost 和 127.0.0 真的被过滤了吗？</p>
+<p>preg_match 函数的参数都没给完整，其限制字符就是个幌子</p>
+<p>直接 <code>url=http://localhost/flag.php</code> 照样拿下</p>
+</blockquote>
+<h3 id="web353"><a href="#web353" class="headerlink" title="web353"></a>web353</h3><p>payload 直接拿上面那题的…</p>
+<h3 id="web354"><a href="#web354" class="headerlink" title="web354"></a>web354</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">error_reporting(0);</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">$url=$_POST [&#x27;url&#x27;];</span><br><span class="line">$x=parse_url($ url);</span><br><span class="line">if($x[&#x27;scheme&#x27;]===&#x27;http&#x27;||$ x [&#x27;scheme&#x27;]===&#x27;https&#x27;)&#123;</span><br><span class="line">if(! preg_match(&#x27;/localhost|1|0|。/i&#x27;, $url))&#123;</span><br><span class="line">$ch=curl_init($ url);</span><br><span class="line">curl_setopt($ch, CURLOPT_HEADER, 0);</span><br><span class="line">curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);</span><br><span class="line">$result=curl_exec($ ch);</span><br><span class="line">curl_close($ch);</span><br><span class="line">echo ($result);</span><br><span class="line">&#125;</span><br><span class="line">else&#123;</span><br><span class="line">    die(&#x27;hacker&#x27;);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">else&#123;</span><br><span class="line">    die(&#x27;hacker&#x27;);</span><br><span class="line">&#125;</span><br><span class="line">?&gt; hacker</span><br></pre></td></tr></table></figure>
+
+<p>代码块</p>
+<p>代码块</p>
+<blockquote>
+<p>通过 ip 地址解析为 127.0.0.1 的网站进行绕过</p>
+<p><code>url=http://spoofed.burpcollaborator.net/flag.php</code></p>
+<p><code>url=http://safe.taobao.com/flag.php</code></p>
+<p><code>url=http://sudo.cc/flag.php </code>; A 记录 sudo.cc 指向 IP 地址 127.0.0.1。</p>
+</blockquote>
+<h3 id="web355"><a href="#web355" class="headerlink" title="web355"></a>web355</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">error_reporting(0);</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">$url=$_POST [&#x27;url&#x27;];</span><br><span class="line">$x=parse_url($ url);</span><br><span class="line">if($x[&#x27;scheme&#x27;]===&#x27;http&#x27;||$ x [&#x27;scheme&#x27;]===&#x27;https&#x27;)&#123;</span><br><span class="line">$host=$ x [&#x27;host&#x27;];</span><br><span class="line">if((strlen($host)&lt;= 5))&#123;</span><br><span class="line">    #限制访问的域名长度</span><br><span class="line">$ch=curl_init($ url);</span><br><span class="line">curl_setopt($ch, CURLOPT_HEADER, 0);</span><br><span class="line">curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);</span><br><span class="line">$result=curl_exec($ ch);</span><br><span class="line">curl_close($ch);</span><br><span class="line">echo ($result);</span><br><span class="line">&#125;</span><br><span class="line">else&#123;</span><br><span class="line">    die(&#x27;hacker&#x27;);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">else&#123;</span><br><span class="line">    die(&#x27;hacker&#x27;);</span><br><span class="line">&#125;</span><br><span class="line">?&gt; hacker</span><br></pre></td></tr></table></figure>
+
+<p>代码块</p>
+<p>代码块</p>
+<p><code>url=http://127.1/flag.php</code></p>
+<p>linux 中 0 指向本机地址</p>
+<p>payload： <code>url=http://0/flag.php</code></p>
+<h3 id="web356"><a href="#web356" class="headerlink" title="web356"></a>web356</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">error_reporting(0);</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">$url=$_POST [&#x27;url&#x27;];</span><br><span class="line">$x=parse_url($ url);</span><br><span class="line">if($x[&#x27;scheme&#x27;]===&#x27;http&#x27;||$ x [&#x27;scheme&#x27;]===&#x27;https&#x27;)&#123;</span><br><span class="line">$host=$ x [&#x27;host&#x27;];</span><br><span class="line">if((strlen($host)&lt;= 3))&#123;</span><br><span class="line">    #继续限制</span><br><span class="line">$ch=curl_init($ url);</span><br><span class="line">curl_setopt($ch, CURLOPT_HEADER, 0);</span><br><span class="line">curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);</span><br><span class="line">$result=curl_exec($ ch);</span><br><span class="line">curl_close($ch);</span><br><span class="line">echo ($result);</span><br><span class="line">&#125;</span><br><span class="line">else&#123;</span><br><span class="line">    die(&#x27;hacker&#x27;);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">else&#123;</span><br><span class="line">    die(&#x27;hacker&#x27;);</span><br><span class="line">&#125;</span><br><span class="line">?&gt; hacker</span><br></pre></td></tr></table></figure>
+
+<p>代码块</p>
+<p><code>url=http://0/flag.php</code></p>
+<h3 id="未复现-web357"><a href="#未复现-web357" class="headerlink" title="(未复现)web357"></a>(未复现)web357</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">error_reporting(0);</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">$url=$_POST [&#x27;url&#x27;];</span><br><span class="line">$x=parse_url($ url);</span><br><span class="line">if($x[&#x27;scheme&#x27;]===&#x27;http&#x27;||$ x [&#x27;scheme&#x27;]===&#x27;https&#x27;)&#123;</span><br><span class="line">$ip = gethostbyname($ x [&#x27;host&#x27;]); </span><br><span class="line">echo &#x27;&lt;/br&gt;&#x27;.$ip.&#x27;&lt;/br &gt;&#x27;;</span><br><span class="line">if(! filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE)) &#123;</span><br><span class="line">    die(&#x27;ip!&#x27;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">echo file_get_contents($_POST[&#x27;url&#x27;]);</span><br><span class="line">&#125;</span><br><span class="line">else&#123;</span><br><span class="line">    die(&#x27;scheme&#x27;);</span><br><span class="line">&#125;</span><br><span class="line">?&gt; scheme</span><br></pre></td></tr></table></figure>
+
+
+
+
+<blockquote>
+<p><code>filter_var</code> 函数来验证 IP 地址的有效性，并且排除了私有 IP 范围（0.0.0.0&#x2F;8、172.16.0.0&#x2F;12 和 192.168.0.0&#x2F;16）和保留 IP 范围(0.0.0.0&#x2F;8 和 169.254.0.0&#x2F;16。)。<br>用 DNS rebind 进行 DNS 重绑定攻击，思路：第一次访问，域名第一次解析是 127.0.0.1，第二次解析是 104.56.61.24。第二次访问的时候，域名第一次解析是 104.56.61.24，第二次解析是 127.0.0.1。</p>
+<p>用 <a target="_blank" rel="noopener" href="https://lock.cmpxchg8b.com/rebinder.html">DNS rebind</a> 进行 DNS 重绑定攻击，<strong>思路：第一次访问，域名第一次解析是 127.0.0.1，第二次解析是 104.56.61.24。第二次访问的时候，域名第一次解析是 104.56.61.24，第二次解析是 127.0.0.1。</strong></p>
+</blockquote>
+<blockquote>
+<p><code>gethostbyname()</code> 是 PHP 中的一个函数，用于获取指定主机名的 IP 地址。这个函数可以通过给定主机名，返回相应主机的 IPv4 地址。如果主机名无效，则函数返回主机名本身</p>
+<p>在 PHP 中，filter_var()函数结合 FILTER_VALIDATE_IP 过滤器可以用来验证一个 IP 地址的有效性。在这个例子中，FILTER_FLAG_NO_PRIV_RANGE 和 FILTER_FLAG_NO_RES_RANGE 是额外的标志，用于指定不接受私有 IP 地址和保留 IP 地址。</p>
+<p>FILTER_VALIDATE_IP：指定要验证的过滤器类型，用于验证 IP 地址。<br>FILTER_FLAG_NO_PRIV_RANGE：指示 filter_var()函数不接受私有 IP 地址。私有 IP 地址范围包括：<br>10.0.0.0 至 10.255.255.255<br>172.16.0.0 至 172.31.255.255<br>192.168.0.0 至 192.168.255.255<br>FILTER_FLAG_NO_RES_RANGE：指示 filter_var()函数不接受保留 IP 地址。保留 IP 地址范围包括：<br>0.0.0.0 至 0.255.255.255<br>169.254.0.0 至 169.254.255.255<br>127.0.0.0 至 127.255.255.255<br>224.0.0.0 至 239.255.255.255<br>利用 302 重定向访问 127.0.0.1 的原理获得 flag 绕过过滤</p>
+<p>302 重定向是 HTTP 状态代码之一，表示临时性的重定向。当服务器收到客户端的请求后，如果需要将请求的资源临时重定向到另一个 URL，但未来可能会恢复到原始 URL 时，就会返回 302 状态码。这意味着客户端应该继续使用原始 URL 进行后续请求，因为重定向是暂时的。302 重定向常用于网站维护、临时性更改或者流量控制等场景。</p>
+</blockquote>
+<h3 id="web358"><a href="#web358" class="headerlink" title="web358"></a>web358</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">error_reporting(0);</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">$url=$_POST[&#x27;url&#x27;];</span><br><span class="line">$x=parse_url($url);</span><br><span class="line">if(preg_match(&#x27;/^http:\/\/ctf\..*show$/i&#x27;,$url))&#123;</span><br><span class="line">    echo file_get_contents($url);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>url=http://ctf.:passwd@127.0.0.1/flag.php#show</code></p>
+<h3 id="web359"><a href="#web359" class="headerlink" title="web359"></a>web359</h3><h3 id="web360"><a href="#web360" class="headerlink" title="web360"></a>web360</h3>
     </div>
 
     
@@ -269,6 +424,9 @@
                 </a>
             </div>
             <div class="post-nav-item">
+                <a href="/2025/03/26/SWPUCTF-2022-%E6%96%B0%E7%94%9F%E8%B5%9B-ez-rce/" rel="next" title="[SWPUCTF 2022 新生赛]ez_rce">
+                  [SWPUCTF 2022 新生赛]ez_rce <i class="fa fa-angle-right"></i>
+                </a>
             </div>
           </div>
     </footer>
@@ -301,14 +459,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">41k</span>
+    <span title="站点总字数">44k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">2:31</span>
+    <span title="站点阅读时长">2:41</span>
   </span>
 </div>
 
