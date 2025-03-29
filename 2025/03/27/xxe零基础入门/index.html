@@ -32,7 +32,7 @@
 <meta property="og:description" content="前置知识：XML可扩展标记语言（eXtensible Markup Language）是什么？https:&#x2F;&#x2F;www.runoob.com&#x2F;web&#x2F;web-xml.html 一种用于存储和传输数据的标记语言，结构类似 HTML，但标签可自定义。 1234&lt;user&gt;  &lt;name&gt;张三&lt;&#x2F;name&gt;  &lt;age&gt;30&lt;&#x2F;age&gt;&lt;&#x2F;">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-03-27T13:40:22.000Z">
-<meta property="article:modified_time" content="2025-03-27T15:37:40.991Z">
+<meta property="article:modified_time" content="2025-03-28T08:33:33.663Z">
 <meta property="article:author" content="温柔刀">
 <meta name="twitter:card" content="summary">
 
@@ -117,7 +117,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86%EF%BC%9A"><span class="nav-number">1.</span> <span class="nav-text">前置知识：</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#XML%E5%8F%AF%E6%89%A9%E5%B1%95%E6%A0%87%E8%AE%B0%E8%AF%AD%E8%A8%80%EF%BC%88eXtensible-Markup-Language%EF%BC%89%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">1.1.</span> <span class="nav-text">XML可扩展标记语言（eXtensible Markup Language）是什么？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#XML%E8%AF%AD%E6%B3%95"><span class="nav-number">1.1.1.</span> <span class="nav-text">XML语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#XML-%E6%A0%87%E7%AD%BE%E5%AF%B9%E5%A4%A7%E5%B0%8F%E5%86%99%E6%95%8F%E6%84%9F"><span class="nav-number">1.1.2.</span> <span class="nav-text">XML 标签对大小写敏感</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E4%BD%93%E5%BC%95%E7%94%A8"><span class="nav-number">1.1.3.</span> <span class="nav-text">实体引用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DTD%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">1.2.</span> <span class="nav-text">DTD是什么？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DTD%E7%9A%84%E4%B8%89%E5%A4%A7%E6%A0%B8%E5%BF%83%E5%8A%9F%E8%83%BD"><span class="nav-number">1.2.1.</span> <span class="nav-text">DTD的三大核心功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BE%8B%E5%AD%90"><span class="nav-number">1.2.2.</span> <span class="nav-text">例子</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#DTD%E6%96%87%E4%BB%B6%EF%BC%88rules-dtd%EF%BC%89"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">DTD文件（rules.dtd）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#XML%E6%96%87%E4%BB%B6%EF%BC%88book-xml%EF%BC%89"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">XML文件（book.xml）</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#XXE"><span class="nav-number">2.</span> <span class="nav-text">XXE</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%96%E9%83%A8%E5%AE%9E%E4%BD%93"><span class="nav-number">2.1.</span> <span class="nav-text">外部实体</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%96%E9%83%A8%E5%AE%9E%E4%BD%93-vs-%E5%86%85%E9%83%A8%E5%AE%9E%E4%BD%93%EF%BC%88%E5%AF%B9%E6%AF%94%E7%90%86%E8%A7%A3%EF%BC%89"><span class="nav-number">2.2.</span> <span class="nav-text">外部实体 vs 内部实体（对比理解）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81URI%E5%8D%8F%E8%AE%AE"><span class="nav-number">2.2.0.1.</span> <span class="nav-text">常见URI协议</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86%EF%BC%9A"><span class="nav-number">1.</span> <span class="nav-text">前置知识：</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#XML%E5%8F%AF%E6%89%A9%E5%B1%95%E6%A0%87%E8%AE%B0%E8%AF%AD%E8%A8%80%EF%BC%88eXtensible-Markup-Language%EF%BC%89%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">1.1.</span> <span class="nav-text">XML可扩展标记语言（eXtensible Markup Language）是什么？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#XML%E8%AF%AD%E6%B3%95"><span class="nav-number">1.1.1.</span> <span class="nav-text">XML语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#XML-%E6%A0%87%E7%AD%BE%E5%AF%B9%E5%A4%A7%E5%B0%8F%E5%86%99%E6%95%8F%E6%84%9F"><span class="nav-number">1.1.2.</span> <span class="nav-text">XML 标签对大小写敏感</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E4%BD%93%E5%BC%95%E7%94%A8"><span class="nav-number">1.1.3.</span> <span class="nav-text">实体引用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DTD%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">1.2.</span> <span class="nav-text">DTD是什么？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DTD%E7%9A%84%E4%B8%89%E5%A4%A7%E6%A0%B8%E5%BF%83%E5%8A%9F%E8%83%BD"><span class="nav-number">1.2.1.</span> <span class="nav-text">DTD的三大核心功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BE%8B%E5%AD%90"><span class="nav-number">1.2.2.</span> <span class="nav-text">例子</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#DTD%E6%96%87%E4%BB%B6%EF%BC%88rules-dtd%EF%BC%89"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">DTD文件（rules.dtd）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#XML%E6%96%87%E4%BB%B6%EF%BC%88book-xml%EF%BC%89"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">XML文件（book.xml）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E4%BD%93%E5%88%86%E7%B1%BB%E7%9A%84%E4%B8%A4%E7%A7%8D%E7%BB%B4%E5%BA%A6"><span class="nav-number">1.2.3.</span> <span class="nav-text">实体分类的两种维度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%89%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%88%86%E7%B1%BB%EF%BC%9A%E5%8F%82%E6%95%B0%E5%AE%9E%E4%BD%93-vs-%E6%99%AE%E9%80%9A%E5%AE%9E%E4%BD%93"><span class="nav-number">1.2.4.</span> <span class="nav-text">按作用域分类：参数实体 vs. 普通实体</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%82%E6%95%B0%E5%AE%9E%E4%BD%93%EF%BC%88Parameter-Entities%EF%BC%89"><span class="nav-number">1.2.4.1.</span> <span class="nav-text">参数实体（Parameter Entities）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%99%AE%E9%80%9A%E5%AE%9E%E4%BD%93%EF%BC%88General-Entities%EF%BC%8C%E5%8D%B3%E9%9D%9E%E5%8F%82%E6%95%B0%E5%AE%9E%E4%BD%93%EF%BC%89"><span class="nav-number">1.2.4.2.</span> <span class="nav-text">普通实体（General Entities，即非参数实体）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%89%E5%AD%98%E5%82%A8%E4%BD%8D%E7%BD%AE%E5%88%86%E7%B1%BB%EF%BC%9A%E5%86%85%E9%83%A8%E5%AE%9E%E4%BD%93-vs-%E5%A4%96%E9%83%A8%E5%AE%9E%E4%BD%93"><span class="nav-number">1.2.5.</span> <span class="nav-text">** 按存储位置分类：内部实体 vs. 外部实体**</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%86%85%E9%83%A8%E5%AE%9E%E4%BD%93%EF%BC%88Internal-Entities%EF%BC%89"><span class="nav-number">1.2.5.1.</span> <span class="nav-text">内部实体（Internal Entities）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A4%96%E9%83%A8%E5%AE%9E%E4%BD%93%EF%BC%88External-Entities%EF%BC%89"><span class="nav-number">1.2.5.2.</span> <span class="nav-text">** 外部实体（External Entities）**</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%96%E9%83%A8%E5%AE%9E%E4%BD%93"><span class="nav-number">1.2.6.</span> <span class="nav-text">外部实体</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%96%E9%83%A8%E5%AE%9E%E4%BD%93-vs-%E5%86%85%E9%83%A8%E5%AE%9E%E4%BD%93%EF%BC%88%E5%AF%B9%E6%AF%94%E7%90%86%E8%A7%A3%EF%BC%89"><span class="nav-number">1.2.7.</span> <span class="nav-text">外部实体 vs 内部实体（对比理解）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81URI%E5%8D%8F%E8%AE%AE"><span class="nav-number">1.2.7.1.</span> <span class="nav-text">常见URI协议</span></a></li></ol></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -132,7 +132,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">66</span>
+          <span class="site-state-item-count">68</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -204,9 +204,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2025-03-27 21:40:22 / 修改时间：23:37:40" itemprop="dateCreated datePublished" datetime="2025-03-27T21:40:22+08:00">2025-03-27</time>
+      <time title="创建时间：2025-03-27 21:40:22" itemprop="dateCreated datePublished" datetime="2025-03-27T21:40:22+08:00">2025-03-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-03-28 16:33:33" itemprop="dateModified" datetime="2025-03-28T16:33:33+08:00">2025-03-28</time>
     </span>
 
   
@@ -230,14 +236,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>1.1k</span>
+      <span>1.6k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>4 分钟</span>
+      <span>6 分钟</span>
     </span>
 </div>
 
@@ -316,11 +322,70 @@
 
 <p><strong>解析过程</strong></p>
 <ol>
-<li>解析器读取<code>rules.dtd</code>，知道<code>&lt;书籍&gt;</code>必须包含<code>书名</code>、<code>作者</code>、<code>价格</code>。</li>
-<li>检查<code>book.xml</code>是否符合规则（比如是否有<code>id</code>属性，<code>分类</code>值是否合法）。</li>
-<li>将<code>&amp;出版社;</code>替换为“XX图书出版社”。</li>
+<li><p>解析器读取<code>rules.dtd</code>，知道<code>&lt;书籍&gt;</code>必须包含<code>书名</code>、<code>作者</code>、<code>价格</code>。</p>
+</li>
+<li><p>检查<code>book.xml</code>是否符合规则（比如是否有<code>id</code>属性，<code>分类</code>值是否合法）。</p>
+</li>
+<li><p>将<code>&amp;出版社;</code>替换为“XX图书出版社”。</p>
+</li>
 </ol>
-<h1 id="XXE"><a href="#XXE" class="headerlink" title="XXE"></a>XXE</h1><h2 id="外部实体"><a href="#外部实体" class="headerlink" title="外部实体"></a>外部实体</h2><p><strong>外部实体</strong> 是XML中一种特殊的“变量”，它的值<strong>不是直接写在XML里</strong>，而是<strong>从外部文件或网络获取</strong>。攻击者利用它，可以<strong>让服务器读取敏感文件或访问内网资源</strong>。</p>
+<h3 id="实体分类的两种维度"><a href="#实体分类的两种维度" class="headerlink" title="实体分类的两种维度"></a><strong>实体分类的两种维度</strong></h3><p>DTD中的实体可以从两个不同角度分类：</p>
+<ul>
+<li><strong>按作用域</strong>：分为<strong>参数实体（Parameter Entities）<strong>和</strong>普通实体（General Entities，即非参数实体）</strong>。</li>
+<li><strong>按存储位置</strong>：分为<strong>内部实体（Internal Entities）<strong>和</strong>外部实体（External Entities）</strong>。</li>
+</ul>
+<p>这两种分类是独立的，因此可以组合成四种实体类型（例如：内部参数实体、外部普通实体等）。</p>
+<h3 id="按作用域分类：参数实体-vs-普通实体"><a href="#按作用域分类：参数实体-vs-普通实体" class="headerlink" title="按作用域分类：参数实体 vs. 普通实体"></a><strong>按作用域分类：参数实体 vs. 普通实体</strong></h3><p>省流：参数实体用%开头，%引用</p>
+<h4 id="参数实体（Parameter-Entities）"><a href="#参数实体（Parameter-Entities）" class="headerlink" title="参数实体（Parameter Entities）"></a><strong>参数实体（Parameter Entities）</strong></h4><ul>
+<li><p><strong>用途</strong>：仅在DTD内部使用，用于模块化DTD结构（如组合属性、元素或引入外部DTD片段）。</p>
+</li>
+<li><p><strong>声明语法</strong>：以 <code>%</code> 开头，例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!ENTITY % 实体名 &quot;内容或外部资源URI&quot;&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>引用方式</strong>：在DTD中通过 <code>%实体名;</code> 引用。</p>
+</li>
+<li><p><strong>示例</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;!ENTITY % common_attrs &quot;id ID #REQUIRED class CDATA #IMPLIED&quot;&gt;</span><br><span class="line">  &lt;!ENTITY % 实体名 &quot;内容或外部资源URI&quot;&gt;</span><br><span class="line">&lt;!ATTLIST div %common_attrs;&gt;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="普通实体（General-Entities，即非参数实体）"><a href="#普通实体（General-Entities，即非参数实体）" class="headerlink" title="普通实体（General Entities，即非参数实体）"></a><strong>普通实体（General Entities，即非参数实体）</strong></h4><ul>
+<li><p><strong>用途</strong>：在XML文档内容中替换文本或引用资源（如特殊字符、文件路径）。</p>
+</li>
+<li><p><strong>声明语法</strong>：无前缀，例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!ENTITY 实体名 &quot;内容或外部资源URI&quot;&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>引用方式</strong>：在XML文档中通过 <code>&amp;实体名;</code> 引用。</p>
+</li>
+<li><p><strong>示例</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!ENTITY copyright &quot;© 2023 Example Corp.&quot;&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;footer&gt;&amp;copyright;&lt;/footer&gt;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<h3 id="按存储位置分类：内部实体-vs-外部实体"><a href="#按存储位置分类：内部实体-vs-外部实体" class="headerlink" title="** 按存储位置分类：内部实体 vs. 外部实体**"></a>** 按存储位置分类：内部实体 vs. 外部实体**</h3><h4 id="内部实体（Internal-Entities）"><a href="#内部实体（Internal-Entities）" class="headerlink" title="内部实体（Internal Entities）"></a><strong>内部实体（Internal Entities）</strong></h4><ul>
+<li><p><strong>定义</strong>：实体内容直接内联在DTD中。</p>
+</li>
+<li><p><strong>语法</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;!ENTITY 实体名 &quot;文本内容&quot;&gt;          &lt;!-- 普通内部实体 --&gt;</span><br><span class="line">&lt;!ENTITY % 参数实体名 &quot;元素/属性定义&quot;&gt; &lt;!-- 参数内部实体 --&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>示例</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;!ENTITY company &quot;OpenAI&quot;&gt;          &lt;!-- 普通内部实体 --&gt;</span><br><span class="line">&lt;!ENTITY % block &quot;(div|p|section)&quot;&gt; &lt;!-- 参数内部实体 --&gt;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="外部实体（External-Entities）"><a href="#外部实体（External-Entities）" class="headerlink" title="** 外部实体（External Entities）**"></a>** 外部实体（External Entities）**</h4><ul>
+<li><p><strong>定义</strong>：实体内容引用外部资源（如文件、URL）。</p>
+</li>
+<li><p><strong>语法</strong>：</p>
+<p>dtd</p>
+<p>复制</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;!ENTITY 实体名 SYSTEM &quot;URI&quot;&gt;          &lt;!-- 普通外部实体 --&gt;</span><br><span class="line">&lt;!ENTITY % 参数实体名 SYSTEM &quot;URI&quot;&gt;   &lt;!-- 参数外部实体 --&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>示例</strong>：</p>
+<p>dtd</p>
+<p>复制</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;!ENTITY logo SYSTEM &quot;logo.png&quot;&gt;       &lt;!-- 普通外部实体 --&gt;</span><br><span class="line">&lt;!ENTITY % ext_dtd SYSTEM &quot;http://example.com/external.dtd&quot;&gt; &lt;!-- 参数外部实体 --&gt;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="外部实体"><a href="#外部实体" class="headerlink" title="外部实体"></a>外部实体</h3><p><strong>外部实体</strong> 是XML中一种特殊的“变量”，它的值<strong>不是直接写在XML里</strong>，而是<strong>从外部文件或网络获取</strong>。攻击者利用它，可以<strong>让服务器读取敏感文件或访问内网资源</strong>。</p>
 <p>语法格式：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!ENTITY 实体名 SYSTEM &quot;URI&quot;&gt;  </span><br></pre></td></tr></table></figure>
 
@@ -328,7 +393,7 @@
 <li><strong><code>SYSTEM</code></strong>：关键字，表示这是一个外部实体。</li>
 <li><strong><code>URI</code></strong>：指向外部资源的路径，可以是本地文件或网络地址。</li>
 </ul>
-<h2 id="外部实体-vs-内部实体（对比理解）"><a href="#外部实体-vs-内部实体（对比理解）" class="headerlink" title="外部实体 vs 内部实体（对比理解）"></a>外部实体 vs 内部实体（对比理解）</h2><ol>
+<h3 id="外部实体-vs-内部实体（对比理解）"><a href="#外部实体-vs-内部实体（对比理解）" class="headerlink" title="外部实体 vs 内部实体（对比理解）"></a>外部实体 vs 内部实体（对比理解）</h3><ol>
 <li>内部实体</li>
 </ol>
 <p>  定义：实体值直接写在XML内部。</p>
@@ -337,7 +402,7 @@
 
 <p>  用途：简化重复内容，类似编程中的常量。</p>
 <ol start="2">
-<li>外部实体<br>  定义：实体值从外部文件或网络获取。</li>
+<li>外部实体<br> 定义：实体值从外部文件或网络获取。</li>
 </ol>
   <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;!ENTITY secret SYSTEM &quot;file:///etc/passwd&quot;&gt;  &lt;!-- 值从/etc/passwd文件读取 --&gt;</span><br><span class="line">&lt;数据&gt;&amp;secret;&lt;/数据&gt;  &lt;!-- 输出文件内容 --&gt;</span><br></pre></td></tr></table></figure>
 
@@ -430,14 +495,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">44k</span>
+    <span title="站点总字数">47k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">2:41</span>
+    <span title="站点阅读时长">2:50</span>
   </span>
 </div>
 
