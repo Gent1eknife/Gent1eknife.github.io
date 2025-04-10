@@ -1,15 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>http://example.com/2025/04/07/GKCTF-2020-cve%E7%89%88%E7%AD%BE%E5%88%B0/</loc>
-    <lastmod>2025-04-07</lastmod>
+    <loc>http://example.com/2025/04/10/Pickle/</loc>
+    <lastmod>2025-04-10</lastmod>
   </url>
   <url>
-    <loc>http://example.com/2025/03/26/SWPUCTF-2022-%E6%96%B0%E7%94%9F%E8%B5%9B-ez-rce/</loc>
-    <lastmod>2025-04-07</lastmod>
+    <loc>http://example.com/2025/04/09/PHP%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E7%9F%A5%E8%AF%86%E7%82%B9/</loc>
+    <lastmod>2025-04-10</lastmod>
+  </url>
+  <url>
+    <loc>http://example.com/2025/02/13/ZJCTF-2019-NiZhuanSiWei/</loc>
+    <lastmod>2025-04-10</lastmod>
+  </url>
+  <url>
+    <loc>http://example.com/2025/03/26/CTFSHOW%E5%88%B7%E9%A2%98%E6%B1%87%E6%80%BB/</loc>
+    <lastmod>2025-04-10</lastmod>
+  </url>
+  <url>
+    <loc>http://example.com/2025/04/08/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/</loc>
+    <lastmod>2025-04-08</lastmod>
   </url>
   <url>
     <loc>http://example.com/2025/04/07/%E7%94%B1wsl%E8%BF%9E%E4%B8%8D%E4%B8%8A%E4%BB%A3%E7%90%86%E5%BC%95%E5%8F%91%E7%9A%84%E4%B8%80%E7%B3%BB%E5%88%97%E4%BA%8B%E4%BB%B6/</loc>
+    <lastmod>2025-04-08</lastmod>
+  </url>
+  <url>
+    <loc>http://example.com/2025/04/07/GKCTF-2020-cve%E7%89%88%E7%AD%BE%E5%88%B0/</loc>
+    <lastmod>2025-04-08</lastmod>
+  </url>
+  <url>
+    <loc>http://example.com/2025/03/26/SWPUCTF-2022-%E6%96%B0%E7%94%9F%E8%B5%9B-ez-rce/</loc>
     <lastmod>2025-04-07</lastmod>
   </url>
   <url>
@@ -39,10 +59,6 @@
   <url>
     <loc>http://example.com/2025/03/27/xxe%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8/</loc>
     <lastmod>2025-03-30</lastmod>
-  </url>
-  <url>
-    <loc>http://example.com/2025/03/26/CTFSHOW%E5%88%B7%E9%A2%98%E6%B1%87%E6%80%BB/</loc>
-    <lastmod>2025-03-29</lastmod>
   </url>
   <url>
     <loc>http://example.com/2025/03/29/Typora%E6%9B%B4%E6%96%B0/</loc>
@@ -278,10 +294,6 @@
   </url>
   <url>
     <loc>http://example.com/2025/02/12/%E7%BD%91%E9%BC%8E%E6%9D%AF2018Fakebook/</loc>
-    <lastmod>2025-02-13</lastmod>
-  </url>
-  <url>
-    <loc>http://example.com/2025/02/13/ZJCTF-2019-NiZhuanSiWei/</loc>
     <lastmod>2025-02-13</lastmod>
   </url>
   <url>

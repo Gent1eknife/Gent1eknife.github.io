@@ -24,17 +24,21 @@
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.22.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":true,"show_result":true,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
 
-    <meta name="description" content="JNU_WEB">
+    <meta name="description" content="本文是本人对于使用代理过程中的一些经验总结，并不是教程或者技术性文章，所以内容比较不全面很正常（本文不会提供任何软件的下载链接，如有需求请自行查找相关下载源。  一个平平无奇的下午，我的wsl报错了：   审视了一下我的 Clash，有系统代理和虚拟网卡模式，那么这两个之间的区别是什么？ 请看关于『代理』的不完全使用指北 省流版： 当你打开系统代理时，代理软件就会修改系统设置中的代理选项。但是，">
 <meta property="og:type" content="article">
 <meta property="og:title" content="由wsl连不上代理引发的一系列事件">
 <meta property="og:url" content="http://example.com/2025/04/07/%E7%94%B1wsl%E8%BF%9E%E4%B8%8D%E4%B8%8A%E4%BB%A3%E7%90%86%E5%BC%95%E5%8F%91%E7%9A%84%E4%B8%80%E7%B3%BB%E5%88%97%E4%BA%8B%E4%BB%B6/index.html">
 <meta property="og:site_name" content="CTF学习笔记">
-<meta property="og:description" content="JNU_WEB">
+<meta property="og:description" content="本文是本人对于使用代理过程中的一些经验总结，并不是教程或者技术性文章，所以内容比较不全面很正常（本文不会提供任何软件的下载链接，如有需求请自行查找相关下载源。  一个平平无奇的下午，我的wsl报错了：   审视了一下我的 Clash，有系统代理和虚拟网卡模式，那么这两个之间的区别是什么？ 请看关于『代理』的不完全使用指北 省流版： 当你打开系统代理时，代理软件就会修改系统设置中的代理选项。但是，">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2025/04/07/%E7%94%B1wsl%E8%BF%9E%E4%B8%8D%E4%B8%8A%E4%BB%A3%E7%90%86%E5%BC%95%E5%8F%91%E7%9A%84%E4%B8%80%E7%B3%BB%E5%88%97%E4%BA%8B%E4%BB%B6/350A7EF3E16F13BCFDDBA472EFB9A05E.png">
 <meta property="article:published_time" content="2025-04-07T10:42:05.000Z">
-<meta property="article:modified_time" content="2025-04-07T10:42:05.584Z">
+<meta property="article:modified_time" content="2025-04-08T08:01:01.899Z">
 <meta property="article:author" content="温柔刀">
+<meta property="article:tag" content="wsl">
+<meta property="article:tag" content="代理">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2025/04/07/%E7%94%B1wsl%E8%BF%9E%E4%B8%8D%E4%B8%8A%E4%BB%A3%E7%90%86%E5%BC%95%E5%8F%91%E7%9A%84%E4%B8%80%E7%B3%BB%E5%88%97%E4%BA%8B%E4%BB%B6/350A7EF3E16F13BCFDDBA472EFB9A05E.png">
 
 
 <link rel="canonical" href="http://example.com/2025/04/07/%E7%94%B1wsl%E8%BF%9E%E4%B8%8D%E4%B8%8A%E4%BB%A3%E7%90%86%E5%BC%95%E5%8F%91%E7%9A%84%E4%B8%80%E7%B3%BB%E5%88%97%E4%BA%8B%E4%BB%B6/">
@@ -131,7 +135,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">73</span>
+          <span class="site-state-item-count">76</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -142,7 +146,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">50</span>
+        <span class="site-state-item-count">52</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -206,6 +210,22 @@
 
       <time title="创建时间：2025-04-07 18:42:05" itemprop="dateCreated datePublished" datetime="2025-04-07T18:42:05+08:00">2025-04-07</time>
     </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-04-08 16:01:01" itemprop="dateModified" datetime="2025-04-08T16:01:01+08:00">2025-04-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%AE%A1%E7%BD%91/" itemprop="url" rel="index"><span itemprop="name">计网</span></a>
+        </span>
+    </span>
 
   
   
@@ -228,14 +248,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>0</span>
+      <span>574</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
+      <span>2 分钟</span>
     </span>
 </div>
 
@@ -245,7 +265,28 @@
     
     
     
-    <div class="post-body" itemprop="articleBody">
+    <div class="post-body" itemprop="articleBody"><blockquote>
+<p>本文是本人对于使用代理过程中的一些经验总结，并不是教程或者技术性文章，所以内容比较不全面很正常（<br>本文不会提供任何软件的下载链接，如有需求请自行查找相关下载源。</p>
+</blockquote>
+<p>一个平平无奇的下午，我的wsl报错了：</p>
+<img src="/2025/04/07/%E7%94%B1wsl%E8%BF%9E%E4%B8%8D%E4%B8%8A%E4%BB%A3%E7%90%86%E5%BC%95%E5%8F%91%E7%9A%84%E4%B8%80%E7%B3%BB%E5%88%97%E4%BA%8B%E4%BB%B6/350A7EF3E16F13BCFDDBA472EFB9A05E.png" class="" title="350A7EF3E16F13BCFDDBA472EFB9A05E">
+
+<p>审视了一下我的 Clash，有系统代理和虚拟网卡模式，那么这两个之间的区别是什么？</p>
+<p>请看<a target="_blank" rel="noopener" href="https://blog.revincx.icu/posts/proxy-summary/index.html">关于『代理』的不完全使用指北</a></p>
+<p>省流版：</p>
+<p>当你打开系统代理时，代理软件就会修改系统设置中的代理选项。但是，系统设置中的代理往往只可设置为HTTP代理，而且这个HTTP代理只对当前系统上web浏览器有效。**这也就是为什么明明设置了系统代理，访问GitHub也很快，但在命令行里克隆一个GitHub的仓库却很慢的原因。**在命令行下，执行git命令也就是直接执行git的二进制文件，跟你设置的系统代理是没有关系的。</p>
+<p>而 Tun 模式：</p>
+<blockquote>
+<p>工作原理<br>Tun 模式通过在操作系统中创建一个虚拟网络接口（即虚拟网卡），实现对所有出站网络流量的捕获和重定向。这是通过修改系统的路由表完成的，将所有或特定目标的IP流量都重定向到虚拟网卡。接着，代理程序从这张虚拟网卡读取流量，处理后再发送到原本的目标地址或其他指定的代理服务器。</p>
+<p>此模式的关键在于，它在操作系统层面拦截网络流量，不依赖于应用程序的代理支持，因此可以处理从 TCP 到UDP 的所有类型的流量。</p>
+</blockquote>
+<p>最终解决方案：</p>
+<p>开虚拟网卡模式，关闭系统代理，开局域网连接 wsl 开镜像模式，正常网页和外网和 wsl 代理都搞好了。</p>
+<p>待解决的问题：</p>
+<p>解释理网卡、网卡接口、内核、IP等属性的关系。</p>
+<p>解释Linux虚拟网卡设备tun&#x2F;tap的一切。<a target="_blank" rel="noopener" href="https://junmajinlong.com/virtual/network/kernel_nic_ip/">https://junmajinlong.com/virtual/network/kernel_nic_ip/</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.skk.moe/post/what-happend-to-dns-in-proxy/">浅谈在代理环境中的 DNS 解析行为</a></p>
+
     </div>
 
     
@@ -253,6 +294,10 @@
     
 
     <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/wsl/" rel="tag"><i class="fa fa-tag"></i> wsl</a>
+              <a href="/tags/%E4%BB%A3%E7%90%86/" rel="tag"><i class="fa fa-tag"></i> 代理</a>
+          </div>
 
         
   <div class="social-like a2a_kit a2a_kit_size_32 a2a_default_style">
@@ -303,14 +348,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">52k</span>
+    <span title="站点总字数">53k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">3:10</span>
+    <span title="站点阅读时长">3:15</span>
   </span>
 </div>
 
