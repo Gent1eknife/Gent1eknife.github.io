@@ -129,7 +129,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">79</span>
+          <span class="site-state-item-count">82</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -163,6 +163,380 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/04/07/GKCTF-2020-cve%E7%89%88%E7%AD%BE%E5%88%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar_2.gif">
+      <meta itemprop="name" content="温柔刀">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CTF学习笔记">
+      <meta itemprop="description" content="JNU_WEB">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | CTF学习笔记">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/04/07/GKCTF-2020-cve%E7%89%88%E7%AD%BE%E5%88%B0/" class="post-title-link" itemprop="url">[GKCTF 2020]cve版签到</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-04-07 18:46:03" itemprop="dateCreated datePublished" datetime="2025-04-07T18:46:03+08:00">2025-04-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-04-08 14:34:14" itemprop="dateModified" datetime="2025-04-08T14:34:14+08:00">2025-04-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/2025/04/07/GKCTF-2020-cve%E7%89%88%E7%AD%BE%E5%88%B0/#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/2025/04/07/GKCTF-2020-cve%E7%89%88%E7%AD%BE%E5%88%B0/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>124</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>cve-2020-7066</p>
+<p>PHP 7.2.29 之前的 7.2.x 版本、 7.3.16之前的 7.3.x 版本、 7.4.4 之前的 7.4.x 版本中的 ‘get_headers()’函数存在安全漏洞。可以用来绕WAF，SSRF利用。</p>
+<p>0x00 是十六进制表示方法，是在 ascii 码中为 0 的字符，有些函数会将 0x00 当做结束符，从而进行文件上传的绕过。</p>
+<p> 在 url 里面，get 传⼊的 %00 会经过⼀次解码，解码为 0x00,发挥截断作用。</p>
+<p><code> ?url=http://127.0.0.1%00ctfhub.com</code></p>
+<p><code>?url=http://127.0.0.123%00.ctfhub.com</code></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/04/07/%E7%94%B1wsl%E8%BF%9E%E4%B8%8D%E4%B8%8A%E4%BB%A3%E7%90%86%E5%BC%95%E5%8F%91%E7%9A%84%E4%B8%80%E7%B3%BB%E5%88%97%E4%BA%8B%E4%BB%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar_2.gif">
+      <meta itemprop="name" content="温柔刀">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CTF学习笔记">
+      <meta itemprop="description" content="JNU_WEB">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | CTF学习笔记">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/04/07/%E7%94%B1wsl%E8%BF%9E%E4%B8%8D%E4%B8%8A%E4%BB%A3%E7%90%86%E5%BC%95%E5%8F%91%E7%9A%84%E4%B8%80%E7%B3%BB%E5%88%97%E4%BA%8B%E4%BB%B6/" class="post-title-link" itemprop="url">由wsl连不上代理引发的一系列事件</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-04-07 18:42:05" itemprop="dateCreated datePublished" datetime="2025-04-07T18:42:05+08:00">2025-04-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-04-08 16:01:01" itemprop="dateModified" datetime="2025-04-08T16:01:01+08:00">2025-04-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%AE%A1%E7%BD%91/" itemprop="url" rel="index"><span itemprop="name">计网</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/2025/04/07/%E7%94%B1wsl%E8%BF%9E%E4%B8%8D%E4%B8%8A%E4%BB%A3%E7%90%86%E5%BC%95%E5%8F%91%E7%9A%84%E4%B8%80%E7%B3%BB%E5%88%97%E4%BA%8B%E4%BB%B6/#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/2025/04/07/%E7%94%B1wsl%E8%BF%9E%E4%B8%8D%E4%B8%8A%E4%BB%A3%E7%90%86%E5%BC%95%E5%8F%91%E7%9A%84%E4%B8%80%E7%B3%BB%E5%88%97%E4%BA%8B%E4%BB%B6/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>574</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>2 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <blockquote>
+<p>本文是本人对于使用代理过程中的一些经验总结，并不是教程或者技术性文章，所以内容比较不全面很正常（<br>本文不会提供任何软件的下载链接，如有需求请自行查找相关下载源。</p>
+</blockquote>
+<p>一个平平无奇的下午，我的wsl报错了：</p>
+<img src="/2025/04/07/%E7%94%B1wsl%E8%BF%9E%E4%B8%8D%E4%B8%8A%E4%BB%A3%E7%90%86%E5%BC%95%E5%8F%91%E7%9A%84%E4%B8%80%E7%B3%BB%E5%88%97%E4%BA%8B%E4%BB%B6/350A7EF3E16F13BCFDDBA472EFB9A05E.png" class="" title="350A7EF3E16F13BCFDDBA472EFB9A05E">
+
+<p>审视了一下我的 Clash，有系统代理和虚拟网卡模式，那么这两个之间的区别是什么？</p>
+<p>请看<a target="_blank" rel="noopener" href="https://blog.revincx.icu/posts/proxy-summary/index.html">关于『代理』的不完全使用指北</a></p>
+<p>省流版：</p>
+<p>当你打开系统代理时，代理软件就会修改系统设置中的代理选项。但是，系统设置中的代理往往只可设置为HTTP代理，而且这个HTTP代理只对当前系统上web浏览器有效。**这也就是为什么明明设置了系统代理，访问GitHub也很快，但在命令行里克隆一个GitHub的仓库却很慢的原因。**在命令行下，执行git命令也就是直接执行git的二进制文件，跟你设置的系统代理是没有关系的。</p>
+<p>而 Tun 模式：</p>
+<blockquote>
+<p>工作原理<br>Tun 模式通过在操作系统中创建一个虚拟网络接口（即虚拟网卡），实现对所有出站网络流量的捕获和重定向。这是通过修改系统的路由表完成的，将所有或特定目标的IP流量都重定向到虚拟网卡。接着，代理程序从这张虚拟网卡读取流量，处理后再发送到原本的目标地址或其他指定的代理服务器。</p>
+<p>此模式的关键在于，它在操作系统层面拦截网络流量，不依赖于应用程序的代理支持，因此可以处理从 TCP 到UDP 的所有类型的流量。</p>
+</blockquote>
+<p>最终解决方案：</p>
+<p>开虚拟网卡模式，关闭系统代理，开局域网连接 wsl 开镜像模式，正常网页和外网和 wsl 代理都搞好了。</p>
+<p>待解决的问题：</p>
+<p>解释理网卡、网卡接口、内核、IP等属性的关系。</p>
+<p>解释Linux虚拟网卡设备tun&#x2F;tap的一切。<a target="_blank" rel="noopener" href="https://junmajinlong.com/virtual/network/kernel_nic_ip/">https://junmajinlong.com/virtual/network/kernel_nic_ip/</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.skk.moe/post/what-happend-to-dns-in-proxy/">浅谈在代理环境中的 DNS 解析行为</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/04/06/SSRF%E4%BE%8B%E4%BC%9A%E4%BD%9C%E4%B8%9A/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar_2.gif">
+      <meta itemprop="name" content="温柔刀">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CTF学习笔记">
+      <meta itemprop="description" content="JNU_WEB">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | CTF学习笔记">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/04/06/SSRF%E4%BE%8B%E4%BC%9A%E4%BD%9C%E4%B8%9A/" class="post-title-link" itemprop="url">SSRF例会作业</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-04-06 19:29:08" itemprop="dateCreated datePublished" datetime="2025-04-06T19:29:08+08:00">2025-04-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-04-07 16:36:30" itemprop="dateModified" datetime="2025-04-07T16:36:30+08:00">2025-04-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/2025/04/06/SSRF%E4%BE%8B%E4%BC%9A%E4%BD%9C%E4%B8%9A/#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/2025/04/06/SSRF%E4%BE%8B%E4%BC%9A%E4%BD%9C%E4%B8%9A/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>4.1k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>15 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="网鼎杯-2020-玄武组-SSRFMe"><a href="#网鼎杯-2020-玄武组-SSRFMe" class="headerlink" title="[网鼎杯 2020 玄武组]SSRFMe"></a>[网鼎杯 2020 玄武组]SSRFMe</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">// 定义函数：检查 URL 是否指向内网 IP</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">check_inner_ip</span>(<span class="params"><span class="variable">$url</span></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 使用正则匹配 URL 协议（http/https/gopher/dict）和格式</span></span><br><span class="line">    <span class="variable">$match_result</span>=<span class="title function_ invoke__">preg_match</span>(<span class="string">&#x27;/^(http|https|gopher|dict)?:\/\/.*(\/)?.*$/&#x27;</span>,<span class="variable">$url</span>);</span><br><span class="line">    <span class="keyword">if</span> (!<span class="variable">$match_result</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">die</span>(<span class="string">&#x27;url fomat error&#x27;</span>); <span class="comment">// 格式错误直接终止脚本</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">try</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="variable">$url_parse</span>=<span class="title function_ invoke__">parse_url</span>(<span class="variable">$url</span>); <span class="comment">// 解析 URL 为数组（协议、主机、路径等）</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">catch</span>(<span class="built_in">Exception</span> <span class="variable">$e</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">die</span>(<span class="string">&#x27;url fomat error&#x27;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>; <span class="comment">// 异常处理（但 parse_url 本身不抛异常，此代码无效）</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable">$hostname</span>=<span class="variable">$url_parse</span>[<span class="string">&#x27;host&#x27;</span>]; <span class="comment">// 提取主机名（如：example.com）</span></span><br><span class="line">    <span class="variable">$ip</span>=<span class="title function_ invoke__">gethostbyname</span>(<span class="variable">$hostname</span>); <span class="comment">// 将主机名解析为 IP 地址</span></span><br><span class="line">     <span class="variable">$int_ip</span>=<span class="title function_ invoke__">ip2long</span>(<span class="variable">$ip</span>); <span class="comment">// 将 IP 转为 32 位整数</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 检查 IP 是否属于内网范围：</span></span><br><span class="line">    <span class="comment">// 127.0.0.0/8（本地回环）、10.0.0.0/8（A 类内网）、</span></span><br><span class="line">    <span class="comment">// 172.16.0.0/12（B 类内网）、192.168.0.0/16（C 类内网）</span></span><br><span class="line">    <span class="keyword">return</span> <span class="title function_ invoke__">ip2long</span>(<span class="string">&#x27;127.0.0.0&#x27;</span>)&gt;&gt;<span class="number">24</span> == <span class="variable">$int_ip</span>&gt;&gt;<span class="number">24</span> || </span><br><span class="line">           <span class="title function_ invoke__">ip2long</span>(<span class="string">&#x27;10.0.0.0&#x27;</span>)&gt;&gt;<span class="number">24</span> == <span class="variable">$int_ip</span>&gt;&gt;<span class="number">24</span> || </span><br><span class="line">           <span class="title function_ invoke__">ip2long</span>(<span class="string">&#x27;172.16.0.0&#x27;</span>)&gt;&gt;<span class="number">20</span> == <span class="variable">$int_ip</span>&gt;&gt;<span class="number">20</span> || </span><br><span class="line">           <span class="title function_ invoke__">ip2long</span>(<span class="string">&#x27;192.168.0.0&#x27;</span>)&gt;&gt;<span class="number">16</span> == <span class="variable">$int_ip</span>&gt;&gt;<span class="number">16</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* check_inner_ip做了几件事：</span></span><br><span class="line"><span class="comment">    限制协议只能为http,https,gopher,dict</span></span><br><span class="line"><span class="comment">    使用parse_url获取host</span></span><br><span class="line"><span class="comment">    使用gethostbyname获取ip地址</span></span><br><span class="line"><span class="comment">    防御了xip.io这类利用dns解析的绕过方法</span></span><br><span class="line"><span class="comment">    使用ip2long将ip地址转为整数，判断是否为内网网段</span></span><br><span class="line"><span class="comment">    防御了127.0.0.1/8 */</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义函数：安全请求 URL （避免访问内网）</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">safe_request_url</span>(<span class="params"><span class="variable">$url</span></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="title function_ invoke__">check_inner_ip</span>(<span class="variable">$url</span>)) <span class="comment">// 调用内网检查函数</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="variable">$url</span>.<span class="string">&#x27; is inner ip&#x27;</span>; <span class="comment">// 如果是内网则输出提示</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="variable">$ch</span> = <span class="title function_ invoke__">curl_init</span>(); <span class="comment">// 初始化 cURL 会话</span></span><br><span class="line">        <span class="title function_ invoke__">curl_setopt</span>(<span class="variable">$ch</span>, CURLOPT_URL, <span class="variable">$url</span>); <span class="comment">// 设置请求 URL</span></span><br><span class="line">        <span class="title function_ invoke__">curl_setopt</span>(<span class="variable">$ch</span>, CURLOPT_RETURNTRANSFER, <span class="number">1</span>); <span class="comment">// 返回响应内容</span></span><br><span class="line">        <span class="title function_ invoke__">curl_setopt</span>(<span class="variable">$ch</span>, CURLOPT_HEADER, <span class="number">0</span>); <span class="comment">// 不包含响应头</span></span><br><span class="line">        <span class="variable">$output</span> = <span class="title function_ invoke__">curl_exec</span>(<span class="variable">$ch</span>); <span class="comment">// 执行请求</span></span><br><span class="line">        <span class="variable">$result_info</span> = <span class="title function_ invoke__">curl_getinfo</span>(<span class="variable">$ch</span>); <span class="comment">// 获取请求信息（如状态码、重定向 URL）</span></span><br><span class="line">        <span class="comment"># 另外在发送请求后还对重定向的情况做了处理</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="variable">$result_info</span>[<span class="string">&#x27;redirect_url&#x27;</span>]) <span class="comment">// 检查是否有重定向</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="title function_ invoke__">safe_request_url</span>(<span class="variable">$result_info</span>[<span class="string">&#x27;redirect_url&#x27;</span>]); <span class="comment">// 递归处理重定向 URL</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="title function_ invoke__">curl_close</span>(<span class="variable">$ch</span>); <span class="comment">// 关闭 cURL</span></span><br><span class="line">        <span class="title function_ invoke__">var_dump</span>(<span class="variable">$output</span>); <span class="comment">// 输出响应内容</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 主程序逻辑</span></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;url&#x27;</span>]))&#123; <span class="comment">// 检查是否有 url 参数</span></span><br><span class="line">    <span class="variable">$url</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;url&#x27;</span>];</span><br><span class="line">    <span class="keyword">if</span>(!<span class="keyword">empty</span>(<span class="variable">$url</span>))&#123;</span><br><span class="line">        <span class="title function_ invoke__">safe_request_url</span>(<span class="variable">$url</span>); <span class="comment">// 调用安全请求函数</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>); <span class="comment">// 无参数时高亮显示当前代码</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 提示本地访问hint.php（可能暗示需要绕过内网限制）</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2025/04/06/SSRF%E4%BE%8B%E4%BC%9A%E4%BD%9C%E4%B8%9A/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1066,361 +1440,8 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2025/03/26/CTFSHOW%E5%88%B7%E9%A2%98%E6%B1%87%E6%80%BB/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar_2.gif">
-      <meta itemprop="name" content="温柔刀">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CTF学习笔记">
-      <meta itemprop="description" content="JNU_WEB">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | CTF学习笔记">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2025/03/26/CTFSHOW%E5%88%B7%E9%A2%98%E6%B1%87%E6%80%BB/" class="post-title-link" itemprop="url">CTFSHOW 刷题汇总</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2025-03-26 19:01:01" itemprop="dateCreated datePublished" datetime="2025-03-26T19:01:01+08:00">2025-03-26</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-04-17 08:30:57" itemprop="dateModified" datetime="2025-04-17T08:30:57+08:00">2025-04-17</time>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-    <span class="post-meta-item-icon">
-      <i class="far fa-comment"></i>
-    </span>
-    <span class="post-meta-item-text">Waline：</span>
-  
-    <a title="waline" href="/2025/03/26/CTFSHOW%E5%88%B7%E9%A2%98%E6%B1%87%E6%80%BB/#waline" itemprop="discussionUrl">
-      <span class="post-comments-count waline-comment-count" data-path="/2025/03/26/CTFSHOW%E5%88%B7%E9%A2%98%E6%B1%87%E6%80%BB/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>3.1k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>11 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="PWN"><a href="#PWN" class="headerlink" title="PWN"></a>PWN</h1><h1 id="PWN-入门"><a href="#PWN-入门" class="headerlink" title="PWN 入门"></a>PWN 入门</h1><h1 id="WEB"><a href="#WEB" class="headerlink" title="WEB"></a>WEB</h1><h1 id="WEB-入门"><a href="#WEB-入门" class="headerlink" title="WEB 入门"></a>WEB 入门</h1>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2025/03/26/CTFSHOW%E5%88%B7%E9%A2%98%E6%B1%87%E6%80%BB/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2025/03/24/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84PWN%E4%B8%96%E7%95%8C%E7%94%9F%E6%B4%BB/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar_2.gif">
-      <meta itemprop="name" content="温柔刀">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CTF学习笔记">
-      <meta itemprop="description" content="JNU_WEB">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | CTF学习笔记">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2025/03/24/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84PWN%E4%B8%96%E7%95%8C%E7%94%9F%E6%B4%BB/" class="post-title-link" itemprop="url">从零开始的PWN世界生活</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2025-03-24 20:00:00" itemprop="dateCreated datePublished" datetime="2025-03-24T20:00:00+08:00">2025-03-24</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-03-30 10:50:29" itemprop="dateModified" datetime="2025-03-30T10:50:29+08:00">2025-03-30</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Pwn/" itemprop="url" rel="index"><span itemprop="name">Pwn</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-    <span class="post-meta-item-icon">
-      <i class="far fa-comment"></i>
-    </span>
-    <span class="post-meta-item-text">Waline：</span>
-  
-    <a title="waline" href="/2025/03/24/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84PWN%E4%B8%96%E7%95%8C%E7%94%9F%E6%B4%BB/#waline" itemprop="discussionUrl">
-      <span class="post-comments-count waline-comment-count" data-path="/2025/03/24/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84PWN%E4%B8%96%E7%95%8C%E7%94%9F%E6%B4%BB/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>213</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/yuwoxinanA3/article/details/130595008?ops_request_misc=%257B%2522request%255Fid%2522%253A%25222e04ad340f9d9de4fecaa8bc26b2aa2c%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=2e04ad340f9d9de4fecaa8bc26b2aa2c&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-1-130595008-null-null.142">https://blog.csdn.net/yuwoxinanA3/article/details/130595008?ops_request_misc=%257B%2522request%255Fid%2522%253A%25222e04ad340f9d9de4fecaa8bc26b2aa2c%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;request_id=2e04ad340f9d9de4fecaa8bc26b2aa2c&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-1-130595008-null-null.142</a></p>
-<p>谜团1：为什么system()，system(“bin&#x2F;sh”)能权限提升</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2025/03/24/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%9A%84PWN%E4%B8%96%E7%95%8C%E7%94%9F%E6%B4%BB/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2025/03/24/JNCTF%E9%A2%98%E8%A7%A3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar_2.gif">
-      <meta itemprop="name" content="温柔刀">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CTF学习笔记">
-      <meta itemprop="description" content="JNU_WEB">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | CTF学习笔记">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2025/03/24/JNCTF%E9%A2%98%E8%A7%A3/" class="post-title-link" itemprop="url">JNCTF题解</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2025-03-24 19:59:39" itemprop="dateCreated datePublished" datetime="2025-03-24T19:59:39+08:00">2025-03-24</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-03-26 20:14:33" itemprop="dateModified" datetime="2025-03-26T20:14:33+08:00">2025-03-26</time>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-    <span class="post-meta-item-icon">
-      <i class="far fa-comment"></i>
-    </span>
-    <span class="post-meta-item-text">Waline：</span>
-  
-    <a title="waline" href="/2025/03/24/JNCTF%E9%A2%98%E8%A7%A3/#waline" itemprop="discussionUrl">
-      <span class="post-comments-count waline-comment-count" data-path="/2025/03/24/JNCTF%E9%A2%98%E8%A7%A3/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>12k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>43 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <blockquote>
-<p>pickle反序列化不会 ，sql注入流量脚本搞不懂，sql注入过滤了’然后呢？？？</p>
-<p>困困困困困困困</p>
-<p>主播真不会写啊</p>
-<p>能不能忽然max上身时间回溯到高考完第一题开始学习CTF再回来打校赛</p>
-<p>有ssrf我知道，搞到了数据库名称账户密码，然后呢？内网？我不会内网啊！！！</p>
-<p>逆向被打烂了，我还是不会啊！！第一次看见这种题目</p>
-</blockquote>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2025/03/24/JNCTF%E9%A2%98%E8%A7%A3/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/3/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>
@@ -1443,14 +1464,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">58k</span>
+    <span title="站点总字数">63k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">3:31</span>
+    <span title="站点阅读时长">3:50</span>
   </span>
 </div>
 

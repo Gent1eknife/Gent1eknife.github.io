@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="google-site-verification=1l-Ncv0xIlzPx6dkZdorprb8MU59sYp-f3JtihJKCaM">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/silver/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.22.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":true,"show_result":true,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+
+    <meta name="description" content="渗透测试是什么？ 在授权许可下，对目标系统渗透，找出尽可能多的安全漏洞。 获得授权获得甲方的法律授权，规避不必要的法律风险。 甲方会给出需要渗透的域名和 ip，或者是资产名和 ip&#x2F;域名对应的 excel。 给的是域名，子域名可能要自己去找。 问清楚子域名能不能渗透，能不能爆破（因为有时候给你的是正常运行的服务）。 信息搜集为什么进行信息搜集？把资产想象为一台机器，它是由一系列不同的部件">
+<meta property="og:type" content="article">
+<meta property="og:title" content="渗透测试流程">
+<meta property="og:url" content="http://example.com/2025/05/01/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E6%B5%81%E7%A8%8B/index.html">
+<meta property="og:site_name" content="CTF学习笔记">
+<meta property="og:description" content="渗透测试是什么？ 在授权许可下，对目标系统渗透，找出尽可能多的安全漏洞。 获得授权获得甲方的法律授权，规避不必要的法律风险。 甲方会给出需要渗透的域名和 ip，或者是资产名和 ip&#x2F;域名对应的 excel。 给的是域名，子域名可能要自己去找。 问清楚子域名能不能渗透，能不能爆破（因为有时候给你的是正常运行的服务）。 信息搜集为什么进行信息搜集？把资产想象为一台机器，它是由一系列不同的部件">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2025/05/01/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E6%B5%81%E7%A8%8B/QQ20250501-210305.png">
+<meta property="og:image" content="https://img2020.cnblogs.com/blog/1365962/202101/1365962-20210120143235482-1758727633.png">
+<meta property="article:published_time" content="2025-05-01T09:00:36.000Z">
+<meta property="article:modified_time" content="2025-05-02T11:06:48.674Z">
+<meta property="article:author" content="温柔刀">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2025/05/01/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E6%B5%81%E7%A8%8B/QQ20250501-210305.png">
+
+
+<link rel="canonical" href="http://example.com/2025/05/01/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E6%B5%81%E7%A8%8B/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2025/05/01/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E6%B5%81%E7%A8%8B/","path":"2025/05/01/渗透测试流程/","title":"渗透测试流程"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>渗透测试流程 | CTF学习笔记</title>
+  
+
+
+
+
+
+
+
+<link rel="dns-prefetch" href="comment-three-tau.vercel.app">
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">CTF学习笔记</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%8E%B7%E5%BE%97%E6%8E%88%E6%9D%83"><span class="nav-number">1.</span> <span class="nav-text">获得授权</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86"><span class="nav-number">2.</span> <span class="nav-text">信息搜集</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%87%E7%BA%B9%E8%AF%86%E5%88%AB"><span class="nav-number">2.1.</span> <span class="nav-text">指纹识别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%90%E5%9F%9F%E5%90%8D%E6%94%B6%E9%9B%86"><span class="nav-number">2.2.</span> <span class="nav-text">子域名收集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E6%9C%BA%E6%89%AB%E6%8F%8F%E5%92%8C%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F"><span class="nav-number">2.3.</span> <span class="nav-text">主机扫描和端口扫描</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8"><span class="nav-number">3.</span> <span class="nav-text">漏洞利用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F"><span class="nav-number">4.</span> <span class="nav-text">内网渗透</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87%E4%B8%8E%E7%BB%B4%E6%8C%81"><span class="nav-number">5.</span> <span class="nav-text">权限提升与维持</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B8%85%E9%99%A4%E7%97%95%E8%BF%B9"><span class="nav-number">6.</span> <span class="nav-text">清除痕迹</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%92%B0%E5%86%99%E6%8A%A5%E5%91%8A"><span class="nav-number">7.</span> <span class="nav-text">撰写报告</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="温柔刀"
+      src="/images/avatar_2.gif">
+  <p class="site-author-name" itemprop="name">温柔刀</p>
+  <div class="site-description" itemprop="description">JNU_WEB</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">82</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">54</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Gent1eknife" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Gent1eknife" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/05/01/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E6%B5%81%E7%A8%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar_2.gif">
+      <meta itemprop="name" content="温柔刀">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CTF学习笔记">
+      <meta itemprop="description" content="JNU_WEB">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="渗透测试流程 | CTF学习笔记">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          渗透测试流程
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-05-01 17:00:36" itemprop="dateCreated datePublished" datetime="2025-05-01T17:00:36+08:00">2025-05-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-05-02 19:06:48" itemprop="dateModified" datetime="2025-05-02T19:06:48+08:00">2025-05-02</time>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/2025/05/01/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E6%B5%81%E7%A8%8B/#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/2025/05/01/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E6%B5%81%E7%A8%8B/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>2.2k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>8 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>渗透测试是什么？</p>
+<p>在授权许可下，对目标系统渗透，找出尽可能多的安全漏洞。</p>
+<h2 id="获得授权"><a href="#获得授权" class="headerlink" title="获得授权"></a>获得授权</h2><p>获得甲方的法律授权，规避不必要的法律风险。</p>
+<p>甲方会给出需要渗透的域名和 ip，或者是资产名和 ip&#x2F;域名对应的 excel。</p>
+<p>给的是域名，子域名可能要自己去找。</p>
+<p>问清楚子域名能不能渗透，能不能爆破（因为有时候给你的是正常运行的服务）。</p>
+<h2 id="信息搜集"><a href="#信息搜集" class="headerlink" title="信息搜集"></a>信息搜集</h2><p>为什么进行信息搜集？把资产想象为一台机器，它是由一系列不同的部件构成的整体，而大概率这个机器的大部分部件都是市面上已有的，而很多低版本的部件都存在着已知的漏洞。判断各个部件具体是哪家厂商生产的，什么时候生产的可以精确定位到“部件”的漏洞，才能实现突破。</p>
+<h3 id="指纹识别"><a href="#指纹识别" class="headerlink" title="指纹识别"></a>指纹识别</h3><p>雁过拔毛，兽走留皮。凡有行动，必有痕迹。尽管网站管理者想掩盖自己用的各个技术，但使用技术必定会留下痕迹，我们通过收集留在现场的指纹（网站的 ico、前端敏感信息、http 响应头等），来判断网站所使用的技术框架、内容管理系统（CMS）等信息。常见的 CMS 有 WordPress 等。</p>
+<img src="/2025/05/01/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E6%B5%81%E7%A8%8B/QQ20250501-210305.png" class="" title="QQ20250501-210305">
+
+<blockquote>
+<p>常见指纹识别工具：</p>
+<p>wappalyzer</p>
+</blockquote>
+<h3 id="子域名收集"><a href="#子域名收集" class="headerlink" title="子域名收集"></a>子域名收集</h3><p>我们通常用爆破的方式收集子域名。</p>
+<p>52pojie.cn 是一个主域名，那么给它加上常见前缀，例如 abc.52pojie.cn，去访问他看看有没有结果。</p>
+<blockquote>
+<p>常见子域名收集工具：</p>
+<p><a target="_blank" rel="noopener" href="https://hunter.qianxin.com/">奇安信鹰图</a></p>
+<p>fofa </p>
+<p>360</p>
+</blockquote>
+<h3 id="主机扫描和端口扫描"><a href="#主机扫描和端口扫描" class="headerlink" title="主机扫描和端口扫描"></a>主机扫描和端口扫描</h3><p>nmap 是主机扫描和端口扫描中十分常见的工具，但是因为特别出名，实战中会转而用 ping 命令或者 arp-scan。</p>
+<p>主机扫描本质上就是利用 arp 协议、tcp 协议、udp 协议、icmp 协议探测有没有存活的端口。</p>
+<blockquote>
+<p>主机扫描命令举例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo nmap -sn 10.10.10.0/24</span><br></pre></td></tr></table></figure>
+
+<p>-n 在主机发现之后不进行端口扫描 <code>no port scan</code>只打印响应了主机嗅探的可用主机，这种扫描也被称为 ping 扫描。</p>
+<p>-sL 列表扫描，比-s 多了一步侦查，允许对目标网络进行轻量级的侦查，而不会引起太多注意。</p>
+<p>对攻击者来说，知道有多少主机处于活动状态， 比列表扫描提供的每个 IP 和主机名的列表更有价值。</p>
+<p>正常运维的系统管理员也会用到-sn 参数，因为这条命令可以很容易地用于看有多少个网络上可用的主机或监视服务器的可用性。它相比对广播地址进行 ping 请求更可靠，因为许多主机不会响应广播查询。</p>
+<p>-sn 这个参数默认会发送四项数据，第一是 ICMP 回旋请求，第二是对端口 443 的 TCPSYN 请求，第三是对端口 80 的 TCPACK。第四就是默认情况下的 ICMP 时间戳请求。当非特权用户执行这条命令时，他只会使用 connect 调用,发送 SYN 数据包到目标主机的 80 和 443 端口。当使用特权用户扫描本地网络，它使用的 ARP 请求，自然它不是刚才提到的发送的四项数据。为什么？因为 ARP 请求是数据链路层的数据包，就没有 TCP 和 ICMP 协议的事，自然不能发送那些数据包。这条命令和这条命令很相似：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo arp-scan -l</span><br></pre></td></tr></table></figure>
+
+<p>当然这指的是扫描本地网络。扫描本地时可以用–send-ip 让 nmap 发送 icmp 时间戳请求来确定主机的活动性。因为在网络中 ARP 请求不会被所有主机响应。</p>
+</blockquote>
+<blockquote>
+<p>端口扫描命令举例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo nmap -sT --min-rate 10000 -p- 10.10.10.21 -oA nmapscan/ports</span><br></pre></td></tr></table></figure>
+
+<p>-sT 明确指定用 TCP 协议进行扫描。<br>默认值是-sS，他利用 TCP 的 SYN 的标志位，来探测目标主机上的开放端口。发送一个 SYN 包只建立 TCP 连接的第一步，如果收到了目标主机的 SYN 加 ACK 回复，则表示响应的端口是开放的，如果收到 RST 复位数据包，则表示该端口是关闭的。SYN 扫描常常用于快速扫描目标主机的端口状态，因为它能够快速探测开放和关闭的端口。<br>而-sT 是用三次握手过程来判断端口的状态，它通过发送完整的 TCP 连接请求，等待目标主机的回应。如果收到了 SYN+ACK 回复，则表示响应的端口是开放的。需要进行完整的 TCO 连接过程，因此相对较慢。<br>很多防火墙都能够检测到不完整的 TCP 连接。<br>-p 制定端口范围的参数，-是简化的制定 1-65535 端口。<br>-oA o 输出 A all 后面是具体指明文件位置。</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1dg411b74a/?vd_source=2a9c168f5a9a45998629d10835496e2c">红队笔记」主机发现和端口扫描的基本原理和工具选择</a></p>
+<p>如果指纹识别不到，那就要上手去自己测。如果没有已经存在的漏洞，没有识别出对应的指纹，那就要自己去目录扫描之类的挖掘漏洞。</p>
+<h2 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h2><p>当我们收集到了足够多的信息之后，我们就要开始对网站进行漏洞探测了。探测网站是否存在一些常见的 Web 漏洞，比如：弱口令、SQL 注入、命令执行、XSS、文件上传等。这一步既可以用自动化工具（如 sqlmap），也可以进行手动测试。接着尝试利用已验证的漏洞获取系统访问权限。</p>
+<p>漏洞 poc 库：<br><a target="_blank" rel="noopener" href="https://github.com/Threekiii/Awesome-POC">https://github.com/Threekiii/Awesome-POC</a></p>
+<h2 id="内网渗透"><a href="#内网渗透" class="headerlink" title="内网渗透"></a>内网渗透</h2><p>内网渗透，从字面上理解便是对目标服务器所在内网进行渗透并最终获取域控权限的一种渗透。内网渗透的前提需要获取一个 shell，可以是低权限的 shell，因为可以通过提权获取高权限。</p>
+<p>在进行内网渗透之前需要了解一个概念，<strong>域环境</strong>。在内网中，往往可能存在几百上千台机器，例如需要对机器进行升级、打补丁、设置权限等，管理员不可能一台一台地更新修改。因此便衍生出了域环境。管理员以一台主机作为域控制器新建一个域，将所有其他主机加入域中，以域控来操作其他主机。因为域控的高权限，导致了域控所在的主机的管理员账号密码，可以登录任意一台主机，所以内网渗透的最终目标，往往便是拿下域控的权限。</p>
+<p>在渗透测试过程中，内网主机的端口是公网 IP 通过端口映射的。也就是说，我们连接的外网 IP 地址的端口，映射到内网中，不一定是那台服务器的端口。</p>
+<p>解决这种问题的方法有两种：<br>1、让目标机器去连接外网主机（必须有一台公网服务器，内网主机能够访问互联网）<br>2、在目标机器上设置一个信号站（放一个 WEB 文件在目标机器上，所有流量都经过这个文件通信）</p>
+<p>内网转发工具<br><a target="_blank" rel="noopener" href="https://github.com/ph4ntonn/Stowaway">https://github.com/ph4ntonn/Stowaway</a><br><a target="_blank" rel="noopener" href="https://github.com/fatedier/frp">https://github.com/fatedier/frp</a></p>
+<h2 id="权限提升与维持"><a href="#权限提升与维持" class="headerlink" title="权限提升与维持"></a>权限提升与维持</h2><p>在拿到目标主机的权限后，很有可能当时我们并不能获取到想要的东西，需要进行长期的潜伏，特别是在内网渗透中，需要进行长期的信息收集。这时，权限维持就很重要了。我们需要维持住获得的现有权限。例如在网站里上传不死马，隐藏用户。</p>
+<h2 id="清除痕迹"><a href="#清除痕迹" class="headerlink" title="清除痕迹"></a>清除痕迹</h2><p>1：如果是 Linux 系统，在获取权限后，执行以下命令，不会记录输入过的命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export HISTFILE=/dev/null export HISTSIZE=0</span><br><span class="line">AI 写代码</span><br></pre></td></tr></table></figure>
+
+<p>2：删除 &#x2F;var&#x2F;log 目录下的日志文件</p>
+<p>3：如果是 web 应用，找到 web 日志文件，删除 </p>
+<h2 id="撰写报告"><a href="#撰写报告" class="headerlink" title="撰写报告"></a>撰写报告</h2><p>输出详细报告，包含漏洞描述、风险等级、复现步骤及修复方案，以便于网站管理员根据我们的渗透测试报告修补漏洞。</p>
+<p><img src="https://img2020.cnblogs.com/blog/1365962/202101/1365962-20210120143235482-1758727633.png" alt="img"></p>
+<p><strong>两篇系统性的讲述渗透测试的文章</strong></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/698306147">https://zhuanlan.zhihu.com/p/698306147</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/wizardforcel/article/details/140816360">https://blog.csdn.net/wizardforcel/article/details/140816360</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+  <div class="social-like a2a_kit a2a_kit_size_32 a2a_default_style">
+    <a class="a2a_dd" target="_blank" rel="noopener" href="https://www.addtoany.com/share"></a>
+      <a class="a2a_button_facebook"></a>
+      <a class="a2a_button_twitter"></a>
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/04/30/%E5%82%BB%E5%AD%90%E9%83%BD%E8%83%BD%E7%9C%8B%E6%87%82%E7%9A%84SSTI%E5%85%A5%E9%97%A8/" rel="prev" title="傻子都能看懂的SSTI入门">
+                  <i class="fa fa-angle-left"></i> 傻子都能看懂的SSTI入门
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="waline"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">温柔刀</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">63k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">3:50</span>
+  </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+  <script src="/js/third-party/addtoany.js"></script>
+
+  
+
+
+
+
+<script class="next-config" data-name="waline" type="application/json">{"lang":"zh-cn","enable":true,"serverURL":"comment-three-tau.vercel.app","cssUrl":"https://unpkg.com/@waline/client@v2/dist/waline.css","commentCount":true,"pageview":false,"placeholder":"说两句吧~","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"visitor":true,"comment_count":true,"requiredFields":["nick","mail"],"libUrl":"//unpkg.com/@waline/client@v2/dist/waline.js","el":"#waline","comment":true,"path":"/2025/05/01/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E6%B5%81%E7%A8%8B/"}</script>
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v2/dist/waline.css">
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.waline.el).then(() =>
+    NexT.utils.getScript(CONFIG.waline.libUrl, { condition: window.Waline })
+  ).then(() => 
+    Waline.init(Object.assign({}, CONFIG.waline,{ el: document.querySelector(CONFIG.waline.el) }))
+  );
+});
+</script>
+
+</body>
+</html>
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>

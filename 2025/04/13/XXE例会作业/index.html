@@ -41,7 +41,7 @@
 <meta property="og:image" content="http://example.com/2025/04/13/XXE%E4%BE%8B%E4%BC%9A%E4%BD%9C%E4%B8%9A/QQ20250413-203156.png">
 <meta property="og:image" content="http://example.com/2025/04/13/XXE%E4%BE%8B%E4%BC%9A%E4%BD%9C%E4%B8%9A/QQ20250413-210107.png">
 <meta property="article:published_time" content="2025-04-13T09:29:49.000Z">
-<meta property="article:modified_time" content="2025-04-14T02:26:32.727Z">
+<meta property="article:modified_time" content="2025-05-03T02:23:54.552Z">
 <meta property="article:author" content="温柔刀">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/2025/04/13/XXE%E4%BE%8B%E4%BC%9A%E4%BD%9C%E4%B8%9A/QQ20250413-173356.png">
@@ -127,7 +127,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#PHP-XXE"><span class="nav-number">1.</span> <span class="nav-text">[PHP]XXE</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#NCTF2019-Fake-XML-cookbook"><span class="nav-number">2.</span> <span class="nav-text">[NCTF2019]Fake XML cookbook</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#NCTF2019-True-XML-cookbook"><span class="nav-number">3.</span> <span class="nav-text">[NCTF2019]True XML cookbook</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9C%A8%E6%9C%AC%E5%9C%B0%E5%A4%8D%E7%8E%B0-XXE-%E7%9B%B2%E6%B3%A8%E7%9A%84%E9%83%A8%E5%88%86%EF%BC%88%E5%B0%9D%E8%AF%95%E7%90%86%E8%A7%A3%E5%8E%9F%E7%90%86%E5%90%8E%E6%89%8B%E5%8A%A8%E7%BC%96%E5%86%99-Payload%EF%BC%89%E3%80%82"><span class="nav-number">4.</span> <span class="nav-text">在本地复现 XXE 盲注的部分（尝试理解原理后手动编写 Payload）。</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#PHP-XXE"><span class="nav-number">1.</span> <span class="nav-text">[PHP]XXE</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#NCTF2019-Fake-XML-cookbook"><span class="nav-number">2.</span> <span class="nav-text">[NCTF2019]Fake XML cookbook</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#NCTF2019-True-XML-cookbook"><span class="nav-number">3.</span> <span class="nav-text">[NCTF2019]True XML cookbook</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -142,7 +142,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">79</span>
+          <span class="site-state-item-count">82</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -222,7 +222,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-04-14 10:26:32" itemprop="dateModified" datetime="2025-04-14T10:26:32+08:00">2025-04-14</time>
+      <time title="修改时间：2025-05-03 10:23:54" itemprop="dateModified" datetime="2025-05-03T10:23:54+08:00">2025-05-03</time>
     </span>
 
   
@@ -246,7 +246,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>318</span>
+      <span>263</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -295,9 +295,6 @@
 <img src="/2025/04/13/XXE%E4%BE%8B%E4%BC%9A%E4%BD%9C%E4%B8%9A/QQ20250413-210107.png" class="" title="QQ20250413-210107">
 
 <p>最后找字数多的看 flag。</p>
-<h1 id="在本地复现-XXE-盲注的部分（尝试理解原理后手动编写-Payload）。"><a href="#在本地复现-XXE-盲注的部分（尝试理解原理后手动编写-Payload）。" class="headerlink" title="在本地复现 XXE 盲注的部分（尝试理解原理后手动编写 Payload）。"></a>在本地复现 XXE 盲注的部分（尝试理解原理后手动编写 Payload）。</h1><ul>
-<li>思考：如果服务器被禁止从外部服务器访问 <code>info.dtd</code> 文件，如何进行盲注？附上你的  Payload。</li>
-</ul>
 
     </div>
 
@@ -356,14 +353,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">58k</span>
+    <span title="站点总字数">63k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">3:31</span>
+    <span title="站点阅读时长">3:50</span>
   </span>
 </div>
 
