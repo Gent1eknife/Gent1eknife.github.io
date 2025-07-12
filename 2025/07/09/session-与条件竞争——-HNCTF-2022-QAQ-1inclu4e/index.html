@@ -20,7 +20,7 @@
 <meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/55662681/1752206648690-d48d5133-0a23-43bb-8242-6688d88737db.png">
 <meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/55662681/1752206689116-77238edf-9f1e-4b5e-b092-e810793693db.png">
 <meta property="article:published_time" content="2025-07-09T07:48:04.000Z">
-<meta property="article:modified_time" content="2025-07-11T07:50:27.240Z">
+<meta property="article:modified_time" content="2025-07-11T13:57:18.531Z">
 <meta property="article:author" content="温柔刀">
 <meta property="article:tag" content="session">
 <meta property="article:tag" content="条件竞争">
@@ -292,7 +292,7 @@
 
                 <!-- 文章字数统计 -->
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count word-count">1.1k</span>Reading time: <span class="post-count reading-time">4 min</span></span>
+                        <span>Word count: <span class="post-count word-count">1.2k</span>Reading time: <span class="post-count reading-time">4 min</span></span>
                     </div>
                 <div class="post-intro-meta">
                     <!-- 撰写日期 -->
@@ -499,13 +499,22 @@
 
 <p>最后写</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    event = threading.Event() <span class="comment"># 	创建一个控制线程的“信号”变量</span></span><br><span class="line">    <span class="keyword">with</span> requests.Session() <span class="keyword">as</span> session: <span class="comment"># 创建一个带状态的 session</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">5</span>): <span class="comment"># 创建 5 个线程，负责不停上传</span></span><br><span class="line">            thread = threading.Thread(target=write, args =(session,)).start()</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">5</span>):</span><br><span class="line">            thread = threading.Thread(target=read, args=(session,)).start()</span><br></pre></td></tr></table></figure>
+
+<h2 id="总结：session-文件包含的利用条件"><a href="#总结：session-文件包含的利用条件" class="headerlink" title="总结：session 文件包含的利用条件"></a>总结：session 文件包含的利用条件</h2><blockquote>
+<ol>
+<li>存在文件包含漏洞</li>
+<li>知道session文件存放路径，可以尝试默认路径</li>
+<li>具有读取和写入session文件的权限</li>
+</ol>
+</blockquote>
+
     </article>
     <!-- license -->
         <div class="license-wrapper">
             <p>Author：<a href="http://example.com">温柔刀</a>
             <p>Link：<a href="http://example.com/2025/07/09/session-%E4%B8%8E%E6%9D%A1%E4%BB%B6%E7%AB%9E%E4%BA%89%E2%80%94%E2%80%94-HNCTF-2022-QAQ-1inclu4e/">http://example.com/2025/07/09/session-%E4%B8%8E%E6%9D%A1%E4%BB%B6%E7%AB%9E%E4%BA%89%E2%80%94%E2%80%94-HNCTF-2022-QAQ-1inclu4e/</a>
             <p>Publish date：<a href="http://example.com/2025/07/09/session-%E4%B8%8E%E6%9D%A1%E4%BB%B6%E7%AB%9E%E4%BA%89%E2%80%94%E2%80%94-HNCTF-2022-QAQ-1inclu4e/">July 9th 2025, 3:48:04 pm</a>
-            <p>Update date：<a href="http://example.com/2025/07/09/session-%E4%B8%8E%E6%9D%A1%E4%BB%B6%E7%AB%9E%E4%BA%89%E2%80%94%E2%80%94-HNCTF-2022-QAQ-1inclu4e/">July 11th 2025, 3:50:27 pm</a>
+            <p>Update date：<a href="http://example.com/2025/07/09/session-%E4%B8%8E%E6%9D%A1%E4%BB%B6%E7%AB%9E%E4%BA%89%E2%80%94%E2%80%94-HNCTF-2022-QAQ-1inclu4e/">July 11th 2025, 9:57:18 pm</a>
             <p>License：本文采用<a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     <!-- paginator -->
@@ -590,7 +599,7 @@
                 <div class="toc-catalog">
                     <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
                 </div>
-                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86%E7%82%B9%EF%BC%9Asession"><span class="toc-number">1.</span> <span class="toc-text">前置知识点：session</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9A%90%E8%97%8F%E5%8A%9F%E8%83%BD%EF%BC%9A%E4%B8%8A%E4%BC%A0%E8%BF%9B%E5%BA%A6%E8%AE%B0%E5%BD%95%EF%BC%88upload-progress%EF%BC%89"><span class="toc-number">2.</span> <span class="toc-text">隐藏功能：上传进度记录（upload_progress）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9E%E5%88%B0%E9%A2%98%E7%9B%AE"><span class="toc-number">3.</span> <span class="toc-text">回到题目</span></a></li></ol>
+                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86%E7%82%B9%EF%BC%9Asession"><span class="toc-number">1.</span> <span class="toc-text">前置知识点：session</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9A%90%E8%97%8F%E5%8A%9F%E8%83%BD%EF%BC%9A%E4%B8%8A%E4%BC%A0%E8%BF%9B%E5%BA%A6%E8%AE%B0%E5%BD%95%EF%BC%88upload-progress%EF%BC%89"><span class="toc-number">2.</span> <span class="toc-text">隐藏功能：上传进度记录（upload_progress）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9E%E5%88%B0%E9%A2%98%E7%9B%AE"><span class="toc-number">3.</span> <span class="toc-text">回到题目</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93%EF%BC%9Asession-%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E7%9A%84%E5%88%A9%E7%94%A8%E6%9D%A1%E4%BB%B6"><span class="toc-number">4.</span> <span class="toc-text">总结：session 文件包含的利用条件</span></a></li></ol>
             </div>
         <!-- sidebar -->
         <div class="sidebar sidebar-hide">
@@ -609,9 +618,10 @@
         
         
         
+        
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 7
+        Total : 8
         </div>
         <!-- search  -->
     </div>
@@ -641,6 +651,10 @@
         <li class="archive-post-item">
             <span class="archive-post-date">04/29</span>
             <a class="archive-post-title" href="/2025/04/29/%E7%BA%A2%E9%98%9F%E7%AC%94%E8%AE%B0/">红队笔记</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/26</span>
+            <a class="archive-post-title" href="/2025/03/26/CTFSHOW%E5%88%B7%E9%A2%98%E6%B1%87%E6%80%BB/">CTFSHOW 刷题汇总</a>
         </li>
         <li class="archive-post-item">
             <span class="archive-post-date">02/26</span>
@@ -679,6 +693,18 @@
             <span class="sidebar-tag-name" data-tags="条件竞争">
                 <span class="iconfont-archer">&#xe606;</span>
                 条件竞争
+            </span>
+            <span class="sidebar-tag-name" data-tags="SOME">
+                <span class="iconfont-archer">&#xe606;</span>
+                SOME
+            </span>
+            <span class="sidebar-tag-name" data-tags="笔记">
+                <span class="iconfont-archer">&#xe606;</span>
+                笔记
+            </span>
+            <span class="sidebar-tag-name" data-tags="SSTI">
+                <span class="iconfont-archer">&#xe606;</span>
+                SSTI
             </span>
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
