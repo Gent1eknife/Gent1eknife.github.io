@@ -10,18 +10,23 @@
     <meta name="copyright" content="温柔刀">
         <meta name="keywords" content="hexo,hexo-theme,hexo-blog">
     <meta name="description" content="">
-    <meta name="description" content="Java 反序列化反射大白话说Java反射：入门、使用、原理 - 陈树义 - 博客园 知道类名，用正射： 1Apple apple &#x3D; new Apple();   Java 中一切皆对象，类是Class对象，方法是Method对象，构造方法是Constructor对象，字段是Field对象。 不知道类名，只能把类名先存变量里面，再一句一句跟代码说要对这个类干什么，这是反射： 1Class clz">
+    <meta name="description" content="基础的Java语法 类与对象类是一个模板：抽象，对象是一个具体的实例   方法定义、调用！   对应的引用引用类型： 基本类型（8）对象是通过引用来操作的：栈—&gt;堆   属性：字段Field 成员变量默认初始化：数字： 0  0.0char : u0000boolean: false引用： null修饰符  属性类型  属性名 &#x3D; 属性值！ 对象的创建和使用   必须使用new 关">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java反射和CC链">
 <meta property="og:url" content="http://example.com/2025/07/28/Java%E5%8F%8D%E5%B0%84%E5%92%8CCC%E9%93%BE/index.html">
 <meta property="og:site_name" content="三重门">
-<meta property="og:description" content="Java 反序列化反射大白话说Java反射：入门、使用、原理 - 陈树义 - 博客园 知道类名，用正射： 1Apple apple &#x3D; new Apple();   Java 中一切皆对象，类是Class对象，方法是Method对象，构造方法是Constructor对象，字段是Field对象。 不知道类名，只能把类名先存变量里面，再一句一句跟代码说要对这个类干什么，这是反射： 1Class clz">
+<meta property="og:description" content="基础的Java语法 类与对象类是一个模板：抽象，对象是一个具体的实例   方法定义、调用！   对应的引用引用类型： 基本类型（8）对象是通过引用来操作的：栈—&gt;堆   属性：字段Field 成员变量默认初始化：数字： 0  0.0char : u0000boolean: false引用： null修饰符  属性类型  属性名 &#x3D; 属性值！ 对象的创建和使用   必须使用new 关">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/55662681/1754035889748-1368bf70-2110-4a2c-b004-5011d81f7cbe.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/55662681/1754035825367-74b0c5c5-ca78-497f-87a8-e1e9e5f18746.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/55662681/1754053196245-090abb6e-922c-4530-9309-db137498a2f5.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/55662681/1754056447882-5c7dc8b5-f557-4cc2-909d-88313afe0e18.png">
 <meta property="article:published_time" content="2025-07-28T03:08:02.000Z">
-<meta property="article:modified_time" content="2025-07-28T03:08:45.533Z">
+<meta property="article:modified_time" content="2025-08-02T07:46:13.524Z">
 <meta property="article:author" content="温柔刀">
 <meta property="article:tag" content="Java">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.nlark.com/yuque/0/2025/png/55662681/1754035889748-1368bf70-2110-4a2c-b004-5011d81f7cbe.png">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <link rel="icon" href="/assets/favicon.ico">
@@ -287,7 +292,7 @@
 
                 <!-- 文章字数统计 -->
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count word-count">1.1k</span>Reading time: <span class="post-count reading-time">4 min</span></span>
+                        <span>Word count: <span class="post-count word-count">1.2k</span>Reading time: <span class="post-count reading-time">5 min</span></span>
                     </div>
                 <div class="post-intro-meta">
                     <!-- 撰写日期 -->
@@ -444,7 +449,25 @@
             <div class="container container-unloaded">
                 <main class="main post-page">
     <article class="article-entry">
-        <h1 id="Java-反序列化"><a href="#Java-反序列化" class="headerlink" title="Java 反序列化"></a>Java 反序列化</h1><h2 id="反射"><a href="#反射" class="headerlink" title="反射"></a>反射</h2><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/chanshuyi/p/head_first_of_reflection.html">大白话说Java反射：入门、使用、原理 - 陈树义 - 博客园</a></p>
+        <h1 id="基础的Java语法"><a href="#基础的Java语法" class="headerlink" title="基础的Java语法"></a>基础的Java语法</h1><ol>
+<li>类与对象<br>类是一个模板：抽象，对象是一个具体的实例  </li>
+<li>方法<br>定义、调用！  </li>
+<li>对应的引用<br>引用类型： 基本类型（8）<br>对象是通过引用来操作的：栈—&gt;堆  </li>
+<li>属性：字段Field 成员变量<br>默认初始化：<br>数字： 0  0.0<br>char : u0000<br>boolean: false<br>引用： null<br>修饰符  属性类型  属性名 &#x3D; 属性值！</li>
+<li>对象的创建和使用</li>
+</ol>
+<ul>
+<li>必须使用new 关键字创造对象，构造器  Person kuangshen &#x3D; new Person();  </li>
+<li>对象的属性  kuangshen.name  </li>
+<li>对象的方法  kuangshen.sleep()</li>
+</ul>
+<p>6.类：<br>  静态的属性   属性<br>  动态的行为   方法</p>
+<p>封装、继承、多态</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2025/png/55662681/1754035889748-1368bf70-2110-4a2c-b004-5011d81f7cbe.png" alt="img"></p>
+<h2 id="super"><a href="#super" class="headerlink" title="super"></a>super</h2><p><img src="https://cdn.nlark.com/yuque/0/2025/png/55662681/1754035825367-74b0c5c5-ca78-497f-87a8-e1e9e5f18746.png" alt="img"></p>
+<h2 id="重写"><a href="#重写" class="headerlink" title="重写"></a>重写</h2><p><img src="https://cdn.nlark.com/yuque/0/2025/png/55662681/1754053196245-090abb6e-922c-4530-9309-db137498a2f5.png" alt="img"></p>
+<h2 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h2><p><img src="https://cdn.nlark.com/yuque/0/2025/png/55662681/1754056447882-5c7dc8b5-f557-4cc2-909d-88313afe0e18.png" alt="img"></p>
+<h1 id="Java-反序列化"><a href="#Java-反序列化" class="headerlink" title="Java 反序列化"></a>Java 反序列化</h1><h2 id="反射"><a href="#反射" class="headerlink" title="反射"></a>反射</h2><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/chanshuyi/p/head_first_of_reflection.html">大白话说Java反射：入门、使用、原理 - 陈树义 - 博客园</a></p>
 <p>知道类名，用正射：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Apple</span> <span class="variable">apple</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Apple</span>(); </span><br></pre></td></tr></table></figure>
 
@@ -505,7 +528,7 @@
             <p>Author：<a href="http://example.com">温柔刀</a>
             <p>Link：<a href="http://example.com/2025/07/28/Java%E5%8F%8D%E5%B0%84%E5%92%8CCC%E9%93%BE/">http://example.com/2025/07/28/Java%E5%8F%8D%E5%B0%84%E5%92%8CCC%E9%93%BE/</a>
             <p>Publish date：<a href="http://example.com/2025/07/28/Java%E5%8F%8D%E5%B0%84%E5%92%8CCC%E9%93%BE/">July 28th 2025, 11:08:02 am</a>
-            <p>Update date：<a href="http://example.com/2025/07/28/Java%E5%8F%8D%E5%B0%84%E5%92%8CCC%E9%93%BE/">July 28th 2025, 11:08:45 am</a>
+            <p>Update date：<a href="http://example.com/2025/07/28/Java%E5%8F%8D%E5%B0%84%E5%92%8CCC%E9%93%BE/">August 2nd 2025, 3:46:13 pm</a>
             <p>License：本文采用<a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     <!-- paginator -->
@@ -594,7 +617,7 @@
                 <div class="toc-catalog">
                     <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
                 </div>
-                <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Java-%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96"><span class="toc-number">1.</span> <span class="toc-text">Java 反序列化</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%8D%E5%B0%84"><span class="toc-number">1.1.</span> <span class="toc-text">反射</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8C-readObject"><span class="toc-number">1.2.</span> <span class="toc-text">反序列化和 readObject</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CommonsCollections1-%E9%93%BE"><span class="toc-number">1.3.</span> <span class="toc-text">CommonsCollections1 链</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#InvokerTransformer-%E7%B1%BB"><span class="toc-number">1.3.1.</span> <span class="toc-text">InvokerTransformer 类</span></a></li></ol></li></ol></li></ol>
+                <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E7%9A%84Java%E8%AF%AD%E6%B3%95"><span class="toc-number">1.</span> <span class="toc-text">基础的Java语法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#super"><span class="toc-number">1.1.</span> <span class="toc-text">super</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%87%8D%E5%86%99"><span class="toc-number">1.2.</span> <span class="toc-text">重写</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E6%80%81"><span class="toc-number">1.3.</span> <span class="toc-text">多态</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Java-%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96"><span class="toc-number">2.</span> <span class="toc-text">Java 反序列化</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%8D%E5%B0%84"><span class="toc-number">2.1.</span> <span class="toc-text">反射</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8C-readObject"><span class="toc-number">2.2.</span> <span class="toc-text">反序列化和 readObject</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CommonsCollections1-%E9%93%BE"><span class="toc-number">2.3.</span> <span class="toc-text">CommonsCollections1 链</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#InvokerTransformer-%E7%B1%BB"><span class="toc-number">2.3.1.</span> <span class="toc-text">InvokerTransformer 类</span></a></li></ol></li></ol></li></ol>
             </div>
         <!-- sidebar -->
         <div class="sidebar sidebar-hide">
@@ -728,26 +751,6 @@
                 <span class="iconfont-archer">&#xe606;</span>
                 Java
             </span>
-            <span class="sidebar-tag-name" data-tags="Nginx">
-                <span class="iconfont-archer">&#xe606;</span>
-                Nginx
-            </span>
-            <span class="sidebar-tag-name" data-tags="SOME">
-                <span class="iconfont-archer">&#xe606;</span>
-                SOME
-            </span>
-            <span class="sidebar-tag-name" data-tags="Perl">
-                <span class="iconfont-archer">&#xe606;</span>
-                Perl
-            </span>
-            <span class="sidebar-tag-name" data-tags="CGI">
-                <span class="iconfont-archer">&#xe606;</span>
-                CGI
-            </span>
-            <span class="sidebar-tag-name" data-tags="文件上传">
-                <span class="iconfont-archer">&#xe606;</span>
-                文件上传
-            </span>
             <span class="sidebar-tag-name" data-tags="RCE">
                 <span class="iconfont-archer">&#xe606;</span>
                 RCE
@@ -763,6 +766,26 @@
             <span class="sidebar-tag-name" data-tags="无参">
                 <span class="iconfont-archer">&#xe606;</span>
                 无参
+            </span>
+            <span class="sidebar-tag-name" data-tags="Perl">
+                <span class="iconfont-archer">&#xe606;</span>
+                Perl
+            </span>
+            <span class="sidebar-tag-name" data-tags="CGI">
+                <span class="iconfont-archer">&#xe606;</span>
+                CGI
+            </span>
+            <span class="sidebar-tag-name" data-tags="文件上传">
+                <span class="iconfont-archer">&#xe606;</span>
+                文件上传
+            </span>
+            <span class="sidebar-tag-name" data-tags="SOME">
+                <span class="iconfont-archer">&#xe606;</span>
+                SOME
+            </span>
+            <span class="sidebar-tag-name" data-tags="Nginx">
+                <span class="iconfont-archer">&#xe606;</span>
+                Nginx
             </span>
             <span class="sidebar-tag-name" data-tags="报错注入">
                 <span class="iconfont-archer">&#xe606;</span>
